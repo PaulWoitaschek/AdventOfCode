@@ -1,19 +1,26 @@
 plugins {
-    kotlin("jvm") version "1.6.0"
+  kotlin("jvm") version "1.6.0"
 }
 
 repositories {
-    mavenCentral()
+  mavenCentral()
+}
+
+dependencies {
+  implementation("io.kotest:kotest-assertions-core:4.6.3")
 }
 
 tasks {
-    sourceSets {
-        main {
-            java.srcDirs("src")
-        }
-    }
+  wrapper {
+    gradleVersion = "7.3"
+  }
+}
 
-    wrapper {
-        gradleVersion = "7.3"
+testing {
+  suites {
+    @Suppress("UNUSED_VARIABLE")
+    val test by getting(JvmTestSuite::class) {
+      useKotlinTest()
     }
+  }
 }
