@@ -6,7 +6,7 @@ fun day1(input: Sequence<String>): Int {
     }
 }
 
-fun day1PartTwo(input: Sequence<String>): Int {
+fun day1Part2(input: Sequence<String>): Int {
   return input.map { it.toInt() }
     .windowed(size = 3)
     .map { it.sum() }
