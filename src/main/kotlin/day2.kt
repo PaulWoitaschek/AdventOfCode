@@ -1,8 +1,9 @@
-fun day2(input: Sequence<String>): Int = process(input, accountAim = false)
-fun day2Part2(input: Sequence<String>): Int = process(input, accountAim = true)
+fun day2(input: String): Int = process(input, accountAim = false)
+fun day2Part2(input: String): Int = process(input, accountAim = true)
 
-private fun process(input: Sequence<String>, accountAim: Boolean): Int {
-  val position = input.map { Instruction.parse(it) }
+private fun process(input: String, accountAim: Boolean): Int {
+  val position = input.lineSequence()
+    .map { Instruction.parse(it) }
     .fold(Position.INITIAL) { position, instruction ->
       position.plusInstruction(instruction, accountAim)
     }

@@ -22,21 +22,29 @@ class AdventOfCodeTests {
   fun day2Part2() {
     day2Part2(input(2)) shouldBe 900
   }
+
+  @Test
+  fun day3() {
+    day3(input(3)) shouldBe 198
+  }
+
+  @Test
+  fun day3Part2() {
+    day3Part2(input(3)) shouldBe 230
+  }
 }
 
-private fun input(
-  @Suppress("SameParameterValue") day: Int
-): Sequence<String> {
+private fun input(day: Int): String {
   return ClassLoader
     .getSystemResourceAsStream("day$day.txt")!!
     .bufferedReader()
-    .lineSequence()
+    .readText()
 }
 
 @Suppress("unused")
-private fun currentTaskInput(): Sequence<String> {
+private fun currentTaskInput(): String {
   return ClassLoader
     .getSystemResourceAsStream("task.txt")!!
     .bufferedReader()
-    .lineSequence()
+    .readText()
 }
