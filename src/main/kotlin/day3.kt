@@ -2,7 +2,7 @@ typealias BitRow = List<Boolean>
 
 fun day3(input: String): Int {
   val bitRows = parseInput(input)
-  val gamma: List<Boolean> = (0 until bitRows.first().size)
+  val gamma: BitRow = (0 until bitRows.first().size)
     .map { index ->
       bitRows.count { it[index] } >= bitRows.size / 2
     }
@@ -24,7 +24,7 @@ private fun parseInput(input: String): List<BitRow> {
     .map { line -> line.map { it == '1' } }
 }
 
-private fun extractForBitCriteria(lines: List<List<Boolean>>, bitCriteria: Boolean): Int {
+private fun extractForBitCriteria(lines: List<BitRow>, bitCriteria: Boolean): Int {
   val bitsPerLine = lines.first().size
 
   var candidates = lines
@@ -50,10 +50,10 @@ private fun extractForBitCriteria(lines: List<List<Boolean>>, bitCriteria: Boole
 
 private fun BitRow.count(selector: Boolean) = count { it == selector }
 
-private fun List<Boolean>.toInt(): Int {
+private fun BitRow.toInt(): Int {
   return joinToString(separator = "") { if (it) "1" else "0" }.toInt(2)
 }
 
-private fun List<Boolean>.flipped(): List<Boolean> {
+private fun BitRow.flipped(): BitRow {
   return map { !it }
 }
