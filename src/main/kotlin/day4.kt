@@ -55,7 +55,7 @@ data class Game(
             .filter { it.isNotBlank() }
             .map { it.toInt() }
         }
-        .chunked(5)
+        .chunked(Board.SIZE)
         .map { Board(it) }
       return Game(draws, boards)
     }
