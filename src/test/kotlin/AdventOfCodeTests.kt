@@ -32,6 +32,16 @@ class AdventOfCodeTests {
   fun day3Part2() {
     day3Part2(input(3)) shouldBe 230
   }
+
+  @Test
+  fun day4() {
+    day4(input(4)) shouldBe 4512
+  }
+
+  @Test
+  fun day4Part2() {
+    day4Part2(input(4)) shouldBe 1924
+  }
 }
 
 private fun input(day: Int): String {
