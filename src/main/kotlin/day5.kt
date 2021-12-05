@@ -27,18 +27,14 @@ private data class Line(
 ) {
 
   fun pointsOnLine(includeDiagonals: Boolean): List<Point> {
-    val fromX = minOf(from.x, to.x)
-    val fromY = minOf(from.y, to.y)
-    val toY = maxOf(from.y, to.y)
-    val toX = maxOf(from.x, to.x)
     return when {
       from.x == to.x -> {
-        (fromY..toY).map { rangeY ->
+        (minOf(from.y, to.y)..maxOf(from.y, to.y)).map { rangeY ->
           Point(x = from.x, y = rangeY)
         }
       }
       from.y == to.y -> {
-        (fromX..toX).map { rangeX ->
+        (minOf(from.x, to.x)..maxOf(from.x, to.x)).map { rangeX ->
           Point(x = rangeX, y = from.y)
         }
       }
