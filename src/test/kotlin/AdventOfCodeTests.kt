@@ -30,7 +30,6 @@ class AdventOfCodeTests {
 
   @Test
   fun day6() {
-    println(Day6.solvePart2(currentTaskInput()))
     Day6.test(part1 = 5934, part2 = 26984457539)
   }
 
