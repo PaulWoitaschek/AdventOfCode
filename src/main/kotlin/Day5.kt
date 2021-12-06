@@ -1,11 +1,16 @@
 import kotlin.math.abs
 
-fun day5(input: String): Int {
-  return process(input, includeDiagonals = false)
-}
+object Day5 : Puzzle {
 
-fun day5Part2(input: String): Int {
-  return process(input, includeDiagonals = true)
+  override val day = 5
+
+  override fun solvePart1(input: String): Int {
+    return process(input, includeDiagonals = false)
+  }
+
+  override fun solvePart2(input: String): Int {
+    return process(input, includeDiagonals = true)
+  }
 }
 
 private fun process(input: String, includeDiagonals: Boolean): Int {

@@ -1,22 +1,27 @@
-typealias BitRow = List<Boolean>
+private typealias BitRow = List<Boolean>
 
-fun day3(input: String): Int {
-  val bitRows = parseInput(input)
-  val gamma: BitRow = (0 until bitRows.first().size)
-    .map { index ->
-      bitRows.count { it[index] } >= bitRows.size / 2
-    }
-  val epsilon = gamma.flipped()
-  return gamma.toInt() * epsilon.toInt()
-}
+object Day3 : Puzzle {
 
-fun day3Part2(input: String): Int {
-  val bitRows = parseInput(input)
+  override val day = 3
 
-  val oxygen = extractForBitCriteria(bitRows, bitCriteria = true)
-  val co2Scrubber = extractForBitCriteria(bitRows, bitCriteria = false)
+  override fun solvePart1(input: String): Int {
+    val bitRows = parseInput(input)
+    val gamma: BitRow = (0 until bitRows.first().size)
+      .map { index ->
+        bitRows.count { it[index] } >= bitRows.size / 2
+      }
+    val epsilon = gamma.flipped()
+    return gamma.toInt() * epsilon.toInt()
+  }
 
-  return oxygen * co2Scrubber
+  override fun solvePart2(input: String): Int {
+    val bitRows = parseInput(input)
+
+    val oxygen = extractForBitCriteria(bitRows, bitCriteria = true)
+    val co2Scrubber = extractForBitCriteria(bitRows, bitCriteria = false)
+
+    return oxygen * co2Scrubber
+  }
 }
 
 private fun parseInput(input: String): List<BitRow> {

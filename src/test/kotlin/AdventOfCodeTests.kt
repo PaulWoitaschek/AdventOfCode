@@ -5,52 +5,33 @@ class AdventOfCodeTests {
 
   @Test
   fun day1() {
-    day1(input(1)) shouldBe 7
-  }
-
-  @Test
-  fun day1Part2() {
-    day1Part2(input(1)) shouldBe 5
+    Day1.test(part1 = 7, part2 = 5)
   }
 
   @Test
   fun day2() {
-    day2(input(2)) shouldBe 150
-  }
-
-  @Test
-  fun day2Part2() {
-    day2Part2(input(2)) shouldBe 900
+    Day2.test(part1 = 150, part2 = 900)
   }
 
   @Test
   fun day3() {
-    day3(input(3)) shouldBe 198
-  }
-
-  @Test
-  fun day3Part2() {
-    day3Part2(input(3)) shouldBe 230
+    Day3.test(part1 = 198, part2 = 230)
   }
 
   @Test
   fun day4() {
-    day4(input(4)) shouldBe 4512
-  }
-
-  @Test
-  fun day4Part2() {
-    day4Part2(input(4)) shouldBe 1924
+    Day4.test(part1 = 4512, part2 = 1924)
   }
 
   @Test
   fun day5() {
-    day5(input(5)) shouldBe 5
+    Day5.test(part1 = 5, part2 = 12)
   }
 
-  @Test
-  fun day5Part2() {
-    day5Part2(input(5)) shouldBe 12
+  private fun Puzzle.test(part1: Int, part2: Int) {
+    val input = input(day)
+    solvePart1(input) shouldBe part1
+    solvePart2(input) shouldBe part2
   }
 }
 

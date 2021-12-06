@@ -1,44 +1,45 @@
 @file:Suppress("ConvertCallChainIntoSequence")
 
-fun day4(input: String): Int {
-  val game = Game.parse(input)
+object Day4 : Puzzle {
 
-  val allDraws = game.allDraws
-  val boards = game.boards
+  override val day = 4
 
-  (allDraws.indices).forEach { round ->
-    val draws = allDraws.take(round)
-    boards.forEach { board ->
-      if (board.hasWon(draws)) {
-        return board.score(draws)
+  override fun solvePart1(input: String): Int {
+    val game = Game.parse(input)
+    val allDraws = game.allDraws
+    val boards = game.boards
+    (allDraws.indices).forEach { round ->
+      val draws = allDraws.take(round)
+      boards.forEach { board ->
+        if (board.hasWon(draws)) {
+          return board.score(draws)
+        }
       }
     }
+    error("No winners!")
   }
-  error("No winners!")
-}
 
-fun day4Part2(input: String): Int {
-  val game = Game.parse(input)
-
-  val allDraws = game.allDraws
-  var boards = game.boards
-
-  var lastWinner: Board? = null
-  var lastDraw: List<Int> = allDraws
-  (allDraws.indices).forEach { round ->
-    val draws = allDraws.take(round)
-    val winnersOfRound = boards.filter { it.hasWon(draws) }
-    if (winnersOfRound.isNotEmpty()) {
-      boards = boards - winnersOfRound
-      lastWinner = winnersOfRound.last()
-      lastDraw = draws
+  override fun solvePart2(input: String): Int {
+    val game = Game.parse(input)
+    val allDraws = game.allDraws
+    var boards = game.boards
+    var lastWinner: Board? = null
+    var lastDraw: List<Int> = allDraws
+    (allDraws.indices).forEach { round ->
+      val draws = allDraws.take(round)
+      val winnersOfRound = boards.filter { it.hasWon(draws) }
+      if (winnersOfRound.isNotEmpty()) {
+        boards = boards - winnersOfRound
+        lastWinner = winnersOfRound.last()
+        lastDraw = draws
+      }
     }
+    return checkNotNull(lastWinner) { "No winners!" }
+      .score(lastDraw)
   }
-  return checkNotNull(lastWinner) { "No winners!" }
-    .score(lastDraw)
 }
 
-data class Game(
+private data class Game(
   val allDraws: List<Int>,
   val boards: List<Board>,
 ) {
@@ -62,7 +63,7 @@ data class Game(
   }
 }
 
-data class Board(
+private data class Board(
   val numbers: List<List<Int>>,
 ) {
 
