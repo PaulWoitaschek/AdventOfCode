@@ -4,23 +4,23 @@ object Day3 : Puzzle {
 
   override val day = 3
 
-  override fun solvePart1(input: String): Int {
+  override fun solvePart1(input: String): Long {
     val bitRows = parseInput(input)
     val gamma: BitRow = (0 until bitRows.first().size)
       .map { index ->
         bitRows.count { it[index] } >= bitRows.size / 2
       }
     val epsilon = gamma.flipped()
-    return gamma.toInt() * epsilon.toInt()
+    return (gamma.toInt() * epsilon.toInt()).toLong()
   }
 
-  override fun solvePart2(input: String): Int {
+  override fun solvePart2(input: String): Long {
     val bitRows = parseInput(input)
 
     val oxygen = extractForBitCriteria(bitRows, bitCriteria = true)
     val co2Scrubber = extractForBitCriteria(bitRows, bitCriteria = false)
 
-    return oxygen * co2Scrubber
+    return (oxygen * co2Scrubber).toLong()
   }
 }
 

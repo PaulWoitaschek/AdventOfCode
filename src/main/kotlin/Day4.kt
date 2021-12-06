@@ -4,7 +4,7 @@ object Day4 : Puzzle {
 
   override val day = 4
 
-  override fun solvePart1(input: String): Int {
+  override fun solvePart1(input: String): Long {
     val game = Game.parse(input)
     val allDraws = game.allDraws
     val boards = game.boards
@@ -19,7 +19,7 @@ object Day4 : Puzzle {
     error("No winners!")
   }
 
-  override fun solvePart2(input: String): Int {
+  override fun solvePart2(input: String): Long {
     val game = Game.parse(input)
     val allDraws = game.allDraws
     var boards = game.boards
@@ -88,10 +88,13 @@ private data class Board(
     return rows.any { it.hasWon(draws) } || columns.any { it.hasWon(draws) }
   }
 
-  fun score(draws: List<Int>): Int {
-    return numbers.flatten()
-      .filter { it !in draws }
-      .sum() * draws.last()
+  fun score(draws: List<Int>): Long {
+    return (
+      numbers.flatten()
+        .filter { it !in draws }
+        .sum() * draws.last()
+      )
+      .toLong()
   }
 
   private fun List<Int>.hasWon(draws: List<Int>): Boolean {

@@ -4,16 +4,16 @@ object Day5 : Puzzle {
 
   override val day = 5
 
-  override fun solvePart1(input: String): Int {
+  override fun solvePart1(input: String): Long {
     return process(input, includeDiagonals = false)
   }
 
-  override fun solvePart2(input: String): Int {
+  override fun solvePart2(input: String): Long {
     return process(input, includeDiagonals = true)
   }
 }
 
-private fun process(input: String, includeDiagonals: Boolean): Int {
+private fun process(input: String, includeDiagonals: Boolean): Long {
   val lines = input.lines().map(Line::parse)
 
   val pointScores = mutableMapOf<Point, Int>()
@@ -23,7 +23,7 @@ private fun process(input: String, includeDiagonals: Boolean): Int {
         pointScores[point] = pointScores.getOrPut(point) { 0 } + 1
       }
   }
-  return pointScores.count { it.value >= 2 }
+  return pointScores.count { it.value >= 2 }.toLong()
 }
 
 private data class Line(

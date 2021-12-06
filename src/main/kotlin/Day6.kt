@@ -4,30 +4,61 @@ object Day6 : Puzzle {
 
   override val day = 6
 
-  override fun solvePart1(input: String): Int {
-    return generateSequence(Ocean.parse(input)) { it.afterOneDay() }
-      .take(81).last().totalFishes
-  }
+  override fun solvePart1(input: String): Long = totalFishesAfterDays(input, days = 80)
 
-  override fun solvePart2(input: String): Int {
-    return 42
+  override fun solvePart2(input: String): Long = totalFishesAfterDays(input, days = 256)
+
+  private fun totalFishesAfterDays(input: String, days: Int): Long {
+    return generateSequence(Ocean.parse(input)) { it.afterOneDay() }
+      .take(days + 1).last().totalFishes
   }
 }
 
-private data class Ocean(private val breedTimes: List<Int>) {
+@JvmInline
+private value class BreedTime(private val value: Int) {
 
-  val totalFishes: Int = breedTimes.size
+  val willBreedToday: Boolean get() = value == 0
+
+  fun afterNextDay(): BreedTime {
+    return if (willBreedToday) {
+      AFTER_BREEDING
+    } else {
+      BreedTime(value - 1)
+    }
+  }
+
+  companion object {
+    val FOR_NEW_FISH = BreedTime(8)
+    private val AFTER_BREEDING = BreedTime(6)
+  }
+}
+
+private data class Ocean(private val fishesPerBreedTime: Map<BreedTime, Long>) {
+
+  val totalFishes: Long get() = fishesPerBreedTime.values.sum()
 
   fun afterOneDay(): Ocean {
-    val agedFishes = breedTimes.map { if (it == 0) 6 else it - 1 }
-    val bornFishes = List(breedTimes.count { it == 0 }) { 8 }
-    return Ocean(agedFishes + bornFishes)
+    val result = mutableMapOf<BreedTime, Long>()
+    fishesPerBreedTime.forEach { (breedTime, fishCount) ->
+      if (breedTime.willBreedToday) {
+        result[BreedTime.FOR_NEW_FISH] = result.getOrElse(BreedTime.FOR_NEW_FISH) { 0L } + fishCount
+      }
+      val afterNextDay = breedTime.afterNextDay()
+      result[afterNextDay] = result.getOrElse(afterNextDay) { 0L } + fishCount
+    }
+    return Ocean(result)
   }
 
   companion object {
     fun parse(input: String): Ocean {
-      val fishes = input.lines().single().split(",").map(String::toInt)
-      return Ocean(fishes)
+      val fishesPerBreedTime = input.lines()
+        .single()
+        .split(",")
+        .map(String::toInt)
+        .map(::BreedTime)
+        .groupBy { it }
+        .mapValues { it.value.size.toLong() }
+      return Ocean(fishesPerBreedTime)
     }
   }
 }
