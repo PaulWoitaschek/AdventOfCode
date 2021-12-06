@@ -1,5 +1,15 @@
-fun day2(input: String): Int = process(input, accountAim = false)
-fun day2Part2(input: String): Int = process(input, accountAim = true)
+object Day2 : Puzzle {
+
+  override val day = 2
+
+  override fun solvePart1(input: String): Int {
+    return process(input, accountAim = false)
+  }
+
+  override fun solvePart2(input: String): Int {
+    return process(input, accountAim = true)
+  }
+}
 
 private fun process(input: String, accountAim: Boolean): Int {
   val position = input.lineSequence()
