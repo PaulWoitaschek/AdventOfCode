@@ -2,22 +2,22 @@ object Day2 : Puzzle {
 
   override val day = 2
 
-  override fun solvePart1(input: String): Int {
+  override fun solvePart1(input: String): Long {
     return process(input, accountAim = false)
   }
 
-  override fun solvePart2(input: String): Int {
+  override fun solvePart2(input: String): Long {
     return process(input, accountAim = true)
   }
 }
 
-private fun process(input: String, accountAim: Boolean): Int {
+private fun process(input: String, accountAim: Boolean): Long {
   val position = input.lineSequence()
     .map { Instruction.parse(it) }
     .fold(Position.INITIAL) { position, instruction ->
       position.plusInstruction(instruction, accountAim)
     }
-  return position.depth * position.horizontal
+  return (position.depth * position.horizontal).toLong()
 }
 
 private enum class Direction {
