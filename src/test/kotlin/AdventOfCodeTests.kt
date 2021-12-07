@@ -33,10 +33,19 @@ class AdventOfCodeTests {
     Day6.test(part1 = 5934, part2 = 26984457539)
   }
 
-  private fun Puzzle.test(part1: Long, part2: Long) {
+  @Test
+  fun day7() {
+    Day7.test(part1 = 37, part2 = 168)
+  }
+
+  private fun Puzzle.test(part1: Long?, part2: Long?) {
     val input = input(day)
-    solvePart1(input) shouldBe part1
-    solvePart2(input) shouldBe part2
+    if (part1 != null) {
+      solvePart1(input) shouldBe part1
+    }
+    if (part2 != null) {
+      solvePart2(input) shouldBe part2
+    }
   }
 }
 
