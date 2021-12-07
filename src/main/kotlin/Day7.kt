@@ -9,10 +9,10 @@ object Day7 : Puzzle {
   }
 
   override fun solvePart2(input: String): Long {
-    return solve(input) { (1..it).sum() }
+    return solve(input) { (it * (it + 1)) / 2 }
   }
 
-  private fun solve(input: String, fuelCostPerDistance: (Long) -> Long): Long {
+  private inline fun solve(input: String, fuelCostPerDistance: (Long) -> Long): Long {
     val positions = input.split(",").map(String::toLong)
     return (positions.minOf { it }..positions.maxOf { it })
       .minOf { candidate ->
