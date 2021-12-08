@@ -1,3 +1,5 @@
+import io.kotest.assertions.assertSoftly
+import io.kotest.assertions.withClue
 import io.kotest.matchers.shouldBe
 import org.junit.Test
 
@@ -36,6 +38,36 @@ class AdventOfCodeTests {
   @Test
   fun day7() {
     Day7.test(part1 = 37, part2 = 168)
+  }
+
+  @Test
+  fun day8() {
+    Day8.test(part1 = 26, part2 = 61229)
+  }
+
+  @Test
+  fun day8Display() {
+    val expected = listOf(
+      8394,
+      9781,
+      1197,
+      9361,
+      4873,
+      8418,
+      4548,
+      1625,
+      8717,
+      4315,
+    )
+    assertSoftly {
+      input(8).lines()
+        .forEachIndexed { index, line ->
+          withClue(line) {
+            val outputValue = Day8.Display.parse(line).outputValue()
+            outputValue shouldBe expected[index]
+          }
+        }
+    }
   }
 
   private fun Puzzle.test(part1: Long?, part2: Long?) {
