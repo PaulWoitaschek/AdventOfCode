@@ -48,8 +48,6 @@ class AdventOfCodeTests {
   @Test
   fun day9() {
     Day9.test(part1 = 15, part2 = 1134)
-    // println(Day9.solvePart1(currentTaskInput()))
-    // println(Day9.solvePart2(currentTaskInput()))
   }
 
   @Test
