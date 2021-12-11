@@ -80,6 +80,11 @@ class AdventOfCodeTests {
     Day10.test(part1 = 26397, part2 = 288957)
   }
 
+  @Test
+  fun day11() {
+    Day11.test(part1 = 1656, part2 = 195)
+  }
+
   private fun Puzzle.test(part1: Long?, part2: Long?) {
     val input = input(day)
     if (part1 != null) {

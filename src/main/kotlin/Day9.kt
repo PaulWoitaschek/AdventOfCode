@@ -19,9 +19,9 @@ private data class HeightMap(
   private val heights: List<List<Int>>
 ) {
 
-  private val allPoints: List<Point> = heights.flatMapIndexed { y, columns ->
+  private val allPoints: List<PointWithValue> = heights.flatMapIndexed { y, columns ->
     columns.mapIndexed { x, value ->
-      Point(x = x, y = y, value = value)
+      PointWithValue(point = Point(x, y), value = value)
     }
   }
 
@@ -40,19 +40,19 @@ private data class HeightMap(
     return lowPointCoordinates().map { basinCoordinates(it).count() }
   }
 
-  private fun lowPointCoordinates(): List<Point> {
+  private fun lowPointCoordinates(): List<PointWithValue> {
     return allPoints.filter { point ->
       point.surroundingPoints().all { it.value > point.value }
     }
   }
 
-  private fun basinCoordinates(from: Point): Set<Point> {
-    return mutableSetOf<Point>().also { set ->
+  private fun basinCoordinates(from: PointWithValue): Set<PointWithValue> {
+    return mutableSetOf<PointWithValue>().also { set ->
       addBasinCoordinates(from, set)
     }
   }
 
-  private fun addBasinCoordinates(from: Point, result: MutableSet<Point>) {
+  private fun addBasinCoordinates(from: PointWithValue, result: MutableSet<PointWithValue>) {
     result += from
     from.surroundingPoints().forEach { surrounding ->
       if (surrounding.value < 9 && surrounding.value > from.value) {
@@ -74,13 +74,11 @@ private data class HeightMap(
     }
   }
 
-  private fun Point.surroundingPoints(): List<Point> {
-    return listOf(x to y + 1, x to y - 1, x + 1 to y, x - 1 to y)
-      .mapNotNull { (x, y) ->
-        allPoints.find { it.x == x && it.y == y }
-      }
+  private fun PointWithValue.surroundingPoints(): List<PointWithValue> {
+    return point.adjacent(includeDiagonal = false)
+      .mapNotNull { adjacentPoint -> allPoints.find { it.point == adjacentPoint } }
   }
 
-  private data class Point(val x: Int, val y: Int, val value: Int)
+  private data class PointWithValue(val point: Point, val value: Int)
 }
 

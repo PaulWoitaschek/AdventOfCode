@@ -74,13 +74,3 @@ private data class Line(
     }
   }
 }
-
-private data class Point(val x: Int, val y: Int) {
-
-  companion object {
-    fun parse(from: String): Point {
-      val (x, y) = from.split(",")
-      return Point(x = x.toInt(), y = y.toInt())
-    }
-  }
-}
