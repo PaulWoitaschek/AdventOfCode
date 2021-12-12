@@ -1,3 +1,5 @@
+package aoc
+
 interface Puzzle {
 
   val day: Int

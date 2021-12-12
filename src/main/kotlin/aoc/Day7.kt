@@ -1,3 +1,5 @@
+package aoc
+
 import kotlin.math.abs
 
 object Day7 : Puzzle {

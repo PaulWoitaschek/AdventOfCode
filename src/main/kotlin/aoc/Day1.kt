@@ -1,5 +1,7 @@
 @file:Suppress("ConvertCallChainIntoSequence")
 
+package aoc
+
 object Day1 : Puzzle {
 
   override val day = 1

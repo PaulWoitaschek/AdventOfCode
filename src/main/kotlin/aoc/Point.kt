@@ -1,3 +1,5 @@
+package aoc
+
 data class Point(val x: Int, val y: Int) {
 
   fun adjacent(includeDiagonal: Boolean): List<Point> {

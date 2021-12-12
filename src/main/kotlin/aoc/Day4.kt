@@ -1,5 +1,7 @@
 @file:Suppress("ConvertCallChainIntoSequence")
 
+package aoc
+
 object Day4 : Puzzle {
 
   override val day = 4
@@ -40,8 +42,8 @@ object Day4 : Puzzle {
 }
 
 private data class Game(
-  val allDraws: List<Int>,
-  val boards: List<Board>,
+    val allDraws: List<Int>,
+    val boards: List<Board>,
 ) {
 
   companion object {
