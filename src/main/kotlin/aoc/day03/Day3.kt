@@ -1,4 +1,6 @@
-package aoc
+package aoc.day03
+
+import aoc.Puzzle
 
 private typealias BitRow = List<Boolean>
 

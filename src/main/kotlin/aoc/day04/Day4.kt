@@ -1,6 +1,8 @@
 @file:Suppress("ConvertCallChainIntoSequence")
 
-package aoc
+package aoc.day04
+
+import aoc.Puzzle
 
 object Day4 : Puzzle {
 
@@ -42,8 +44,8 @@ object Day4 : Puzzle {
 }
 
 private data class Game(
-    val allDraws: List<Int>,
-    val boards: List<Board>,
+  val allDraws: List<Int>,
+  val boards: List<Board>,
 ) {
 
   companion object {
