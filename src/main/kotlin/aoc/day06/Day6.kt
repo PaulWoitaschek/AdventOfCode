@@ -1,6 +1,8 @@
 @file:Suppress("ConvertCallChainIntoSequence")
 
-package aoc
+package aoc.day06
+
+import aoc.Puzzle
 
 object Day6 : Puzzle {
 
@@ -9,11 +11,11 @@ object Day6 : Puzzle {
   override fun solvePart1(input: String): Long = totalFishesAfterDays(input, days = 80)
 
   override fun solvePart2(input: String): Long = totalFishesAfterDays(input, days = 256)
+}
 
-  private fun totalFishesAfterDays(input: String, days: Int): Long {
-    return generateSequence(Ocean.parse(input)) { it.afterOneDay() }
-      .take(days + 1).last().totalFishes
-  }
+private fun totalFishesAfterDays(input: String, days: Int): Long {
+  return generateSequence(Ocean.parse(input)) { it.afterOneDay() }
+    .take(days + 1).last().totalFishes
 }
 
 @JvmInline

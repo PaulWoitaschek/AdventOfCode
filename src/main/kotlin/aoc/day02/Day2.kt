@@ -1,4 +1,6 @@
-package aoc
+package aoc.day02
+
+import aoc.Puzzle
 
 object Day2 : Puzzle {
 

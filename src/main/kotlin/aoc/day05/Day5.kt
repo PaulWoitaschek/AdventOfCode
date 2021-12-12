@@ -1,5 +1,7 @@
-package aoc
+package aoc.day05
 
+import aoc.Point
+import aoc.Puzzle
 import kotlin.math.abs
 
 object Day5 : Puzzle {

@@ -1,4 +1,16 @@
-import aoc.*
+import aoc.Puzzle
+import aoc.day01.Day1
+import aoc.day02.Day2
+import aoc.day03.Day3
+import aoc.day04.Day4
+import aoc.day05.Day5
+import aoc.day06.Day6
+import aoc.day07.Day7
+import aoc.day08.Day8
+import aoc.day08.Display
+import aoc.day09.Day9
+import aoc.day10.Day10
+import aoc.day11.Day11
 import aoc.day12.Day12
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.withClue
@@ -65,7 +77,7 @@ class AdventOfCodeTests {
       input(8).lines()
         .forEachIndexed { index, line ->
           withClue(line) {
-            val outputValue = Day8.Display.parse(line).outputValue()
+            val outputValue = Display.parse(line).outputValue()
             outputValue shouldBe expected[index]
           }
         }

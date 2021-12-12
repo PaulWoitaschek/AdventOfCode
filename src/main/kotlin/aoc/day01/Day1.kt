@@ -1,6 +1,8 @@
 @file:Suppress("ConvertCallChainIntoSequence")
 
-package aoc
+package aoc.day01
+
+import aoc.Puzzle
 
 object Day1 : Puzzle {
 
