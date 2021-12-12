@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-  implementation("io.kotest:kotest-assertions-core:4.6.3")
+  testImplementation("io.kotest:kotest-assertions-core:5.0.1")
 }
 
 tasks {

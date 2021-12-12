@@ -1,3 +1,5 @@
+package aoc
+
 object Day9 : Puzzle {
 
   override val day = 9

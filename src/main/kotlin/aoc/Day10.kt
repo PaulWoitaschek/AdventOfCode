@@ -1,16 +1,18 @@
+package aoc
+
 object Day10 : Puzzle {
 
   override val day = 10
 
   override fun solvePart1(input: String): Long {
     return input.lines()
-      .map(NavigationSubSystem::parse)
+      .map(NavigationSubSystem.Companion::parse)
       .sumOf { it.illegalScore().toLong() }
   }
 
   override fun solvePart2(input: String): Long {
     return input.lines()
-      .map(NavigationSubSystem::parse)
+      .map(NavigationSubSystem.Companion::parse)
       .filterNot { it.isCorrupted() }
       .map { it.closingSequencePoints() }
       .sorted()

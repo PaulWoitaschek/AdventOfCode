@@ -1,3 +1,5 @@
+package aoc
+
 private typealias BitRow = List<Boolean>
 
 object Day3 : Puzzle {

@@ -1,3 +1,5 @@
+package aoc
+
 import kotlin.math.abs
 
 object Day5 : Puzzle {
@@ -14,7 +16,7 @@ object Day5 : Puzzle {
 }
 
 private fun process(input: String, includeDiagonals: Boolean): Long {
-  val lines = input.lines().map(Line::parse)
+  val lines = input.lines().map(Line.Companion::parse)
 
   val pointScores = mutableMapOf<Point, Int>()
   lines.forEach { line ->

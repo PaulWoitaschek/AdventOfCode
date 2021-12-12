@@ -1,3 +1,5 @@
+package aoc
+
 object Day2 : Puzzle {
 
   override val day = 2
@@ -20,7 +22,7 @@ private fun process(input: String, accountAim: Boolean): Long {
   return (position.depth * position.horizontal).toLong()
 }
 
-private enum class Direction {
+private enum class Connection {
   Forward, Up, Down
 }
 
@@ -34,18 +36,18 @@ private data class Position(
     val steps = instruction.steps
     return if (accountAim) {
       when (instruction.direction) {
-        Direction.Forward -> copy(
+        Connection.Forward -> copy(
           horizontal = horizontal + steps,
           depth = depth + aim * steps
         )
-        Direction.Up -> copy(aim = aim - steps)
-        Direction.Down -> copy(aim = aim + steps)
+        Connection.Up -> copy(aim = aim - steps)
+        Connection.Down -> copy(aim = aim + steps)
       }
     } else {
       when (instruction.direction) {
-        Direction.Forward -> copy(horizontal = horizontal + steps)
-        Direction.Up -> copy(depth = depth - steps)
-        Direction.Down -> copy(depth = depth + steps)
+        Connection.Forward -> copy(horizontal = horizontal + steps)
+        Connection.Up -> copy(depth = depth - steps)
+        Connection.Down -> copy(depth = depth + steps)
       }
     }
   }
@@ -56,16 +58,16 @@ private data class Position(
 }
 
 private data class Instruction(
-  val direction: Direction,
+  val direction: Connection,
   val steps: Int
 ) {
   companion object {
     fun parse(input: String): Instruction {
       val (directionString, stepString) = input.split(" ")
       val direction = when (directionString) {
-        "forward" -> Direction.Forward
-        "down" -> Direction.Down
-        "up" -> Direction.Up
+        "forward" -> Connection.Forward
+        "down" -> Connection.Down
+        "up" -> Connection.Up
         else -> error("Invalid direction=$directionString")
       }
       val steps = stepString.toInt()

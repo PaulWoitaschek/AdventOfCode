@@ -1,3 +1,5 @@
+package aoc
+
 object Day8 : Puzzle {
 
   override val day = 8
@@ -14,7 +16,7 @@ object Day8 : Puzzle {
     return parseInput(input).sumOf { it.outputValue().toLong() }
   }
 
-  private fun parseInput(input: String): List<Display> = input.lines().map(Display::parse)
+  private fun parseInput(input: String): List<Display> = input.lines().map(Display.Companion::parse)
 
   data class Display(
     val input: List<Set<Char>>,
