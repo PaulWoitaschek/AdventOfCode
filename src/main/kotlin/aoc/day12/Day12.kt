@@ -15,6 +15,8 @@ object Day12 : Puzzle {
   }
 }
 
+private typealias Path = List<Segment>
+
 private data class Passage(
   private val connections: List<Connection>,
   private val allowTwoSmallCaves: Boolean
@@ -24,12 +26,12 @@ private data class Passage(
     return findPaths().size.toLong()
   }
 
-  private fun findPaths(): List<List<Segment>> {
-    return mutableListOf<List<Segment>>()
+  private fun findPaths(): List<Path> {
+    return mutableListOf<Path>()
       .also { collectPaths(result = it, currentRoute = listOf(Segment.Start)) }
   }
 
-  private fun collectPaths(result: MutableList<List<Segment>>, currentRoute: List<Segment>) {
+  private fun collectPaths(result: MutableList<Path>, currentRoute: Path) {
     validConnections(currentRoute = currentRoute).forEach { to ->
       val newRoute = currentRoute + to
       if (to == Segment.End) {
@@ -40,7 +42,7 @@ private data class Passage(
     }
   }
 
-  private fun validConnections(currentRoute: List<Segment>): List<Segment> {
+  private fun validConnections(currentRoute: Path): Path {
     return connections
       .mapNotNull { connection ->
         connection.connectionTo(currentRoute.last())
@@ -59,7 +61,7 @@ private data class Passage(
       }
   }
 
-  private fun List<Segment>.hasDuplicatedSmallCaves(): Boolean {
+  private fun Path.hasDuplicatedSmallCaves(): Boolean {
     val smallCaves = filter { it is Segment.Cave && it.isSmallCave }
     return smallCaves.toSet().size != smallCaves.size
   }
