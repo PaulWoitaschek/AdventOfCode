@@ -12,12 +12,14 @@ import aoc.day09.Day9
 import aoc.day10.Day10
 import aoc.day11.Day11
 import aoc.day12.Day12
+import aoc.day13.Day13
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.withClue
 import io.kotest.matchers.shouldBe
 import org.junit.Test
 
 class AdventOfCodeTests {
+
 
   @Test
   fun day1() {
@@ -104,7 +106,22 @@ class AdventOfCodeTests {
     Day12.test(part1 = 10, part2 = 36)
   }
 
-  private fun Puzzle.test(part1: Long?, part2: Long?) {
+  @Test
+  fun day13() {
+    Day13.test(
+      part1 = 17,
+      part2 = """
+        █████
+        █   █
+        █   █
+        █   █
+        █████
+        
+        """.trimIndent()
+    )
+  }
+
+  private fun Puzzle.test(part1: Any?, part2: Any?) {
     val input = input(day)
     if (part1 != null) {
       solvePart1(input) shouldBe part1
@@ -118,9 +135,9 @@ class AdventOfCodeTests {
 private fun input(day: Int): String = input("day$day.txt")
 
 @Suppress("unused")
-private fun currentTaskInput(): String = input("task.txt")
+fun currentTaskInput(): String = input("task.txt")
 
-private fun input(fileName: String): String {
+fun input(fileName: String): String {
   return ClassLoader
     .getSystemResourceAsStream(fileName)!!
     .bufferedReader()
