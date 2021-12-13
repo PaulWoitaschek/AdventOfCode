@@ -5,6 +5,7 @@ import aoc.Puzzle
 import kotlin.math.abs
 
 object Day13 : Puzzle {
+
   override val day: Int = 13
 
   override fun solvePart1(input: String): Long {
@@ -26,18 +27,18 @@ object Day13 : Puzzle {
 
 private fun Point.followInstruction(instruction: FoldingInstruction): Point {
   return if (instruction.foldVertically) {
-    foldY(instruction.coordinate)
+    if (y <= instruction.coordinate) {
+      this
+    } else {
+      Point(x, instruction.coordinate - abs(y - instruction.coordinate))
+    }
   } else {
-    foldX(instruction.coordinate)
+    if (x <= instruction.coordinate) {
+      this
+    } else {
+      Point(instruction.coordinate - abs(x - instruction.coordinate), y)
+    }
   }
-}
-
-private fun Point.foldX(x: Int): Point {
-  return if (this.x <= x) this else Point(x - abs(this.x - x), y)
-}
-
-private fun Point.foldY(y: Int): Point {
-  return if (this.y <= y) this else Point(x, y - abs(this.y - y))
 }
 
 private fun Set<Point>.printString(): String {
@@ -53,7 +54,6 @@ private fun Set<Point>.printString(): String {
   }
 }
 
-
 private fun parse(input: String): Pair<Set<Point>, List<FoldingInstruction>> {
   val lines = input.lines()
   val points = lines.takeWhile { it.isNotEmpty() }
@@ -63,29 +63,17 @@ private fun parse(input: String): Pair<Set<Point>, List<FoldingInstruction>> {
     }
     .toSet()
   val foldRegex = "fold along (.*?)=(.*)".toRegex()
-  val foldInstructions = lines.reversed().takeWhile { it.isNotEmpty() }
-    .mapNotNull {
-      val result = foldRegex.find(it)
-      if (result != null) {
-        val (axis, value) = result.groupValues.drop(1)
-        FoldingInstruction(
-          foldVertically = when (axis) {
-            "x" -> false
-            "y" -> true
-            else -> error("Invalid axis=$axis")
-          }, coordinate = value.toInt()
-        )
-      } else {
-        null
-      }
+  val foldInstructions = lines.dropWhile { !foldRegex.containsMatchIn(it) }
+    .map {
+      val result = foldRegex.find(it)!!
+      val (axis, value) = result.groupValues.drop(1)
+      FoldingInstruction(foldVertically = axis == "y", coordinate = value.toInt())
     }
-    .reversed()
-
   return points to foldInstructions
 }
 
 
-data class FoldingInstruction(
+private data class FoldingInstruction(
   val foldVertically: Boolean,
   val coordinate: Int
 )
