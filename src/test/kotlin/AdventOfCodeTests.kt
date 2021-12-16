@@ -13,6 +13,7 @@ import aoc.day10.Day10
 import aoc.day11.Day11
 import aoc.day12.Day12
 import aoc.day13.Day13
+import aoc.day15.Day15
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.withClue
 import io.kotest.matchers.shouldBe
@@ -119,6 +120,12 @@ class AdventOfCodeTests {
         
         """.trimIndent()
     )
+  }
+
+  @Test
+  fun day15() {
+    Day15.test(part1 = 40, part2 = 315)
+    println(Day15.solvePart1(currentTaskInput()))
   }
 
   private fun Puzzle.test(part1: Any?, part2: Any?) {
