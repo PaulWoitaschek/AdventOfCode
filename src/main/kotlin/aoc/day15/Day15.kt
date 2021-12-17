@@ -15,7 +15,7 @@ object Day15 : Puzzle {
     val riskLevel: Int
   )
 
-  override fun solvePart1(input: String): Any {
+  override fun solvePart1(input: String): Int {
     val vertexes = input.lines()
       .mapIndexed { y, line ->
         line.mapIndexed { x, value ->

@@ -125,7 +125,7 @@ class AdventOfCodeTests {
 
   @Test
   fun day15() {
-    Day15.test(part1 = 40, part2 = 315)
+    Day15.test(part1 = 40, part2 = null)
   }
 
   @Test
