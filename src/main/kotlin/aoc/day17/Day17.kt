@@ -11,15 +11,13 @@ object Day17 : Puzzle {
   override fun solvePart2(input: String): Int = allSuccessfulShots(input).count()
 }
 
-private fun allSuccessfulShots(input: String): Sequence<VelocityWithHighestY> {
+private fun allSuccessfulShots(input: String): List<VelocityWithHighestY> {
   val targetArea = TargetArea.parse(input)
-  return generateSequence(targetArea.y.last - targetArea.x.last) { it + 1 }
-    .takeWhile { it < targetArea.y.first + targetArea.x.last }
+  return (targetArea.y.last - targetArea.x.last..targetArea.y.first + targetArea.x.last)
     .flatMap { yVelocity ->
-      generateSequence(1) { it + 1 }
-        .takeWhile { it <= targetArea.x.last }.mapNotNull { xVelocity ->
-          highestYIfHit(targetArea = targetArea, xVelocity = xVelocity, yVelocity = yVelocity)
-        }
+      (1..targetArea.x.last).mapNotNull { xVelocity ->
+        highestYIfHit(targetArea = targetArea, xVelocity = xVelocity, yVelocity = yVelocity)
+      }
     }
 }
 
