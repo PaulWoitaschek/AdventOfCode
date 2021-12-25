@@ -22,6 +22,7 @@ tasks {
 
 tasks.withType<KotlinCompile>().configureEach {
   kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+  kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.ExperimentalStdlibApi"
 }
 
 testing {
