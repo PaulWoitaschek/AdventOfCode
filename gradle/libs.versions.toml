@@ -8,4 +8,4 @@ jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "j
 jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
 
 [plugins]
-kotlin = { id = "org.jetbrains.kotlin.jvm", version = "1.7.21" }
+kotlin = { id = "org.jetbrains.kotlin.jvm", version = "1.7.22" }
