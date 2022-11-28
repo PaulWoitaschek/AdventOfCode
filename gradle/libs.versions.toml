@@ -1,0 +1,11 @@
+[versions]
+jupiter = "5.9.1"
+
+[libraries]
+kotest = "io.kotest:kotest-assertions-core:5.0.1"
+
+jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
+jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version = "1.6.10" }

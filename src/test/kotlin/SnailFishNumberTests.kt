@@ -1,6 +1,6 @@
 import aoc.day18.SnailFishNumber
 import io.kotest.matchers.shouldBe
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class SnailFishNumberTests {
 
