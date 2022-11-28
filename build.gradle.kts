@@ -14,7 +14,6 @@ dependencies {
 
 tasks {
   wrapper {
-    gradleVersion = "7.3.2"
     distributionType = Wrapper.DistributionType.ALL
   }
 }
