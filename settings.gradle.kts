@@ -1,1 +1,7 @@
-rootProject.name = "Advent-of-Code-2021"
+rootProject.name = "AdventOfCode"
+
+dependencyResolutionManagement {
+  repositories {
+    mavenCentral()
+  }
+}

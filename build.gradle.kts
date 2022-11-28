@@ -1,34 +1,26 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.6.10"
-}
-
-repositories {
-  mavenCentral()
+  alias(libs.plugins.kotlin)
 }
 
 dependencies {
-  testImplementation("io.kotest:kotest-assertions-core:5.0.1")
+  testImplementation(libs.kotest)
+  testImplementation(libs.jupiter.api)
+  testRuntimeOnly(libs.jupiter.engine)
 }
 
 tasks {
   wrapper {
     distributionType = Wrapper.DistributionType.ALL
   }
-}
-
-
-tasks.withType<KotlinCompile>().configureEach {
-  kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
-  kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.ExperimentalStdlibApi"
-}
-
-testing {
-  suites {
-    @Suppress("UNUSED_VARIABLE")
-    val test by getting(JvmTestSuite::class) {
-      useKotlinTest()
-    }
+  withType<KotlinCompile>().configureEach {
+    kotlinOptions.freeCompilerArgs += listOf(
+      "-opt-in=kotlin.RequiresOptIn",
+      "-opt-in=kotlin.ExperimentalStdlibApi"
+    )
+  }
+  withType<Test>().configureEach {
+    useJUnitPlatform()
   }
 }

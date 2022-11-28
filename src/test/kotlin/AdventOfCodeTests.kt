@@ -20,7 +20,7 @@ import aoc.day25.Day25
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.withClue
 import io.kotest.matchers.shouldBe
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class AdventOfCodeTests {
 
