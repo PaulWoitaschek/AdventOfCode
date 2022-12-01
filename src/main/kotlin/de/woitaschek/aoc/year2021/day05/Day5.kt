@@ -1,7 +1,7 @@
 package de.woitaschek.aoc.year2021.day05
 
 import de.woitaschek.aoc.year2021.Point
-import de.woitaschek.aoc.year2021.Puzzle
+import de.woitaschek.aoc.Puzzle
 import kotlin.math.abs
 
 object Day5 : Puzzle {

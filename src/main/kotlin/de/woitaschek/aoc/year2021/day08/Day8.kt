@@ -1,6 +1,6 @@
 package de.woitaschek.aoc.year2021.day08
 
-import de.woitaschek.aoc.year2021.Puzzle
+import de.woitaschek.aoc.Puzzle
 
 object Day8 : Puzzle {
 

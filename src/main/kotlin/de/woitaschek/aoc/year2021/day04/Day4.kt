@@ -2,7 +2,7 @@
 
 package de.woitaschek.aoc.year2021.day04
 
-import de.woitaschek.aoc.year2021.Puzzle
+import de.woitaschek.aoc.Puzzle
 
 object Day4 : Puzzle {
 
