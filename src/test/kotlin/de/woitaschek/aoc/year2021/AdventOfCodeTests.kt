@@ -1,5 +1,6 @@
 package de.woitaschek.aoc.year2021
 
+import de.woitaschek.aoc.Puzzle
 import de.woitaschek.aoc.year2021.day01.Day1
 import de.woitaschek.aoc.year2021.day02.Day2
 import de.woitaschek.aoc.year2021.day03.Day3

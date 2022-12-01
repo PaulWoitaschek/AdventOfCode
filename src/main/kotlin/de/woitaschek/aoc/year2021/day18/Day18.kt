@@ -2,7 +2,7 @@
 
 package de.woitaschek.aoc.year2021.day18
 
-import de.woitaschek.aoc.year2021.Puzzle
+import de.woitaschek.aoc.Puzzle
 import kotlin.math.ceil
 import kotlin.math.floor
 
