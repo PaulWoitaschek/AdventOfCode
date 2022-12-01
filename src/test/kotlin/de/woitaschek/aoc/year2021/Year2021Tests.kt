@@ -1,6 +1,6 @@
 package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.AocTest
 import de.woitaschek.aoc.year2021.day01.Day1
 import de.woitaschek.aoc.year2021.day02.Day2
 import de.woitaschek.aoc.year2021.day03.Day3
@@ -24,7 +24,7 @@ import io.kotest.assertions.withClue
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-class AdventOfCodeTests {
+class Year2021Tests : AocTest(2021) {
 
   @Test
   fun day1() {
@@ -122,7 +122,7 @@ class AdventOfCodeTests {
         █   █
         █████
 
-        """.trimIndent()
+        """.trimIndent(),
     )
   }
 
@@ -145,26 +145,4 @@ class AdventOfCodeTests {
   fun day25() {
     Day25.test(part1 = 58, part2 = null)
   }
-
-  private fun Puzzle.test(part1: Any?, part2: Any?) {
-    val input = input(day)
-    if (part1 != null) {
-      solvePart1(input) shouldBe part1
-    }
-    if (part2 != null) {
-      solvePart2(input) shouldBe part2
-    }
-  }
-}
-
-private fun input(day: Int): String = input("2021/day$day.txt")
-
-@Suppress("unused")
-fun currentTaskInput(): String = input("2021/task.txt")
-
-fun input(fileName: String): String {
-  return ClassLoader
-    .getSystemResourceAsStream(fileName)!!
-    .bufferedReader()
-    .readText()
 }
