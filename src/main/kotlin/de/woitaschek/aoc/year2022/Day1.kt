@@ -8,11 +8,11 @@ object Day1 : Puzzle {
   override fun solvePart2(input: String) = parse(input).sortedDescending().take(3).sum()
 }
 
-private fun parse(input: String): List<Long> {
+private fun parse(input: String): List<Int> {
   return input.split("\n\n")
     .map { elv ->
       elv.split("\n").sumOf { line ->
-        line.toLongOrNull() ?: 0L
+        line.toIntOrNull() ?: 0
       }
     }
 }

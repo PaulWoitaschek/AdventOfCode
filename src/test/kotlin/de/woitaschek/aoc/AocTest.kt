@@ -14,15 +14,19 @@ abstract class AocTest(private val year: Int) {
     }
   }
 
-  protected fun input(day: Int): String = input("$year/day$day.txt")
+  protected fun input(day: Int): String = aocInput(year = year, day = day)
 
   @Suppress("unused")
   protected fun testInput(): String = input("testinput.txt")
+}
 
-  private fun input(fileName: String): String {
-    return ClassLoader
-      .getSystemResourceAsStream(fileName)!!
-      .bufferedReader()
-      .readText()
-  }
+fun aocInput(year: Int, day: Int): String {
+  return input("$year/day$day.txt")
+}
+
+private fun input(fileName: String): String {
+  return ClassLoader
+    .getSystemResourceAsStream(fileName)!!
+    .bufferedReader()
+    .readText()
 }
