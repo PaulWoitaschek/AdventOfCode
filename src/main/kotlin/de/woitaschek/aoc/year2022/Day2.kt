@@ -9,8 +9,8 @@ object Day2 : Puzzle {
   override fun solvePart1(input: String): Int = input.lines()
     .filter { it.isNotBlank() }
     .sumOf { round ->
-      val opponent = RPS.parse(round[0])
-      val answer = RPS.parse(round[2])
+      val opponent = RPS.byChar.getValue(round[0])
+      val answer = RPS.byChar.getValue(round[2])
       val match = answer.match(opponent)
       match.score + answer.score
     }
@@ -18,8 +18,8 @@ object Day2 : Puzzle {
   override fun solvePart2(input: String): Int = input.lines()
     .filter { it.isNotBlank() }
     .sumOf { round ->
-      val opponent = RPS.parse(round[0])
-      val desiredMatchResult = MatchResult.parse(round[2])
+      val opponent = RPS.byChar.getValue(round[0])
+      val desiredMatchResult = MatchResult.byChar.getValue(round[2])
       val response = RPS.values().first { it.match(opponent) == desiredMatchResult }
       desiredMatchResult.score + response.score
     }
@@ -45,14 +45,11 @@ enum class RPS(val score: Int) {
   }
 
   companion object {
-    fun parse(input: Char): RPS {
-      return when (input) {
-        'A', 'X' -> Rock
-        'B', 'Y' -> Paper
-        'C', 'Z' -> Scissor
-        else -> error("Invalid input $input")
-      }
-    }
+    val byChar = mapOf(
+      'A' to Rock, 'X' to Rock,
+      'B' to Paper, 'Y' to Paper,
+      'C' to Scissor, 'Z' to Scissor,
+    )
   }
 }
 
@@ -62,13 +59,6 @@ enum class MatchResult(val score: Int) {
   Draw(3);
 
   companion object {
-    fun parse(input: Char): MatchResult {
-      return when (input) {
-        'X' -> Loss
-        'Y' -> Draw
-        'Z' -> Won
-        else -> error("Invalid input $input")
-      }
-    }
+    val byChar = mapOf('X' to Loss, 'Y' to Draw, 'Z' to Won)
   }
 }
