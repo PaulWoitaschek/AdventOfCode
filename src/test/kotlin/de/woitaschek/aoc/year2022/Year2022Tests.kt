@@ -18,6 +18,11 @@ class Year2022Tests : AocTest(2022) {
   }
 
   @Test
+  fun day3() {
+    Day3.test(part1 = 8039, part2 = 2510)
+  }
+
+  @Test
   @Disabled
   fun solveTestInput() {
     Day2.solvePart1(testInput()) shouldBe 15
