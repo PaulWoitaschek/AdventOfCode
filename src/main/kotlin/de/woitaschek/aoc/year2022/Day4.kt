@@ -20,7 +20,6 @@ private data class Ranges(val x1: Int, val x2: Int, val y1: Int, val y2: Int)
 private inline fun String.rangeMatches(
   match: Ranges.() -> Boolean,
 ): Int = lines().filter(String::isNotEmpty).count { line ->
-  val (x1, x2, y1, y2) = "(\\d+)-(\\d+),(\\d+)-(\\d+)".toRegex().find(line)!!
-    .destructured.toList().map(String::toInt)
-  match(Ranges(x1, x2, y1, y2))
+  val values = line.split(",", "-").map { it.toInt() }
+  match(Ranges(values[0], values[1], values[2], values[3]))
 }
