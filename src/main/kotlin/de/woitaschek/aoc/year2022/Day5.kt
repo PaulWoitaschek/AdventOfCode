@@ -21,21 +21,21 @@ private value class Crates(val stacks: List<List<Char>>) {
     return Crates(
       stacks = stacks.toMutableList().apply {
         if (moveOneByOne) {
-          val fromStack = this[instruction.from - 1].toMutableList()
-          val toStack = this[instruction.to - 1].toMutableList()
+          val fromStack = this[instruction.from].toMutableList()
+          val toStack = this[instruction.to].toMutableList()
           repeat(instruction.count) {
             toStack.add(fromStack.removeLast())
           }
-          this[instruction.from - 1] = fromStack
-          this[instruction.to - 1] = toStack
+          this[instruction.from] = fromStack
+          this[instruction.to] = toStack
         } else {
-          val fromStack = this[instruction.from - 1]
-          val toStack = this[instruction.to - 1]
+          val fromStack = this[instruction.from]
+          val toStack = this[instruction.to]
           val splitIndex = fromStack.count() - instruction.count
           val keep = fromStack.take(splitIndex)
           val move = fromStack.drop(splitIndex)
-          this[instruction.from - 1] = keep
-          this[instruction.to - 1] = toStack + move
+          this[instruction.from] = keep
+          this[instruction.to] = toStack + move
         }
       },
     )
@@ -50,11 +50,11 @@ private value class Crates(val stacks: List<List<Char>>) {
       val cratesMap = mutableMapOf<Int, MutableList<Char>>()
       input.lines().reversed().drop(1).forEach {
         it.chunked(4)
-          .forEachIndexed { index, s ->
-            val value = s[1]
-            if (value != ' ') {
+          .forEachIndexed { index, value ->
+            val type = value[1]
+            if (type != ' ') {
               val list = cratesMap.getOrPut(index) { mutableListOf() }
-              list.add(value)
+              list.add(type)
             }
           }
       }
@@ -67,7 +67,7 @@ private data class MoveInstruction(val count: Int, val from: Int, val to: Int) {
   companion object {
     fun parse(input: String): MoveInstruction {
       val (count, from, to) = input.split("move ", " from ", " to ").drop(1).map(String::toInt)
-      return MoveInstruction(count = count, from = from, to = to)
+      return MoveInstruction(count = count, from = from - 1, to = to - 1)
     }
   }
 }
