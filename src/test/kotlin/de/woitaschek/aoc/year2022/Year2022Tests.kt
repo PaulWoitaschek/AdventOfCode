@@ -28,10 +28,15 @@ class Year2022Tests : AocTest(2022) {
   }
 
   @Test
+  fun day5() {
+    Day5.test(part1 = "SPFMVDTZT", part2 = "ZFSJBPRFP")
+  }
+
+  @Test
   @Disabled
   fun solveTestInput() {
-    Day4.solvePart1(testInput()) shouldBe 2
-    Day4.solvePart2(testInput()) shouldBe 4
-    Day4.test(657, 938)
+    Day5.solvePart2(testInput()) shouldBe "MCD"
+    Day5.solvePart1(input(5)) shouldBe "SPFMVDTZT"
+    Day5.solvePart2(input(5)) shouldBe "ZFSJBPRFP"
   }
 }
