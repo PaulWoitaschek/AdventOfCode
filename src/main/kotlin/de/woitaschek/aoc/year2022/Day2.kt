@@ -2,9 +2,7 @@ package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.Puzzle
 
-object Day2 : Puzzle {
-
-  override val day: Int = 2
+object Day2 : Puzzle(2022, 2) {
 
   override fun solvePart1(input: String): Int = input.lines()
     .filter { it.isNotBlank() }

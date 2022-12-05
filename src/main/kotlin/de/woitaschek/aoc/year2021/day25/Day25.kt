@@ -2,9 +2,7 @@ package de.woitaschek.aoc.year2021.day25
 
 import de.woitaschek.aoc.Puzzle
 
-object Day25 : Puzzle {
-
-  override val day = 25
+object Day25 : Puzzle(2021, 25) {
 
   override fun solvePart1(input: String): Int {
     return sequence {

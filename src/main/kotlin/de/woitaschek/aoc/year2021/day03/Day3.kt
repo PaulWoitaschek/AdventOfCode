@@ -4,9 +4,7 @@ import de.woitaschek.aoc.Puzzle
 
 private typealias BitRow = List<Boolean>
 
-object Day3 : Puzzle {
-
-  override val day = 3
+object Day3 : Puzzle(2021, 3) {
 
   override fun solvePart1(input: String): Long {
     val bitRows = parseInput(input)

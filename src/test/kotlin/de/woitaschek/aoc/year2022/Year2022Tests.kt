@@ -1,11 +1,12 @@
 package de.woitaschek.aoc.year2022
 
-import de.woitaschek.aoc.AocTest
+import de.woitaschek.aoc.test
+import de.woitaschek.aoc.testInput
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
-class Year2022Tests : AocTest(2022) {
+class Year2022Tests {
 
   @Test
   fun day1() {
@@ -24,7 +25,7 @@ class Year2022Tests : AocTest(2022) {
 
   @Test
   fun day4() {
-    Day4.test(657, 938)
+    Day4.test(part1 = 657, part2 = 938)
   }
 
   @Test
@@ -36,7 +37,5 @@ class Year2022Tests : AocTest(2022) {
   @Disabled
   fun solveTestInput() {
     Day5.solvePart2(testInput()) shouldBe "MCD"
-    Day5.solvePart1(input(5)) shouldBe "SPFMVDTZT"
-    Day5.solvePart2(input(5)) shouldBe "ZFSJBPRFP"
   }
 }

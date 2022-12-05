@@ -2,9 +2,7 @@ package de.woitaschek.aoc.year2021.day17
 
 import de.woitaschek.aoc.Puzzle
 
-object Day17 : Puzzle {
-
-  override val day: Int = 17
+object Day17 : Puzzle(2021, 17) {
 
   override fun solvePart1(input: String): Int = allSuccessfulShots(input).maxOf { it.highestY }
 
@@ -52,7 +50,7 @@ private data class Probe(val x: Int, val y: Int, val xVelocity: Int, val yVeloci
         xVelocity > 0 -> -1
         else -> 0
       },
-      yVelocity = yVelocity - 1
+      yVelocity = yVelocity - 1,
     )
   }
 }

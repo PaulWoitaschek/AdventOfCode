@@ -2,9 +2,7 @@ package de.woitaschek.aoc.year2021.day08
 
 import de.woitaschek.aoc.Puzzle
 
-object Day8 : Puzzle {
-
-  override val day = 8
+object Day8 : Puzzle(2021, 8) {
 
   override fun solvePart1(input: String): Long {
     return parseInput(input).sumOf { line ->
@@ -24,7 +22,7 @@ object Day8 : Puzzle {
 
 data class Display(
   val input: List<Set<Char>>,
-  val output: List<Set<Char>>
+  val output: List<Set<Char>>,
 ) {
 
   fun outputValue(): Int {
@@ -68,7 +66,7 @@ data class Display(
       val (left, right) = input.split(" | ")
       return Display(
         input = left.split(" ").map { it.toSet() },
-        output = right.split(" ").map { it.toSet() }
+        output = right.split(" ").map { it.toSet() },
       )
     }
   }

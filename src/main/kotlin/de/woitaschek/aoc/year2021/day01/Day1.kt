@@ -4,9 +4,7 @@ package de.woitaschek.aoc.year2021.day01
 
 import de.woitaschek.aoc.Puzzle
 
-object Day1 : Puzzle {
-
-  override val day = 1
+object Day1 : Puzzle(2021,1) {
 
   override fun solvePart1(input: String): Long {
     return input.lines().map { it.toInt() }
