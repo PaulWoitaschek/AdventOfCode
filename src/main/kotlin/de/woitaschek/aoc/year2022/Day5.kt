@@ -9,39 +9,33 @@ object Day5 : Puzzle(2022, 5) {
 
 private fun String.solve(moveOneByOne: Boolean): String {
   val (crates, moveInstructions) = parseInput()
-  return moveInstructions.fold(crates) { currentCrates, instruction ->
-    currentCrates.move(instruction, moveOneByOne = moveOneByOne)
-  }.onTopOfStack()
+  moveInstructions.forEach {
+    crates.move(it, moveOneByOne = moveOneByOne)
+  }
+  return crates.onTopOfStack()
 }
 
 @JvmInline
-private value class Crates(val stacks: List<List<Char>>) {
-  fun move(instruction: MoveInstruction, moveOneByOne: Boolean): Crates {
-    return Crates(
-      stacks = stacks.toMutableList().apply {
-        if (moveOneByOne) {
-          val fromStack = this[instruction.from].toMutableList()
-          val toStack = this[instruction.to].toMutableList()
-          repeat(instruction.count) {
-            toStack.add(fromStack.removeLast())
-          }
-          this[instruction.from] = fromStack
-          this[instruction.to] = toStack
-        } else {
-          val fromStack = this[instruction.from]
-          val toStack = this[instruction.to]
-          val splitIndex = fromStack.count() - instruction.count
-          val keep = fromStack.take(splitIndex)
-          val move = fromStack.drop(splitIndex)
-          this[instruction.from] = keep
-          this[instruction.to] = toStack + move
-        }
-      },
-    )
+private value class Crates(val stacks: List<MutableList<Char>>) {
+  fun move(instruction: MoveInstruction, moveOneByOne: Boolean) {
+    if (moveOneByOne) {
+      val fromStack = stacks[instruction.from]
+      val toStack = stacks[instruction.to]
+      repeat(instruction.count) {
+        toStack.add(fromStack.removeLast())
+      }
+    } else {
+      val fromStack = stacks[instruction.from]
+      val toStack = stacks[instruction.to]
+      val splitIndex = fromStack.count() - instruction.count
+      repeat(instruction.count) {
+        toStack.add(fromStack.removeAt(splitIndex))
+      }
+    }
   }
 
   fun onTopOfStack(): String {
-    return stacks.mapNotNull { it.lastOrNull() }.joinToString(separator = "")
+    return String(stacks.mapNotNull { it.lastOrNull() }.toCharArray())
   }
 
   companion object {
