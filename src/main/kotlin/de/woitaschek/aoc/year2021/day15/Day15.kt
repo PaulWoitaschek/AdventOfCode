@@ -4,15 +4,13 @@ import de.woitaschek.aoc.Puzzle
 import java.util.*
 
 
-object Day15 : Puzzle {
-
-  override val day: Int = 15
+object Day15 : Puzzle(2021, 15) {
 
   data class Vertex(
     val x: Int,
     val y: Int,
     var totalRisk: Int,
-    val riskLevel: Int
+    val riskLevel: Int,
   )
 
   override fun solvePart1(input: String): Int {
@@ -31,7 +29,7 @@ object Day15 : Puzzle {
       vertex(x - 1, y),
       vertex(x + 1, y),
       vertex(x, y - 1),
-      vertex(x, y + 1)
+      vertex(x, y + 1),
     )
 
     val start = vertexes.first().first()

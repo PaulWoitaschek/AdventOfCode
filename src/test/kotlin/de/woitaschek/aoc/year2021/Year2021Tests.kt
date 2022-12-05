@@ -1,6 +1,7 @@
 package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.AocTest
+import de.woitaschek.aoc.input
+import de.woitaschek.aoc.test
 import de.woitaschek.aoc.year2021.day01.Day1
 import de.woitaschek.aoc.year2021.day02.Day2
 import de.woitaschek.aoc.year2021.day03.Day3
@@ -24,7 +25,7 @@ import io.kotest.assertions.withClue
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-class Year2021Tests : AocTest(2021) {
+class Year2021Tests {
 
   @Test
   fun day1() {
@@ -81,7 +82,7 @@ class Year2021Tests : AocTest(2021) {
       4315,
     )
     assertSoftly {
-      input(8).lines()
+      Day8.input().lines()
         .forEachIndexed { index, line ->
           withClue(line) {
             val outputValue = Display.parse(line).outputValue()

@@ -1,12 +1,10 @@
 package de.woitaschek.aoc.year2021.day13
 
-import de.woitaschek.aoc.year2021.Point
 import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.year2021.Point
 import kotlin.math.abs
 
-object Day13 : Puzzle {
-
-  override val day: Int = 13
+object Day13 : Puzzle(2021, 13) {
 
   override fun solvePart1(input: String): Long {
     val (points, instructions) = parse(input)
@@ -48,7 +46,7 @@ private fun Set<Point>.printString(): String {
       appendLine(
         (0..(points.maxOf { it.x } + 1)).map { x -> Point(x, y) }
           .joinToString(separator = "") { if (it in points) "█" else " " }
-          .trim()
+          .trim(),
       )
     }
   }
@@ -75,5 +73,5 @@ private fun parse(input: String): Pair<Set<Point>, List<FoldingInstruction>> {
 
 private data class FoldingInstruction(
   val foldVertically: Boolean,
-  val coordinate: Int
+  val coordinate: Int,
 )

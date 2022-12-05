@@ -2,9 +2,7 @@ package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.Puzzle
 
-object Day4 : Puzzle {
-
-  override val day = 4
+object Day4 : Puzzle(2022, 4) {
 
   override fun solvePart1(input: String) = input.rangeMatches {
     (x1 >= y1 && x2 <= y2) || (y1 >= x1 && y2 <= x2)

@@ -1,11 +1,9 @@
 package de.woitaschek.aoc.year2021.day09
 
-import de.woitaschek.aoc.year2021.Point
 import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.year2021.Point
 
-object Day9 : Puzzle {
-
-  override val day = 9
+object Day9 : Puzzle(2021, 9) {
 
   override fun solvePart1(input: String): Long {
     return HeightMap.parse(input)
@@ -21,7 +19,7 @@ object Day9 : Puzzle {
 }
 
 private data class HeightMap(
-  private val heights: List<List<Int>>
+  private val heights: List<List<Int>>,
 ) {
 
   private val allPoints: List<PointWithValue> = heights.flatMapIndexed { y, columns ->
@@ -74,7 +72,7 @@ private data class HeightMap(
             line.toList().map {
               it.digitToInt()
             }
-          }
+          },
       )
     }
   }

@@ -2,9 +2,7 @@ package de.woitaschek.aoc.year2021.day12
 
 import de.woitaschek.aoc.Puzzle
 
-object Day12 : Puzzle {
-
-  override val day = 12
+object Day12 : Puzzle(2021, 12) {
 
   override fun solvePart1(input: String): Long {
     return Passage.parse(input, allowTwoSmallCaves = false).pathsCount()
@@ -18,8 +16,8 @@ object Day12 : Puzzle {
 private typealias Path = List<Segment>
 
 private data class Passage(
-    private val connections: List<Connection>,
-    private val allowTwoSmallCaves: Boolean
+  private val connections: List<Connection>,
+  private val allowTwoSmallCaves: Boolean,
 ) {
 
   fun pathsCount(): Long {
@@ -70,7 +68,7 @@ private data class Passage(
     fun parse(input: String, allowTwoSmallCaves: Boolean): Passage {
       return Passage(
         connections = input.lines().map(Connection.Companion::parse),
-        allowTwoSmallCaves = allowTwoSmallCaves
+        allowTwoSmallCaves = allowTwoSmallCaves,
       )
     }
   }
@@ -102,8 +100,8 @@ private sealed interface Segment {
 }
 
 private data class Connection(
-    val from: Segment,
-    val to: Segment
+  val from: Segment,
+  val to: Segment,
 ) {
 
   fun connectionTo(segment: Segment): Segment? {

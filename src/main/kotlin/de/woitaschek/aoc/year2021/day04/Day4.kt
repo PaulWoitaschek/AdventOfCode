@@ -4,9 +4,7 @@ package de.woitaschek.aoc.year2021.day04
 
 import de.woitaschek.aoc.Puzzle
 
-object Day4 : Puzzle {
-
-  override val day = 4
+object Day4 : Puzzle(2021, 4) {
 
   override fun solvePart1(input: String): Long {
     val game = Game.parse(input)
@@ -44,8 +42,8 @@ object Day4 : Puzzle {
 }
 
 private data class Game(
-    val allDraws: List<Int>,
-    val boards: List<Board>,
+  val allDraws: List<Int>,
+  val boards: List<Board>,
 ) {
 
   companion object {

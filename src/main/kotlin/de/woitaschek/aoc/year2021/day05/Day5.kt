@@ -1,12 +1,10 @@
 package de.woitaschek.aoc.year2021.day05
 
-import de.woitaschek.aoc.year2021.Point
 import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.year2021.Point
 import kotlin.math.abs
 
-object Day5 : Puzzle {
-
-  override val day = 5
+object Day5 : Puzzle(2021, 5) {
 
   override fun solvePart1(input: String): Long {
     return process(input, includeDiagonals = false)
@@ -31,8 +29,8 @@ private fun process(input: String, includeDiagonals: Boolean): Long {
 }
 
 private data class Line(
-    val from: Point,
-    val to: Point,
+  val from: Point,
+  val to: Point,
 ) {
 
   fun pointsOnLine(includeDiagonals: Boolean): List<Point> {
@@ -42,11 +40,13 @@ private data class Line(
           Point(x = from.x, y = rangeY)
         }
       }
+
       from.y == to.y -> {
         (minOf(from.x, to.x)..maxOf(from.x, to.x)).map { rangeX ->
           Point(x = rangeX, y = from.y)
         }
       }
+
       includeDiagonals && (abs(from.x - to.x) == abs(from.y - to.y)) -> {
         val results = mutableListOf<Point>()
         results += from
@@ -56,12 +56,13 @@ private data class Line(
         do {
           currentPoint = Point(
             x = currentPoint.x + if (right) 1 else -1,
-            y = currentPoint.y + if (up) 1 else -1
+            y = currentPoint.y + if (up) 1 else -1,
           )
           results += currentPoint
         } while (currentPoint != to)
         results
       }
+
       else -> {
         emptyList()
       }
@@ -73,7 +74,7 @@ private data class Line(
       val (from, to) = input.split(" -> ")
       return Line(
         from = Point.parse(from),
-        to = Point.parse(to)
+        to = Point.parse(to),
       )
     }
   }

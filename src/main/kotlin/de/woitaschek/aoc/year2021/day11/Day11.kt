@@ -1,11 +1,9 @@
 package de.woitaschek.aoc.year2021.day11
 
-import de.woitaschek.aoc.year2021.Point
 import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.year2021.Point
 
-object Day11 : Puzzle {
-
-  override val day = 11
+object Day11 : Puzzle(2021, 11) {
 
   override fun solvePart1(input: String): Long {
     return generateSequence(Octopuses.parse(input)) { it.afterOneDay() }
@@ -70,10 +68,10 @@ private data class Octopuses(val octopuses: List<Octopus>) {
               Octopus(
                 point = Point(x = x, y = y),
                 energyLevel = value.digitToInt(),
-                flashes = 0
+                flashes = 0,
               )
             }
-          }
+          },
       )
     }
   }
