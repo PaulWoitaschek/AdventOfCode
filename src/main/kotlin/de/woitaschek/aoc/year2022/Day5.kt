@@ -16,17 +16,17 @@ private fun String.solve(moveOneByOne: Boolean): String {
 }
 
 @JvmInline
-private value class Crates(val stacks: List<MutableList<Char>>) {
+private value class Crates(val stacks: Map<Int, MutableList<Char>>) {
   fun move(instruction: MoveInstruction, moveOneByOne: Boolean) {
     if (moveOneByOne) {
-      val fromStack = stacks[instruction.from]
-      val toStack = stacks[instruction.to]
+      val fromStack = stacks.getValue(instruction.from)
+      val toStack = stacks.getValue(instruction.to)
       repeat(instruction.count) {
         toStack.add(fromStack.removeLast())
       }
     } else {
-      val fromStack = stacks[instruction.from]
-      val toStack = stacks[instruction.to]
+      val fromStack = stacks.getValue(instruction.from)
+      val toStack = stacks.getValue(instruction.to)
       val splitIndex = fromStack.count() - instruction.count
       repeat(instruction.count) {
         toStack.add(fromStack.removeAt(splitIndex))
@@ -35,7 +35,7 @@ private value class Crates(val stacks: List<MutableList<Char>>) {
   }
 
   fun onTopOfStack(): String {
-    return String(stacks.mapNotNull { it.lastOrNull() }.toCharArray())
+    return String(stacks.toSortedMap().mapNotNull { it.value.lastOrNull() }.toCharArray())
   }
 
   companion object {
@@ -51,7 +51,7 @@ private value class Crates(val stacks: List<MutableList<Char>>) {
             }
           }
       }
-      return Crates(cratesMap.toSortedMap().map { it.value })
+      return Crates(cratesMap)
     }
   }
 }
