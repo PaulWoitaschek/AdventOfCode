@@ -16,11 +16,19 @@ dependencies {
   testRuntimeOnly(libs.jupiter.engine)
 }
 
-jmh{
+jmh {
+  // includes.add("Day6Benchmark")
+
   warmup.set("2s")
-  iterations.set(1)
-  fork.set(1)
+  warmupIterations.set(1)
+  warmupForks.set(1)
+
+  fork.set(2)
+  iterations.set(2)
+  timeOnIteration.set("3s")
+
   benchmarkMode.set(listOf("avgt"))
+
   timeUnit.set("ms")
 }
 
