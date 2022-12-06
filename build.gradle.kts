@@ -3,33 +3,34 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.allopen)
-  alias(libs.plugins.jmh)
+  alias(libs.plugins.benchmark)
 }
 
 allOpen {
   annotation("org.openjdk.jmh.annotations.State")
 }
 
+sourceSets.create("benchmarks")
+
 dependencies {
   testImplementation(libs.kotest)
   testImplementation(libs.jupiter.api)
+  add("benchmarksImplementation", libs.benchmark)
   testRuntimeOnly(libs.jupiter.engine)
+
+  add(
+    "benchmarksImplementation",
+    sourceSets.main.get().output +
+      sourceSets.main.get().runtimeClasspath +
+      sourceSets.test.get().output +
+      sourceSets.test.get().runtimeClasspath,
+  )
 }
 
-jmh {
-  // includes.add("Day6Benchmark")
-
-  warmup.set("2s")
-  warmupIterations.set(1)
-  warmupForks.set(1)
-
-  fork.set(2)
-  iterations.set(2)
-  timeOnIteration.set("3s")
-
-  benchmarkMode.set(listOf("avgt"))
-
-  timeUnit.set("ms")
+benchmark {
+  targets {
+    register("benchmarks")
+  }
 }
 
 tasks {

@@ -1,6 +1,7 @@
 [versions]
 jupiter = "5.9.1"
 kotlin = "1.7.22"
+benchmark = "0.4.4"
 
 [libraries]
 kotest = "io.kotest:kotest-assertions-core:5.5.4"
@@ -8,7 +9,10 @@ kotest = "io.kotest:kotest-assertions-core:5.5.4"
 jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
 jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
 
+benchmark = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime", version.ref = "benchmark" }
+
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
 jmh = { id = "me.champeau.jmh", version = "0.6.8" }
+benchmark = { id = "org.jetbrains.kotlinx.benchmark", version.ref = "benchmark" }
