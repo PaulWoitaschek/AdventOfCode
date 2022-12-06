@@ -16,17 +16,17 @@ private fun String.solve(moveOneByOne: Boolean): String {
 }
 
 @JvmInline
-private value class Crates(val stacks: Map<Int, MutableList<Char>>) {
+private value class Crates(val stacks: List<MutableList<Char>>) {
   fun move(instruction: MoveInstruction, moveOneByOne: Boolean) {
     if (moveOneByOne) {
-      val fromStack = stacks.getValue(instruction.from)
-      val toStack = stacks.getValue(instruction.to)
+      val fromStack = stacks[instruction.from]
+      val toStack = stacks[instruction.to]
       repeat(instruction.count) {
         toStack.add(fromStack.removeLast())
       }
     } else {
-      val fromStack = stacks.getValue(instruction.from)
-      val toStack = stacks.getValue(instruction.to)
+      val fromStack = stacks[instruction.from]
+      val toStack = stacks[instruction.to]
       val splitIndex = fromStack.count() - instruction.count
       repeat(instruction.count) {
         toStack.add(fromStack.removeAt(splitIndex))
@@ -35,23 +35,21 @@ private value class Crates(val stacks: Map<Int, MutableList<Char>>) {
   }
 
   fun onTopOfStack(): String {
-    return String(stacks.toSortedMap().mapNotNull { it.value.lastOrNull() }.toCharArray())
+    return String(stacks.mapNotNull { it.lastOrNull() }.toCharArray())
   }
 
   companion object {
     fun parse(input: String): Crates {
-      val cratesMap = mutableMapOf<Int, MutableList<Char>>()
-      input.lines().reversed().drop(1).forEach {
-        it.chunked(4)
-          .forEachIndexed { index, value ->
-            val type = value[1]
-            if (type != ' ') {
-              val list = cratesMap.getOrPut(index) { mutableListOf() }
-              list.add(type)
+      val lines = input.lines().reversed().drop(1)
+      return Crates(
+        List(9) { index ->
+          lines.mapNotNull {
+            it.getOrNull(1 + index * 4)?.takeIf { char ->
+              char in 'A'..'Z'
             }
-          }
-      }
-      return Crates(cratesMap)
+          }.toMutableList()
+        },
+      )
     }
   }
 }
