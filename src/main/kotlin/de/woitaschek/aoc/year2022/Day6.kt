@@ -1,6 +1,6 @@
 package de.woitaschek.aoc.year2022
 
-import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.utils.Puzzle
 
 object Day6 : Puzzle(2022, 6) {
   override fun solvePart1(input: String) = input.solve(4)

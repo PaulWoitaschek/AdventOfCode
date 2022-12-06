@@ -1,4 +1,4 @@
-package de.woitaschek.aoc.year2021
+package de.woitaschek.aoc.utils
 
 data class Point(val x: Int, val y: Int) {
 

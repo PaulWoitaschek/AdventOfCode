@@ -1,7 +1,7 @@
-package de.woitaschek.aoc.year2021.day05
+package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.Puzzle
-import de.woitaschek.aoc.year2021.Point
+import de.woitaschek.aoc.utils.Puzzle
+import de.woitaschek.aoc.utils.Point
 import kotlin.math.abs
 
 object Day5 : Puzzle(2021, 5) {
@@ -29,8 +29,8 @@ private fun process(input: String, includeDiagonals: Boolean): Long {
 }
 
 private data class Line(
-  val from: Point,
-  val to: Point,
+    val from: Point,
+    val to: Point,
 ) {
 
   fun pointsOnLine(includeDiagonals: Boolean): List<Point> {

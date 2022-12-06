@@ -1,6 +1,6 @@
 package de.woitaschek.aoc.year2022
 
-import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.utils.Puzzle
 
 object Day4 : Puzzle(2022, 4) {
 

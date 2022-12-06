@@ -1,5 +1,6 @@
 package de.woitaschek.aoc
 
+import de.woitaschek.aoc.utils.Puzzle
 import io.kotest.matchers.shouldBe
 
 fun Puzzle.test(part1: Any?, part2: Any?) {

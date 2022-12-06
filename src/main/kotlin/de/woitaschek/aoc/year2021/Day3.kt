@@ -1,6 +1,6 @@
-package de.woitaschek.aoc.year2021.day03
+package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.utils.Puzzle
 
 private typealias BitRow = List<Boolean>
 
