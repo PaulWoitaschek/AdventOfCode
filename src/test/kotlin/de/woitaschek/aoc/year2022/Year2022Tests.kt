@@ -1,9 +1,9 @@
 package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.test
-import de.woitaschek.aoc.testInput
+import io.kotest.assertions.assertSoftly
+import io.kotest.assertions.withClue
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Year2022Tests {
@@ -34,8 +34,30 @@ class Year2022Tests {
   }
 
   @Test
-  @Disabled
+  fun day6Part1TestData() {
+    mapOf(
+      "mjqjpqmgbljsphdztnvjfqwrcgsmlb" to 7,
+      "bvwbjplbgvbhsrlpgdmjqwftvncz" to 5,
+      "nppdvjthqldpwncqszvftbrmjlhg" to 6,
+      "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg" to 10,
+      "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw" to 11,
+    ).forEach { (input, expected) ->
+      withClue("input=$input") {
+        assertSoftly {
+          Day6.solvePart1(input) shouldBe expected
+        }
+      }
+    }
+  }
+
+  @Test
+  fun day6() {
+    Day6.test(part1 = 1892, part2 = 2313)
+  }
+
+  @Test
+  //@Disabled
   fun solveTestInput() {
-    Day5.solvePart2(testInput()) shouldBe "MCD"
+    //Day6.solvePart2(testInput()) shouldBe "MCD"
   }
 }
