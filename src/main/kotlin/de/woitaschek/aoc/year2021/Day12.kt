@@ -1,6 +1,6 @@
-package de.woitaschek.aoc.year2021.day12
+package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.utils.Puzzle
 
 object Day12 : Puzzle(2021, 12) {
 
@@ -16,7 +16,7 @@ object Day12 : Puzzle(2021, 12) {
 private typealias Path = List<Segment>
 
 private data class Passage(
-  private val connections: List<Connection>,
+  private val connections: List<SegmentConnection>,
   private val allowTwoSmallCaves: Boolean,
 ) {
 
@@ -67,7 +67,7 @@ private data class Passage(
   companion object {
     fun parse(input: String, allowTwoSmallCaves: Boolean): Passage {
       return Passage(
-        connections = input.lines().map(Connection.Companion::parse),
+        connections = input.lines().map(SegmentConnection.Companion::parse),
         allowTwoSmallCaves = allowTwoSmallCaves,
       )
     }
@@ -99,7 +99,7 @@ private sealed interface Segment {
   }
 }
 
-private data class Connection(
+private data class SegmentConnection(
   val from: Segment,
   val to: Segment,
 ) {
@@ -113,9 +113,9 @@ private data class Connection(
   }
 
   companion object {
-    fun parse(input: String): Connection {
+    fun parse(input: String): SegmentConnection {
       val (from, to) = input.split("-")
-      return Connection(
+      return SegmentConnection(
         from = Segment.parse(from),
         to = Segment.parse(to),
       )

@@ -1,6 +1,5 @@
 package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.year2021.day18.SnailFishNumber
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -31,7 +30,7 @@ class SnailFishNumberTests {
   fun explode4() {
     testExplode(
       value = "[[3,[2,[1,[7,3]]]],[6,[5,[4,[3,2]]]]]",
-      expected = "[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]"
+      expected = "[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]",
     )
   }
 
@@ -39,7 +38,7 @@ class SnailFishNumberTests {
   fun explode5() {
     testExplode(
       value = "[[3,[2,[8,0]]],[9,[5,[4,[3,2]]]]]",
-      expected = "[[3,[2,[8,0]]],[9,[5,[7,0]]]]"
+      expected = "[[3,[2,[8,0]]],[9,[5,[7,0]]]]",
     )
   }
 

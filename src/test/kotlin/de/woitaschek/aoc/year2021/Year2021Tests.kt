@@ -2,24 +2,6 @@ package de.woitaschek.aoc.year2021
 
 import de.woitaschek.aoc.input
 import de.woitaschek.aoc.test
-import de.woitaschek.aoc.year2021.day01.Day1
-import de.woitaschek.aoc.year2021.day02.Day2
-import de.woitaschek.aoc.year2021.day03.Day3
-import de.woitaschek.aoc.year2021.day04.Day4
-import de.woitaschek.aoc.year2021.day05.Day5
-import de.woitaschek.aoc.year2021.day06.Day6
-import de.woitaschek.aoc.year2021.day07.Day7
-import de.woitaschek.aoc.year2021.day08.Day8
-import de.woitaschek.aoc.year2021.day08.Display
-import de.woitaschek.aoc.year2021.day09.Day9
-import de.woitaschek.aoc.year2021.day10.Day10
-import de.woitaschek.aoc.year2021.day11.Day11
-import de.woitaschek.aoc.year2021.day12.Day12
-import de.woitaschek.aoc.year2021.day13.Day13
-import de.woitaschek.aoc.year2021.day15.Day15
-import de.woitaschek.aoc.year2021.day17.Day17
-import de.woitaschek.aoc.year2021.day18.Day18
-import de.woitaschek.aoc.year2021.day25.Day25
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.withClue
 import io.kotest.matchers.shouldBe

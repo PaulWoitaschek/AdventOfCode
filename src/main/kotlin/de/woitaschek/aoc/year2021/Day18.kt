@@ -1,8 +1,8 @@
 @file:OptIn(ExperimentalStdlibApi::class)
 
-package de.woitaschek.aoc.year2021.day18
+package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.utils.Puzzle
 import kotlin.math.ceil
 import kotlin.math.floor
 

@@ -1,8 +1,8 @@
 @file:Suppress("ConvertCallChainIntoSequence")
 
-package de.woitaschek.aoc.year2021.day06
+package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.Puzzle
+import de.woitaschek.aoc.utils.Puzzle
 
 object Day6 : Puzzle(2021, 6) {
 
