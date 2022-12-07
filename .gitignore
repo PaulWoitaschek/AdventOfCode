@@ -3,3 +3,4 @@
 build
 local.properties
 src/test/resources/testinput.txt
+.DS_STORE
