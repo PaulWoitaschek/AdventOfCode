@@ -38,7 +38,7 @@ private class Forest(input: String) {
       } else {
         diagonals.takeWhile { it.height() < treeHeight }.count() + 1
       }
-    }.reduce { acc, i -> acc * i }
+    }.reduce(Int::times)
   }
 
   private fun Point.diagonals() = listOf(

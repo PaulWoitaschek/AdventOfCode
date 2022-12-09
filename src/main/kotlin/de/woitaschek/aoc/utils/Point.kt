@@ -22,6 +22,9 @@ data class Point(val x: Int, val y: Int) {
     }
   }
 
+
+  override fun toString(): String = "($x,$y)"
+
   companion object {
     fun parse(from: String): Point {
       val (x, y) = from.split(",")
