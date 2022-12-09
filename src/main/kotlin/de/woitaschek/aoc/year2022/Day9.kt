@@ -14,60 +14,50 @@ object Day9 : Puzzle(2022, 9) {
     var head = Point(0, 0)
     var tail = List(knots - 1) { head }
     val visitedPoints = mutableSetOf<Point>()
-    parseInput(input)
-      .flatMap { instruction ->
-        (0 until instruction.steps).map { instruction.direction }
-      }
-      .forEach { direction ->
-        head = head.copy(
-          x = when (direction) {
-            Direction.Left -> head.x - 1
-            Direction.Right -> head.x + 1
-            Direction.Up, Direction.Down -> head.x
-          },
-          y = when (direction) {
-            Direction.Up -> head.y + 1
-            Direction.Down -> head.y - 1
-            Direction.Left, Direction.Right -> head.y
-          },
-        )
-        tail = tail.scan(head) { head: Point, tail: Point ->
-          val xDistance = head.x - tail.x
-          val yDistance = head.y - tail.y
-          val shouldMoveHorizontally = abs(xDistance) > 1
-          val shouldMoveVertically = abs(yDistance) > 1
-          if (shouldMoveHorizontally && shouldMoveVertically) {
-            tail.copy(
-              x = if (xDistance > 0) tail.x + 1 else tail.x - 1,
-              y = if (yDistance > 0) tail.y + 1 else tail.y - 1,
-            )
-          } else if (shouldMoveHorizontally) {
-            if (xDistance > 0) {
-              tail.copy(x = tail.x + 1, y = head.y)
-            } else {
-              tail.copy(x = tail.x - 1, y = head.y)
-            }
-          } else if (shouldMoveVertically) {
-            if (yDistance > 0) {
-              tail.copy(y = tail.y + 1, x = head.x)
-            } else {
-              tail.copy(y = tail.y - 1, x = head.x)
-            }
-          } else {
-            tail
-          }
-        }.drop(1)
-        visitedPoints.add(tail.last())
-      }
+    parseInput(input).forEach { direction ->
+      head = head.copy(
+        x = when (direction) {
+          Direction.Left -> head.x - 1
+          Direction.Right -> head.x + 1
+          Direction.Up, Direction.Down -> head.x
+        },
+        y = when (direction) {
+          Direction.Up -> head.y + 1
+          Direction.Down -> head.y - 1
+          Direction.Left, Direction.Right -> head.y
+        },
+      )
+      tail = tail.scan(head) { head, tail ->
+        val xDistance = head.x - tail.x
+        val yDistance = head.y - tail.y
+        when {
+          abs(xDistance) > 1 && abs(yDistance) > 1 -> Point(
+            x = tail.x + if (xDistance > 0) 1 else -1,
+            y = tail.y + if (yDistance > 0) 1 else -1,
+          )
+          abs(xDistance) > 1 -> Point(
+            x = tail.x + if (xDistance > 0) 1 else -1,
+            y = head.y,
+          )
+          abs(yDistance) > 1 -> Point(
+            y = tail.y + if (yDistance > 0) 1 else -1,
+            x = head.x,
+          )
+          else -> tail
+        }
+      }.drop(1)
+      visitedPoints.add(tail.last())
+    }
     return visitedPoints.size
   }
 
-  private fun parseInput(input: String): List<Instruction> = input.lines().filter { it.isNotEmpty() }
-    .map {
-      Instruction(direction = Direction.parse(it.first()), steps = it.drop(2).toInt())
+  private fun parseInput(input: String): List<Direction> = input.lines().filter { it.isNotEmpty() }
+    .flatMap {
+      val direction = Direction.parse(it.first())
+      List(it.drop(2).toInt()) {
+        direction
+      }
     }
-
-  private data class Instruction(val direction: Direction, val steps: Int)
 
   private enum class Direction(var char: Char) {
     Left('L'), Right('R'), Up('U'), Down('D');
