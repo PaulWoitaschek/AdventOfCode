@@ -1,7 +1,9 @@
 package de.woitaschek.aoc.year2022
 
+import de.woitaschek.aoc.utils.Direction
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
+import de.woitaschek.aoc.utils.move
 import kotlin.math.absoluteValue
 import kotlin.math.sign
 
@@ -32,19 +34,6 @@ private fun Point.follow(current: Point): Point {
   }
 }
 
-private fun Point.move(direction: Direction) = Point(
-  x = x + when (direction) {
-    Direction.Left -> -1
-    Direction.Right -> 1
-    Direction.Up, Direction.Down -> 0
-  },
-  y = y + when (direction) {
-    Direction.Up -> 1
-    Direction.Down -> -1
-    Direction.Left, Direction.Right -> 0
-  },
-)
-
 private fun parseInput(input: String): List<Direction> = input.lines().filter { it.isNotEmpty() }
   .flatMap {
     val direction = Direction.parse(it.first())
@@ -52,11 +41,3 @@ private fun parseInput(input: String): List<Direction> = input.lines().filter { 
       direction
     }
   }
-
-private enum class Direction(var char: Char) {
-  Left('L'), Right('R'), Up('U'), Down('D');
-
-  companion object {
-    fun parse(input: Char) = values().first { it.char == input }
-  }
-}
