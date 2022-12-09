@@ -32,15 +32,15 @@ object Day9 : Puzzle(2022, 9) {
         val xDistance = head.x - tail.x
         val yDistance = head.y - tail.y
         when {
-          abs(xDistance) > 1 && abs(yDistance) > 1 -> Point(
+          abs(xDistance) == 2 && abs(yDistance) == 2 -> Point(
             x = tail.x + xDistance.sign,
             y = tail.y + yDistance.sign,
           )
-          abs(xDistance) > 1 -> Point(
+          abs(xDistance) == 2 -> Point(
             x = tail.x + xDistance.sign,
             y = head.y,
           )
-          abs(yDistance) > 1 -> Point(
+          abs(yDistance) == 2 -> Point(
             y = tail.y + yDistance.sign,
             x = head.x,
           )
