@@ -3,6 +3,7 @@ package de.woitaschek.aoc.year2022
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
 import kotlin.math.abs
+import kotlin.math.sign
 
 object Day9 : Puzzle(2022, 9) {
 
@@ -32,15 +33,15 @@ object Day9 : Puzzle(2022, 9) {
         val yDistance = head.y - tail.y
         when {
           abs(xDistance) > 1 && abs(yDistance) > 1 -> Point(
-            x = tail.x + if (xDistance > 0) 1 else -1,
-            y = tail.y + if (yDistance > 0) 1 else -1,
+            x = tail.x + xDistance.sign,
+            y = tail.y + yDistance.sign,
           )
           abs(xDistance) > 1 -> Point(
-            x = tail.x + if (xDistance > 0) 1 else -1,
+            x = tail.x + xDistance.sign,
             y = head.y,
           )
           abs(yDistance) > 1 -> Point(
-            y = tail.y + if (yDistance > 0) 1 else -1,
+            y = tail.y + yDistance.sign,
             x = head.x,
           )
           else -> tail
