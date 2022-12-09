@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
-import kotlin.math.abs
+import kotlin.math.absoluteValue
 import kotlin.math.sign
 
 object Day9 : Puzzle(2022, 9) {
@@ -28,23 +28,13 @@ object Day9 : Puzzle(2022, 9) {
           Direction.Left, Direction.Right -> head.y
         },
       )
-      tail = tail.scan(head) { head, tail ->
-        val xDistance = head.x - tail.x
-        val yDistance = head.y - tail.y
-        when {
-          abs(xDistance) == 2 && abs(yDistance) == 2 -> Point(
-            x = tail.x + xDistance.sign,
-            y = tail.y + yDistance.sign,
-          )
-          abs(xDistance) == 2 -> Point(
-            x = tail.x + xDistance.sign,
-            y = head.y,
-          )
-          abs(yDistance) == 2 -> Point(
-            y = tail.y + yDistance.sign,
-            x = head.x,
-          )
-          else -> tail
+      tail = tail.scan(head) { previous, current ->
+        val xDiff = previous.x - current.x
+        val yDiff = previous.y - current.y
+        if (xDiff.absoluteValue == 2 || yDiff.absoluteValue == 2) {
+          Point(current.x + xDiff.sign, current.y + yDiff.sign)
+        } else {
+          current
         }
       }.drop(1)
       visitedPoints.add(tail.last())
