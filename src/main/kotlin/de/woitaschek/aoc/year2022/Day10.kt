@@ -21,11 +21,8 @@ object Day10 : Puzzle(2022, 10) {
         drawAt.add(cycle - 1)
       }
     }
-    return (0 until 240).chunked(40).joinToString(separator = "\n") { indexes ->
-      indexes.joinToString(separator = "") { index ->
-        if (index in drawAt) "█" else " "
-      }
-    }
+    return String(CharArray(240) { if (it in drawAt) '█' else ' ' })
+      .chunked(40).joinToString(separator = "\n")
   }
 
   private fun runCycles(input: String, onCycle: (x: Int, cycle: Int) -> Unit) {
