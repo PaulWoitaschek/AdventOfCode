@@ -31,6 +31,12 @@ benchmark {
   targets {
     register("benchmarks")
   }
+  configurations {
+    named("main") {
+      outputTimeUnit = "ms"
+      mode = "avgt"
+    }
+  }
 }
 
 tasks {
