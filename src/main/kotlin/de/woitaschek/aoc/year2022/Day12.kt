@@ -6,23 +6,12 @@ import java.util.*
 
 object Day12 : Puzzle(2022, 12) {
 
-  override fun solvePart1(input: String): Int {
-    val vertexes = parseInput(input)
-    return shortestDistanceToEndFrom(
-      start = listOf(vertexes.flatten().first { it.isStart }),
-      vertexes = vertexes,
-    )
-  }
+  override fun solvePart1(input: String): Int = solve(input) { it.isStart }
 
-  override fun solvePart2(input: String): Int {
-    val vertexes = parseInput(input)
-    return shortestDistanceToEndFrom(
-      start = vertexes.flatten().filter { it.height == 0 },
-      vertexes = vertexes,
-    )
-  }
+  override fun solvePart2(input: String): Int = solve(input) { it.height == 0 }
 
-  private fun shortestDistanceToEndFrom(start: List<Vertex>, vertexes: List<List<Vertex>>): Int {
+  private fun solve(input: String, isStart: (Vertex) -> Boolean): Int {
+    val vertexes = parseInput(input)
     fun vertex(x: Int, y: Int): Vertex? = vertexes.getOrNull(y)?.getOrNull(x)
 
     fun Vertex.neighborCandidates() = listOfNotNull(
@@ -34,9 +23,9 @@ object Day12 : Puzzle(2022, 12) {
       height + 1 >= neighbor.height
     }
 
-    val end = vertexes.flatten().first { it.isEnd }
-
-    start.forEach { it.pathLength = 0 }
+    val flatVertexes = vertexes.flatten()
+    val end = flatVertexes.first { it.isEnd }
+    val start = flatVertexes.filter(isStart).onEach { it.pathLength = 0 }
 
     val queue = PriorityQueue<Vertex>(compareBy { it.pathLength })
     queue.addAll(start)
