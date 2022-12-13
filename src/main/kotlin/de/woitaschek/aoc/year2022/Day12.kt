@@ -23,10 +23,7 @@ object Day12 : Puzzle(2022, 12) {
   }
 
   private fun shortestDistanceToEndFrom(start: List<Vertex>, vertexes: List<List<Vertex>>): Int {
-    vertexes.flatten().forEach { it.reset() }
-    fun vertex(x: Int, y: Int): Vertex? {
-      return vertexes.getOrNull(y)?.getOrNull(x)
-    }
+    fun vertex(x: Int, y: Int): Vertex? = vertexes.getOrNull(y)?.getOrNull(x)
 
     fun Vertex.neighborCandidates() = listOfNotNull(
       vertex(x - 1, y),
@@ -44,18 +41,9 @@ object Day12 : Puzzle(2022, 12) {
     val queue = PriorityQueue<Vertex>(compareBy { it.pathLength })
     queue.addAll(start)
 
-    val result: Int
     while (true) {
-      val vertex = queue.firstOrNull()
-      if (vertex == null) {
-        result = Int.MAX_VALUE
-        break
-      }
-      if (vertex == end) {
-        result = end.pathLength
-        break
-      }
-      queue.remove(vertex)
+      val vertex = queue.remove()
+      if (vertex == end) return end.pathLength
       vertex.neighborCandidates().forEach { neighbor ->
         if (neighbor.pathLength == Int.MAX_VALUE) {
           neighbor.pathLength = vertex.pathLength + 1
@@ -63,7 +51,6 @@ object Day12 : Puzzle(2022, 12) {
         }
       }
     }
-    return result
   }
 
   private data class Vertex(
@@ -73,12 +60,7 @@ object Day12 : Puzzle(2022, 12) {
     val height: Int,
     val isStart: Boolean,
     val isEnd: Boolean,
-  ) {
-    fun reset() {
-      pathLength = Int.MAX_VALUE
-    }
-  }
-
+  )
 
   private fun parseInput(input: String) = input.lines().filter(String::isNotEmpty)
     .mapIndexed { y, line ->
