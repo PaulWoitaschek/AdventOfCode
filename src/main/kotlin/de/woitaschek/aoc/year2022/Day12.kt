@@ -8,18 +8,21 @@ object Day12 : Puzzle(2022, 12) {
 
   override fun solvePart1(input: String): Int {
     val vertexes = parseInput(input)
-    val start = vertexes.flatten().first { it.isStart }
-    return shortestDistanceToEndFrom(start, vertexes = vertexes)
+    return shortestDistanceToEndFrom(
+      start = listOf(vertexes.flatten().first { it.isStart }),
+      vertexes = vertexes,
+    )
   }
 
   override fun solvePart2(input: String): Int {
     val vertexes = parseInput(input)
-    return vertexes.flatten().filter { it.height == 0 }.minOf { start ->
-      shortestDistanceToEndFrom(start, vertexes)
-    }
+    return shortestDistanceToEndFrom(
+      start = vertexes.flatten().filter { it.height == 0 },
+      vertexes = vertexes,
+    )
   }
 
-  private fun shortestDistanceToEndFrom(start: Vertex, vertexes: List<List<Vertex>>): Int {
+  private fun shortestDistanceToEndFrom(start: List<Vertex>, vertexes: List<List<Vertex>>): Int {
     vertexes.flatten().forEach { it.reset() }
     fun vertex(x: Int, y: Int): Vertex? {
       return vertexes.getOrNull(y)?.getOrNull(x)
@@ -36,10 +39,10 @@ object Day12 : Puzzle(2022, 12) {
 
     val end = vertexes.flatten().first { it.isEnd }
 
-    start.pathLength = 0
+    start.forEach { it.pathLength = 0 }
 
     val queue = PriorityQueue<Vertex>(compareBy { it.pathLength })
-    queue.add(start)
+    queue.addAll(start)
 
     val result: Int
     while (true) {
