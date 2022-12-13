@@ -13,6 +13,7 @@ allOpen {
 sourceSets.create("benchmarks")
 
 dependencies {
+  implementation(libs.serialization)
   testImplementation(libs.kotest)
   testImplementation(libs.jupiter.api)
   add("benchmarksImplementation", libs.benchmark)
