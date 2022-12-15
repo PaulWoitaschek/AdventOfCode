@@ -62,7 +62,7 @@ object Day14 : Puzzle(2022, 14) {
       val SandOrigin = Point(500, 0)
 
       fun parse(input: String): Cave {
-        val rocks3 = input.lines().filter(String::isNotEmpty)
+        val rocks = input.lines().filter(String::isNotEmpty)
           .flatMap { line ->
             line.split(" -> ", ",").chunked(2)
               .map { (x, y) -> Point(x.toInt(), y.toInt()) }
@@ -78,7 +78,7 @@ object Day14 : Puzzle(2022, 14) {
 
         return Cave(
           sands = mutableSetOf(),
-          rocks = rocks3.toSet(),
+          rocks = rocks.toSet(),
         )
       }
     }
