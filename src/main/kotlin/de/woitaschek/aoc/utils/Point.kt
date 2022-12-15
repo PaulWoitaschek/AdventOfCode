@@ -1,5 +1,7 @@
 package de.woitaschek.aoc.utils
 
+import kotlin.math.absoluteValue
+
 data class Point(val x: Int, val y: Int) {
 
   fun adjacent(includeDiagonal: Boolean): List<Point> {
@@ -22,8 +24,13 @@ data class Point(val x: Int, val y: Int) {
     }
   }
 
+  fun manhattanDistanceTo(other: Point): Int {
+    return (x - other.x).absoluteValue + (y - other.y).absoluteValue
+  }
 
   override fun toString(): String = "($x,$y)"
+
+  operator fun plus(other: Point): Point = Point(x = x + other.x, y = y + other.y)
 
   companion object {
     fun parse(from: String): Point {
@@ -45,3 +52,15 @@ fun Point.move(direction: Direction) = Point(
     Direction.Left, Direction.Right -> 0
   },
 )
+
+fun printString(points: Iterable<Point>): String {
+  return (points.minOf { it.y }..points.maxOf { it.y }).joinToString(separator = "\n") { y ->
+    (points.minOf { it.x }..points.maxOf { it.x }).joinToString(separator = "") { x ->
+      if (Point(x, y) in points) "█" else " "
+    }
+  }
+}
+
+fun printPoints(points: Iterable<Point>) {
+  println(printString(points))
+}
