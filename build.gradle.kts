@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.allopen)
   alias(libs.plugins.benchmark)
+  alias(libs.plugins.compose)
 }
 
 allOpen {
@@ -18,6 +19,7 @@ dependencies {
   testImplementation(libs.jupiter.api)
   add("benchmarksImplementation", libs.benchmark)
   testRuntimeOnly(libs.jupiter.engine)
+  implementation(compose.desktop.currentOs)
 
   add(
     "benchmarksImplementation",
@@ -26,6 +28,12 @@ dependencies {
       sourceSets.test.get().output +
       sourceSets.test.get().runtimeClasspath,
   )
+}
+
+compose.desktop {
+  application {
+    mainClass = "ComposeKt"
+  }
 }
 
 benchmark {
