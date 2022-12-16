@@ -5,8 +5,13 @@ import java.util.*
 
 object Day16 : Puzzle(2022, 16) {
 
-  override fun solvePart1(input: String): Any {
+  override fun solvePart1(input: String): Int = solve(input = input, availableMinutes = 30, withElephant = false)
+
+  override fun solvePart2(input: String): Int = solve(input = input, availableMinutes = 26, withElephant = true)
+
+  private fun solve(input: String, availableMinutes: Int, withElephant: Boolean): Int {
     val valves = input.lines().filter(String::isNotEmpty).map(Valve::parse)
+      .sortedByDescending { it.flowRate }
 
     val distances = valves.associateWith { start ->
       valves.filter { it.flowRate > 0 }.associateWith { end ->
@@ -14,42 +19,54 @@ object Day16 : Puzzle(2022, 16) {
       }
     }
 
-    val queue = mutableListOf(
-      Travel(
-        minutesRemaining = 30,
-        opened = emptyList(),
-        releasedSteam = 0,
-        position = valves.first { it.name == "AA" },
-      ),
-    )
-    var max = 0
-    while (true) {
-      val travel = queue.removeFirstOrNull() ?: break
-      max = maxOf(travel.releasedSteam, max)
-      if (travel.minutesRemaining <= 0) {
-        continue
-      }
-      val valve = travel.position
-      distances.getValue(valve)
-        .mapNotNullTo(queue) { (candidate, distance) ->
-          val minutesRemainingForTravel = travel.minutesRemaining - distance - 1
-          if (minutesRemainingForTravel > 0 && candidate !in travel.opened) {
-            Travel(
-              minutesRemaining = minutesRemainingForTravel,
-              opened = travel.opened + candidate,
-              releasedSteam = travel.releasedSteam + candidate.flowRate * minutesRemainingForTravel,
-              position = candidate,
-            )
-          } else {
-            null
-          }
-        }
-    }
-    return max
-  }
+    val startValve = valves.first { it.name == "AA" }
 
-  override fun solvePart2(input: String): Any {
-    TODO("Not yet implemented")
+    var maxPressureReleased = 0
+
+    fun search(releasedPressure: Int, position: Valve, visited: Set<Valve>, minute: Int, spawnElephant: Boolean) {
+      maxPressureReleased = maxOf(releasedPressure, maxPressureReleased)
+
+      if (!spawnElephant) {
+        val unVisited = (valves - visited)
+        var index = 0
+        val possiblePressureRelease = (availableMinutes - minute downTo 0 step 2).sumOf {
+          (unVisited.getOrNull(index++)?.flowRate ?: 0) * it
+        }
+        if (possiblePressureRelease + releasedPressure < maxPressureReleased) return
+      }
+
+      distances.getValue(position).forEach { (candidate, distance) ->
+        val newMinute = minute + distance + 1
+        if (newMinute < availableMinutes && candidate !in visited) {
+          search(
+            releasedPressure = releasedPressure + (availableMinutes - newMinute) * candidate.flowRate,
+            position = candidate,
+            visited = visited + candidate,
+            minute = newMinute,
+            spawnElephant = spawnElephant,
+          )
+        }
+      }
+      if (spawnElephant) {
+        search(
+          releasedPressure = releasedPressure,
+          position = startValve,
+          visited = visited,
+          minute = 0,
+          spawnElephant = false,
+        )
+      }
+    }
+
+    search(
+      releasedPressure = 0,
+      position = startValve,
+      visited = emptySet(),
+      minute = 0,
+      spawnElephant = withElephant,
+    )
+
+    return maxPressureReleased
   }
 
   private fun shortestDistanceBetweenNodes(
@@ -84,14 +101,7 @@ object Day16 : Puzzle(2022, 16) {
     }
   }
 
-  data class Travel(
-    val minutesRemaining: Int,
-    val opened: List<Valve>,
-    val releasedSteam: Int,
-    val position: Valve,
-  )
-
-  data class Valve(
+  private data class Valve(
     val name: String,
     val flowRate: Int,
     val tunnelsTo: Set<String>,
