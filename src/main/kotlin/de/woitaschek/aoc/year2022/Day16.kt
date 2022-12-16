@@ -27,11 +27,10 @@ object Day16 : Puzzle(2022, 16) {
       maxPressureReleased = maxOf(releasedPressure, maxPressureReleased)
 
       if (!spawnElephant) {
-        val unVisited = (valves - visited)
-        var index = 0
-        val possiblePressureRelease = (availableMinutes - minute downTo 0 step 2).sumOf {
-          (unVisited.getOrNull(index++)?.flowRate ?: 0) * it
-        }
+        val possiblePressureRelease = (valves - visited)
+          .zip((availableMinutes - minute - 2 downTo 0 step 2)) { futureValve, futureMinute ->
+            futureValve.flowRate * futureMinute
+          }.sum()
         if (possiblePressureRelease + releasedPressure < maxPressureReleased) return
       }
 
