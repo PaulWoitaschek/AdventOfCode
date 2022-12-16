@@ -99,11 +99,11 @@ object Day16 : Puzzle(2022, 16) {
     companion object {
       private val regex = "Valve (\\w+) has flow rate=(\\d+); tunnels? leads? to valves? (.*)".toRegex()
       fun parse(input: String): Valve {
-        val parsed = regex.find(input)!!.destructured.toList()
+        val (name, flowRate, tunnelsTo) = regex.find(input)!!.destructured
         return Valve(
-          name = parsed[0],
-          flowRate = parsed[1].toInt(),
-          tunnelsTo = parsed[2].split(", ").toSet(),
+          name = name,
+          flowRate = flowRate.toInt(),
+          tunnelsTo = tunnelsTo.split(", ").toSet(),
         )
       }
     }
