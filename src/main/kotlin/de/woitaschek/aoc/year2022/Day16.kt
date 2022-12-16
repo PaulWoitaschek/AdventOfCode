@@ -8,22 +8,18 @@ object Day16 : Puzzle(2022, 16) {
   override fun solvePart1(input: String): Any {
     val valves = input.lines().filter(String::isNotEmpty).map(Valve::parse)
 
-    val distances = valves.associate { start ->
-      start.name to (valves.filter { it.flowRate > 0 })
-        .associate { end ->
-          end.name to shortestDistanceBetweenNodes(start, end, valves)
-        }
+    val distances = valves.associateWith { start ->
+      (valves.filter { it.flowRate > 0 }).associateWith { end ->
+        shortestDistanceBetweenNodes(start, end, valves)
+      }
     }
-
-    val valvesByName = valves.associateBy { it.name }
-    fun valve(name: String): Valve = valvesByName.getValue(name)
 
     val queue = mutableListOf(
       Travel(
         minutesRemaining = 30,
         opened = emptyList(),
         releasedSteam = 0,
-        position = "AA",
+        position = valves.first { it.name == "AA" },
       ),
     )
     var max = 0
@@ -33,17 +29,16 @@ object Day16 : Puzzle(2022, 16) {
       if (travel.minutesRemaining <= 0) {
         continue
       }
-      val valve = valve(travel.position)
-      distances.getValue(valve.name)
-        .mapNotNullTo(queue) { (candidateName, distance) ->
-          val candidate = valve(candidateName)
+      val valve = travel.position
+      distances.getValue(valve)
+        .mapNotNullTo(queue) { (candidate, distance) ->
           val minutesRemainingForTravel = travel.minutesRemaining - distance - 1
-          if (minutesRemainingForTravel > 0 && candidateName !in travel.opened) {
+          if (minutesRemainingForTravel > 0 && candidate !in travel.opened) {
             Travel(
               minutesRemaining = minutesRemainingForTravel,
-              opened = travel.opened + candidateName,
+              opened = travel.opened + candidate,
               releasedSteam = travel.releasedSteam + candidate.flowRate * minutesRemainingForTravel,
-              position = candidateName,
+              position = candidate,
             )
           } else {
             null
@@ -78,7 +73,7 @@ object Day16 : Puzzle(2022, 16) {
     }
 
     while (true) {
-      val node = queue.remove()
+      val node = queue.remove()!!
       if (node == endNode) {
         return endNode.distance
       }
@@ -95,9 +90,9 @@ object Day16 : Puzzle(2022, 16) {
 
   data class Travel(
     val minutesRemaining: Int,
-    val opened: List<String>,
+    val opened: List<Valve>,
     val releasedSteam: Int,
-    val position: String,
+    val position: Valve,
   )
 
   data class Valve(
