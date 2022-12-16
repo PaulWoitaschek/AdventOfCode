@@ -9,7 +9,7 @@ object Day16 : Puzzle(2022, 16) {
     val valves = input.lines().filter(String::isNotEmpty).map(Valve::parse)
 
     val distances = valves.associateWith { start ->
-      (valves.filter { it.flowRate > 0 }).associateWith { end ->
+      valves.filter { it.flowRate > 0 }.associateWith { end ->
         shortestDistanceBetweenNodes(start, end, valves)
       }
     }
@@ -59,25 +59,21 @@ object Day16 : Puzzle(2022, 16) {
   ): Int {
     data class Node(val valve: Valve, var distance: Int = Int.MAX_VALUE)
 
-    val allNodes = all.map { Node(it) }
-    fun node(name: String): Node = allNodes.single { it.valve.name == name }
-    val startNode = node(from.name)
-    val endNode = node(to.name)
+    val allNodes = all.map(::Node).associateBy { it.valve.name }
+    val startNode = allNodes.getValue(from.name)
+    val endNode = allNodes.getValue(to.name)
 
     val queue = PriorityQueue<Node>(compareBy { it.distance })
     startNode.distance = 0
     queue.add(startNode)
-
-    fun Node.neighbors(): List<Node> = valve.tunnelsTo.map { childName ->
-      node(childName)
-    }
 
     while (true) {
       val node = queue.remove()!!
       if (node == endNode) {
         return endNode.distance
       }
-      node.neighbors().mapNotNullTo(queue) { child ->
+      node.valve.tunnelsTo.mapNotNullTo(queue) { valveName ->
+        val child = allNodes.getValue(valveName)
         if (child.distance == Int.MAX_VALUE) {
           child.distance = node.distance + 1
           child
