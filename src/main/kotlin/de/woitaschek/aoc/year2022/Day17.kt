@@ -6,7 +6,7 @@ object Day17 {
 
   fun solvePart1(input: String, reportOnRock: Long): Long {
 
-    val chamber: MutableMap<Int, BooleanArray> = mutableMapOf()
+    val cave = Cave()
 
     data class Rock(
       val shape: RockShape,
@@ -14,7 +14,7 @@ object Day17 {
     )
 
     fun newRock(shape: RockShape): Rock {
-      val top = (chamber.maxOfOrNull { it.key } ?: -1) + 4
+      val top = cave.top() + 4
       return Rock(shape, shape.points.map { it.copy(x = it.x + 2, y = it.y + top) })
     }
 
@@ -37,7 +37,7 @@ object Day17 {
         )
       }
       val inBonds = newCoordinates.all { (x, y) ->
-        x in 0 until CAVE_WIDTH && y >= 0 && chamber[y]?.get(x) != true
+        x in 0 until Cave.Width && y > 0 && !cave.hasRock(x, y)
       }
       return if (inBonds) {
         rock = rock.copy(coordinates = newCoordinates)
@@ -54,12 +54,11 @@ object Day17 {
 
       if (!moveRock(Direction.Down)) {
         if (rocks == reportOnRock) {
-          return ((chamber.maxOfOrNull { it.key } ?: 0) + 1).toLong()
+          return cave.top().toLong()
         }
         rocks++
         rock.coordinates.forEach { (x, y) ->
-          val arr = chamber.getOrPut(y) { BooleanArray(CAVE_WIDTH) }
-          arr[x] = true
+          cave.putRock(x, y)
         }
         rock = newRock(rock.shape.next())
       }
@@ -125,5 +124,21 @@ object Day17 {
     }
   }
 
-  private const val CAVE_WIDTH = 7
+  private class Cave {
+
+    private val cave: MutableMap<Int, BooleanArray> = mutableMapOf()
+
+    fun top(): Int = cave.maxOfOrNull { it.key } ?: 0
+
+    fun putRock(x: Int, y: Int) {
+      val line = cave.getOrPut(y) { BooleanArray((Width)) }
+      line[x] = true
+    }
+
+    fun hasRock(x: Int, y: Int): Boolean = cave[y]?.get(x) == true
+
+    companion object {
+      const val Width = 7
+    }
+  }
 }
