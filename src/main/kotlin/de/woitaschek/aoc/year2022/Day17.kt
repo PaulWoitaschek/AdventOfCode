@@ -1,6 +1,7 @@
 package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Point
+import java.util.*
 
 object Day17 {
 
@@ -124,21 +125,26 @@ object Day17 {
     }
   }
 
-  private class Cave {
+  class Cave {
 
-    private val cave: MutableMap<Int, BooleanArray> = mutableMapOf()
+    private val value = BitSet()
 
-    fun top(): Int = cave.maxOfOrNull { it.key } ?: 0
+    fun top(): Int = (value.length() - 2) / Width
 
     fun putRock(x: Int, y: Int) {
-      val line = cave.getOrPut(y) { BooleanArray((Width)) }
-      line[x] = true
+      value.set((y * Width + x) + 1)
     }
 
-    fun hasRock(x: Int, y: Int): Boolean = cave[y]?.get(x) == true
+    fun hasRock(x: Int, y: Int): Boolean = value.get((y * Width + x) + 1)
 
     companion object {
       const val Width = 7
     }
   }
 }
+
+fun main() {
+  val value = 21
+  println(value.div(10))
+}
+
