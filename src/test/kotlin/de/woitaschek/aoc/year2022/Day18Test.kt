@@ -14,4 +14,14 @@ class Day18Test {
   fun part1RegularInput() {
     Day18.test(part1 = 4370)
   }
+
+  @Test
+  fun part2TestInput() {
+    Day18.test(part2Test = 58)
+  }
+
+  @Test
+  fun part2RegularInput() {
+    Day18.test(part2 = 2458)
+  }
 }
