@@ -18,13 +18,14 @@ object Day18 : Puzzle(2022, 18) {
     val zRange = lava.minOf { it.z - 1 }..lava.maxOf { it.z + 1 }
 
     val air = mutableSetOf<Cube>()
-    fun visit(cube: Cube) {
-      air.add(cube)
+    val queue = ArrayDeque(listOf(Cube(xRange.first, yRange.first, zRange.first)))
+    while (queue.isNotEmpty()) {
+      val cube = queue.removeLast()
+      if (!air.add(cube)) continue
       cube.adjacent()
         .filter { it !in air && it.x in xRange && it.y in yRange && it.z in zRange && it !in lava }
-        .forEach(::visit)
+        .let(queue::addAll)
     }
-    visit(Cube(xRange.first, yRange.first, zRange.first))
     return air.sumOf { airCube ->
       airCube.adjacent().count { neighbor ->
         neighbor in lava
