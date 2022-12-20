@@ -36,7 +36,7 @@ object Day20 : Puzzle(2022, 20) {
         val toMove = mixedNumbers.first { it.index == index }
         if (toMove.number != 0L) {
           val toMoveIndex = mixedNumbers.indexOf(toMove)
-          mixedNumbers.remove(toMove)
+          mixedNumbers.removeAt(toMoveIndex)
           Collections.rotate(mixedNumbers, (-toMove.number % mixedNumbers.size).toInt())
           mixedNumbers.add(toMoveIndex, toMove)
         }
