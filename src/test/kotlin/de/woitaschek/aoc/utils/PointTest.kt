@@ -15,8 +15,8 @@ class PointTest {
         Point(2, 1),
       ),
     ) shouldBe """
-      ███
-        █
+          ⬛⬛⬛
+          ⬜⬜⬛
     """.trimIndent()
   }
 
