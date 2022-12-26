@@ -14,4 +14,14 @@ class Day24Test {
   fun part1RealData() {
     Day24.test(part1 = 264)
   }
+
+  @Test
+  fun part2TestData() {
+    Day24.test(part2Test = 54)
+  }
+
+  @Test
+  fun part2RealData() {
+    Day24.test(part2 = 789)
+  }
 }
