@@ -1,4 +1,4 @@
- package de.woitaschek.aoc.year2022
+package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.test
 import org.junit.jupiter.api.Test

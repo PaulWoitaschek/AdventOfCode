@@ -13,9 +13,9 @@ object Day18 : Puzzle(2022, 18) {
 
   override fun solvePart2(input: String): Any {
     val lava = parseInput(input)
-    val xRange = lava.minOf { it.x - 1 }..lava.maxOf { it.x + 1 }
-    val yRange = lava.minOf { it.y - 1 }..lava.maxOf { it.y + 1 }
-    val zRange = lava.minOf { it.z - 1 }..lava.maxOf { it.z + 1 }
+    val xRange = lava.minOf { it.x - 1 }.rangeTo(lava.maxOf { it.x + 1 })
+    val yRange = lava.minOf { it.y - 1 }.rangeTo(lava.maxOf { it.y + 1 })
+    val zRange = lava.minOf { it.z - 1 }.rangeTo(lava.maxOf { it.z + 1 })
 
     val air = mutableSetOf<Cube>()
     val queue = ArrayDeque(listOf(Cube(xRange.first, yRange.first, zRange.first)))
@@ -35,9 +35,12 @@ object Day18 : Puzzle(2022, 18) {
 
   data class Cube(val x: Int, val y: Int, val z: Int) {
     fun adjacent() = listOf(
-      copy(x = x + 1), copy(x = x - 1),
-      copy(y = y + 1), copy(y = y - 1),
-      copy(z = z + 1), copy(z = z - 1),
+      copy(x = x + 1),
+      copy(x = x - 1),
+      copy(y = y + 1),
+      copy(y = y - 1),
+      copy(z = z + 1),
+      copy(z = z - 1),
     )
 
     override fun toString(): String = "($x,$y,$z)"

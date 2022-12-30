@@ -54,8 +54,8 @@ fun Point.move(direction: Direction) = Point(
 )
 
 fun printString(points: Iterable<Point>): String {
-  return (points.minOf { it.y }..points.maxOf { it.y }).joinToString(separator = "\n") { y ->
-    (points.minOf { it.x }..points.maxOf { it.x }).joinToString(separator = "") { x ->
+  return (points.minOf { it.y }.rangeTo(points.maxOf { it.y })).joinToString(separator = "\n") { y ->
+    (points.minOf { it.x }.rangeTo(points.maxOf { it.x })).joinToString(separator = "") { x ->
       if (Point(x, y) in points) "⬛" else "⬜"
     }
   }

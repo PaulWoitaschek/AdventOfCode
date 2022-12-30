@@ -105,7 +105,7 @@ class Year2021Tests {
         █   █
         █████
 
-        """.trimIndent(),
+      """.trimIndent(),
     )
   }
 

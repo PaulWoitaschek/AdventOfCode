@@ -1,10 +1,18 @@
 package de.woitaschek.aoc
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -55,8 +63,8 @@ fun main() {
           val cave = remember { caveFlow }.collectAsState(null).value ?: return@MaterialTheme
 
           val occupiedSpaces = cave.sands + cave.rocks + Day14.Cave.SandOrigin
-          val xRange = (occupiedSpaces.minOf { it.x }..occupiedSpaces.maxOf { it.x })
-          val yRange = occupiedSpaces.minOf { it.y }..occupiedSpaces.maxOf { it.y }
+          val xRange = occupiedSpaces.minOf { it.x }.rangeTo(occupiedSpaces.maxOf { it.x })
+          val yRange = occupiedSpaces.minOf { it.y }.rangeTo(occupiedSpaces.maxOf { it.y })
 
           Column {
             yRange.take(29).forEach { y ->

@@ -58,7 +58,6 @@ object Day21 : Puzzle(2022, 21) {
       }
     }
 
-
   override fun solvePart2(input: String) = TODO()
 
   sealed interface CalculationElement {

@@ -44,9 +44,12 @@ enum class RPS(val score: Int) {
 
   companion object {
     val byChar = mapOf(
-      'A' to Rock, 'X' to Rock,
-      'B' to Paper, 'Y' to Paper,
-      'C' to Scissor, 'Z' to Scissor,
+      'A' to Rock,
+      'X' to Rock,
+      'B' to Paper,
+      'Y' to Paper,
+      'C' to Scissor,
+      'Z' to Scissor,
     )
   }
 }
@@ -54,7 +57,8 @@ enum class RPS(val score: Int) {
 enum class MatchResult(val score: Int) {
   Won(6),
   Loss(0),
-  Draw(3);
+  Draw(3),
+  ;
 
   companion object {
     val byChar = mapOf('X' to Loss, 'Y' to Draw, 'Z' to Won)

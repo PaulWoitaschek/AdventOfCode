@@ -6,7 +6,6 @@ import java.util.*
 object Day17 {
 
   fun solvePart1(input: String, reportOnRock: Long): Long {
-
     val cave = Cave()
 
     data class Rock(
@@ -88,14 +87,14 @@ object Day17 {
     .#.
     ###
     .#.
-  """.trimIndent(),
+      """.trimIndent(),
     ),
     C(
       """
     ..#
     ..#
     ###
-  """.trimIndent(),
+      """.trimIndent(),
     ),
     D(
       """
@@ -103,14 +102,15 @@ object Day17 {
     #
     #
     #
-  """.trimIndent(),
+      """.trimIndent(),
     ),
     E(
       """
     ##
     ##
-  """.trimIndent(),
-    );
+      """.trimIndent(),
+    ),
+    ;
 
     fun next(): RockShape = values().getOrNull(ordinal + 1) ?: A
 
@@ -147,4 +147,3 @@ fun main() {
   val value = 21
   println(value.div(10))
 }
-

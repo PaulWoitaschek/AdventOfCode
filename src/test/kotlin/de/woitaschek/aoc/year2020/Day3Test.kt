@@ -17,7 +17,7 @@ class Day3Test {
   fun part2() {
     Day3.test(
       part2Test = 336,
-      part2 = 1355323200
+      part2 = 1355323200,
     )
   }
 }

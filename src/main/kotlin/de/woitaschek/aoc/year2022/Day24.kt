@@ -28,7 +28,9 @@ object Day24 : Puzzle(2022, 24) {
         position = world.start,
         targets = if (part2) {
           listOf(world.end, world.start, world.end)
-        } else listOf(world.end),
+        } else {
+          listOf(world.end)
+        },
       ),
     )
 
@@ -70,11 +72,14 @@ object Day24 : Puzzle(2022, 24) {
       ).filter { newPosition ->
         newPosition == world.start ||
           newPosition == world.end ||
-          (newPosition.x in 0 until world.width &&
-            (newPosition.y in 0 until world.height) &&
-            !world.hasBlizzardAtMinute(
-              newPosition, journey.minute + 1,
-            ))
+          (
+            newPosition.x in 0 until world.width &&
+              (newPosition.y in 0 until world.height) &&
+              !world.hasBlizzardAtMinute(
+                newPosition,
+                journey.minute + 1,
+              )
+            )
       }.forEach { moveTo ->
         val newJourney = Journey(
           minute = journey.minute + 1,

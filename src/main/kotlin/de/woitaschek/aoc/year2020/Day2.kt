@@ -26,4 +26,3 @@ object Day2 : Puzzle(2020, 2) {
     fun isValidForPart2(): Boolean = listOf(min, max).count { password[it - 1] == char } == 1
   }
 }
-
