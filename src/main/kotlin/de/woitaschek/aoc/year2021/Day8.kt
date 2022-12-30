@@ -17,7 +17,6 @@ object Day8 : Puzzle(2021, 8) {
   }
 
   private fun parseInput(input: String): List<Display> = input.lines().map(Display.Companion::parse)
-
 }
 
 data class Display(

@@ -1,7 +1,7 @@
 package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.utils.Puzzle
 import de.woitaschek.aoc.utils.Point
+import de.woitaschek.aoc.utils.Puzzle
 
 object Day9 : Puzzle(2021, 9) {
 
@@ -84,4 +84,3 @@ private data class HeightMap(
 
   private data class PointWithValue(val point: Point, val value: Int)
 }
-

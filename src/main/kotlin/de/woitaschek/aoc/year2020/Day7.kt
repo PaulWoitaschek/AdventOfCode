@@ -10,9 +10,12 @@ object Day7 : Puzzle(2020, 7) {
     val bagRules = parseInput(input)
 
     fun canContainShinyGoldBag(color: String): Boolean {
-      return if (color == shinyGold) true
-      else bagRules[color]!!.any {
-        canContainShinyGoldBag(it.key)
+      return if (color == shinyGold) {
+        true
+      } else {
+        bagRules[color]!!.any {
+          canContainShinyGoldBag(it.key)
+        }
       }
     }
 

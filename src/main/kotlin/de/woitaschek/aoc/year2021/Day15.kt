@@ -3,7 +3,6 @@ package de.woitaschek.aoc.year2021
 import de.woitaschek.aoc.utils.Puzzle
 import java.util.*
 
-
 object Day15 : Puzzle(2021, 15) {
 
   data class Vertex(

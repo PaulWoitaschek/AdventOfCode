@@ -52,8 +52,11 @@ object Day11 : Puzzle(2022, 11) {
       object Old : OperationValue
       companion object {
         fun parse(value: String): OperationValue {
-          return if (value == "old") Old
-          else Value(value.toLong())
+          return if (value == "old") {
+            Old
+          } else {
+            Value(value.toLong())
+          }
         }
       }
     }

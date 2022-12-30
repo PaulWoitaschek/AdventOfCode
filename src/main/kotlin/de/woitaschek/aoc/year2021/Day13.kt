@@ -1,7 +1,7 @@
 package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.utils.Puzzle
 import de.woitaschek.aoc.utils.Point
+import de.woitaschek.aoc.utils.Puzzle
 import kotlin.math.abs
 
 object Day13 : Puzzle(2021, 13) {
@@ -69,7 +69,6 @@ private fun parse(input: String): Pair<Set<Point>, List<FoldingInstruction>> {
     }
   return points to foldInstructions
 }
-
 
 private data class FoldingInstruction(
   val foldVertically: Boolean,

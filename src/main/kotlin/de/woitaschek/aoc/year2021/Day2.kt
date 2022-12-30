@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2021
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day2 : Puzzle(2021,2) {
+object Day2 : Puzzle(2021, 2) {
 
   override fun solvePart1(input: String): Long {
     return process(input, accountAim = false)
@@ -38,7 +38,7 @@ private data class Position(
       when (instruction.direction) {
         Connection.Forward -> copy(
           horizontal = horizontal + steps,
-          depth = depth + aim * steps
+          depth = depth + aim * steps,
         )
         Connection.Up -> copy(aim = aim - steps)
         Connection.Down -> copy(aim = aim + steps)
@@ -58,8 +58,8 @@ private data class Position(
 }
 
 private data class Instruction(
-    val direction: Connection,
-    val steps: Int
+  val direction: Connection,
+  val steps: Int,
 ) {
   companion object {
     fun parse(input: String): Instruction {

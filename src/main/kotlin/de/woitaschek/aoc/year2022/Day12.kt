@@ -3,7 +3,6 @@ package de.woitaschek.aoc.year2022
 import de.woitaschek.aoc.utils.Puzzle
 import java.util.*
 
-
 object Day12 : Puzzle(2022, 12) {
 
   override fun solvePart1(input: String): Int = solve(input) { it.isStart }

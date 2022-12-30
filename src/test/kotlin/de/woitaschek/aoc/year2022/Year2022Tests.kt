@@ -55,9 +55,9 @@ class Year2022Tests {
     Day6.test(part1 = 1892, part2 = 2313)
   }
 
+  // @Disabled
   @Test
-  //@Disabled
   fun solveTestInput() {
-    //Day6.solvePart2(testInput()) shouldBe "MCD"
+    // Day6.solvePart2(testInput()) shouldBe "MCD"
   }
 }

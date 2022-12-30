@@ -84,7 +84,7 @@ object Day4 : Puzzle(2020, 4) {
 
   private fun Passport.hasValidPassportId(): Boolean {
     val passportId = get("pid") ?: return false
-    return passportId.length==9&& passportId.all {
+    return passportId.length == 9 && passportId.all {
       it.digitToIntOrNull() != null
     }
   }
@@ -95,12 +95,12 @@ object Day4 : Puzzle(2020, 4) {
   }
 
   fun Passport.allFieldsCorrect(): Boolean {
-    return hasValidHeight()
-      && hasValidBirthYear()
-      && hasValidExpatriationYear()
-      && hasValidIssueYear()
-      && hasValidHairColor()
-      && hasValidPassportId()
-      && hasValidEyeColor()
+    return hasValidHeight() &&
+      hasValidBirthYear() &&
+      hasValidExpatriationYear() &&
+      hasValidIssueYear() &&
+      hasValidHairColor() &&
+      hasValidPassportId() &&
+      hasValidEyeColor()
   }
 }

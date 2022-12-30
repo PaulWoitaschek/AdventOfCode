@@ -28,7 +28,7 @@ class Day25Test {
   fun snafuNumberToDecimal() {
     assertSoftly {
       numberMapping.forEach { (snafuNumber, decimal) ->
-        withClue("snafu=${snafuNumber}, shouldBe decimal=${decimal}") {
+        withClue("snafu=$snafuNumber, shouldBe decimal=$decimal") {
           snafuNumber.toDecimal() shouldBe decimal
         }
       }
@@ -39,7 +39,7 @@ class Day25Test {
   fun decimalToSnafuNumber() {
     assertSoftly {
       numberMapping.forEach { (snafuNumber, decimal) ->
-        withClue("snafu=${snafuNumber}, shouldBe decimal=${decimal}") {
+        withClue("snafu=$snafuNumber, shouldBe decimal=$decimal") {
           decimal.toSnafuNumber() shouldBe snafuNumber
         }
       }

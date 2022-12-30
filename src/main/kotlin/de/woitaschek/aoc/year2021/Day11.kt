@@ -1,7 +1,7 @@
 package de.woitaschek.aoc.year2021
 
-import de.woitaschek.aoc.utils.Puzzle
 import de.woitaschek.aoc.utils.Point
+import de.woitaschek.aoc.utils.Puzzle
 
 object Day11 : Puzzle(2021, 11) {
 
@@ -76,4 +76,3 @@ private data class Octopuses(val octopuses: List<Octopus>) {
     }
   }
 }
-

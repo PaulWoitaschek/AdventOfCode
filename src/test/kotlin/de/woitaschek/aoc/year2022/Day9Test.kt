@@ -28,10 +28,9 @@ class Day9Test {
       D 1
       L 5
       R 2
-    """.trimIndent(),
+      """.trimIndent(),
     ) shouldBe 13
   }
-
 
   @Test
   fun part2Short() {
@@ -45,7 +44,7 @@ class Day9Test {
       D 1
       L 5
       R 2
-    """.trimIndent(),
+      """.trimIndent(),
     ) shouldBe 1
   }
 
@@ -61,7 +60,7 @@ class Day9Test {
       D 10
       L 25
       U 20
-    """.trimIndent(),
+      """.trimIndent(),
     ) shouldBe 36
   }
 }

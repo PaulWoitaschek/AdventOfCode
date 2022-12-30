@@ -1,7 +1,10 @@
 package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.aocInput
-import kotlinx.benchmark.*
+import kotlinx.benchmark.Benchmark
+import kotlinx.benchmark.Scope
+import kotlinx.benchmark.Setup
+import kotlinx.benchmark.State
 
 @State(Scope.Benchmark)
 class Day16Benchmark {

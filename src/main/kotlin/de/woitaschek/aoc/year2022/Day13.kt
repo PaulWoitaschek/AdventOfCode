@@ -1,7 +1,11 @@
 package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Puzzle
-import kotlinx.serialization.json.*
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.int
 
 object Day13 : Puzzle(2022, 13) {
 

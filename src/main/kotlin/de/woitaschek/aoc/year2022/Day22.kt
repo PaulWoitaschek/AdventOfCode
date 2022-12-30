@@ -118,7 +118,8 @@ object Day22 : Puzzle(2022, 22) {
     Left(-1, 0, 2),
     Up(0, -1, 3),
     Right(1, 0, 0),
-    Down(0, 1, 1);
+    Down(0, 1, 1),
+    ;
 
     fun turnLeft(): Facing = values().getOrNull(ordinal - 1) ?: values().last()
     fun turnRight(): Facing = values().getOrNull(ordinal + 1) ?: values().first()
