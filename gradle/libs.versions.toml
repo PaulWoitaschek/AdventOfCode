@@ -1,5 +1,5 @@
 [versions]
-jupiter = "5.9.1"
+jupiter = "5.9.2"
 kotlin = "1.7.20"
 benchmark = "0.4.7"
 
