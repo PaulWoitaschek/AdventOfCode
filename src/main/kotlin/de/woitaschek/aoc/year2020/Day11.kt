@@ -109,6 +109,6 @@ object Day11 : Puzzle(2020, 11) {
   enum class Tile {
     Floor,
     EmptySeat,
-    OccupiedSeat
+    OccupiedSeat,
   }
 }
