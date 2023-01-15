@@ -17,7 +17,7 @@ fun aocTestInput(year: Int, day: Int): String {
   return input("$year/day${day}test.txt")
 }
 
-private fun input(fileName: String): String {
+fun input(fileName: String): String {
   return ClassLoader
     .getSystemResourceAsStream(fileName)!!
     .bufferedReader()
