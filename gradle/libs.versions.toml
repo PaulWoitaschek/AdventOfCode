@@ -1,6 +1,6 @@
 [versions]
 jupiter = "5.9.2"
-kotlin = "1.8.0"
+kotlin = "1.8.10"
 benchmark = "0.4.7"
 
 [libraries]
