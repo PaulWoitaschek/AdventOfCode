@@ -25,7 +25,10 @@ object Day10 : Puzzle(2022, 10) {
       .chunked(40).joinToString(separator = "\n")
   }
 
-  private fun runCycles(input: String, onCycle: (x: Int, cycle: Int) -> Unit) {
+  private fun runCycles(
+    input: String,
+    onCycle: (x: Int, cycle: Int) -> Unit,
+  ) {
     var x = 1
     var cycle = 0
     fun runCycle() {

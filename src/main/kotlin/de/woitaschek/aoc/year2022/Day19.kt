@@ -1,7 +1,7 @@
 package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Puzzle
-import java.util.*
+import java.util.PriorityQueue
 import kotlin.math.sign
 
 object Day19 : Puzzle(2022, 19) {
@@ -159,6 +159,9 @@ object Day19 : Puzzle(2022, 19) {
   )
 
   enum class Material {
-    Ore, Clay, Obsidian, Geode;
+    Ore,
+    Clay,
+    Obsidian,
+    Geode,
   }
 }

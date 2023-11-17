@@ -13,7 +13,10 @@ object Day2 : Puzzle(2021, 2) {
   }
 }
 
-private fun process(input: String, accountAim: Boolean): Long {
+private fun process(
+  input: String,
+  accountAim: Boolean,
+): Long {
   val position = input.lineSequence()
     .map { Instruction.parse(it) }
     .fold(Position.INITIAL) { position, instruction ->
@@ -23,7 +26,9 @@ private fun process(input: String, accountAim: Boolean): Long {
 }
 
 private enum class Connection {
-  Forward, Up, Down
+  Forward,
+  Up,
+  Down,
 }
 
 private data class Position(
@@ -32,7 +37,10 @@ private data class Position(
   val aim: Int,
 ) {
 
-  fun plusInstruction(instruction: Instruction, accountAim: Boolean): Position {
+  fun plusInstruction(
+    instruction: Instruction,
+    accountAim: Boolean,
+  ): Position {
     val steps = instruction.steps
     return if (accountAim) {
       when (instruction.direction) {

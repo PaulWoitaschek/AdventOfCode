@@ -1,11 +1,14 @@
 package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Point
-import java.util.*
+import java.util.BitSet
 
 object Day17 {
 
-  fun solvePart1(input: String, reportOnRock: Long): Long {
+  fun solvePart1(
+    input: String,
+    reportOnRock: Long,
+  ): Long {
     val cave = Cave()
 
     data class Rock(
@@ -37,7 +40,7 @@ object Day17 {
         )
       }
       val inBonds = newCoordinates.all { (x, y) ->
-        x in 0 until Cave.Width && y > 0 && !cave.hasRock(x, y)
+        x in 0 until Cave.WIDTH && y > 0 && !cave.hasRock(x, y)
       }
       return if (inBonds) {
         rock = rock.copy(coordinates = newCoordinates)
@@ -129,21 +132,22 @@ object Day17 {
 
     private val value = BitSet()
 
-    fun top(): Int = (value.length() - 2) / Width
+    fun top(): Int = (value.length() - 2) / WIDTH
 
-    fun putRock(x: Int, y: Int) {
-      value.set((y * Width + x) + 1)
+    fun putRock(
+      x: Int,
+      y: Int,
+    ) {
+      value.set((y * WIDTH + x) + 1)
     }
 
-    fun hasRock(x: Int, y: Int): Boolean = value.get((y * Width + x) + 1)
+    fun hasRock(
+      x: Int,
+      y: Int,
+    ): Boolean = value.get((y * WIDTH + x) + 1)
 
     companion object {
-      const val Width = 7
+      const val WIDTH = 7
     }
   }
-}
-
-fun main() {
-  val value = 21
-  println(value.div(10))
 }

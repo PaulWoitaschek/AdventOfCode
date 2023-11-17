@@ -19,7 +19,11 @@ private fun allSuccessfulShots(input: String): List<VelocityWithHighestY> {
     }
 }
 
-private fun highestYIfHit(targetArea: TargetArea, xVelocity: Int, yVelocity: Int): VelocityWithHighestY? {
+private fun highestYIfHit(
+  targetArea: TargetArea,
+  xVelocity: Int,
+  yVelocity: Int,
+): VelocityWithHighestY? {
   var yMax = 0
   generateSequence(Probe(0, 0, xVelocity, yVelocity)) { it.afterStep() }
     .forEach { probe ->

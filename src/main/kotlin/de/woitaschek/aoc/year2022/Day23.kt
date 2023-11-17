@@ -81,7 +81,11 @@ object Day23 : Puzzle(2022, 23) {
   }
 
   enum class Direction {
-    North, South, West, East;
+    North,
+    South,
+    West,
+    East,
+    ;
 
     fun next(): Direction = values().getOrNull(ordinal + 1) ?: values().first()
   }

@@ -3,7 +3,7 @@ package de.woitaschek.aoc.year2022
 import de.woitaschek.aoc.utils.Direction
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
-import java.util.*
+import java.util.PriorityQueue
 
 object Day24 : Puzzle(2022, 24) {
 
@@ -11,7 +11,10 @@ object Day24 : Puzzle(2022, 24) {
 
   override fun solvePart2(input: String): Int = solve(input, part2 = true)
 
-  private fun solve(input: String, part2: Boolean): Int {
+  private fun solve(
+    input: String,
+    part2: Boolean,
+  ): Int {
     val world = World.parse(input)
 
     val queue = PriorityQueue<Journey>(
@@ -109,7 +112,10 @@ object Day24 : Puzzle(2022, 24) {
     val end: Point,
   ) {
 
-    fun hasBlizzardAtMinute(point: Point, minute: Int): Boolean {
+    fun hasBlizzardAtMinute(
+      point: Point,
+      minute: Int,
+    ): Boolean {
       return blizzards.any { blizzard ->
         val blizzardPosition = blizzard.point
         when (blizzard.direction) {
