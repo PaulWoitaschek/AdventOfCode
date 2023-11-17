@@ -11,13 +11,23 @@ import java.time.LocalDate
 class App : CliktCommand() {
 
   private val year: Int by option().int().prompt(default = LocalDate.now().year)
+  private val singleDay: Int? by option().int()
 
   override fun run() {
-    (1..26).forEach { day ->
-      writeSources(day)
-      writeResources(day)
-      writeTests(day)
+    val singleDay = singleDay
+    if (singleDay != null) {
+      write(singleDay)
+    } else {
+      (1..26).forEach { day ->
+        write(day)
+      }
     }
+  }
+
+  private fun write(day: Int) {
+    writeSources(day)
+    writeResources(day)
+    writeTests(day)
   }
 
   private fun writeTests(day: Int) {
