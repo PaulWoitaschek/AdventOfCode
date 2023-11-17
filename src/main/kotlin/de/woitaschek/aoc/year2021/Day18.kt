@@ -6,7 +6,7 @@ import de.woitaschek.aoc.utils.Puzzle
 import kotlin.math.ceil
 import kotlin.math.floor
 
-object Day18 : Puzzle(2021, 18) {
+object Day18 : Puzzle<Int, Int>(2021, 18) {
 
   override fun solvePart1(input: String): Int {
     return input.lines().map(::SnailFishNumber)

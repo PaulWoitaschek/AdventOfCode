@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2021
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day12 : Puzzle(2021, 12) {
+object Day12 : Puzzle<Long, Long>(2021, 12) {
 
   override fun solvePart1(input: String): Long {
     return Passage.parse(input, allowTwoSmallCaves = false).pathsCount()

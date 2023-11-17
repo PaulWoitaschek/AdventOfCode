@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2020
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day16 : Puzzle(2020, 16) {
+object Day16 : Puzzle<Int, Long>(2020, 16) {
 
   override fun solvePart1(input: String): Int {
     val parsed = Input.parse(input)

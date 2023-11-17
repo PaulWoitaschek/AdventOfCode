@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day3 : Puzzle(2022, 3) {
+object Day3 : Puzzle<Int, Int>(2022, 3) {
 
   override fun solvePart1(input: String) = input.lines()
     .filter(String::isNotEmpty).sumOf { line ->

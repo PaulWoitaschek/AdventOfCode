@@ -7,7 +7,7 @@ import kotlin.math.absoluteValue
 class Day15(
   private val lineToScan: Int,
   private val rangeMax: Int,
-) : Puzzle(2022, 15) {
+) : Puzzle<Int, Long>(2022, 15) {
 
   override fun solvePart1(input: String): Int {
     val sensorsWithBeacons = parseInput(input)
@@ -36,7 +36,7 @@ class Day15(
     }
   }
 
-  override fun solvePart2(input: String): Any {
+  override fun solvePart2(input: String): Long {
     val sensorsWithBeacons = parseInput(input)
     val range = 0..rangeMax
     return sensorsWithBeacons.asSequence()

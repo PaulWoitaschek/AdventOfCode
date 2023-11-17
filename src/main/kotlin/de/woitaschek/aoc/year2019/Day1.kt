@@ -3,7 +3,7 @@ package de.woitaschek.aoc.year2019
 import de.woitaschek.aoc.utils.Puzzle
 import de.woitaschek.aoc.utils.intList
 
-object Day1 : Puzzle(2019, 1) {
+object Day1 : Puzzle<Int, Int>(2019, 1) {
 
   override fun solvePart1(input: String): Int = input.intList().sumOf { fuelForMass(it) }
   override fun solvePart2(input: String): Int = input.intList().sumOf { fuelForMassWithFuelTakingMass(it) }

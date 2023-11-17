@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day11 : Puzzle(2022, 11) {
+object Day11 : Puzzle<Long, Long>(2022, 11) {
 
   override fun solvePart1(input: String): Long = solve(parseInput(input), rounds = 20) { it / 3 }
 
@@ -53,7 +53,7 @@ object Day11 : Puzzle(2022, 11) {
 
     sealed interface OperationValue {
       data class Value(val value: Long) : OperationValue
-      object Old : OperationValue
+      data object Old : OperationValue
       companion object {
         fun parse(value: String): OperationValue {
           return if (value == "old") {

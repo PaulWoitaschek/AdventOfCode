@@ -3,7 +3,7 @@ package de.woitaschek.aoc.year2021
 import de.woitaschek.aoc.utils.Puzzle
 import java.util.PriorityQueue
 
-object Day15 : Puzzle(2021, 15) {
+object Day15 : Puzzle<Int, Int>(2021, 15) {
 
   data class Vertex(
     val x: Int,
@@ -57,7 +57,7 @@ object Day15 : Puzzle(2021, 15) {
     }
   }
 
-  override fun solvePart2(input: String): Any {
+  override fun solvePart2(input: String): Int {
     TODO()
   }
 }

@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day18 : Puzzle(2022, 18) {
+object Day18 : Puzzle<Int, Int>(2022, 18) {
 
   override fun solvePart1(input: String): Int {
     val lava = parseInput(input)
@@ -11,7 +11,7 @@ object Day18 : Puzzle(2022, 18) {
     }
   }
 
-  override fun solvePart2(input: String): Any {
+  override fun solvePart2(input: String): Int {
     val lava = parseInput(input)
     val xRange = lava.minOf { it.x - 1 }.rangeTo(lava.maxOf { it.x + 1 })
     val yRange = lava.minOf { it.y - 1 }.rangeTo(lava.maxOf { it.y + 1 })

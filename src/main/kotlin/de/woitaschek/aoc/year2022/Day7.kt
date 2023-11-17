@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day7 : Puzzle(2022, 7) {
+object Day7 : Puzzle<Long, Long>(2022, 7) {
 
   override fun solvePart1(input: String): Long {
     return directorySizes(input).filter { it <= 100_000 }.sum()

@@ -5,7 +5,7 @@ import de.woitaschek.aoc.utils.Puzzle
 
 private typealias SeatMap = List<List<Day11.Tile>>
 
-object Day11 : Puzzle(2020, 11) {
+object Day11 : Puzzle<Int, Int>(2020, 11) {
 
   override fun solvePart1(input: String): Int = solve(input, onlyConsiderNeighborSeats = true, emptyThreshold = 4)
 

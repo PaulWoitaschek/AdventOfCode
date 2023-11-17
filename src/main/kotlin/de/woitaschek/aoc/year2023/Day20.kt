@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2023
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day20 : Puzzle(2023, 20) {
+object Day20 : Puzzle<Int, Int>(2023, 20) {
 
   override fun solvePart1(input: String): Int {
     TODO()

@@ -77,7 +77,7 @@ class App : CliktCommand() {
 
                 import de.woitaschek.aoc.utils.Puzzle
 
-                object Day$day : Puzzle($year, $day) {
+                object Day$day : Puzzle<Int,Int>($year, $day) {
 
                   override fun solvePart1(input: String): Int {
                     TODO()

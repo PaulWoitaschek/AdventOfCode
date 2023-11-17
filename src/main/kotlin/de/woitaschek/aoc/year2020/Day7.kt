@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2020
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day7 : Puzzle(2020, 7) {
+object Day7 : Puzzle<Int, Int>(2020, 7) {
 
   private const val SHINY_GOLD = "shiny gold"
 

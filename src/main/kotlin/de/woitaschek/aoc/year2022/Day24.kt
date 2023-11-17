@@ -5,7 +5,7 @@ import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
 import java.util.PriorityQueue
 
-object Day24 : Puzzle(2022, 24) {
+object Day24 : Puzzle<Int, Int>(2022, 24) {
 
   override fun solvePart1(input: String): Int = solve(input, part2 = false)
 

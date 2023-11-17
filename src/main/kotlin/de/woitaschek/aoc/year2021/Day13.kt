@@ -4,7 +4,7 @@ import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
 import kotlin.math.abs
 
-object Day13 : Puzzle(2021, 13) {
+object Day13 : Puzzle<Long, String>(2021, 13) {
 
   override fun solvePart1(input: String): Long {
     val (points, instructions) = parse(input)

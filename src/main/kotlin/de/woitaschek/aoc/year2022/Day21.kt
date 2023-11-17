@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day21 : Puzzle(2022, 21) {
+object Day21 : Puzzle<Long, Long>(2022, 21) {
 
   override fun solvePart1(input: String): Long {
     val monkeys = parseInput(input)
