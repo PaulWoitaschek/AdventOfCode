@@ -31,7 +31,10 @@ private fun parseInput(input: String): List<BitRow> {
     .map { line -> line.map { it == '1' } }
 }
 
-private fun extractForBitCriteria(lines: List<BitRow>, bitCriteria: Boolean): Int {
+private fun extractForBitCriteria(
+  lines: List<BitRow>,
+  bitCriteria: Boolean,
+): Int {
   val bitsPerLine = lines.first().size
 
   var candidates = lines

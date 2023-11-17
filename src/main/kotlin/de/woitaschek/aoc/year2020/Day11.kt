@@ -11,7 +11,11 @@ object Day11 : Puzzle(2020, 11) {
 
   override fun solvePart2(input: String): Int = solve(input, onlyConsiderNeighborSeats = false, emptyThreshold = 5)
 
-  private fun solve(input: String, onlyConsiderNeighborSeats: Boolean, emptyThreshold: Int): Int {
+  private fun solve(
+    input: String,
+    onlyConsiderNeighborSeats: Boolean,
+    emptyThreshold: Int,
+  ): Int {
     val seats = parseInput(input)
     val adjacentSeats = adjacentSeats(seats, onlyConsiderNeighborSeats)
     return generateSequence(seats) { it.afterOneRound(adjacentSeats, emptyThreshold) }
@@ -69,7 +73,10 @@ object Day11 : Puzzle(2020, 11) {
     return adjacentSeats
   }
 
-  private fun SeatMap.afterOneRound(adjacentSeats: Map<Point, List<Point>>, emptyTreshold: Int): SeatMap {
+  private fun SeatMap.afterOneRound(
+    adjacentSeats: Map<Point, List<Point>>,
+    emptyTreshold: Int,
+  ): SeatMap {
     fun tile(point: Point): Tile = get(point.y)[point.x]
     return mapIndexed { y, row ->
       row.mapIndexed { x, tile ->

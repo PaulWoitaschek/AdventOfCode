@@ -16,7 +16,10 @@ object Day3 : Puzzle(2020, 3) {
     Point(1, 2),
   )
 
-  private fun solve(input: String, vararg slopes: Point): Int {
+  private fun solve(
+    input: String,
+    vararg slopes: Point,
+  ): Int {
     val treeMap = parseInput(input)
     return slopes.map { countTreesOnSlope(treeMap, it) }.reduce(Int::times)
   }

@@ -1,14 +1,18 @@
 package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Puzzle
-import java.util.*
+import java.util.Collections
 
 object Day20 : Puzzle(2022, 20) {
 
   override fun solvePart1(input: String): Long = solve(input = input, decryptionKey = 1, mix = 1)
   override fun solvePart2(input: String) = solve(input = input, decryptionKey = 811589153, mix = 10)
 
-  private fun solve(input: String, decryptionKey: Long, mix: Int): Long {
+  private fun solve(
+    input: String,
+    decryptionKey: Long,
+    mix: Int,
+  ): Long {
     val numbers = input.lines().filter(String::isNotEmpty).map(String::toInt)
     val mixedNumbers = mixNumbers(numbers, decryptionKey, mix)
     return sequence {

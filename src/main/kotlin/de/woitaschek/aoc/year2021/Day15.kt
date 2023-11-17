@@ -1,7 +1,7 @@
 package de.woitaschek.aoc.year2021
 
 import de.woitaschek.aoc.utils.Puzzle
-import java.util.*
+import java.util.PriorityQueue
 
 object Day15 : Puzzle(2021, 15) {
 
@@ -20,7 +20,10 @@ object Day15 : Puzzle(2021, 15) {
         }
       }
 
-    fun vertex(x: Int, y: Int): Vertex? {
+    fun vertex(
+      x: Int,
+      y: Int,
+    ): Vertex? {
       return vertexes.getOrNull(y)?.getOrNull(x)
     }
 

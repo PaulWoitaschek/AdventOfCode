@@ -1,7 +1,7 @@
 package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Puzzle
-import java.util.*
+import java.util.PriorityQueue
 
 object Day12 : Puzzle(2022, 12) {
 
@@ -9,9 +9,15 @@ object Day12 : Puzzle(2022, 12) {
 
   override fun solvePart2(input: String): Int = solve(input) { it.height == 0 }
 
-  private fun solve(input: String, isStart: (Vertex) -> Boolean): Int {
+  private fun solve(
+    input: String,
+    isStart: (Vertex) -> Boolean,
+  ): Int {
     val vertexes = parseInput(input)
-    fun vertex(x: Int, y: Int): Vertex? = vertexes.getOrNull(y)?.getOrNull(x)
+    fun vertex(
+      x: Int,
+      y: Int,
+    ): Vertex? = vertexes.getOrNull(y)?.getOrNull(x)
 
     fun Vertex.neighborCandidates() = listOfNotNull(
       vertex(x - 1, y),

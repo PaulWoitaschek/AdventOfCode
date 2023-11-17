@@ -24,7 +24,10 @@ object Day2 : Puzzle(2022, 2) {
 }
 
 enum class RPS(val score: Int) {
-  Rock(1), Paper(2), Scissor(3);
+  Rock(1),
+  Paper(2),
+  Scissor(3),
+  ;
 
   fun match(opponent: RPS): MatchResult {
     if (this == opponent) {
