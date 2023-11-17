@@ -4,7 +4,7 @@ kotlin = "1.9.20"
 benchmark = "0.4.9"
 
 [libraries]
-kotest = "io.kotest:kotest-assertions-core:5.5.5"
+kotest = "io.kotest:kotest-assertions-core:5.8.0"
 ktlint = "com.pinterest.ktlint:ktlint-cli:1.0.1"
 
 jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
