@@ -13,7 +13,7 @@ dependencies {
 }
 
 ktlint {
-  ktlintVersion.set(libs.ktlint.map { it.version!! })
+  version.set(libs.ktlint.map { it.version!! })
 }
 
 kotlin {

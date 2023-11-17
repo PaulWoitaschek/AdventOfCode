@@ -13,4 +13,4 @@ serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-ktlint = { id = "io.github.usefulness.ktlint-gradle-plugin", version = "0.7.0" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version = "11.6.1" }
