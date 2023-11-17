@@ -1,7 +1,7 @@
 [versions]
 jupiter = "5.9.2"
 kotlin = "1.8.10"
-benchmark = "0.4.7"
+benchmark = "0.4.9"
 
 [libraries]
 kotest = "io.kotest:kotest-assertions-core:5.5.5"
