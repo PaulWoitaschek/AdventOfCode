@@ -23,7 +23,10 @@ object Day13 : Puzzle(2022, 13) {
 
   private fun String.asJsonArray(): JsonArray = Json.decodeFromString(JsonArray.serializer(), this)
 
-  private fun order(left: JsonElement, right: JsonElement): Int? {
+  private fun order(
+    left: JsonElement,
+    right: JsonElement,
+  ): Int? {
     return if (left is JsonPrimitive && right is JsonPrimitive) {
       (left.int - right.int).takeUnless { it == 0 }
     } else if (left is JsonArray && right is JsonArray) {

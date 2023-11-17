@@ -5,7 +5,7 @@ plugins {
   alias(libs.plugins.kotlin.allopen)
   alias(libs.plugins.benchmark)
   alias(libs.plugins.compose)
-  alias(libs.plugins.kotlinter)
+  alias(libs.plugins.ktlint)
 }
 
 allOpen {
@@ -49,18 +49,9 @@ benchmark {
   }
 }
 
-buildscript {
-  configurations.classpath {
-    resolutionStrategy {
-      eachDependency {
-        if (requested.group == "com.pinterest.ktlint") {
-           useVersion(libs.ktlint.get().version!!)
-        }
-      }
-    }
-  }
+ktlint{
+  ktlintVersion.set(libs.ktlint.map { it.version })
 }
-
 
 tasks {
   wrapper {

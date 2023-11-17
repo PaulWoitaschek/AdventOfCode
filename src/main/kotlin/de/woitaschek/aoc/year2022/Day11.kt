@@ -12,7 +12,11 @@ object Day11 : Puzzle(2022, 11) {
     return solve(monkeys, rounds = 10000) { it % divisor }
   }
 
-  private fun solve(monkeys: List<Monkey>, rounds: Int, relax: (Long) -> Long): Long {
+  private fun solve(
+    monkeys: List<Monkey>,
+    rounds: Int,
+    relax: (Long) -> Long,
+  ): Long {
     repeat(rounds) {
       monkeys.forEach { monkey ->
         while (monkey.items.isNotEmpty()) {

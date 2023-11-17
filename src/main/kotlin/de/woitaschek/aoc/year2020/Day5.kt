@@ -26,9 +26,15 @@ object Day5 : Puzzle(2020, 5) {
       }
   }
 
-  private fun seatId(row: Int, column: Int): Int = row * 8 + column
+  private fun seatId(
+    row: Int,
+    column: Int,
+  ): Int = row * 8 + column
 
-  private fun findValue(max: Int, instructions: String): Int {
+  private fun findValue(
+    max: Int,
+    instructions: String,
+  ): Int {
     var from = 0
     var to = max
     instructions.forEach {

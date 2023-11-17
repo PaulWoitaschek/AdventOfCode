@@ -9,11 +9,17 @@ fun Puzzle.testInput(): String = aocTestInput(year = year, day = day)
 @Suppress("unused")
 fun testInput(): String = input("testinput.txt")
 
-fun aocInput(year: Int, day: Int): String {
+fun aocInput(
+  year: Int,
+  day: Int,
+): String {
   return input("$year/day$day.txt")
 }
 
-fun aocTestInput(year: Int, day: Int): String {
+fun aocTestInput(
+  year: Int,
+  day: Int,
+): String {
   return input("$year/day${day}test.txt")
 }
 

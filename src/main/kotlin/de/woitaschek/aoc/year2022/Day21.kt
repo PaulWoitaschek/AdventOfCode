@@ -73,7 +73,11 @@ object Day21 : Puzzle(2022, 21) {
   }
 
   enum class Operator(val char: Char) {
-    Plus('+'), Times('*'), Div('/'), Minus('-');
+    Plus('+'),
+    Times('*'),
+    Div('/'),
+    Minus('-'),
+    ;
 
     companion object {
       fun parse(input: Char) = Operator.values().first { it.char == input }

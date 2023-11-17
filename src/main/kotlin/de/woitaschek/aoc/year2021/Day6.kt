@@ -11,7 +11,10 @@ object Day6 : Puzzle(2021, 6) {
   override fun solvePart2(input: String): Long = totalFishesAfterDays(input, days = 256)
 }
 
-private fun totalFishesAfterDays(input: String, days: Int): Long {
+private fun totalFishesAfterDays(
+  input: String,
+  days: Int,
+): Long {
   return generateSequence(Ocean.parse(input)) { it.afterOneDay() }
     .take(days + 1).last().totalFishes
 }

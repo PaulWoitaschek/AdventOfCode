@@ -40,7 +40,8 @@ object Day8 : Puzzle(2020, 8) {
   }
 
   private enum class ExitResult {
-    ExitedNormally, ExitDueToLoop
+    ExitedNormally,
+    ExitDueToLoop,
   }
 
   private fun execute(instructions: List<Instruction>): Pair<Int, ExitResult> {
@@ -76,7 +77,9 @@ object Day8 : Puzzle(2020, 8) {
     val type: Type,
   ) {
     enum class Type(val value: String) {
-      NoOp("nop"), Acc("acc"), Jump("jmp")
+      NoOp("nop"),
+      Acc("acc"),
+      Jump("jmp"),
     }
 
     companion object {

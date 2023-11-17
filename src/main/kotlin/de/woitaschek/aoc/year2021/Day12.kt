@@ -29,7 +29,10 @@ private data class Passage(
       .also { collectPaths(result = it, currentRoute = listOf(Segment.Start)) }
   }
 
-  private fun collectPaths(result: MutableList<Path>, currentRoute: Path) {
+  private fun collectPaths(
+    result: MutableList<Path>,
+    currentRoute: Path,
+  ) {
     validConnections(currentRoute = currentRoute).forEach { to ->
       val newRoute = currentRoute + to
       if (to == Segment.End) {
@@ -65,7 +68,10 @@ private data class Passage(
   }
 
   companion object {
-    fun parse(input: String, allowTwoSmallCaves: Boolean): Passage {
+    fun parse(
+      input: String,
+      allowTwoSmallCaves: Boolean,
+    ): Passage {
       return Passage(
         connections = input.lines().map(SegmentConnection.Companion::parse),
         allowTwoSmallCaves = allowTwoSmallCaves,

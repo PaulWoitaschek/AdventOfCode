@@ -63,11 +63,17 @@ class SnailFishNumberTests {
     testMagnitude("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]", 3488)
   }
 
-  private fun testMagnitude(value: String, expected: Int) {
+  private fun testMagnitude(
+    value: String,
+    expected: Int,
+  ) {
     SnailFishNumber(value).magnitude() shouldBe expected
   }
 
-  private fun testExplode(value: String, expected: String) {
+  private fun testExplode(
+    value: String,
+    expected: String,
+  ) {
     SnailFishNumber(value).explode() shouldBe SnailFishNumber(expected)
   }
 }

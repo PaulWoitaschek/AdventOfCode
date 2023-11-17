@@ -15,7 +15,10 @@ object Day13 : Puzzle(2020, 13) {
     TODO("Not yet implemented")
   }
 
-  private fun extracted(earliestBus: Int, busses: List<Int>): Int = generateSequence(earliestBus) { it + 1 }
+  private fun extracted(
+    earliestBus: Int,
+    busses: List<Int>,
+  ): Int = generateSequence(earliestBus) { it + 1 }
     .firstNotNullOf { minute ->
       val bus = busses.find { minute.mod(it) == 0 }
       if (bus != null) {

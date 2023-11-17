@@ -47,5 +47,8 @@ object Day15 : Puzzle(2020, 15) {
     }
   }
 
-  private fun solve(input: String, turns: Int): Int = speak(input).drop(turns - 1).first()
+  private fun solve(
+    input: String,
+    turns: Int,
+  ): Int = speak(input).drop(turns - 1).first()
 }
