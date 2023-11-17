@@ -1,12 +1,12 @@
 package de.woitaschek.aoc.year2019
 
 import de.woitaschek.aoc.utils.Puzzle
-import de.woitaschek.aoc.utils.lineSeparatedIntList
+import de.woitaschek.aoc.utils.toLineSeparatedIntList
 
 object Day1 : Puzzle<Int, Int>(2019, 1) {
 
-  override fun solvePart1(input: String): Int = input.lineSeparatedIntList().sumOf { fuelForMass(it) }
-  override fun solvePart2(input: String): Int = input.lineSeparatedIntList().sumOf { fuelForMassWithFuelTakingMass(it) }
+  override fun solvePart1(input: String): Int = input.toLineSeparatedIntList().sumOf { fuelForMass(it) }
+  override fun solvePart2(input: String): Int = input.toLineSeparatedIntList().sumOf { fuelForMassWithFuelTakingMass(it) }
 
   fun fuelForMass(mass: Int): Int = mass / 3 - 2
 
