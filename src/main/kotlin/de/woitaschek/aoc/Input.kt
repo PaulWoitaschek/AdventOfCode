@@ -2,9 +2,9 @@ package de.woitaschek.aoc
 
 import de.woitaschek.aoc.utils.Puzzle
 
-fun Puzzle.input(): String = aocInput(year = year, day = day)
+fun Puzzle<*, *>.input(): String = aocInput(year = year, day = day)
 
-fun Puzzle.testInput(): String = aocTestInput(year = year, day = day)
+fun Puzzle<*, *>.testInput(): String = aocTestInput(year = year, day = day)
 
 @Suppress("unused")
 fun testInput(): String = input("testinput.txt")

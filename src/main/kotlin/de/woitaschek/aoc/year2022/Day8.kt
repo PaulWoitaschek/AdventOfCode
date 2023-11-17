@@ -3,7 +3,7 @@ package de.woitaschek.aoc.year2022
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day8 : Puzzle(2022, 8) {
+object Day8 : Puzzle<Int, Int>(2022, 8) {
   override fun solvePart1(input: String) = Forest(input).visibleTreesFromOutsideTheGrid()
   override fun solvePart2(input: String) = Forest(input).highestScenicScore()
 }

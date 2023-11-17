@@ -3,7 +3,7 @@ package de.woitaschek.aoc.year2021
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day11 : Puzzle(2021, 11) {
+object Day11 : Puzzle<Long, Long>(2021, 11) {
 
   override fun solvePart1(input: String): Long {
     return generateSequence(Octopuses.parse(input)) { it.afterOneDay() }

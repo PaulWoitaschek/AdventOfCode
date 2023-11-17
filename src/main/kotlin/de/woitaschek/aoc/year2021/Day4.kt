@@ -4,7 +4,7 @@ package de.woitaschek.aoc.year2021
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day4 : Puzzle(2021, 4) {
+object Day4 : Puzzle<Long, Long>(2021, 4) {
 
   override fun solvePart1(input: String): Long {
     val game = Game.parse(input)

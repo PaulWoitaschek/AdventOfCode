@@ -6,9 +6,9 @@ import de.woitaschek.aoc.year2022.Day22.Facing.Right
 
 private typealias Board = List<List<Day22.Tile>>
 
-object Day22 : Puzzle(2022, 22) {
+object Day22 : Puzzle<Int, Int>(2022, 22) {
 
-  override fun solvePart1(input: String): Any {
+  override fun solvePart1(input: String): Int {
     val (mapString, instructions) = input.split("\n\n")
 
     val mapLines = mapString.lines()
@@ -121,20 +121,16 @@ object Day22 : Puzzle(2022, 22) {
     Down(0, 1, 1),
     ;
 
-    fun turnLeft(): Facing = values().getOrNull(ordinal - 1) ?: values().last()
-    fun turnRight(): Facing = values().getOrNull(ordinal + 1) ?: values().first()
+    fun turnLeft(): Facing = entries.getOrNull(ordinal - 1) ?: entries.last()
+    fun turnRight(): Facing = entries.getOrNull(ordinal + 1) ?: entries.first()
   }
 
   sealed interface Instruction {
     @JvmInline
     value class Move(val steps: Int) : Instruction
-    object TurnLeft : Instruction {
-      override fun toString() = "TurnLeft"
-    }
+    data object TurnLeft : Instruction
 
-    object TurnRight : Instruction {
-      override fun toString() = "TurnRight"
-    }
+    data object TurnRight : Instruction
   }
 
   enum class Tile {

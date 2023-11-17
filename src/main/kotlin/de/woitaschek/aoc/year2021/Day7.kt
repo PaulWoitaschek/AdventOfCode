@@ -3,7 +3,7 @@ package de.woitaschek.aoc.year2021
 import de.woitaschek.aoc.utils.Puzzle
 import kotlin.math.abs
 
-object Day7 : Puzzle(2021, 7) {
+object Day7 : Puzzle<Long, Long>(2021, 7) {
 
   override fun solvePart1(input: String): Long {
     return solve(input) { it }

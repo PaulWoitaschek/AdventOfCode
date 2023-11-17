@@ -3,7 +3,7 @@ package de.woitaschek.aoc.year2020
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day3 : Puzzle(2020, 3) {
+object Day3 : Puzzle<Int, Int>(2020, 3) {
 
   override fun solvePart1(input: String): Int = solve(input, Point(3, 1))
 

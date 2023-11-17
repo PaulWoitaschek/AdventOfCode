@@ -3,7 +3,7 @@ package de.woitaschek.aoc.year2020
 import de.woitaschek.aoc.utils.Puzzle
 import kotlin.math.ceil
 
-object Day5 : Puzzle(2020, 5) {
+object Day5 : Puzzle<Int, Int>(2020, 5) {
 
   override fun solvePart1(input: String): Int = boardingPasses(input).max()
 

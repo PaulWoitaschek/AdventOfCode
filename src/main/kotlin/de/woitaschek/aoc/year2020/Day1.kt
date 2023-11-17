@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2020
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day1 : Puzzle(2020, 1) {
+object Day1 : Puzzle<Long, Long>(2020, 1) {
 
   override fun solvePart1(input: String): Long = solve(input) { it.permutations2() }
   override fun solvePart2(input: String): Long = solve(input) { it.permutations3() }

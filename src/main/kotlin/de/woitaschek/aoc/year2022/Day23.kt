@@ -3,7 +3,7 @@ package de.woitaschek.aoc.year2022
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day23 : Puzzle(2022, 23) {
+object Day23 : Puzzle<Int, Int>(2022, 23) {
 
   override fun solvePart1(input: String): Int {
     val elves = parseInput(input)

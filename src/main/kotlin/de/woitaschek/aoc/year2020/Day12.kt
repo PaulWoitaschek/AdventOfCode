@@ -4,9 +4,9 @@ import de.woitaschek.aoc.utils.Direction
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day12 : Puzzle(2020, 12) {
+object Day12 : Puzzle<Int, Int>(2020, 12) {
 
-  override fun solvePart1(input: String): Any {
+  override fun solvePart1(input: String): Int {
     val instructions = parseInstructions(input)
 
     var position = Point(0, 0)
@@ -60,7 +60,7 @@ object Day12 : Puzzle(2020, 12) {
     return position.manhattanDistanceTo(Point(0, 0))
   }
 
-  override fun solvePart2(input: String): Any {
+  override fun solvePart2(input: String): Int {
     TODO("Not yet implemented")
   }
 
@@ -89,7 +89,7 @@ object Day12 : Puzzle(2020, 12) {
       ;
 
       companion object {
-        val byChar = Action.values().associateBy { it.name.first() }
+        val byChar = Action.entries.associateBy { it.name.first() }
       }
     }
   }

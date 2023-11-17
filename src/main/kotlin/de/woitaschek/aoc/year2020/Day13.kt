@@ -2,16 +2,16 @@ package de.woitaschek.aoc.year2020
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day13 : Puzzle(2020, 13) {
+object Day13 : Puzzle<Int, Int>(2020, 13) {
 
-  override fun solvePart1(input: String): Any {
+  override fun solvePart1(input: String): Int {
     val lines = input.lines()
     val earliestBus = lines.first().toInt()
     val busses = lines[1].split(",").mapNotNull { it.toIntOrNull() }
     return extracted(earliestBus, busses)
   }
 
-  override fun solvePart2(input: String): Any {
+  override fun solvePart2(input: String): Int {
     TODO("Not yet implemented")
   }
 

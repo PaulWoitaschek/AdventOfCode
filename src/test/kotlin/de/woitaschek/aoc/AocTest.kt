@@ -3,11 +3,11 @@ package de.woitaschek.aoc
 import de.woitaschek.aoc.utils.Puzzle
 import io.kotest.matchers.shouldBe
 
-fun Puzzle.test(
-  part1: Any? = null,
-  part2: Any? = null,
-  part1Test: Any? = null,
-  part2Test: Any? = null,
+fun <Part1, Part2> Puzzle<Part1, Part2>.test(
+  part1: Part1? = null,
+  part2: Part2? = null,
+  part1Test: Part1? = null,
+  part2Test: Part2? = null,
 ) {
   if (part1 != null) {
     solvePart1(input()) shouldBe part1

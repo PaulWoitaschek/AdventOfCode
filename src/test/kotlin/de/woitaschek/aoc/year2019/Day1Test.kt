@@ -10,7 +10,7 @@ class Day1Test {
   @Test
   fun test() {
     Day1.test(
-      part1 = 3353880L,
+      part1 = 3353880,
       part2 = 5027950,
     )
   }

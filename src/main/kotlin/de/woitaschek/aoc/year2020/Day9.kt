@@ -2,11 +2,11 @@ package de.woitaschek.aoc.year2020
 
 import de.woitaschek.aoc.utils.Puzzle
 
-class Day9(private val premableLength: Int) : Puzzle(2020, 9) {
+class Day9(private val premableLength: Int) : Puzzle<Int, Int>(2020, 9) {
 
   override fun solvePart1(input: String) = invalidNumber(input)
 
-  override fun solvePart2(input: String): Any {
+  override fun solvePart2(input: String): Int {
     val invalidNumber = invalidNumber(input)
     input.lineSequence().mapNotNull(String::toIntOrNull)
       .windowed(invalidNumber, 1, true)

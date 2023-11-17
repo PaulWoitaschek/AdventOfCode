@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2020
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day10 : Puzzle(2020, 10) {
+object Day10 : Puzzle<Int, Long>(2020, 10) {
 
   override fun solvePart1(input: String): Int {
     val differences = powerConnections(input).zipWithNext { first, second ->

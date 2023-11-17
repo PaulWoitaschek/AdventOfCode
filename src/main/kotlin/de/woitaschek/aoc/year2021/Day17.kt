@@ -2,7 +2,7 @@ package de.woitaschek.aoc.year2021
 
 import de.woitaschek.aoc.utils.Puzzle
 
-object Day17 : Puzzle(2021, 17) {
+object Day17 : Puzzle<Int, Int>(2021, 17) {
 
   override fun solvePart1(input: String): Int = allSuccessfulShots(input).maxOf { it.highestY }
 
