@@ -49,8 +49,12 @@ benchmark {
   }
 }
 
-ktlint{
-  ktlintVersion.set(libs.ktlint.map { it.version })
+ktlint {
+  ktlintVersion.set(libs.ktlint.map { it.version!! })
+}
+
+kotlin {
+  jvmToolchain(21)
 }
 
 tasks {
