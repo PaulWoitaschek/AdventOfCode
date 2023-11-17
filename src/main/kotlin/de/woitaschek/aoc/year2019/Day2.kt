@@ -1,16 +1,16 @@
 package de.woitaschek.aoc.year2019
 
 import de.woitaschek.aoc.utils.Puzzle
-import de.woitaschek.aoc.utils.commaSeparatedIntList
+import de.woitaschek.aoc.utils.toCommaSeparatedIntList
 
 object Day2 : Puzzle<Int, Int>(2019, 2) {
 
   override fun solvePart1(input: String): Int {
-    return runInstructions(instructions = input.commaSeparatedIntList(), verb = 2, noun = 12)
+    return runInstructions(instructions = input.toCommaSeparatedIntList(), verb = 2, noun = 12)
   }
 
   override fun solvePart2(input: String): Int {
-    val originalInput = input.commaSeparatedIntList()
+    val originalInput = input.toCommaSeparatedIntList()
     var max = 0
     while (true) {
       max++

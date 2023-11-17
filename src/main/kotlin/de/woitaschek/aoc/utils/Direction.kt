@@ -8,14 +8,14 @@ enum class Direction(var char: Char) {
   ;
 
   fun clockwise(): Direction {
-    return values().getOrNull(ordinal + 1) ?: values().first()
+    return entries.getOrNull(ordinal + 1) ?: entries.first()
   }
 
   fun counterClockwise(): Direction {
-    return values().getOrNull(ordinal - 1) ?: values().last()
+    return entries.getOrNull(ordinal - 1) ?: entries.last()
   }
 
   companion object {
-    fun parse(input: Char) = values().first { it.char == input }
+    fun parse(input: Char) = entries.first { it.char == input }
   }
 }
