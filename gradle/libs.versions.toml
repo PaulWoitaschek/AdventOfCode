@@ -1,7 +1,6 @@
 [versions]
 jupiter = "5.10.1"
 kotlin = "1.9.20"
-benchmark = "0.4.9"
 
 [libraries]
 kotest = "io.kotest:kotest-assertions-core:5.8.0"
@@ -10,13 +9,8 @@ ktlint = "com.pinterest.ktlint:ktlint-cli:1.0.1"
 jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
 jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
 
-benchmark = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime", version.ref = "benchmark" }
 serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
-jmh = { id = "me.champeau.jmh", version = "0.7.2" }
-benchmark = { id = "org.jetbrains.kotlinx.benchmark", version.ref = "benchmark" }
-compose = { id = "org.jetbrains.compose", version = "1.5.10" }
 ktlint = { id = "io.github.usefulness.ktlint-gradle-plugin", version = "0.7.0" }
