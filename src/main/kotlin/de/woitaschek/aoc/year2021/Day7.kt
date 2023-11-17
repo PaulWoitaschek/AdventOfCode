@@ -14,7 +14,10 @@ object Day7 : Puzzle(2021, 7) {
   }
 }
 
-private inline fun solve(input: String, fuelCostPerDistance: (Long) -> Long): Long {
+private inline fun solve(
+  input: String,
+  fuelCostPerDistance: (Long) -> Long,
+): Long {
   val positions = input.split(",").map(String::toLong)
   return (positions.minOf { it }.rangeTo(positions.maxOf { it }))
     .minOf { candidate ->

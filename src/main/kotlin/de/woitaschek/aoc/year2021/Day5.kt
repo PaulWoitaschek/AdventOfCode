@@ -15,7 +15,10 @@ object Day5 : Puzzle(2021, 5) {
   }
 }
 
-private fun process(input: String, includeDiagonals: Boolean): Long {
+private fun process(
+  input: String,
+  includeDiagonals: Boolean,
+): Long {
   val lines = input.lines().map(Line.Companion::parse)
 
   val pointScores = mutableMapOf<Point, Int>()

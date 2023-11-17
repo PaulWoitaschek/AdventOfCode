@@ -55,7 +55,10 @@ private data class HeightMap(
     }
   }
 
-  private fun addBasinCoordinates(from: PointWithValue, result: MutableSet<PointWithValue>) {
+  private fun addBasinCoordinates(
+    from: PointWithValue,
+    result: MutableSet<PointWithValue>,
+  ) {
     result += from
     from.surroundingPoints().forEach { surrounding ->
       if (surrounding.value < 9 && surrounding.value > from.value) {

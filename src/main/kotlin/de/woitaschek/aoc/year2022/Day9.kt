@@ -12,7 +12,10 @@ object Day9 : Puzzle(2022, 9) {
   override fun solvePart2(input: String) = solve(input, knots = 10)
 }
 
-private fun solve(input: String, knots: Int): Int {
+private fun solve(
+  input: String,
+  knots: Int,
+): Int {
   var head = Point(0, 0)
   var tail = List(knots - 1) { head }
   val visitedPoints = mutableSetOf<Point>()

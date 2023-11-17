@@ -1,7 +1,7 @@
 package de.woitaschek.aoc.year2022
 
 import de.woitaschek.aoc.utils.Puzzle
-import java.util.*
+import java.util.PriorityQueue
 
 object Day16 : Puzzle(2022, 16) {
 
@@ -9,7 +9,11 @@ object Day16 : Puzzle(2022, 16) {
 
   override fun solvePart2(input: String): Int = solve(input = input, availableMinutes = 26, withElephant = true)
 
-  private fun solve(input: String, availableMinutes: Int, withElephant: Boolean): Int {
+  private fun solve(
+    input: String,
+    availableMinutes: Int,
+    withElephant: Boolean,
+  ): Int {
     val valves = input.lines().filter(String::isNotEmpty).map(Valve::parse)
       .sortedByDescending { it.flowRate }
 
@@ -23,7 +27,13 @@ object Day16 : Puzzle(2022, 16) {
 
     var maxPressureReleased = 0
 
-    fun search(releasedPressure: Int, position: Valve, visited: Set<Valve>, minute: Int, spawnElephant: Boolean) {
+    fun search(
+      releasedPressure: Int,
+      position: Valve,
+      visited: Set<Valve>,
+      minute: Int,
+      spawnElephant: Boolean,
+    ) {
       maxPressureReleased = maxOf(releasedPressure, maxPressureReleased)
 
       if (!spawnElephant) {

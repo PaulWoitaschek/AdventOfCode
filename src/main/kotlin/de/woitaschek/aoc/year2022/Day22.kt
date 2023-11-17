@@ -138,7 +138,9 @@ object Day22 : Puzzle(2022, 22) {
   }
 
   enum class Tile {
-    Wall, Floor, Void
+    Wall,
+    Floor,
+    Void,
   }
 
   override fun solvePart2(input: String) = TODO("Not yet implemented")

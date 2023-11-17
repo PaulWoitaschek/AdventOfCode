@@ -17,7 +17,10 @@ private fun String.solve(moveOneByOne: Boolean): String {
 
 @JvmInline
 private value class Crates(val stacks: List<MutableList<Char>>) {
-  fun move(instruction: MoveInstruction, moveOneByOne: Boolean) {
+  fun move(
+    instruction: MoveInstruction,
+    moveOneByOne: Boolean,
+  ) {
     if (moveOneByOne) {
       val fromStack = stacks[instruction.from]
       val toStack = stacks[instruction.to]
