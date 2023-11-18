@@ -14,82 +14,80 @@ object Day5 : Puzzle<Int, Int>(2019, 5) {
     values: List<Int>,
     inputValue: Int,
   ): Int {
-    val state = ComputerState(
+    val output = StringBuilder()
+    runInstructions(
       instructions = values.toMutableList(),
+      pointer = 0,
       input = inputValue,
+      output = output,
     )
-    runInstructions(state)
-    return state.output.toInt()
+    return output.toString().toInt()
   }
 
-  private data class ComputerState(
-    val instructions: MutableList<Int>,
-    var output: String = "",
-    val input: Int,
-    var pointer: Int = 0,
+  private fun runInstructions(
+    instructions: MutableList<Int>,
+    pointer: Int,
+    input: Int,
+    output: StringBuilder,
   ) {
-
-    operator fun get(index: Int): Int {
+    val newPointer: Int
+    val read: (Int) -> Int = { index ->
       val value = instructions[pointer + index + 1]
       val instructionValue = instructions[pointer]
-      return when (val v = instructionValue / 10.toFloat().pow(index + 2).toInt() % 10) {
+      when (val v = instructionValue / 10.toFloat().pow(index + 2).toInt() % 10) {
         0 -> instructions[value]
         1 -> value
         else -> error("Invalid mode=$v")
       }
     }
-  }
-
-  private fun runInstructions(state: ComputerState) {
-    val instructions = state.instructions
-    when (val opCode = instructions[state.pointer] % 100) {
+    when (val opCode = instructions[pointer] % 100) {
       1 -> {
         // add
-        instructions[instructions[state.pointer + 3]] = state[0] + state[1]
-        state.pointer += 4
+        instructions[instructions[pointer + 3]] = read(0) + read(1)
+        newPointer = pointer + 4
       }
       2 -> {
         // multiply
-        instructions[instructions[state.pointer + 3]] = state[0] * state[1]
-        state.pointer += 4
+        instructions[instructions[pointer + 3]] = read(0) * read(1)
+        newPointer = pointer + 4
       }
       3 -> {
         // write input at position
-        instructions[instructions[state.pointer + 1]] = state.input
-        state.pointer += 2
+        instructions[instructions[pointer + 1]] = input
+        newPointer = pointer + 2
       }
       4 -> {
-        val value = state[0]
-        state.output += value.toString()
-        state.pointer += 2
+        val value = read(0)
+        output.append(value)
+        newPointer = pointer + 2
       }
       5 -> {
-        state.pointer = if (state[0] != 0) {
-          state[1]
+        newPointer = if (read(0) != 0) {
+          read(1)
         } else {
-          state.pointer + 3
+          pointer + 3
         }
       }
       6 -> {
-        state.pointer = if (state[0] == 0) {
-          state[1]
+        newPointer = if (read(0) == 0) {
+          read(1)
         } else {
-          state.pointer + 3
+          pointer + 3
         }
       }
       7 -> {
-        val value = if (state[0] < state[1]) 1 else 0
-        instructions[instructions[state.pointer + 3]] = value
-        state.pointer += 4
+        val value = if (read(0) < read(1)) 1 else 0
+        instructions[instructions[pointer + 3]] = value
+        newPointer = pointer + 4
       }
       8 -> {
-        val value = if (state[0] == state[1]) 1 else 0
-        instructions[instructions[state.pointer + 3]] = value
-        state.pointer += 4
+        val value = if (read(0) == read(1)) 1 else 0
+        instructions[instructions[pointer + 3]] = value
+        newPointer = pointer + 4
       }
       99 -> return
       else -> error("Invalid opCode=$opCode")
     }
-    runInstructions(state)
+    runInstructions(input = input, output = output, pointer = newPointer, instructions = instructions)
   }
 }
