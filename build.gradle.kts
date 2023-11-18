@@ -7,6 +7,7 @@ plugins {
 
 dependencies {
   implementation(libs.serialization)
+  implementation(libs.coroutines)
   testImplementation(libs.kotest)
   testImplementation(libs.jupiter.api)
   testRuntimeOnly(libs.jupiter.engine)
