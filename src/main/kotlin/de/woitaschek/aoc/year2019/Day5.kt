@@ -28,75 +28,73 @@ object Day5 : Puzzle<Int, Int>(2019, 5) {
 
     fun run(): Int {
       while (!finished) {
-        finished = !runInstructions()
+        runInstruction()
       }
       return output.toString().toInt()
     }
 
-    private fun runInstructions(): Boolean {
-      val read: (Int) -> Int = { index ->
-        val value = instructions[pointer + index + 1]
-        val instructionValue = instructions[pointer]
-        when (val v = instructionValue / 10.toFloat().pow(index + 2).toInt() % 10) {
-          0 -> instructions[value]
-          1 -> value
-          else -> error("Invalid mode=$v")
-        }
+    private fun read(index: Int): Int {
+      val value = instructions[pointer + index + 1]
+      val instructionValue = instructions[pointer]
+      return when (val v = instructionValue / 10.toFloat().pow(index + 2).toInt() % 10) {
+        0 -> instructions[value]
+        1 -> value
+        else -> error("Invalid mode=$v")
       }
-      return when (val opCode = instructions[pointer] % 100) {
+    }
+
+    private fun write(
+      index: Int,
+      value: Int,
+    ) {
+      instructions[instructions[pointer + index + 1]] = value
+    }
+
+    private fun runInstruction() {
+      when (val opCode = instructions[pointer] % 100) {
         1 -> {
-          // add
-          instructions[instructions[pointer + 3]] = read(0) + read(1)
+          write(2, read(0) + read(1))
           pointer += 4
-          true
         }
         2 -> {
-          // multiply
-          instructions[instructions[pointer + 3]] = read(0) * read(1)
+          write(2, read(0) * read(1))
           pointer += 4
-          true
         }
         3 -> {
-          // write input at position
-          instructions[instructions[pointer + 1]] = input
+          write(0, input)
           pointer += 2
-          true
         }
         4 -> {
-          val value = read(0)
-          output.append(value)
+          output.append(read(0))
           pointer += 2
-          true
         }
         5 -> {
-          pointer = if (read(0) != 0) {
-            read(1)
+          if (read(0) != 0) {
+            pointer = read(1)
           } else {
-            pointer + 3
+            pointer += 3
           }
-          true
         }
         6 -> {
-          pointer = if (read(0) == 0) {
-            read(1)
+          if (read(0) == 0) {
+            pointer = read(1)
           } else {
-            pointer + 3
+            pointer += 3
           }
-          true
         }
         7 -> {
           val value = if (read(0) < read(1)) 1 else 0
-          instructions[instructions[pointer + 3]] = value
+          write(2, value)
           pointer += 4
-          true
         }
         8 -> {
           val value = if (read(0) == read(1)) 1 else 0
-          instructions[instructions[pointer + 3]] = value
+          write(2, value)
           pointer += 4
-          true
         }
-        99 -> false
+        99 -> {
+          finished = true
+        }
         else -> error("Invalid opCode=$opCode")
       }
     }
