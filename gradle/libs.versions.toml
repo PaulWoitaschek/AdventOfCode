@@ -5,6 +5,7 @@ kotlin = "1.9.20"
 [libraries]
 kotest = "io.kotest:kotest-assertions-core:5.8.0"
 ktlint = "com.pinterest.ktlint:ktlint-cli:1.0.1"
+coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
 
 jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
 jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
