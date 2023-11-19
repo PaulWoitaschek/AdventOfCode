@@ -1,20 +1,20 @@
 package de.woitaschek.aoc.year2019
 
 import de.woitaschek.aoc.utils.Puzzle
-import de.woitaschek.aoc.utils.toCommaSeparatedIntList
+import de.woitaschek.aoc.utils.toCommaSeparatedLongList
 import kotlinx.coroutines.runBlocking
 
-object Day5 : Puzzle<Int, Int>(2019, 5) {
+object Day5 : Puzzle<Long, Long>(2019, 5) {
 
-  override fun solvePart1(input: String): Int = solve(input.toCommaSeparatedIntList(), 1)
+  override fun solvePart1(input: String): Long = solve(input.toCommaSeparatedLongList(), 1)
 
-  override fun solvePart2(input: String): Int = solve(input.toCommaSeparatedIntList(), 5)
+  override fun solvePart2(input: String): Long = solve(input.toCommaSeparatedLongList(), 5)
 
   fun solve(
-    values: List<Int>,
-    inputValue: Int,
-  ): Int {
-    val computer = IntCodeComputer(values.toMutableList(), mutableListOf(inputValue))
+    values: List<Long>,
+    inputValue: Long,
+  ): Long {
+    val computer = IntCodeComputer(values, listOf(inputValue))
     runBlocking {
       computer.run()
     }

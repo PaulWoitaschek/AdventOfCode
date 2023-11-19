@@ -8,12 +8,12 @@ class Day5Test {
 
   @Test
   fun part1() {
-    Day5.test(part1 = 12440243)
+    Day5.test(part1 = 12440243L)
   }
 
   @Test
   fun part2() {
-    Day5.test(part2 = 15486302)
+    Day5.test(part2 = 15486302L)
   }
 
   @Test
@@ -111,8 +111,8 @@ class Day5Test {
   }
 
   private fun runTest(
-    instructions: List<Int>,
-    input: Int,
+    instructions: List<Long>,
+    input: Long,
     expectedOutput: Int,
   ) {
     Day5.solve(instructions, input) shouldBe expectedOutput

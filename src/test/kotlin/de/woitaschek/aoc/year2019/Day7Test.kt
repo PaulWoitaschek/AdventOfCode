@@ -1,7 +1,7 @@
 package de.woitaschek.aoc.year2019
 
 import de.woitaschek.aoc.test
-import io.kotest.matchers.ints.shouldBeExactly
+import io.kotest.matchers.longs.shouldBeExactly
 import org.junit.jupiter.api.Test
 
 class Day7Test {
@@ -9,6 +9,11 @@ class Day7Test {
   @Test
   fun part1() {
     Day7.test(part1 = 914828)
+  }
+
+  @Test
+  fun part2() {
+    Day7.test(part2 = 17956613L)
   }
 
   @Test
@@ -43,10 +48,5 @@ class Day7Test {
         "-5,54,1105,1,12,1,53,54,53,1008,54,0,55,1001,55,1,55,2,53,55,53,4," +
         "53,1001,56,-1,56,1005,56,6,99,0,0,0,0,10",
     ) shouldBeExactly 18216
-  }
-
-  @Test
-  fun part2() {
-    Day7.test(part2 = 17956613)
   }
 }
