@@ -1,6 +1,7 @@
 package de.woitaschek.aoc.utils
 
 import kotlin.math.absoluteValue
+import kotlin.math.atan2
 
 data class Point(val x: Int, val y: Int) {
 
@@ -26,6 +27,14 @@ data class Point(val x: Int, val y: Int) {
 
   fun manhattanDistanceTo(other: Point): Int {
     return (x - other.x).absoluteValue + (y - other.y).absoluteValue
+  }
+
+  fun degreesTo(other: Point): Double {
+    val atan2 = atan2(
+      y = (other.y - this.y).toDouble(),
+      x = (other.x - this.x).toDouble(),
+    )
+    return (Math.toDegrees(atan2) + 90 + 360) % 360
   }
 
   override fun toString(): String = "($x,$y)"
