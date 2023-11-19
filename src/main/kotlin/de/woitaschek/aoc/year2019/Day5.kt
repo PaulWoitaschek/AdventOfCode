@@ -18,6 +18,6 @@ object Day5 : Puzzle<Long, Long>(2019, 5) {
     runBlocking {
       computer.run()
     }
-    return computer.fullOutput
+    return computer.fullOutput.last()
   }
 }

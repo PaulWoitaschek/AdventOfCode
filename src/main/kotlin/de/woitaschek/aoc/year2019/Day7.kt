@@ -33,7 +33,7 @@ object Day7 : Puzzle<Long, Long>(2019, 7) {
   ): Long {
     val computer = IntCodeComputer(values, inputs.map { it })
     runBlocking { computer.run() }
-    return computer.fullOutput
+    return computer.fullOutput.last()
   }
 
   override fun solvePart2(input: String): Long = runBlocking(Dispatchers.Default) {
@@ -69,7 +69,7 @@ object Day7 : Puzzle<Long, Long>(2019, 7) {
         it.inputs.cancel()
         it.outputs.cancel()
       }
-      val value = e.latestOutput
+      val value = e.fullOutput.last()
       max = maxOf(max, value)
     }
     max

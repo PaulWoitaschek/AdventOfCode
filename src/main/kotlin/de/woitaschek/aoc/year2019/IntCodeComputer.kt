@@ -1,5 +1,8 @@
 package de.woitaschek.aoc.year2019
 
+import de.woitaschek.aoc.year2019.IntCodeComputer.Mode.Immediate
+import de.woitaschek.aoc.year2019.IntCodeComputer.Mode.Positional
+import de.woitaschek.aoc.year2019.IntCodeComputer.Mode.Relative
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.channels.ReceiveChannel
@@ -11,7 +14,7 @@ class IntCodeComputer(
   val outputs: Channel<Long> = Channel(UNLIMITED),
 ) {
 
-  private val instructions: MutableMap<Long, Long> = instructions.withIndex().associate {
+  val instructions: MutableMap<Long, Long> = instructions.withIndex().associate {
     it.index.toLong() to it.value
   }.toMutableMap()
 
@@ -29,14 +32,15 @@ class IntCodeComputer(
   )
 
   private var pointer = 0L
+  private var relativeBase = 0L
   private var finished = false
 
-  private val output = StringBuilder()
+  private val output = mutableListOf<Long>()
 
-  var latestOutput: Long = 0
-    private set
-  val fullOutput: Long
-    get() = output.toString().toLong()
+  val concatFullOutput: Long
+    get() = output.joinToString("").toLong()
+  val fullOutput: List<Long>
+    get() = output.toList()
   val firstInstruction: Long
     get() = instructions.getValue(0)
 
@@ -48,11 +52,11 @@ class IntCodeComputer(
 
   private fun read(index: Long): Long {
     val value = instructions.getValue(pointer + index + 1)
-    val instructionValue = instructions.getValue(pointer)
-    return when (val v = (instructionValue / 10.toFloat().pow(index.toFloat() + 2).toLong() % 10).toInt()) {
-      0 -> instructions.getValue(value)
-      1 -> value
-      else -> error("Invalid mode=$v")
+    return when (mode(index)) {
+      Positional -> value(value)
+      Immediate -> value
+      Relative -> instructions.getValue(value + relativeBase)
+      // Relative -> //instructions.getValue(value + relativeBase)
     }
   }
 
@@ -60,7 +64,33 @@ class IntCodeComputer(
     index: Long,
     value: Long,
   ) {
-    instructions[instructions.getValue(pointer + index + 1)] = value
+    val mode = mode(index)
+    when (mode) {
+      Immediate -> error("Writes are never positional")
+      Positional -> {
+        instructions[instructions.getValue(pointer + index + 1)] = value
+      }
+      Relative -> {
+        instructions[instructions.getValue(pointer + index + 1) + relativeBase] = value
+      }
+    }
+  }
+
+  private fun mode(index: Long): Mode {
+    val instructionValue = instructions.getValue(pointer)
+    val divisor = 10.toFloat().pow(index.toInt() + 2)
+    return when (val mode = (instructionValue / divisor % 10).toInt()) {
+      0 -> Positional
+      1 -> Immediate
+      2 -> Relative
+      else -> error("Invalid mode=$mode")
+    }
+  }
+
+  private enum class Mode { Immediate, Positional, Relative; }
+
+  private fun value(key: Long): Long {
+    return instructions[key] ?: 0L
   }
 
   private suspend fun runInstruction() {
@@ -80,8 +110,7 @@ class IntCodeComputer(
       }
       4 -> {
         val o = read(0)
-        output.append(o)
-        latestOutput = o
+        output.add(o)
         outputs.send(o)
         pointer += 2
       }
@@ -108,6 +137,10 @@ class IntCodeComputer(
         val value: Long = if (read(0) == read(1)) 1 else 0
         write(2, value)
         pointer += 4
+      }
+      9 -> {
+        relativeBase += read(0)
+        pointer += 2
       }
       99 -> {
         finished = true
