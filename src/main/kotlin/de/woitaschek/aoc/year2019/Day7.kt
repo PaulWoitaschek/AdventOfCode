@@ -1,7 +1,7 @@
 package de.woitaschek.aoc.year2019
 
 import de.woitaschek.aoc.utils.Puzzle
-import de.woitaschek.aoc.utils.toCommaSeparatedIntList
+import de.woitaschek.aoc.utils.toCommaSeparatedLongList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
@@ -12,15 +12,15 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-object Day7 : Puzzle<Int, Int>(2019, 7) {
+object Day7 : Puzzle<Long, Long>(2019, 7) {
 
-  override fun solvePart1(input: String): Int {
-    val values = input.toCommaSeparatedIntList()
-    var max = 0
+  override fun solvePart1(input: String): Long {
+    val values = input.toCommaSeparatedLongList()
+    var max = 0L
     settingsCombinations(0..4).forEach { settings ->
-      var previousOutput = 0
+      var previousOutput = 0L
       settings.forEach {
-        previousOutput = calculate(values, listOf(it, previousOutput))
+        previousOutput = calculate(values, listOf(it.toLong(), previousOutput))
       }
       max = maxOf(max, previousOutput)
     }
@@ -28,23 +28,23 @@ object Day7 : Puzzle<Int, Int>(2019, 7) {
   }
 
   private fun calculate(
-    values: List<Int>,
-    inputs: List<Int>,
-  ): Int {
-    val computer = IntCodeComputer(values.toMutableList(), inputs.toMutableList())
+    values: List<Long>,
+    inputs: List<Long>,
+  ): Long {
+    val computer = IntCodeComputer(values, inputs.map { it })
     runBlocking { computer.run() }
     return computer.fullOutput
   }
 
-  override fun solvePart2(input: String): Int = runBlocking(Dispatchers.Default) {
-    val values = input.toCommaSeparatedIntList()
-    var max = 0
+  override fun solvePart2(input: String): Long = runBlocking(Dispatchers.Default) {
+    val values = input.toCommaSeparatedLongList()
+    var max = 0L
     settingsCombinations(5..9).forEach { settings ->
-      fun Channel<Int>.withInitialValue(vararg initial: Int): ReceiveChannel<Int> {
+      fun Channel<Long>.withInitialValue(vararg initial: Int): ReceiveChannel<Long> {
         @OptIn(ExperimentalCoroutinesApi::class)
         return produce {
           initial.forEach {
-            send(it)
+            send(it.toLong())
           }
           consumeEach {
             send(it)
@@ -52,7 +52,7 @@ object Day7 : Puzzle<Int, Int>(2019, 7) {
         }
       }
 
-      val eOutput = Channel<Int>(Channel.RENDEZVOUS)
+      val eOutput = Channel<Long>(Channel.RENDEZVOUS)
       val a = IntCodeComputer(values, eOutput.withInitialValue(settings[0], 0))
       val b = IntCodeComputer(values, a.outputs.withInitialValue(settings[1]))
       val c = IntCodeComputer(values, b.outputs.withInitialValue(settings[2]))

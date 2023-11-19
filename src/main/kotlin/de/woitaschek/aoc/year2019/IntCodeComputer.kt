@@ -6,19 +6,21 @@ import kotlinx.coroutines.channels.ReceiveChannel
 import kotlin.math.pow
 
 class IntCodeComputer(
-  instructions: List<Int>,
-  val inputs: ReceiveChannel<Int>,
-  val outputs: Channel<Int> = Channel(UNLIMITED),
+  instructions: List<Long>,
+  val inputs: ReceiveChannel<Long>,
+  val outputs: Channel<Long> = Channel(UNLIMITED),
 ) {
 
-  private val instructions = instructions.toMutableList()
+  private val instructions: MutableMap<Long, Long> = instructions.withIndex().associate {
+    it.index.toLong() to it.value
+  }.toMutableMap()
 
   constructor(
-    instructions: List<Int>,
-    inputs: List<Int>,
+    instructions: List<Long>,
+    inputs: List<Long>,
   ) : this(
     instructions = instructions,
-    inputs = Channel<Int>(UNLIMITED)
+    inputs = Channel<Long>(UNLIMITED)
       .also { channel ->
         inputs.forEach {
           check(channel.trySend(it).isSuccess)
@@ -26,17 +28,17 @@ class IntCodeComputer(
       },
   )
 
-  private var pointer = 0
+  private var pointer = 0L
   private var finished = false
 
   private val output = StringBuilder()
 
-  var latestOutput: Int = 0
+  var latestOutput: Long = 0
     private set
-  val fullOutput: Int
-    get() = output.toString().toInt()
-  val firstInstruction: Int
-    get() = instructions.first()
+  val fullOutput: Long
+    get() = output.toString().toLong()
+  val firstInstruction: Long
+    get() = instructions.getValue(0)
 
   suspend fun run() {
     while (!finished) {
@@ -44,25 +46,25 @@ class IntCodeComputer(
     }
   }
 
-  private fun read(index: Int): Int {
-    val value = instructions[pointer + index + 1]
-    val instructionValue = instructions[pointer]
-    return when (val v = instructionValue / 10.toFloat().pow(index + 2).toInt() % 10) {
-      0 -> instructions[value]
+  private fun read(index: Long): Long {
+    val value = instructions.getValue(pointer + index + 1)
+    val instructionValue = instructions.getValue(pointer)
+    return when (val v = (instructionValue / 10.toFloat().pow(index.toFloat() + 2).toLong() % 10).toInt()) {
+      0 -> instructions.getValue(value)
       1 -> value
       else -> error("Invalid mode=$v")
     }
   }
 
   private fun write(
-    index: Int,
-    value: Int,
+    index: Long,
+    value: Long,
   ) {
-    instructions[instructions[pointer + index + 1]] = value
+    instructions[instructions.getValue(pointer + index + 1)] = value
   }
 
   private suspend fun runInstruction() {
-    when (val opCode = instructions[pointer] % 100) {
+    when (val opCode = (instructions.getValue(pointer) % 100).toInt()) {
       1 -> {
         write(2, read(0) + read(1))
         pointer += 4
@@ -84,26 +86,26 @@ class IntCodeComputer(
         pointer += 2
       }
       5 -> {
-        if (read(0) != 0) {
+        if (read(0) != 0L) {
           pointer = read(1)
         } else {
           pointer += 3
         }
       }
       6 -> {
-        if (read(0) == 0) {
+        if (read(0) == 0L) {
           pointer = read(1)
         } else {
           pointer += 3
         }
       }
       7 -> {
-        val value = if (read(0) < read(1)) 1 else 0
+        val value: Long = if (read(0) < read(1)) 1 else 0
         write(2, value)
         pointer += 4
       }
       8 -> {
-        val value = if (read(0) == read(1)) 1 else 0
+        val value: Long = if (read(0) == read(1)) 1 else 0
         write(2, value)
         pointer += 4
       }
