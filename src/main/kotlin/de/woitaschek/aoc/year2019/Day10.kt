@@ -3,7 +3,6 @@ package de.woitaschek.aoc.year2019
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
 import de.woitaschek.aoc.utils.toLineList
-import kotlin.math.atan2
 
 object Day10 : Puzzle<Int, Int>(2019, 10) {
 
@@ -53,13 +52,5 @@ object Day10 : Puzzle<Int, Int>(2019, 10) {
           }
         }
       }
-  }
-
-  private fun Point.degreesTo(other: Point): Double {
-    val atan2 = atan2(
-      y = (other.y - this.y).toDouble(),
-      x = (other.x - this.x).toDouble(),
-    )
-    return (Math.toDegrees(atan2) + 90 + 360) % 360
   }
 }
