@@ -50,15 +50,18 @@ data class Point(val x: Int, val y: Int) {
   }
 }
 
-fun Point.move(direction: Direction) = Point(
+fun Point.move(
+  direction: Direction,
+  upIsPositive: Boolean = true,
+) = Point(
   x = x + when (direction) {
     Direction.Left -> -1
     Direction.Right -> 1
     Direction.Up, Direction.Down -> 0
   },
   y = y + when (direction) {
-    Direction.Up -> 1
-    Direction.Down -> -1
+    Direction.Up -> if (upIsPositive) 1 else -1
+    Direction.Down -> if (upIsPositive) -1 else 1
     Direction.Left, Direction.Right -> 0
   },
 )
