@@ -1,6 +1,6 @@
 [versions]
 jupiter = "5.10.1"
-kotlin = "1.9.20"
+kotlin = "1.9.21"
 
 [libraries]
 kotest = "io.kotest:kotest-assertions-core:5.8.0"
