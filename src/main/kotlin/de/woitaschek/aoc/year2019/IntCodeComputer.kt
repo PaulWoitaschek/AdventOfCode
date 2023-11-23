@@ -56,7 +56,6 @@ class IntCodeComputer(
       Positional -> value(value)
       Immediate -> value
       Relative -> instructions.getValue(value + relativeBase)
-      // Relative -> //instructions.getValue(value + relativeBase)
     }
   }
 
