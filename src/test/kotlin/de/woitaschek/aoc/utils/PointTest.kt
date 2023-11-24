@@ -7,14 +7,12 @@ class PointTest {
 
   @Test
   fun testPrintString() {
-    printString(
-      setOf(
-        Point(0, 0),
-        Point(1, 0),
-        Point(2, 0),
-        Point(2, 1),
-      ),
-    ) shouldBe """
+    setOf(
+      Point(0, 0),
+      Point(1, 0),
+      Point(2, 0),
+      Point(2, 1),
+    ).printString() shouldBe """
           ⬛⬛⬛
           ⬜⬜⬛
     """.trimIndent()
