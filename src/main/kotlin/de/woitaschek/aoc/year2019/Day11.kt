@@ -17,7 +17,7 @@ object Day11 : Puzzle<Int, String>(2019, 11) {
 
   override fun solvePart2(input: String): String {
     val coloredArea = process(input, 1)
-    return printString(coloredArea.filterValues { it == Color.White }.keys)
+    return coloredArea.filterValues { it == Color.White }.keys.printString()
   }
 
   private fun process(

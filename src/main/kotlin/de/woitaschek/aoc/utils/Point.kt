@@ -5,7 +5,7 @@ import kotlin.math.atan2
 
 data class Point(val x: Int, val y: Int) {
 
-  fun adjacent(includeDiagonal: Boolean): List<Point> {
+  fun adjacent(includeDiagonal: Boolean = false): List<Point> {
     val horizontal = listOf(
       Point(x = x, y = y - 1),
       Point(x = x, y = y + 1),
@@ -66,14 +66,26 @@ fun Point.move(
   },
 )
 
-fun printString(points: Iterable<Point>): String {
+fun Collection<Point>.printString(): String = associateWith { }.printString {
+  if (it in this) "⬛" else "⬜"
+}
+
+inline fun <T> Map<Point, T>.printString(crossinline tile: (Point) -> String): String {
+  if (isEmpty()) {
+    return "EMPTY MAP"
+  }
+  val points = keys
   return (points.minOf { it.y }.rangeTo(points.maxOf { it.y })).joinToString(separator = "\n") { y ->
     (points.minOf { it.x }.rangeTo(points.maxOf { it.x })).joinToString(separator = "") { x ->
-      if (Point(x, y) in points) "⬛" else "⬜"
+      tile(Point(x, y))
     }
   }
 }
 
-fun printPoints(points: Iterable<Point>) {
-  println(printString(points))
+fun Collection<Point>.print() {
+  println(printString())
+}
+
+inline fun <T> Map<Point, T>.print(crossinline tile: (Point) -> String) {
+  println(printString(tile))
 }

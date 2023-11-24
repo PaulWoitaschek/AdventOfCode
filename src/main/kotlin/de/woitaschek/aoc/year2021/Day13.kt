@@ -2,6 +2,7 @@ package de.woitaschek.aoc.year2021
 
 import de.woitaschek.aoc.utils.Point
 import de.woitaschek.aoc.utils.Puzzle
+import de.woitaschek.aoc.utils.printString
 import kotlin.math.abs
 
 object Day13 : Puzzle<Long, String>(2021, 13) {
@@ -35,19 +36,6 @@ private fun Point.followInstruction(instruction: FoldingInstruction): Point {
       this
     } else {
       Point(instruction.coordinate - abs(x - instruction.coordinate), y)
-    }
-  }
-}
-
-private fun Set<Point>.printString(): String {
-  val points = this
-  return buildString {
-    repeat(points.maxOf { it.y } + 1) { y ->
-      appendLine(
-        (0..(points.maxOf { it.x } + 1)).map { x -> Point(x, y) }
-          .joinToString(separator = "") { if (it in points) "█" else " " }
-          .trim(),
-      )
     }
   }
 }

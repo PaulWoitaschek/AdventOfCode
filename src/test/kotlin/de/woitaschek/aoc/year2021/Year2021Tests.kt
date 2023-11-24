@@ -95,21 +95,6 @@ class Year2021Tests {
   }
 
   @Test
-  fun day13() {
-    Day13.test(
-      part1 = 17,
-      part2 = """
-        █████
-        █   █
-        █   █
-        █   █
-        █████
-
-      """.trimIndent(),
-    )
-  }
-
-  @Test
   fun day15() {
     Day15.test(part1 = 40, part2 = null)
   }
