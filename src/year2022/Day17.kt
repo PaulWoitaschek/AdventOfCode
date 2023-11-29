@@ -115,7 +115,7 @@ object Day17 {
     ),
     ;
 
-    fun next(): RockShape = values().getOrNull(ordinal + 1) ?: A
+    fun next(): RockShape = entries.getOrNull(ordinal + 1) ?: A
 
     val points = shapeString.lines().reversed().flatMapIndexed { y, line ->
       line.mapIndexedNotNull { x, char ->
