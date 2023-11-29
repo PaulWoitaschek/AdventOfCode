@@ -31,7 +31,7 @@ object Day4 : Puzzle<Long, Long>(2021, 4) {
       val draws = allDraws.take(round)
       val winnersOfRound = boards.filter { it.hasWon(draws) }
       if (winnersOfRound.isNotEmpty()) {
-        boards = boards - winnersOfRound
+        boards = boards - winnersOfRound.toSet()
         lastWinner = winnersOfRound.last()
         lastDraw = draws
       }
