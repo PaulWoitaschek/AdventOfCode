@@ -1,0 +1,24 @@
+product:
+  type: lib
+  platforms:
+    - jvm
+
+test-dependencies:
+  - io.kotest:kotest-assertions-core:5.8.0
+
+dependencies:
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3
+
+
+settings:
+  kotlin:
+    languageVersion: 1.9
+    serialization:
+      format: json
+  java:
+    source: 17
+  jvm:
+    target: 17
+
+test-settings:
+  junit: junit-5
