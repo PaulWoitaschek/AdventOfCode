@@ -87,7 +87,7 @@ object Day23 : Puzzle<Int, Int>(2022, 23) {
     East,
     ;
 
-    fun next(): Direction = values().getOrNull(ordinal + 1) ?: values().first()
+    fun next(): Direction = entries.getOrNull(ordinal + 1) ?: entries.first()
   }
 
   data class Elf(

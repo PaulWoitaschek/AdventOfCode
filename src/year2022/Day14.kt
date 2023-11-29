@@ -52,10 +52,7 @@ object Day14 : Puzzle<Int, Int>(2022, 14) {
       }
 
       this.candidate = SandOrigin
-      if (!sands.add(SandOrigin)) {
-        return false
-      }
-      return true
+      return sands.add(SandOrigin)
     }
 
     companion object {

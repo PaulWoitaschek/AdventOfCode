@@ -85,7 +85,7 @@ object Day8 : Puzzle<Int, Int>(2020, 8) {
     companion object {
       fun parse(input: String): Instruction {
         val typeValue = input.take(3)
-        val type = Type.values().first { it.value == typeValue }
+        val type = Type.entries.first { it.value == typeValue }
         val value = input.drop(4).toInt()
         return Instruction(value, type)
       }

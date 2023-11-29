@@ -42,12 +42,12 @@ object Day19 : Puzzle<Int, Int>(2022, 19) {
     queue.add(
       Snapshot(
         minute = 1,
-        robots = Material.values().associateWith { if (it == Material.Ore) 1 else 0 },
-        material = Material.values().associateWith { 0 },
+        robots = Material.entries.associateWith { if (it == Material.Ore) 1 else 0 },
+        material = Material.entries.associateWith { 0 },
       ),
     )
 
-    val maxNeededRobots = Material.values().associateWith { material ->
+    val maxNeededRobots = Material.entries.associateWith { material ->
       robotBlueprints.maxOf { it.costs[material] ?: 0 }
     }
 

@@ -18,7 +18,7 @@ object Day2 : Puzzle<Int, Int>(2022, 2) {
     .sumOf { round ->
       val opponent = RPS.byChar.getValue(round[0])
       val desiredMatchResult = MatchResult.byChar.getValue(round[2])
-      val response = RPS.values().first { it.match(opponent) == desiredMatchResult }
+      val response = RPS.entries.first { it.match(opponent) == desiredMatchResult }
       desiredMatchResult.score + response.score
     }
 }

@@ -80,7 +80,7 @@ object Day21 : Puzzle<Long, Long>(2022, 21) {
     ;
 
     companion object {
-      fun parse(input: Char) = Operator.values().first { it.char == input }
+      fun parse(input: Char) = entries.first { it.char == input }
     }
   }
 

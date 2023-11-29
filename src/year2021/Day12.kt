@@ -82,17 +82,13 @@ private data class Passage(
 
 private sealed interface Segment {
 
-  object Start : Segment {
-    override fun toString(): String = "Start"
-  }
+  data object Start : Segment
 
   data class Cave(val name: String) : Segment {
     val isSmallCave: Boolean = name.all(Char::isLowerCase)
   }
 
-  object End : Segment {
-    override fun toString(): String = "End"
-  }
+  data object End : Segment
 
   companion object {
     fun parse(value: String): Segment {
