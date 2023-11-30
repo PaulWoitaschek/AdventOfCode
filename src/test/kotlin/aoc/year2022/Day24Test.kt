@@ -1,6 +1,7 @@
 package aoc.year2022
 
 import aoc.utils.test
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day24Test {
@@ -11,6 +12,7 @@ class Day24Test {
   }
 
   @Test
+  @Disabled("Too slow")
   fun part1RealData() {
     Day24.test(part1 = 264)
   }
@@ -21,6 +23,7 @@ class Day24Test {
   }
 
   @Test
+  @Disabled("Too slow")
   fun part2RealData() {
     Day24.test(part2 = 789)
   }

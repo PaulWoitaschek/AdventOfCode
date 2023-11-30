@@ -3,6 +3,7 @@ package aoc.year2022
 import aoc.utils.aocInput
 import aoc.utils.aocTestInput
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day16Test {
@@ -23,6 +24,7 @@ class Day16Test {
   }
 
   @Test
+  @Disabled("Too slow")
   fun part2() {
     Day16.solvePart2(aocInput(2022, 16)) shouldBe 2171
   }

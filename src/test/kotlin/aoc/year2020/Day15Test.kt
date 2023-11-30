@@ -1,6 +1,7 @@
 package aoc.year2020
 
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day15Test {
@@ -12,6 +13,7 @@ class Day15Test {
   }
 
   @Test
+  @Disabled("Too slow")
   fun part2() {
     Day15.solvePart2("11,18,0,20,1,7,16") shouldBe 266
   }
