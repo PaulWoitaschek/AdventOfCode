@@ -13,7 +13,6 @@ class Day8Test {
     Day8.test(part1 = 26, part2 = 61229)
   }
 
-  // Assuming day8Display is related to Day8 and should be in the same test class
   @Test
   fun day8Display() {
     val expected = listOf(
