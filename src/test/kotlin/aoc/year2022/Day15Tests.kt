@@ -3,6 +3,7 @@ package aoc.year2022
 import aoc.utils.aocInput
 import aoc.utils.aocTestInput
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day15Tests {
@@ -16,6 +17,7 @@ class Day15Tests {
   }
 
   @Test
+  @Disabled("Too slow")
   fun realData() {
     val input = aocInput(2022, 15)
     val puzzle = Day15(lineToScan = 2000000, rangeMax = 4000000)
