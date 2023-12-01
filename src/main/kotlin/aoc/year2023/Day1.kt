@@ -16,18 +16,20 @@ object Day1 : Puzzle<Int, Int>(2023, 1) {
   }
 
   override fun solvePart2(input: String): Int {
-    val numbers = (1..9).associateBy { it.toString() } + (1..9).associateBy { number ->
-      when (number) {
-        1 -> "one"
-        2 -> "two"
-        3 -> "three"
-        4 -> "four"
-        5 -> "five"
-        6 -> "six"
-        7 -> "seven"
-        8 -> "eight"
-        9 -> "nine"
-        else -> error("Invalid number $number")
+    val numbers = buildMap {
+      listOf(
+        1 to "one",
+        2 to "two",
+        3 to "three",
+        4 to "four",
+        5 to "five",
+        6 to "six",
+        7 to "seven",
+        8 to "eight",
+        9 to "nine",
+      ).forEach { (number, name) ->
+        put(number.toString(), number)
+        put(name, number)
       }
     }
 
