@@ -1,11 +1,11 @@
 package aoc.year2019
 
-import aoc.utils.Direction
-import aoc.utils.Point
-import aoc.utils.Puzzle
-import aoc.utils.move
-import aoc.utils.printString
-import aoc.utils.toCommaSeparatedLongList
+import aoc.library.Direction
+import aoc.library.Point
+import aoc.library.Puzzle
+import aoc.library.move
+import aoc.library.printString
+import aoc.library.toCommaSeparatedLongList
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.launch

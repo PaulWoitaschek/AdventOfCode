@@ -1,7 +1,7 @@
 package aoc.year2022
 
-import aoc.utils.Point
-import aoc.utils.Puzzle
+import aoc.library.Point
+import aoc.library.Puzzle
 import kotlin.math.absoluteValue
 
 class Day15(

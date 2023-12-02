@@ -1,6 +1,6 @@
 package aoc.year2021
 
-import aoc.utils.Puzzle
+import aoc.library.Puzzle
 
 private typealias BitRow = List<Boolean>
 

@@ -1,7 +1,7 @@
 package aoc.year2022
 
-import aoc.utils.solvePart1
-import aoc.utils.solvePart1WithTestInput
+import aoc.library.solvePart1
+import aoc.library.solvePart1WithTestInput
 import aoc.year2022.Day25.SnafuNumber.Companion.toSnafuNumber
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.withClue

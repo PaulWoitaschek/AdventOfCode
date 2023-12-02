@@ -1,6 +1,6 @@
 package aoc.year2022
 
-import aoc.utils.Puzzle
+import aoc.library.Puzzle
 import aoc.year2022.Day25.SnafuNumber.Companion.toSnafuNumber
 import kotlin.math.pow
 

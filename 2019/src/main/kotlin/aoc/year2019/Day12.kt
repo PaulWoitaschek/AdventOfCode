@@ -1,8 +1,8 @@
 package aoc.year2019
 
-import aoc.utils.Point3
-import aoc.utils.Puzzle
-import aoc.utils.toLineList
+import aoc.library.Point3
+import aoc.library.Puzzle
+import aoc.library.toLineList
 import kotlin.math.absoluteValue
 
 object Day12 : Puzzle<Int, Long>(2019, 12) {

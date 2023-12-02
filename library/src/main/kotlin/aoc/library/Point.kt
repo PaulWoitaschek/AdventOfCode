@@ -1,4 +1,4 @@
-package aoc.utils
+package aoc.library
 
 import kotlin.math.absoluteValue
 import kotlin.math.atan2

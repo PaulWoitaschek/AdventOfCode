@@ -1,9 +1,9 @@
 package aoc.year2022
 
-import aoc.utils.Direction
-import aoc.utils.Point
-import aoc.utils.Puzzle
-import aoc.utils.move
+import aoc.library.Direction
+import aoc.library.Point
+import aoc.library.Puzzle
+import aoc.library.move
 import kotlin.math.absoluteValue
 import kotlin.math.sign
 

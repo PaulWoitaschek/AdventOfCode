@@ -1,7 +1,7 @@
 package aoc.year2019
 
-import aoc.utils.Puzzle
-import aoc.utils.toSingleLine
+import aoc.library.Puzzle
+import aoc.library.toSingleLine
 import kotlin.math.absoluteValue
 
 object Day16 : Puzzle<String, String>(2019, 16) {

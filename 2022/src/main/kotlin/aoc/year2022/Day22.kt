@@ -1,7 +1,7 @@
 package aoc.year2022
 
-import aoc.utils.Point
-import aoc.utils.Puzzle
+import aoc.library.Point
+import aoc.library.Puzzle
 import aoc.year2022.Day22.Facing.Right
 
 private typealias Board = List<List<Day22.Tile>>

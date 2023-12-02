@@ -1,6 +1,6 @@
 package aoc.year2015
 
-import aoc.utils.Puzzle
+import aoc.library.Puzzle
 import java.security.MessageDigest
 
 object Day4 : Puzzle<Int, Int>(2015, 4) {

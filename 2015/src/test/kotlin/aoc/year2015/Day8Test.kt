@@ -1,7 +1,7 @@
 package aoc.year2015
 
-import aoc.utils.solvePart1
-import aoc.utils.solvePart2
+import aoc.library.solvePart1
+import aoc.library.solvePart2
 import io.kotest.matchers.ints.shouldBeExactly
 import org.junit.jupiter.api.Test
 

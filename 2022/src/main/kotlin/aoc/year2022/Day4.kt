@@ -1,6 +1,6 @@
 package aoc.year2022
 
-import aoc.utils.Puzzle
+import aoc.library.Puzzle
 
 object Day4 : Puzzle<Int, Int>(2022, 4) {
 

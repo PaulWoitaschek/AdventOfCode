@@ -1,7 +1,7 @@
 package aoc.year2022
 
-import aoc.utils.Point
-import aoc.utils.Puzzle
+import aoc.library.Point
+import aoc.library.Puzzle
 
 object Day8 : Puzzle<Int, Int>(2022, 8) {
   override fun solvePart1(input: String) = Forest(input).visibleTreesFromOutsideTheGrid()

@@ -1,6 +1,6 @@
 package aoc.year2020
 
-import aoc.utils.Puzzle
+import aoc.library.Puzzle
 
 private typealias Passport = Map<String, String>
 

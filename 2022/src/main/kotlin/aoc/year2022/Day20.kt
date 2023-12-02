@@ -1,6 +1,6 @@
 package aoc.year2022
 
-import aoc.utils.Puzzle
+import aoc.library.Puzzle
 import java.util.Collections
 
 object Day20 : Puzzle<Long, Long>(2022, 20) {

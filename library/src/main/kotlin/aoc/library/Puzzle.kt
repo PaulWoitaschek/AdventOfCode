@@ -1,4 +1,4 @@
-package aoc.utils
+package aoc.library
 
 abstract class Puzzle<Part1, Part2>(val year: Int, val day: Int) {
   abstract fun solvePart1(input: String): Part1

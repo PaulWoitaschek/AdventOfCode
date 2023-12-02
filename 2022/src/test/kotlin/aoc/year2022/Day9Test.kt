@@ -1,6 +1,6 @@
 package aoc.year2022
 
-import aoc.utils.aocInput
+import aoc.library.aocInput
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 

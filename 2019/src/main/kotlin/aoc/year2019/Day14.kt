@@ -1,7 +1,7 @@
 package aoc.year2019
 
-import aoc.utils.Puzzle
-import aoc.utils.toLineSeparatedStringList
+import aoc.library.Puzzle
+import aoc.library.toLineSeparatedStringList
 import kotlin.math.absoluteValue
 import kotlin.math.ceil
 

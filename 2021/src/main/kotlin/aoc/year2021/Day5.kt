@@ -1,7 +1,7 @@
 package aoc.year2021
 
-import aoc.utils.Point
-import aoc.utils.Puzzle
+import aoc.library.Point
+import aoc.library.Puzzle
 import kotlin.math.abs
 
 object Day5 : Puzzle<Long, Long>(2021, 5) {

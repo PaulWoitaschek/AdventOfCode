@@ -1,7 +1,7 @@
 package aoc.year2020
 
-import aoc.utils.Point
-import aoc.utils.Puzzle
+import aoc.library.Point
+import aoc.library.Puzzle
 
 object Day3 : Puzzle<Int, Int>(2020, 3) {
 

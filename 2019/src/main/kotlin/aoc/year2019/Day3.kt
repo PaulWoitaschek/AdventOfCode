@@ -1,10 +1,10 @@
 package aoc.year2019
 
-import aoc.utils.Direction
-import aoc.utils.Point
-import aoc.utils.Puzzle
-import aoc.utils.move
-import aoc.utils.toLineSeparatedStringList
+import aoc.library.Direction
+import aoc.library.Point
+import aoc.library.Puzzle
+import aoc.library.move
+import aoc.library.toLineSeparatedStringList
 
 object Day3 : Puzzle<Int, Int>(2019, 3) {
 

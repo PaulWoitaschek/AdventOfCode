@@ -1,7 +1,7 @@
 package aoc.year2019
 
-import aoc.utils.Puzzle
-import aoc.utils.toCommaSeparatedLongList
+import aoc.library.Puzzle
+import aoc.library.toCommaSeparatedLongList
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch

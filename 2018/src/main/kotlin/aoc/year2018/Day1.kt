@@ -1,7 +1,7 @@
 package aoc.year2018
 
-import aoc.utils.Puzzle
-import aoc.utils.toLineSeparatedIntList
+import aoc.library.Puzzle
+import aoc.library.toLineSeparatedIntList
 
 object Day1 : Puzzle<Int, Int>(year = 2018, day = 1) {
 

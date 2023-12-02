@@ -1,7 +1,7 @@
 package aoc.year2019
 
-import aoc.utils.Puzzle
-import aoc.utils.toCommaSeparatedLongList
+import aoc.library.Puzzle
+import aoc.library.toCommaSeparatedLongList
 import kotlinx.coroutines.runBlocking
 
 object Day9 : Puzzle<Long, Long>(2019, 9) {

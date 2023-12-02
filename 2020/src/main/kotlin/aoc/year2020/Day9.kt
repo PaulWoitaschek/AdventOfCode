@@ -1,6 +1,6 @@
 package aoc.year2020
 
-import aoc.utils.Puzzle
+import aoc.library.Puzzle
 
 class Day9(private val premableLength: Int) : Puzzle<Int, Int>(2020, 9) {
 

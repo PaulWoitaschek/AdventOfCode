@@ -1,6 +1,6 @@
 package aoc.year2022
 
-import aoc.utils.Puzzle
+import aoc.library.Puzzle
 
 object Day21 : Puzzle<Long, Long>(2022, 21) {
 

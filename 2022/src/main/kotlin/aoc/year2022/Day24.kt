@@ -1,8 +1,8 @@
 package aoc.year2022
 
-import aoc.utils.Direction
-import aoc.utils.Point
-import aoc.utils.Puzzle
+import aoc.library.Direction
+import aoc.library.Point
+import aoc.library.Puzzle
 import java.util.PriorityQueue
 
 object Day24 : Puzzle<Int, Int>(2022, 24) {

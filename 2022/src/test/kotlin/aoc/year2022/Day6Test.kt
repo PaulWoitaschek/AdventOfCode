@@ -1,7 +1,7 @@
 package aoc.year2022
 
-import aoc.utils.solvePart1
-import aoc.utils.solvePart2
+import aoc.library.solvePart1
+import aoc.library.solvePart2
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.withClue
 import io.kotest.matchers.shouldBe

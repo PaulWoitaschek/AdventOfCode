@@ -1,6 +1,6 @@
 package aoc.year2020
 
-import aoc.utils.Puzzle
+import aoc.library.Puzzle
 import kotlin.math.ceil
 
 object Day5 : Puzzle<Int, Int>(2020, 5) {

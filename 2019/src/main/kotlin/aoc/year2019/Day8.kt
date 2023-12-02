@@ -1,7 +1,7 @@
 package aoc.year2019
 
-import aoc.utils.Puzzle
-import aoc.utils.toSingleLine
+import aoc.library.Puzzle
+import aoc.library.toSingleLine
 
 private const val WIDTH = 25
 private const val HEIGHT = 6

@@ -1,7 +1,7 @@
 package aoc.year2019
 
-import aoc.utils.solvePart1
-import aoc.utils.solvePart2
+import aoc.library.solvePart1
+import aoc.library.solvePart2
 import io.kotest.matchers.longs.shouldBeExactly
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldHaveLength

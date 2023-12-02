@@ -1,4 +1,4 @@
-package aoc.utils
+package aoc.library
 
 enum class Direction(var char: Char) {
   Left('L'),

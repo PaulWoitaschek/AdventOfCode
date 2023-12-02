@@ -1,6 +1,6 @@
 package aoc.year2022
 
-import aoc.utils.Point
+import aoc.library.Point
 import java.util.BitSet
 
 object Day17 {

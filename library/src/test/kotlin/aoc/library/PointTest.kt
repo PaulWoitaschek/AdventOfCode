@@ -1,7 +1,5 @@
 package aoc.library
 
-import aoc.utils.Point
-import aoc.utils.printString
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 

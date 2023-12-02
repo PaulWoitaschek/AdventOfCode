@@ -1,9 +1,9 @@
 package aoc.year2022
 
-import aoc.utils.solvePart1
-import aoc.utils.solvePart1WithTestInput
-import aoc.utils.solvePart2
-import aoc.utils.solvePart2WithTestInput
+import aoc.library.solvePart1
+import aoc.library.solvePart1WithTestInput
+import aoc.library.solvePart2
+import aoc.library.solvePart2WithTestInput
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
