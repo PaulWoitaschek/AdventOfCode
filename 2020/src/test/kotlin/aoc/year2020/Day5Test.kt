@@ -1,0 +1,21 @@
+package aoc.year2020
+
+import aoc.utils.solvePart1
+import aoc.utils.solvePart1WithTestInput
+import aoc.utils.solvePart2
+import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Test
+
+class Day5Test {
+
+  @Test
+  fun part1() {
+    Day5.solvePart1() shouldBe 933
+    Day5.solvePart1WithTestInput() shouldBe 820
+  }
+
+  @Test
+  fun part2() {
+    Day5.solvePart2() shouldBe 711
+  }
+}
