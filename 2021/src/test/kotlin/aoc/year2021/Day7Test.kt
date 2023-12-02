@@ -12,7 +12,7 @@ class Day7Test {
   }
 
   @Test
-  fun part2()  {
+  fun part2() {
     Day7.solvePart2() shouldBe 93397632L
   }
 }
