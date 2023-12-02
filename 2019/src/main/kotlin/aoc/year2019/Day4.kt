@@ -1,7 +1,6 @@
 package aoc.year2019
 
 import aoc.library.Puzzle
-import aoc.library.toSingleLine
 
 object Day4 : Puzzle<Int, Int>(2019, 4) {
 
@@ -13,7 +12,7 @@ object Day4 : Puzzle<Int, Int>(2019, 4) {
     input: String,
     isValidPassword: (Int) -> Boolean,
   ): Int {
-    val (from, to) = input.toSingleLine()
+    val (from, to) = input
       .split('-')
       .map(String::toInt)
     return (from..to).count(isValidPassword)

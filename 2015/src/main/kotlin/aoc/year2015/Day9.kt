@@ -1,7 +1,6 @@
 package aoc.year2015
 
 import aoc.library.Puzzle
-import aoc.library.toLineSeparatedStringList
 
 object Day9 : Puzzle<Int, Int>(2015, 9) {
 
@@ -25,7 +24,7 @@ object Day9 : Puzzle<Int, Int>(2015, 9) {
     input: String,
     onPathCompleted: (Int) -> Unit,
   ) {
-    val routes = input.toLineSeparatedStringList()
+    val routes = input.lines()
       .map(Route::parse)
       .flatMap {
         listOf(it, it.copy(from = it.to, to = it.from))

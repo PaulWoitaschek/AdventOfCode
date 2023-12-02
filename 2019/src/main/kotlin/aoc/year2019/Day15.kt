@@ -4,7 +4,6 @@ import aoc.library.Direction
 import aoc.library.Point
 import aoc.library.Puzzle
 import aoc.library.move
-import aoc.library.toCommaSeparatedLongList
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -28,7 +27,7 @@ object Day15 : Puzzle<Int, Int>(2019, 15) {
     }
 
     val map = mutableMapOf(Point.Zero to Tile.Floor)
-    val computer = IntCodeComputer(input.toCommaSeparatedLongList(), inputs)
+    val computer = IntCodeComputer(input.split(",").map(String::toLong), inputs)
     val computerProcessing = launch {
       computer.run()
     }

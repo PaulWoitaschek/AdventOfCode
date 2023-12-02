@@ -1,7 +1,6 @@
 package aoc.year2023
 
 import aoc.library.Puzzle
-import aoc.library.toLineSeparatedStringList
 
 object Day2 : Puzzle<Int, Int>(2023, 2) {
 
@@ -34,7 +33,7 @@ object Day2 : Puzzle<Int, Int>(2023, 2) {
     input: String,
     solve: (List<Game>) -> Int,
   ): Int {
-    val games = input.toLineSeparatedStringList()
+    val games = input.lines()
       .map { line ->
         val (gameIdValue, gameValue) = line.split(": ")
         Game(

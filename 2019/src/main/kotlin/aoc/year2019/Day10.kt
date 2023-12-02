@@ -2,7 +2,6 @@ package aoc.year2019
 
 import aoc.library.Point
 import aoc.library.Puzzle
-import aoc.library.toLineList
 
 object Day10 : Puzzle<Int, Int>(2019, 10) {
 
@@ -42,7 +41,7 @@ object Day10 : Puzzle<Int, Int>(2019, 10) {
   }
 
   private fun parseAsteroids(input: String): List<Point> {
-    return input.toLineList()
+    return input.lines()
       .flatMapIndexed { y, line ->
         line.mapIndexedNotNull { x, value ->
           if (value == '#') {

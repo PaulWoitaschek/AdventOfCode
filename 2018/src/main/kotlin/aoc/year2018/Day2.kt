@@ -1,14 +1,13 @@
 package aoc.year2018
 
 import aoc.library.Puzzle
-import aoc.library.toLineSeparatedStringList
 
 object Day2 : Puzzle<Int, String>(2018, 2) {
 
   override fun solvePart1(input: String): Int {
     var pairs = 0
     var triples = 0
-    input.toLineSeparatedStringList()
+    input.lines()
       .forEach { line ->
         val counts = line.groupingBy { it }.eachCount().values
         if (2 in counts) pairs++
@@ -18,7 +17,7 @@ object Day2 : Puzzle<Int, String>(2018, 2) {
   }
 
   override fun solvePart2(input: String): String {
-    val pool = input.toLineSeparatedStringList()
+    val pool = input.lines()
       .map { it.toList() }
       .toMutableList()
     while (true) {

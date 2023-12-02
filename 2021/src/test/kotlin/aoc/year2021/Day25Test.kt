@@ -7,6 +7,6 @@ import org.junit.jupiter.api.Test
 class Day25Test {
   @Test
   fun day25() {
-    Day25.solvePart1() shouldBe 58
+    Day25.solvePart1() shouldBe 400
   }
 }

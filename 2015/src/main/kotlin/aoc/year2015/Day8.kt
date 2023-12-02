@@ -1,14 +1,13 @@
 package aoc.year2015
 
 import aoc.library.Puzzle
-import aoc.library.toLineSeparatedStringList
 
 object Day8 : Puzzle<Int, Int>(2015, 8) {
 
-  override fun solvePart1(input: String): Int = input.toLineSeparatedStringList()
+  override fun solvePart1(input: String): Int = input.lines()
     .sumOf { it.length - memoryCount(it) }
 
-  override fun solvePart2(input: String): Int = input.toLineSeparatedStringList()
+  override fun solvePart2(input: String): Int = input.lines()
     .sumOf { encodedSize(it) - it.length }
 
   fun memoryCount(string: String): Int {

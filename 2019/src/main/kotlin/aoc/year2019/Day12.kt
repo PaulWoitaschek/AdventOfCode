@@ -2,7 +2,6 @@ package aoc.year2019
 
 import aoc.library.Point3
 import aoc.library.Puzzle
-import aoc.library.toLineList
 import kotlin.math.absoluteValue
 
 object Day12 : Puzzle<Int, Long>(2019, 12) {
@@ -58,7 +57,7 @@ object Day12 : Puzzle<Int, Long>(2019, 12) {
   }
 
   private fun moonPositions(input: String): List<Point3> {
-    return input.toLineList()
+    return input.lines()
       .map { value ->
         val (x, y, z) = "<x=(.*?), y=(.*?), z=(.*?)>"
           .toRegex()

@@ -7,8 +7,12 @@ import org.junit.jupiter.api.Test
 
 class Day17Test {
   @Test
-  fun day17() {
-    Day17.solvePart1() shouldBe 45
-    Day17.solvePart2() shouldBe 112
+  fun part1() {
+    Day17.solvePart1() shouldBe 3916
+  }
+
+  @Test
+  fun part2() {
+    Day17.solvePart2() shouldBe 2986
   }
 }

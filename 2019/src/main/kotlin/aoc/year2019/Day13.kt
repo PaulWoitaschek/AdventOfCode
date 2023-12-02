@@ -1,7 +1,6 @@
 package aoc.year2019
 
 import aoc.library.Puzzle
-import aoc.library.toCommaSeparatedLongList
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
@@ -12,7 +11,7 @@ object Day13 : Puzzle<Int, Int>(2019, 13) {
 
   override fun solvePart1(input: String): Int = runBlocking {
     val computer = IntCodeComputer(
-      instructions = input.toCommaSeparatedLongList(),
+      instructions = input.split(",").map(String::toLong),
       inputs = Channel(),
       outputs = Channel(),
     )
@@ -36,7 +35,7 @@ object Day13 : Puzzle<Int, Int>(2019, 13) {
   override fun solvePart2(input: String): Int = runBlocking {
     val inputs = Channel<Long>(capacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val computer = IntCodeComputer(
-      instructions = input.toCommaSeparatedLongList()
+      instructions = input.split(",").map(String::toLong)
         .toMutableList()
         .apply {
           set(0, 2)

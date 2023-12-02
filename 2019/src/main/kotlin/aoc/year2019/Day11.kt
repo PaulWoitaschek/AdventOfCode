@@ -5,7 +5,6 @@ import aoc.library.Point
 import aoc.library.Puzzle
 import aoc.library.move
 import aoc.library.printString
-import aoc.library.toCommaSeparatedLongList
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.launch
@@ -27,7 +26,7 @@ object Day11 : Puzzle<Int, String>(2019, 11) {
     val inputs = Channel<Long>(UNLIMITED)
       .also { it.send(initialInput.toLong()) }
 
-    val computer = IntCodeComputer(input.toCommaSeparatedLongList(), inputs)
+    val computer = IntCodeComputer(input.split(",").map(String::toLong), inputs)
     val coloredArea = mutableMapOf<Point, Color>()
     val colorJob = launch {
       var robotPosition = Point(0, 0)

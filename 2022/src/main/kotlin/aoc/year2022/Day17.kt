@@ -1,14 +1,16 @@
 package aoc.year2022
 
 import aoc.library.Point
+import aoc.library.Puzzle
 import java.util.BitSet
 
-object Day17 {
+object Day17 : Puzzle<Long, Nothing>(2022, 17) {
 
-  fun solvePart1(
-    input: String,
-    reportOnRock: Long,
-  ): Long {
+  private val reportOnRock = 2022L
+
+  override fun solvePart2(input: String): Nothing = error("Nada")
+
+  override fun solvePart1(input: String): Long {
     val cave = Cave()
 
     data class Rock(

@@ -1,7 +1,6 @@
 package aoc.year2019
 
 import aoc.library.Puzzle
-import aoc.library.toCommaSeparatedLongList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
@@ -15,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 object Day7 : Puzzle<Long, Long>(2019, 7) {
 
   override fun solvePart1(input: String): Long {
-    val values = input.toCommaSeparatedLongList()
+    val values = input.split(",").map(String::toLong)
     var max = 0L
     settingsCombinations(0..4).forEach { settings ->
       var previousOutput = 0L
@@ -37,7 +36,7 @@ object Day7 : Puzzle<Long, Long>(2019, 7) {
   }
 
   override fun solvePart2(input: String): Long = runBlocking(Dispatchers.Default) {
-    val values = input.toCommaSeparatedLongList()
+    val values = input.split(",").map(String::toLong)
     var max = 0L
     settingsCombinations(5..9).forEach { settings ->
       fun Channel<Long>.withInitialValue(vararg initial: Int): ReceiveChannel<Long> {

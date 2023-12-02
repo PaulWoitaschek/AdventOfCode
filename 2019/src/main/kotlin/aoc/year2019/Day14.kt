@@ -1,7 +1,6 @@
 package aoc.year2019
 
 import aoc.library.Puzzle
-import aoc.library.toLineSeparatedStringList
 import kotlin.math.absoluteValue
 import kotlin.math.ceil
 
@@ -55,7 +54,7 @@ object Day14 : Puzzle<Long, Long>(2019, 14) {
   }
 
   private fun reactions(input: String): List<Reaction> {
-    val reactions = input.toLineSeparatedStringList()
+    val reactions = input.lines()
       .map { line ->
         val (inputs, output) = line.split(" => ")
         val inputProducts = inputs.split(", ").map(Product::parse)

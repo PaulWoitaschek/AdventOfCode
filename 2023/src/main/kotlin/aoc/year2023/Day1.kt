@@ -1,12 +1,11 @@
 package aoc.year2023
 
 import aoc.library.Puzzle
-import aoc.library.toLineSeparatedStringList
 
 object Day1 : Puzzle<Int, Int>(2023, 1) {
 
   override fun solvePart1(input: String): Int {
-    return input.toLineSeparatedStringList()
+    return input.lines()
       .map {
         val firstDigit = it.first(Char::isDigit)
         val lastDigit = it.reversed().first(Char::isDigit)
@@ -33,7 +32,7 @@ object Day1 : Puzzle<Int, Int>(2023, 1) {
       }
     }
 
-    return input.toLineSeparatedStringList()
+    return input.lines()
       .map { line ->
         val min = numbers.getValue(line.findAnyOf(numbers.keys)!!.second)
         val max = numbers.getValue(line.findLastAnyOf(numbers.keys)!!.second)

@@ -1,17 +1,16 @@
 package aoc.year2019
 
 import aoc.library.Puzzle
-import aoc.library.toCommaSeparatedLongList
 import kotlinx.coroutines.runBlocking
 
 object Day2 : Puzzle<Long, Long>(2019, 2) {
 
   override fun solvePart1(input: String): Long {
-    return runInstructions(instructions = input.toCommaSeparatedLongList(), verb = 2, noun = 12)
+    return runInstructions(instructions = input.split(",").map(String::toLong), verb = 2, noun = 12)
   }
 
   override fun solvePart2(input: String): Long {
-    val originalInput = input.toCommaSeparatedLongList()
+    val originalInput = input.split(",").map(String::toLong)
     var max = 0
     while (true) {
       max++

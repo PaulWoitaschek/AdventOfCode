@@ -11,9 +11,8 @@ class Day10Test {
 
   @Test
   fun part1() {
-    val part1Test = 22 * 10
     Day10.solvePart1() shouldBe 1998
-    Day10.solvePart1WithTestInput() shouldBe part1Test
+    Day10.solvePart1WithTestInput() shouldBe 22 * 10
   }
 
   @Test

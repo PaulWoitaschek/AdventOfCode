@@ -1,7 +1,6 @@
 package aoc.year2019
 
 import aoc.library.Puzzle
-import aoc.library.toSingleLine
 
 private const val WIDTH = 25
 private const val HEIGHT = 6
@@ -36,7 +35,7 @@ object Day8 : Puzzle<Int, String>(2019, 8) {
   }
 
   private fun layers(input: String): List<List<Int>> {
-    return input.toSingleLine()
+    return input
       .map(Char::digitToInt)
       .chunked(SIZE)
   }

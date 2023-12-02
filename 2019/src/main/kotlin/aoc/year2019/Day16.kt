@@ -1,7 +1,6 @@
 package aoc.year2019
 
 import aoc.library.Puzzle
-import aoc.library.toSingleLine
 import kotlin.math.absoluteValue
 
 object Day16 : Puzzle<String, String>(2019, 16) {
@@ -19,7 +18,7 @@ object Day16 : Puzzle<String, String>(2019, 16) {
     phases: Int,
   ): String {
     return process(
-      digits = input.toSingleLine().toList().map { it.digitToInt() },
+      digits = input.toList().map { it.digitToInt() },
       phases = phases,
     ).joinToString("")
   }

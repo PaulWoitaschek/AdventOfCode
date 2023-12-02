@@ -4,7 +4,6 @@ import aoc.library.Direction
 import aoc.library.Point
 import aoc.library.Puzzle
 import aoc.library.move
-import aoc.library.toLineSeparatedStringList
 
 object Day3 : Puzzle<Int, Int>(2019, 3) {
 
@@ -30,7 +29,7 @@ object Day3 : Puzzle<Int, Int>(2019, 3) {
   }
 
   private fun paths(input: String): List<List<Point>> {
-    return input.toLineSeparatedStringList()
+    return input.lines()
       .map { vectorString ->
         val path = mutableListOf(Point.Zero)
         vectorString.split(",").forEach { vector ->
