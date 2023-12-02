@@ -13,7 +13,6 @@ class Day9Test {
   @Test
   fun part1() {
     Day9.solvePart1() shouldBeExactly 3241900951
-
   }
 
   @Test

@@ -10,7 +10,6 @@ class Day2Test {
   @Test
   fun part1() {
     Day2.solvePart1() shouldBeExactly 9581917
-
   }
 
   @Test

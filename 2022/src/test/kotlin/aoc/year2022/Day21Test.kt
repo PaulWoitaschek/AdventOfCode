@@ -9,8 +9,7 @@ class Day21Test {
 
   @Test
   fun part1() {
-    Day21.solvePart1(
-    ) shouldBe 291425799367130
+    Day21.solvePart1() shouldBe 291425799367130
     Day21.solvePart1WithTestInput() shouldBe 152
   }
 }

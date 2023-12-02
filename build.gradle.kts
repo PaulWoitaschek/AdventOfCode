@@ -1,6 +1,6 @@
 plugins {
   id(libs.plugins.kotlin.jvm.get().pluginId) apply false
-  alias(libs.plugins.ktlint)
+  id(libs.plugins.ktlint.get().pluginId)
 }
 
 ktlint {

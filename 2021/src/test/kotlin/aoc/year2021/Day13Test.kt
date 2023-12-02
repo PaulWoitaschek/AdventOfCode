@@ -20,6 +20,6 @@ class Day13Test {
           ⬛⬜⬜⬜⬛
           ⬛⬜⬜⬜⬛
           ⬛⬛⬛⬛⬛
-          """.trimIndent()
+    """.trimIndent()
   }
 }

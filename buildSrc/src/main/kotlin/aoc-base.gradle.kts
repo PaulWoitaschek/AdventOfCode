@@ -2,10 +2,19 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   kotlin("jvm")
+  id("org.jlleitschuh.gradle.ktlint")
 }
 
 kotlin {
   jvmToolchain(21)
+}
+
+ktlint {
+  version.set(
+    versionCatalogs
+      .named("libs")
+      .findLibrary("ktlint").get().map { it.version!! },
+  )
 }
 
 dependencies {

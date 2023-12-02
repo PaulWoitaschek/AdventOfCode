@@ -12,8 +12,7 @@ class Day4Test {
 
   @Test
   fun part1() {
-    Day4.solvePart1(
-    ) shouldBeExactly 190
+    Day4.solvePart1() shouldBeExactly 190
     Day4.solvePart1WithTestInput() shouldBeExactly 2
   }
 
