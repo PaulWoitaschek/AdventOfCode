@@ -17,3 +17,14 @@ dependencyResolutionManagement {
 plugins {
   id("org.gradle.toolchains.foojay-resolver-convention") version ("0.7.0")
 }
+
+include(
+  ":library",
+  ":2015",
+  ":2018",
+  ":2019",
+  ":2020",
+  ":2021",
+  ":2022",
+  ":2023",
+)
