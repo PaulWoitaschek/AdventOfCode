@@ -1,13 +1,27 @@
-#!/usr/bin/env kotlin
+#!/usr/bin/env kotlin  -Djava.awt.headless=false
 @file:DependsOn("com.github.ajalt.clikt:clikt-jvm:4.2.1")
+@file:DependsOn("com.squareup:kotlinpoet-jvm:1.15.3")
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.terminal
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.prompt
 import com.github.ajalt.clikt.parameters.types.int
+import com.github.ajalt.mordant.terminal.YesNoPrompt
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.INT
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.MemberName
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
+import java.awt.Toolkit
+import java.awt.datatransfer.DataFlavor
 import java.io.File
 import java.time.LocalDate
+
 
 class App : CliktCommand() {
 
@@ -15,14 +29,8 @@ class App : CliktCommand() {
   private val day: Int by option().int().prompt(default = LocalDate.now().dayOfMonth)
 
   override fun run() {
-    writeTestInput()
-    val singleDay = day
-    write(singleDay)
-  }
-
-  private fun write(day: Int) {
-    writeSources(day)
-    writeTests(day)
+    generateDayTestSourceFile()
+    generateDaySourceFile()
     writeTestInput()
   }
 
@@ -32,91 +40,80 @@ class App : CliktCommand() {
       println("Test input $testInputFile exists already. Don't overwrite")
       return
     }
-    val testInput = terminal.prompt("Test input")
-    if (testInput == null) {
-      println("No test input given. Don't overwrite")
+    if (YesNoPrompt(
+        prompt = "Paste test input from clipboard?",
+        terminal = terminal,
+        default = false,
+      ).ask() != true
+    ) {
+      return
+    }
+    val pasted = Toolkit.getDefaultToolkit().systemClipboard.getData(DataFlavor.stringFlavor)
+    testInputFile.parentFile.mkdirs()
+    if (pasted is String && pasted.isNotBlank()) {
+      testInputFile.writeText(pasted.trim())
     } else {
-      testInputFile.parentFile.mkdirs()
-      testInputFile.writeText(testInput)
+      testInputFile.createNewFile()
     }
   }
 
-  private fun writeTests(day: Int) {
-    val sourceFolder = File("$year/src/test/kotlin/aoc/year$year")
-      .also { it.mkdirs() }
-    File(sourceFolder, "Day${day}Test.kt")
-      .writeTextIfNotExists(
-        // language=kotlin
-        """
-        package aoc.year$year
-
-        import aoc.library.solvePart1
-        import aoc.library.solvePart2
-        import io.kotest.matchers.ints.shouldBeExactly
-        import org.junit.jupiter.api.Test
-
-        class Day${day}Test {
-
-          private val testInput = ""${'"'}
-
-          ""${'"'}.trimIndent()
-
-          @Test
-          fun part1() {
-            Day$day.solvePart1() shouldBeExactly 42
-          }
-
-          @Test
-          fun part1TestInput() {
-            Day$day.solvePart1(testInput) shouldBeExactly 42
-          }
-
-          @Test
-          fun part2() {
-            Day$day.solvePart2() shouldBeExactly 42
-          }
-
-          @Test
-          fun part2TestInput() {
-            Day$day.solvePart2(testInput) shouldBeExactly 42
-          }
-        }
-        """.trimIndent(),
+  private fun generateDaySourceFile() {
+    val sourceFileContent = FileSpec.builder("aoc.year$year", "Day$day")
+      .addType(
+        TypeSpec.objectBuilder("Day$day")
+          .superclass(ClassName("aoc.library", "Puzzle").parameterizedBy(INT, INT))
+          .addSuperclassConstructorParameter("year = $year, day = $day")
+          .addFunction(createSolveFunction("Part1"))
+          .addFunction(createSolveFunction("Part2"))
+          .build(),
       )
+      .build()
+
+    sourceFileContent.writeTo(File("$year/src/main/kotlin"))
   }
 
-  private fun writeSources(day: Int) {
-    val sourceFolder = File("$year/src/main/kotlin/aoc/year$year")
-      .also { it.mkdirs() }
-    File(sourceFolder, "Day$day.kt")
-      .writeTextIfNotExists(
-        // language=kotlin
-        """
-                package aoc.year$year
-
-                import aoc.library.Puzzle
-
-                object Day$day : Puzzle<Int,Int>($year, $day) {
-
-                  override fun solvePart1(input: String): Int {
-                    TODO()
-                  }
-
-                  override fun solvePart2(input: String): Int {
-                    TODO()
-                  }
-                }
-
-        """.trimIndent(),
-      )
+  private fun createSolveFunction(part: String): FunSpec {
+    return FunSpec.builder("solve$part")
+      .addParameter("input", String::class)
+      .addModifiers(KModifier.OVERRIDE)
+      .returns(Int::class)
+      .addStatement("TODO()")
+      .build()
   }
 
-  private fun File.writeTextIfNotExists(text: String) {
-    if (exists()) {
-      println("File $this exists. Don't overwrite")
-    } else {
-      writeText(text)
-    }
+  private fun createTestFunction(
+    name: String,
+    solveName: String,
+  ): FunSpec {
+    return FunSpec.builder(name)
+      .addAnnotation(ClassName("org.junit.jupiter.api", "Test"))
+      .addStatement(
+        "Day%L.%M() %M 42",
+        day,
+        MemberName("aoc.library", solveName),
+        MemberName("io.kotest.matchers.ints", "shouldBeExactly"),
+      )
+      .build()
+  }
+
+  private fun generateDayTestSourceFile() {
+    val testFileContent = FileSpec.builder("aoc.year$year", "Day${day}Test")
+      .addType(
+        TypeSpec.classBuilder("Day${day}Test")
+          .addProperty(
+            PropertySpec.builder("testInput", String::class)
+              .initializer("%S", "")
+              .build(),
+          )
+          .addFunction(createTestFunction(name = "part1", "solvePart1"))
+          .addFunction(createTestFunction(name = "part1TestInput", "solvePart1WithTestInput"))
+          .addFunction(createTestFunction(name = "part2", "solvePart2"))
+          .addFunction(createTestFunction(name = "part2TestInput", "solvePart2WithTestInput"))
+          .build(),
+      )
+      .build()
+
+    testFileContent.writeTo(File("$year/src/test/kotlin"))
   }
 }
 
