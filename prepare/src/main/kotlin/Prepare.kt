@@ -1,7 +1,3 @@
-#!/usr/bin/env kotlin  -Djava.awt.headless=false
-@file:DependsOn("com.github.ajalt.clikt:clikt-jvm:4.2.1")
-@file:DependsOn("com.squareup:kotlinpoet-jvm:1.15.3")
-
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.terminal
 import com.github.ajalt.clikt.parameters.options.option
@@ -22,8 +18,7 @@ import java.awt.datatransfer.DataFlavor
 import java.io.File
 import java.time.LocalDate
 
-
-class App : CliktCommand() {
+class Prepare : CliktCommand() {
 
   private val year: Int by option().int().prompt(default = LocalDate.now().year)
   private val day: Int by option().int().prompt(default = LocalDate.now().dayOfMonth)
@@ -117,4 +112,6 @@ class App : CliktCommand() {
   }
 }
 
-App().main(args)
+fun main(args: Array<String>) {
+  Prepare().main(args)
+}

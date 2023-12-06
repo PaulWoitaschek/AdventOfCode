@@ -19,6 +19,7 @@ plugins {
 }
 
 include(
+  ":prepare",
   ":library",
   ":2015",
   ":2018",

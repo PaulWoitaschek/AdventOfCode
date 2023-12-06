@@ -9,6 +9,8 @@ ktlint = "com.pinterest.ktlint:ktlint-cli:1.0.1"
 ktlintGradlePlugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlintGradlePlugin" }
 coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
 okhttp = "com.squareup.okhttp3:okhttp:4.12.0"
+clikt = "com.github.ajalt.clikt:clikt:4.2.1"
+kotlinPoet = "com.squareup:kotlinpoet:1.15.3"
 
 jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
 jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
