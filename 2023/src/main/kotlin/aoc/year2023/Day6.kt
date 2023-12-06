@@ -15,8 +15,14 @@ object Day6 : Puzzle<Int, Int>(year = 2023, day = 6) {
     val recordDistance: Long,
   ) {
 
-    fun waysToSolve(): Int = (0..time).count { speed ->
-      (time - speed) * speed > recordDistance
+    private fun accelerationStepsWin(steps: Long): Boolean {
+      return (time - steps) * steps > recordDistance
+    }
+
+    fun waysToSolve(): Int {
+      val start = (0..time).first(::accelerationStepsWin)
+      val end = (time downTo 0).first(::accelerationStepsWin)
+      return (end - start + 1).toInt()
     }
 
     companion object {
