@@ -15,29 +15,21 @@ object Day6 : Puzzle<Int, Int>(year = 2023, day = 6) {
     val recordDistance: Long,
   ) {
 
-    fun waysToSolve(): Int {
-      return (0..time).count { speed ->
-        ((time - speed) * speed > recordDistance)
-      }
+    fun waysToSolve(): Int = (0..time).count { speed ->
+      (time - speed) * speed > recordDistance
     }
 
     companion object {
-      private val digitRegex = """(\d+)""".toRegex()
       fun parseAsMultipleRounds(input: String): List<Round> {
         val values = input.lines().map { line ->
-          digitRegex.findAll(line)
-            .map { it.groupValues[1].toLong() }
-            .toList()
+          line.split(' ').mapNotNull(String::toLongOrNull)
         }
         return values[0].zip(values[1]).map { Round(it.first, it.second) }
       }
 
       fun parseAsSingleRound(input: String): Round {
         val values = input.lines().map { line ->
-          digitRegex.findAll(line)
-            .map { it.groupValues[1].toInt() }
-            .joinToString("")
-            .toLong()
+          line.filter(Char::isDigit).toLong()
         }
         return Round(time = values[0], recordDistance = values[1])
       }
