@@ -14,7 +14,7 @@ fun <Part1, Part2> Puzzle<Part1, Part2>.solvePart2(): Part2 = solvePart2(input()
 
 fun <Part1, Part2> Puzzle<Part1, Part2>.solvePart2WithTestInput(): Part2 = solvePart2(testInput())
 
-private fun Puzzle<*, *>.input(): String = aocInput(year = year, day = day)
+fun Puzzle<*, *>.input(): String = aocInput(year = year, day = day)
 
 private fun aocInput(
   year: Int,
