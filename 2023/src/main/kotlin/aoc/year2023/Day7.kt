@@ -21,11 +21,11 @@ object Day7 : Puzzle<Int, Int>(year = 2023, day = 7) {
       .sum()
   }
 
-  private data class Hand(val cards: List<Char>, val bid: Int) {
+  private data class Hand(val cards: String, val bid: Int) {
     companion object {
       fun parse(input: String): Hand {
         val (cards, bid) = input.split(" ")
-        return Hand(cards = cards.toList(), bid = bid.toInt())
+        return Hand(cards = cards, bid = bid.toInt())
       }
     }
   }
@@ -36,46 +36,52 @@ object Day7 : Puzzle<Int, Int>(year = 2023, day = 7) {
       "J23456789TQKA"
     } else {
       "23456789TJQKA"
-    }.withIndex().associate { it.value to it.index }
+    }.reversed().withIndex().associate { it.value to it.index }
 
     override fun compare(
       o1: Hand,
       o2: Hand,
     ): Int {
-      val byType = o2.type().compareTo(o1.type())
-      if (byType != 0) return byType
-      return o1.cards.zip(o2.cards) { left, right ->
-        cardRanks.getValue(left)
-          .compareTo(cardRanks.getValue(right))
-      }.firstOrNull { it != 0 } ?: 0
+      return compareValuesBy(
+        o2.cards,
+        o1.cards,
+        { it.type() },
+        { cardRanks.getValue(it[0]) },
+        { cardRanks.getValue(it[1]) },
+        { cardRanks.getValue(it[2]) },
+        { cardRanks.getValue(it[3]) },
+        { cardRanks.getValue(it[4]) },
+      )
     }
 
-    private fun Hand.type(): Type {
-      val grouping = cards.groupingBy { it }.eachCount()
-      val groupingValuesWithoutJoker = grouping.filter {
-        !accountForJokers || it.key != 'J'
-      }.values
-      val jokers = if (!accountForJokers) 0 else grouping['J'] ?: 0
-      val max = groupingValuesWithoutJoker.maxOrNull() ?: return Type.FiveOfAKind
-      val maxWithJokers = max + jokers
-      if (maxWithJokers >= 5) return Type.FiveOfAKind
-      if (maxWithJokers >= 4) return Type.FourOfAKind
-      if (jokers > 0) {
-        if (groupingValuesWithoutJoker.count { it >= 2 } >= 2) {
-          return Type.FullHouse
+    private val types = mutableMapOf<String, Type>()
+
+    private fun String.type(): Type = types.getOrPut(this) {
+      val groupingValues = groupingBy { it }.eachCount()
+        .toMutableMap()
+        .apply {
+          if (accountForJokers) {
+            val jokers = remove('J') ?: 0
+            if (jokers == 5) return Type.FiveOfAKind
+            val best = maxBy { it.value }
+            this[best.key] = best.value + jokers
+          }
         }
-      }
-      if (3 in groupingValuesWithoutJoker && 2 in groupingValuesWithoutJoker) {
+        .values
+      val max = groupingValues.max()
+      if (max == 5) return Type.FiveOfAKind
+      if (max == 4) return Type.FourOfAKind
+      if (3 in groupingValues && 2 in groupingValues) {
         return Type.FullHouse
       }
-      if (maxWithJokers >= 3) return Type.ThreeOfAKind
-      if (groupingValuesWithoutJoker.count { it == 2 } == 2) return Type.TwoPair
-      if (maxWithJokers >= 2) return Type.OnePair
+      if (max == 3) return Type.ThreeOfAKind
+      if (groupingValues.count { it == 2 } == 2) return Type.TwoPair
+      if (max == 2) return Type.OnePair
       return Type.HighCard
     }
   }
 
-  enum class Type {
+  private enum class Type {
     FiveOfAKind,
     FourOfAKind,
     FullHouse,
