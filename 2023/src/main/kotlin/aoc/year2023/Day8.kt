@@ -31,20 +31,14 @@ private data class SandMap(
   val nodes: Map<String, Map<Direction, String>>,
 ) {
 
-  fun position(
+  private fun position(
     from: String,
     direction: Direction,
   ): String {
     return nodes.getValue(from).getValue(direction)
   }
 
-  fun instructions(): Sequence<Direction> {
-    return sequence {
-      while (true) {
-        yieldAll(instructions)
-      }
-    }
-  }
+  private fun instructions(): Sequence<Direction> = generateSequence { instructions }.flatten()
 
   fun steps(
     from: String,

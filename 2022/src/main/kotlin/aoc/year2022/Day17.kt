@@ -6,7 +6,7 @@ import java.util.BitSet
 
 object Day17 : Puzzle<Long, Nothing>(2022, 17) {
 
-  private val reportOnRock = 2022L
+  private const val REPORT_ON_ROCK = 2022L
 
   override fun solvePart2(input: String): Nothing = error("Nada")
 
@@ -58,7 +58,7 @@ object Day17 : Puzzle<Long, Nothing>(2022, 17) {
       moveRock(jetPush)
 
       if (!moveRock(Direction.Down)) {
-        if (rocks == reportOnRock) {
+        if (rocks == REPORT_ON_ROCK) {
           return cave.top().toLong()
         }
         rocks++
@@ -71,7 +71,7 @@ object Day17 : Puzzle<Long, Nothing>(2022, 17) {
     error("No answer found")
   }
 
-  private fun jetStream(input: String): Sequence<Direction> = sequence {
+  private fun jetStream(input: String): Sequence<Direction> {
     val jetPattern = input.map {
       when (it) {
         '>' -> Direction.Right
@@ -79,9 +79,7 @@ object Day17 : Puzzle<Long, Nothing>(2022, 17) {
         else -> error("Invalid directions")
       }
     }
-    while (true) {
-      yieldAll(jetPattern)
-    }
+    return generateSequence { jetPattern }.flatten()
   }
 
   enum class Direction { Left, Right, Down }

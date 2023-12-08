@@ -15,11 +15,7 @@ object Day20 : Puzzle<Long, Long>(2022, 20) {
   ): Long {
     val numbers = input.lines().filter(String::isNotEmpty).map(String::toInt)
     val mixedNumbers = mixNumbers(numbers, decryptionKey, mix)
-    return sequence {
-      while (true) {
-        yieldAll(mixedNumbers)
-      }
-    }
+    return generateSequence { mixedNumbers }.flatten()
       .dropWhile { it != 0L }
       .windowed(size = 1, step = 1000) { it.single() }
       .drop(1)
