@@ -2,6 +2,7 @@ package aoc.year2019
 
 import aoc.library.Point3
 import aoc.library.Puzzle
+import aoc.library.lcm
 import kotlin.math.absoluteValue
 
 object Day12 : Puzzle<Int, Long>(2019, 12) {
@@ -80,18 +81,4 @@ private data class Moon(
   fun isStable(axis: Point3.Axis): Boolean {
     return velocity[axis] == 0 && position[axis] == originalPosition[axis]
   }
-}
-
-private fun gcd(
-  a: Long,
-  b: Long,
-): Long {
-  return if (b == 0L) a else gcd(b, a % b)
-}
-
-private fun lcm(
-  a: Long,
-  b: Long,
-): Long {
-  return (a * b).absoluteValue / gcd(a, b)
 }
