@@ -18,25 +18,17 @@ object Day9 : Puzzle<Long, Long>(year = 2023, day = 9) {
 
   private fun predict(
     history: List<Long>,
-    addRight: Boolean = true,
+    addRight: Boolean,
   ): Long {
-    val values = mutableListOf(history.toMutableList())
-    while (true) {
-      val differences = values.last().windowed(2) { it[1] - it[0] }
-      values.add(differences.toMutableList())
-      if (differences.all { it == 0L }) {
-        break
-      }
-    }
-    for (index in values.lastIndex - 1 downTo 0) {
-      val row = values[index]
+    return if (history.all { it == 0L }) {
+      return 0L
+    } else {
+      val differences = history.windowed(2) { it[1] - it[0] }
       if (addRight) {
-        row.add(row.last() + values[index + 1].last())
+        history.last() + predict(history = differences, addRight = true)
       } else {
-        row.add(0, row.first() - values[index + 1].first())
+        history.first() - predict(history = differences, addRight = false)
       }
     }
-    val firstLine = values.first()
-    return if (addRight) firstLine.last() else firstLine.first()
   }
 }
