@@ -1,28 +1,19 @@
-@file:Suppress("ConvertCallChainIntoSequence")
-
 package aoc.year2021
 
 import aoc.library.Puzzle
 
-object Day1 : Puzzle<Long, Long>(2021, 1) {
+object Day1 : Puzzle<Int, Int>(2021, 1) {
 
-  override fun solvePart1(input: String): Long {
+  override fun solvePart1(input: String): Int {
     return input.lines().map(String::toInt)
-      .windowed(2)
-      .count { (previous, current) ->
-        current > previous
-      }
-      .toLong()
+      .zipWithNext { previous, current -> current > previous }
+      .count { it }
   }
 
-  override fun solvePart2(input: String): Long {
+  override fun solvePart2(input: String): Int {
     return input.lines().map(String::toInt)
-      .windowed(size = 3)
-      .map { it.sum() }
-      .windowed(2)
-      .count { (previous, current) ->
-        current > previous
-      }
-      .toLong()
+      .windowed(3) { it.sum() }
+      .zipWithNext { previous, current -> current > previous }
+      .count { it }
   }
 }

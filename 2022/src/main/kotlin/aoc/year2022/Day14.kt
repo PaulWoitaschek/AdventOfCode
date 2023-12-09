@@ -63,14 +63,14 @@ object Day14 : Puzzle<Int, Int>(2022, 14) {
           .flatMap { line ->
             line.split(" -> ", ",").chunked(2)
               .map { (x, y) -> Point(x.toInt(), y.toInt()) }
-              .windowed(2)
-              .flatMap { (from, to) ->
+              .zipWithNext { from, to ->
                 if (from.y == to.y) {
                   (minOf(from.x, to.x)..maxOf(from.x, to.x)).map { Point(it, from.y) }
                 } else {
                   (minOf(from.y, to.y)..maxOf(from.y, to.y)).map { Point(from.x, it) }
                 }
               }
+              .flatten()
           }
 
         return Cave(

@@ -18,6 +18,6 @@ object Day9 : Puzzle<Long, Long>(year = 2023, day = 9) {
   private fun predict(history: List<Long>): Long = if (history.all { it == 0L }) {
     0L
   } else {
-    history.last() + predict(history = history.windowed(2) { it[1] - it[0] })
+    history.last() + predict(history.zipWithNext { a, b -> b - a })
   }
 }
