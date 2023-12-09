@@ -14,10 +14,10 @@ object Day11 : Puzzle<Long, Long>(2021, 11) {
 
   override fun solvePart2(input: String): Long {
     return generateSequence(Octopuses.parse(input)) { it.afterOneDay() }
-      .windowed(2)
-      .takeWhile { (previous, current) ->
+      .zipWithNext { previous, current ->
         previous.flashes + previous.octopuses.size != current.flashes
       }
+      .takeWhile { it }
       .count()
       .toLong() + 1
   }
