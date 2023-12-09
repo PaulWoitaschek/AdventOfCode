@@ -15,9 +15,14 @@ object Day9 : Puzzle<Long, Long>(year = 2023, day = 9) {
     predict(if (addRight) history else history.reversed())
   }
 
-  private fun predict(history: List<Long>): Long = if (history.all { it == 0L }) {
-    0L
-  } else {
-    history.last() + predict(history.zipWithNext { a, b -> b - a })
+  private tailrec fun predict(
+    history: List<Long>,
+    acc: Long = 0,
+  ): Long {
+    return if (history.all { it == 0L }) {
+      acc
+    } else {
+      predict(history.zipWithNext { a, b -> b - a }, history.last() + acc)
+    }
   }
 }
