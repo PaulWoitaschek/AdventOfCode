@@ -5,10 +5,10 @@ import aoc.library.Point
 import aoc.library.Puzzle
 import aoc.library.move
 
-object Day10 : Puzzle<Long, Long>(year = 2023, day = 10) {
+object Day10 : Puzzle<Int, Int>(year = 2023, day = 10) {
 
-  override fun solvePart1(input: String): Long {
-    return (findLoop(parse(input)).size / 2).toLong()
+  override fun solvePart1(input: String): Int {
+    return (findLoop(parse(input)).size / 2)
   }
 
   private fun findLoop(map: Map<Point, Tile>): List<Point> {
@@ -28,8 +28,16 @@ object Day10 : Puzzle<Long, Long>(year = 2023, day = 10) {
     return start.adjacent().firstNotNullOf { path(listOf(start, it)) }
   }
 
-  override fun solvePart2(input: String): Long {
-    TODO()
+  override fun solvePart2(input: String): Int {
+    val loop = findLoop(parse(input))
+    return (loop.minOf { it.x }..loop.maxOf { it.x })
+      .flatMap { x ->
+        (loop.minOf { it.y }..loop.maxOf { it.y }).map { y ->
+          Point(x, y)
+        }
+      }
+      .filter { it !in loop }
+      .count { it.isInPath(loop) }
   }
 
   private fun parse(input: String): Map<Point, Tile> {
