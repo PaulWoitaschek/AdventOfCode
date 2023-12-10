@@ -7,9 +7,7 @@ import aoc.library.move
 
 object Day10 : Puzzle<Int, Int>(year = 2023, day = 10) {
 
-  override fun solvePart1(input: String): Int {
-    return (findLoop(parse(input)).size / 2)
-  }
+  override fun solvePart1(input: String): Int = findLoop(parse(input)).size / 2
 
   private fun findLoop(map: Map<Point, Tile>): List<Point> {
     val start = map.entries.first { it.value == Tile.Start }.key
@@ -30,11 +28,13 @@ object Day10 : Puzzle<Int, Int>(year = 2023, day = 10) {
 
   override fun solvePart2(input: String): Int {
     val loop = findLoop(parse(input))
-    return (loop.minOf { it.x }..loop.maxOf { it.x })
+    val minX = loop.minOf { it.x }
+    val maxX = loop.maxOf { it.x }
+    val minY = loop.minOf { it.y }
+    val maxY = loop.maxOf { it.y }
+    return (minX..maxX)
       .flatMap { x ->
-        (loop.minOf { it.y }..loop.maxOf { it.y }).map { y ->
-          Point(x, y)
-        }
+        (minY..maxY).map { y -> Point(x, y) }
       }
       .filter { it !in loop }
       .count { it.isInPath(loop) }
