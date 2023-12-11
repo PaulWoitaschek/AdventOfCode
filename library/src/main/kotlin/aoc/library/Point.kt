@@ -102,3 +102,12 @@ fun Collection<Point>.print() {
 inline fun <T> Map<Point, T>.print(crossinline tile: (Point) -> String) {
   println(printString(tile))
 }
+
+fun Collection<Point>.boundingBoxes(): Rect {
+  return Rect(
+    left = minOf { it.x },
+    right = maxOf { it.x },
+    top = minOf { it.y },
+    bottom = maxOf { it.y },
+  )
+}
