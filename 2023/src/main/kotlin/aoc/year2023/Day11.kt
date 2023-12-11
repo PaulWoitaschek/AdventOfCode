@@ -25,22 +25,10 @@ object Day11 : Puzzle<Long, Long>(year = 2023, day = 11) {
     }
     return pairs.sumOf { (left, right) ->
       val xGapAdditions = (minOf(left.x, right.x)..maxOf(left.x, right.x))
-        .sumOf {
-          if (it in xGaps) {
-            emptySpace.toLong() - 1
-          } else {
-            0
-          }
-        }
+        .count { it in xGaps } * (emptySpace - 1)
       val yGapAdditions = (minOf(left.y, right.y)..maxOf(left.y, right.y))
-        .sumOf {
-          if (it in yGaps) {
-            emptySpace.toLong() - 1
-          } else {
-            0
-          }
-        }
-      left.manhattanDistanceTo(right) + xGapAdditions + yGapAdditions
+        .count { it in yGaps } * (emptySpace - 1)
+      left.manhattanDistanceTo(right).toLong() + xGapAdditions + yGapAdditions
     }
   }
 
