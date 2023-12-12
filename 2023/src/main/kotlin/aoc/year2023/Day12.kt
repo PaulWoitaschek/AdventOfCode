@@ -1,6 +1,10 @@
 package aoc.year2023
 
 import aoc.library.Puzzle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.runBlocking
 
 object Day12 : Puzzle<Long, Long>(year = 2023, day = 12) {
 
@@ -16,68 +20,73 @@ object Day12 : Puzzle<Long, Long>(year = 2023, day = 12) {
       },
   )
 
-  private fun solve(lines: List<String>): Long {
-    return lines
-      .sumOf { line ->
-        val memo = mutableMapOf<Memo, Long>()
-        fun visit(
-          damages: List<Int>,
-          recognized: List<Int>,
-          springConditions: String,
-        ): Long = memo.getOrPut(Memo(damages, recognized, springConditions)) {
-          if (springConditions.isEmpty()) {
-            return@getOrPut if (recognized == damages) 1 else 0
-          }
-          if (recognized.size > damages.size) return@getOrPut 0
-          recognized.forEachIndexed { index, i ->
-            if (damages[index] != i) return@getOrPut 0
-          }
+  private fun solve(lines: List<String>): Long = runBlocking(Dispatchers.Default) {
+    lines.map { line ->
+      async {
+        solveEntry(line)
+      }
+    }.awaitAll().sum()
+  }
 
-          val first = springConditions.first()
-          val group = springConditions.takeWhile { it == first }
+  private fun solveEntry(line: String): Long {
+    val memo = mutableMapOf<Memo, Long>()
+    fun visit(
+      damages: List<Int>,
+      recognized: List<Int>,
+      springConditions: String,
+    ): Long = memo.getOrPut(Memo(damages, recognized, springConditions)) {
+      if (springConditions.isEmpty()) {
+        return@getOrPut if (recognized == damages) 1 else 0
+      }
+      if (recognized.size > damages.size) return@getOrPut 0
+      recognized.forEachIndexed { index, i ->
+        if (damages[index] != i) return@getOrPut 0
+      }
 
-          when (first) {
-            '?' -> {
-              listOf('.', '#').sumOf {
-                visit(
-                  damages = damages,
-                  recognized = recognized,
-                  springConditions = it + springConditions.drop(1),
-                )
-              }
-            }
-            '.' -> visit(
+      val first = springConditions.first()
+      val group = springConditions.takeWhile { it == first }
+
+      when (first) {
+        '?' -> {
+          listOf('.', '#').sumOf {
+            visit(
               damages = damages,
               recognized = recognized,
-              springConditions = springConditions.drop(group.length),
+              springConditions = it + springConditions.drop(1),
             )
-            '#' -> {
-              val rest = springConditions.drop(group.length)
-              val after = rest.firstOrNull()
-              if (after == '?') {
-                listOf('.', '#').sumOf {
-                  visit(
-                    damages = damages,
-                    recognized = recognized,
-                    springConditions = springConditions.replaceFirst('?', it),
-                  )
-                }
-              } else {
-                visit(
-                  damages = damages,
-                  recognized = recognized + group.length,
-                  springConditions = springConditions.drop(group.length),
-                )
-              }
-            }
-            else -> error("Invalid data")
           }
         }
-
-        val (springConditions, damageMap) = line.split(" ")
-        val pattern = damageMap.split(",").map(String::toInt)
-        visit(damages = pattern, recognized = emptyList(), springConditions = springConditions)
+        '.' -> visit(
+          damages = damages,
+          recognized = recognized,
+          springConditions = springConditions.drop(group.length),
+        )
+        '#' -> {
+          val rest = springConditions.drop(group.length)
+          val after = rest.firstOrNull()
+          if (after == '?') {
+            listOf('.', '#').sumOf {
+              visit(
+                damages = damages,
+                recognized = recognized,
+                springConditions = springConditions.replaceFirst('?', it),
+              )
+            }
+          } else {
+            visit(
+              damages = damages,
+              recognized = recognized + group.length,
+              springConditions = springConditions.drop(group.length),
+            )
+          }
+        }
+        else -> error("Invalid data")
       }
+    }
+
+    val (springConditions, damageMap) = line.split(" ")
+    val pattern = damageMap.split(",").map(String::toInt)
+    return visit(damages = pattern, recognized = emptyList(), springConditions = springConditions)
   }
 
   private data class Memo(
