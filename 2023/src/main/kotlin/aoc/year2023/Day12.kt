@@ -34,7 +34,7 @@ object Day12 : Puzzle<Long, Long>(year = 2023, day = 12) {
       damages: List<Int>,
       recognized: List<Int>,
       springConditions: String,
-    ): Long = memo.getOrPut(Memo(damages, recognized, springConditions)) {
+    ): Long = memo.getOrPut(Memo(recognized, springConditions)) {
       if (springConditions.isEmpty()) {
         return@getOrPut if (recognized == damages) 1 else 0
       }
@@ -90,7 +90,6 @@ object Day12 : Puzzle<Long, Long>(year = 2023, day = 12) {
   }
 
   private data class Memo(
-    val damages: List<Int>,
     val recognized: List<Int>,
     val remaining: String,
   )
