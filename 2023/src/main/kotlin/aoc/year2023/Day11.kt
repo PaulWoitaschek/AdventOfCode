@@ -2,7 +2,7 @@ package aoc.year2023
 
 import aoc.library.Point
 import aoc.library.Puzzle
-import aoc.library.boundingBoxes
+import aoc.library.bounds
 
 object Day11 : Puzzle<Long, Long>(day = 11) {
 
@@ -16,7 +16,7 @@ object Day11 : Puzzle<Long, Long>(day = 11) {
   ): Long {
     val galaxies = parse(input)
     val pairs = galaxyPairs(galaxies)
-    val galaxyBounds = galaxies.boundingBoxes()
+    val galaxyBounds = galaxies.bounds()
     val xGaps = (galaxyBounds.left..galaxyBounds.right).filter { x ->
       galaxies.none { galaxy -> galaxy.x == x }
     }

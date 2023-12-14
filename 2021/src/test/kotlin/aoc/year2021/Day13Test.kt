@@ -43,11 +43,13 @@ class Day13Test {
   @Test
   fun part2() {
     Day13.solvePart2(testInput) shouldBe """
-          ⬛⬛⬛⬛⬛
-          ⬛⬜⬜⬜⬛
-          ⬛⬜⬜⬜⬛
-          ⬛⬜⬜⬜⬛
-          ⬛⬛⬛⬛⬛
+            ╔═════╗
+            ║█████║
+            ║█   █║
+            ║█   █║
+            ║█   █║
+            ║█████║
+            ╚═════╝
     """.trimIndent()
   }
 }
