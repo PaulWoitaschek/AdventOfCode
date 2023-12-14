@@ -65,7 +65,6 @@ data class Point(val x: Int, val y: Int) {
 
 fun Point.move(
   direction: Direction,
-  upIsPositive: Boolean = true,
   steps: Int = 1,
 ): Point {
   if (steps == 0) return this
@@ -76,8 +75,8 @@ fun Point.move(
       Direction.Up, Direction.Down -> 0
     },
     y = y + when (direction) {
-      Direction.Up -> if (upIsPositive) steps else -steps
-      Direction.Down -> if (upIsPositive) -steps else steps
+      Direction.Up -> -steps
+      Direction.Down -> steps
       Direction.Left, Direction.Right -> 0
     },
   )

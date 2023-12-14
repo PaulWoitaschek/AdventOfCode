@@ -63,8 +63,8 @@ object Day15 : Puzzle<Int, Int>(15) {
     return when {
       other.x > x -> Direction.Left
       other.x < x -> Direction.Right
-      other.y > y -> Direction.Down
-      other.y < y -> Direction.Up
+      other.y > y -> Direction.Up
+      other.y < y -> Direction.Down
       else -> error("nope")
     }
   }
