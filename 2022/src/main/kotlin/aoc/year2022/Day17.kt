@@ -4,7 +4,7 @@ import aoc.library.Point
 import aoc.library.Puzzle
 import java.util.BitSet
 
-object Day17 : Puzzle<Long, Nothing>(2022, 17) {
+object Day17 : Puzzle<Long, Nothing>(17) {
 
   private const val REPORT_ON_ROCK = 2022L
 

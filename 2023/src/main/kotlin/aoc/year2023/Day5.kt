@@ -6,7 +6,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 
-object Day5 : Puzzle<Long, Long>(year = 2023, day = 5) {
+object Day5 : Puzzle<Long, Long>(day = 5) {
 
   override fun solvePart1(input: String): Long {
     val almanac = Almanac.parse(input)

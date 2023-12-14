@@ -2,7 +2,7 @@ package aoc.year2020
 
 import aoc.library.Puzzle
 
-object Day2 : Puzzle<Int, Int>(2020, 2) {
+object Day2 : Puzzle<Int, Int>(2) {
 
   override fun solvePart1(input: String): Int = parseInput(input).count(PasswordPolicy::isValidForPart1)
 

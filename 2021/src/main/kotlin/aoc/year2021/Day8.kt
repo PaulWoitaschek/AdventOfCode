@@ -2,7 +2,7 @@ package aoc.year2021
 
 import aoc.library.Puzzle
 
-object Day8 : Puzzle<Long, Long>(2021, 8) {
+object Day8 : Puzzle<Long, Long>(8) {
 
   override fun solvePart1(input: String): Long {
     return parseInput(input).sumOf { line ->

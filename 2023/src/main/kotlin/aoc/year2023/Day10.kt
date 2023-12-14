@@ -6,7 +6,7 @@ import aoc.library.Puzzle
 import aoc.library.boundingBoxes
 import aoc.library.move
 
-object Day10 : Puzzle<Int, Int>(year = 2023, day = 10) {
+object Day10 : Puzzle<Int, Int>(day = 10) {
 
   override fun solvePart1(input: String): Int = findLoop(parse(input)).size / 2
 

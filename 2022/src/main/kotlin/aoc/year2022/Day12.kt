@@ -3,7 +3,7 @@ package aoc.year2022
 import aoc.library.Puzzle
 import java.util.PriorityQueue
 
-object Day12 : Puzzle<Int, Int>(2022, 12) {
+object Day12 : Puzzle<Int, Int>(12) {
 
   override fun solvePart1(input: String): Int = solve(input) { it.isStart }
 

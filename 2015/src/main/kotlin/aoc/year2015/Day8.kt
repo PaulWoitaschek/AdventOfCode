@@ -2,7 +2,7 @@ package aoc.year2015
 
 import aoc.library.Puzzle
 
-object Day8 : Puzzle<Int, Int>(2015, 8) {
+object Day8 : Puzzle<Int, Int>(8) {
 
   override fun solvePart1(input: String): Int = input.lines()
     .sumOf { it.length - memoryCount(it) }

@@ -2,7 +2,7 @@ package aoc.year2020
 
 import aoc.library.Puzzle
 
-class Day9(private val premableLength: Int) : Puzzle<Int, Int>(2020, 9) {
+class Day9(private val premableLength: Int) : Puzzle<Int, Int>(9) {
 
   override fun solvePart1(input: String) = invalidNumber(input)
 

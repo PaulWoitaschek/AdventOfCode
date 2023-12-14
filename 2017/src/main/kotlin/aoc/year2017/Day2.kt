@@ -2,7 +2,7 @@ package aoc.year2017
 
 import aoc.library.Puzzle
 
-object Day2 : Puzzle<Int, Int>(year = 2017, day = 2) {
+object Day2 : Puzzle<Int, Int>(day = 2) {
 
   override fun solvePart1(input: String): Int = parse(input).sumOf { it.max() - it.min() }
 

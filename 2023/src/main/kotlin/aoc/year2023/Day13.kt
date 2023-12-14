@@ -2,7 +2,7 @@ package aoc.year2023
 
 import aoc.library.Puzzle
 
-object Day13 : Puzzle<Int, Int>(year = 2023, day = 13) {
+object Day13 : Puzzle<Int, Int>(day = 13) {
 
   override fun solvePart1(input: String): Int {
     return input.split("\n\n").sumOf { pattern ->

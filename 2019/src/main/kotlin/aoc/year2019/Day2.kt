@@ -3,7 +3,7 @@ package aoc.year2019
 import aoc.library.Puzzle
 import kotlinx.coroutines.runBlocking
 
-object Day2 : Puzzle<Long, Long>(2019, 2) {
+object Day2 : Puzzle<Long, Long>(2) {
 
   override fun solvePart1(input: String): Long {
     return runInstructions(instructions = input.split(",").map(String::toLong), verb = 2, noun = 12)

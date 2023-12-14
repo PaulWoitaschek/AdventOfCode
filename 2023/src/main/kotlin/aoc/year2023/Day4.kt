@@ -3,7 +3,7 @@ package aoc.year2023
 import aoc.library.Puzzle
 import kotlin.math.pow
 
-object Day4 : Puzzle<Int, Int>(2023, 4) {
+object Day4 : Puzzle<Int, Int>(4) {
 
   override fun solvePart1(input: String): Int = input.lines()
     .map(Card::parse)

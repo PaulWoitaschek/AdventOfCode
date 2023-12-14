@@ -5,7 +5,7 @@ import aoc.library.lcm
 import aoc.year2023.SandMap.Direction.Left
 import aoc.year2023.SandMap.Direction.Right
 
-object Day8 : Puzzle<Int, Long>(year = 2023, day = 8) {
+object Day8 : Puzzle<Int, Long>(day = 8) {
 
   override fun solvePart1(input: String): Int {
     return SandMap.parse(input)

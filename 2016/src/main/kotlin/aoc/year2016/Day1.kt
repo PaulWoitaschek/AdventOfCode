@@ -5,7 +5,7 @@ import aoc.library.Point
 import aoc.library.Puzzle
 import aoc.library.move
 
-object Day1 : Puzzle<Int, Int>(year = 2016, day = 1) {
+object Day1 : Puzzle<Int, Int>(day = 1) {
 
   override fun solvePart1(input: String): Int = walk(input).manhattanDistanceTo(Point.Zero)
 

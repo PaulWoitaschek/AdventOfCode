@@ -4,7 +4,7 @@ import aoc.library.Puzzle
 import aoc.year2022.Day25.SnafuNumber.Companion.toSnafuNumber
 import kotlin.math.pow
 
-object Day25 : Puzzle<String, Nothing>(2022, 25) {
+object Day25 : Puzzle<String, Nothing>(25) {
 
   override fun solvePart1(input: String): String = input.lines().filter(String::isNotEmpty)
     .map(::SnafuNumber)

@@ -5,7 +5,7 @@ import aoc.library.Puzzle
 import aoc.library.lcm
 import kotlin.math.absoluteValue
 
-object Day12 : Puzzle<Int, Long>(2019, 12) {
+object Day12 : Puzzle<Int, Long>(12) {
 
   override fun solvePart1(input: String): Int {
     val moons = moonPositions(input).map(::Moon)

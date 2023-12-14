@@ -2,7 +2,7 @@ package aoc.year2022
 
 import aoc.library.Puzzle
 
-object Day3 : Puzzle<Int, Int>(2022, 3) {
+object Day3 : Puzzle<Int, Int>(3) {
 
   override fun solvePart1(input: String) = input.lines()
     .filter(String::isNotEmpty).sumOf { line ->

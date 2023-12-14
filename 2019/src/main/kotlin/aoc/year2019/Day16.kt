@@ -3,7 +3,7 @@ package aoc.year2019
 import aoc.library.Puzzle
 import kotlin.math.absoluteValue
 
-object Day16 : Puzzle<String, String>(2019, 16) {
+object Day16 : Puzzle<String, String>(16) {
 
   override fun solvePart1(input: String): String {
     return process(input, 100).take(8)

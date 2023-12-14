@@ -2,7 +2,7 @@ package aoc.year2022
 
 import aoc.library.Puzzle
 
-object Day2 : Puzzle<Int, Int>(2022, 2) {
+object Day2 : Puzzle<Int, Int>(2) {
 
   override fun solvePart1(input: String): Int = input.lines()
     .filter { it.isNotBlank() }

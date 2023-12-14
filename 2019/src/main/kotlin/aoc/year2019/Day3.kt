@@ -5,7 +5,7 @@ import aoc.library.Point
 import aoc.library.Puzzle
 import aoc.library.move
 
-object Day3 : Puzzle<Int, Int>(2019, 3) {
+object Day3 : Puzzle<Int, Int>(3) {
 
   override fun solvePart1(input: String): Int {
     val paths = paths(input)

@@ -6,7 +6,7 @@ private const val WIDTH = 25
 private const val HEIGHT = 6
 private const val SIZE = WIDTH * HEIGHT
 
-object Day8 : Puzzle<Int, String>(2019, 8) {
+object Day8 : Puzzle<Int, String>(8) {
 
   override fun solvePart1(input: String): Int {
     return layers(input)

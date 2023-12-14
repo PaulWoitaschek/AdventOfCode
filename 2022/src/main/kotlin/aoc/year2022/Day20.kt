@@ -3,7 +3,7 @@ package aoc.year2022
 import aoc.library.Puzzle
 import java.util.Collections
 
-object Day20 : Puzzle<Long, Long>(2022, 20) {
+object Day20 : Puzzle<Long, Long>(20) {
 
   override fun solvePart1(input: String): Long = solve(input = input, decryptionKey = 1, mix = 1)
   override fun solvePart2(input: String) = solve(input = input, decryptionKey = 811589153, mix = 10)

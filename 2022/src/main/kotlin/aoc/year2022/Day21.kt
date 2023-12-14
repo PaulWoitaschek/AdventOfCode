@@ -2,7 +2,7 @@ package aoc.year2022
 
 import aoc.library.Puzzle
 
-object Day21 : Puzzle<Long, Long>(2022, 21) {
+object Day21 : Puzzle<Long, Long>(21) {
 
   override fun solvePart1(input: String): Long {
     val monkeys = parseInput(input)

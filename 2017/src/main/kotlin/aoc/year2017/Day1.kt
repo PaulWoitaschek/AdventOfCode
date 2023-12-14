@@ -2,7 +2,7 @@ package aoc.year2017
 
 import aoc.library.Puzzle
 
-object Day1 : Puzzle<Int, Int>(year = 2017, day = 1) {
+object Day1 : Puzzle<Int, Int>(day = 1) {
 
   override fun solvePart1(input: String): Int = input.map(Char::digitToInt).solveCaptcha(1)
 

@@ -2,7 +2,7 @@ package aoc.year2015
 
 import aoc.library.Puzzle
 
-object Day9 : Puzzle<Int, Int>(2015, 9) {
+object Day9 : Puzzle<Int, Int>(9) {
 
   override fun solvePart1(input: String): Int {
     var min = Int.MAX_VALUE

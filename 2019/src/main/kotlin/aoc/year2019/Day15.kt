@@ -8,7 +8,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-object Day15 : Puzzle<Int, Int>(2019, 15) {
+object Day15 : Puzzle<Int, Int>(15) {
 
   override fun solvePart1(input: String): Int = findShortestPath(extractMap(input))
   override fun solvePart2(input: String): Int = oxygenFillTime(extractMap(input))

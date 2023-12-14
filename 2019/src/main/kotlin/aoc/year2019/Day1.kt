@@ -2,7 +2,7 @@ package aoc.year2019
 
 import aoc.library.Puzzle
 
-object Day1 : Puzzle<Int, Int>(2019, 1) {
+object Day1 : Puzzle<Int, Int>(1) {
 
   override fun solvePart1(input: String): Int = input.lines().map(String::toInt).sumOf { fuelForMass(it) }
   override fun solvePart2(input: String): Int = input.lines().map(String::toInt).sumOf { fuelForMassWithFuelTakingMass(it) }

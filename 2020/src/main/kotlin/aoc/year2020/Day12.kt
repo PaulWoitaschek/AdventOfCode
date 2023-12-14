@@ -4,7 +4,7 @@ import aoc.library.Direction
 import aoc.library.Point
 import aoc.library.Puzzle
 
-object Day12 : Puzzle<Int, Int>(2020, 12) {
+object Day12 : Puzzle<Int, Int>(12) {
 
   override fun solvePart1(input: String): Int {
     val instructions = parseInstructions(input)

@@ -2,7 +2,7 @@ package aoc.year2023
 
 import aoc.library.Puzzle
 
-object Day6 : Puzzle<Int, Int>(year = 2023, day = 6) {
+object Day6 : Puzzle<Int, Int>(day = 6) {
 
   override fun solvePart1(input: String): Int = Round.parseAsMultipleRounds(input)
     .map(Round::waysToSolve)
