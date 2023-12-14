@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.math.sign
 
-object Day13 : Puzzle<Int, Int>(2019, 13) {
+object Day13 : Puzzle<Int, Int>(13) {
 
   override fun solvePart1(input: String): Int = runBlocking {
     val computer = IntCodeComputer(

@@ -3,7 +3,7 @@ package aoc.year2020
 import aoc.library.Point
 import aoc.library.Puzzle
 
-object Day3 : Puzzle<Int, Int>(2020, 3) {
+object Day3 : Puzzle<Int, Int>(3) {
 
   override fun solvePart1(input: String): Int = solve(input, Point(3, 1))
 

@@ -6,7 +6,7 @@ import aoc.year2022.Day22.Facing.Right
 
 private typealias Board = List<List<Day22.Tile>>
 
-object Day22 : Puzzle<Int, Int>(2022, 22) {
+object Day22 : Puzzle<Int, Int>(22) {
 
   override fun solvePart1(input: String): Int {
     val (mapString, instructions) = input.split("\n\n")

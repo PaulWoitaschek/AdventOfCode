@@ -3,7 +3,7 @@ package aoc.year2021
 import aoc.library.Point
 import aoc.library.Puzzle
 
-object Day9 : Puzzle<Long, Long>(2021, 9) {
+object Day9 : Puzzle<Long, Long>(9) {
 
   override fun solvePart1(input: String): Long {
     return HeightMap.parse(input)

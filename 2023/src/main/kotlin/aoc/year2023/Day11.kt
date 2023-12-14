@@ -4,7 +4,7 @@ import aoc.library.Point
 import aoc.library.Puzzle
 import aoc.library.boundingBoxes
 
-object Day11 : Puzzle<Long, Long>(year = 2023, day = 11) {
+object Day11 : Puzzle<Long, Long>(day = 11) {
 
   override fun solvePart1(input: String): Long = solve(input = input, emptySpace = 2)
 

@@ -4,7 +4,7 @@ import aoc.library.Puzzle
 import java.util.PriorityQueue
 import kotlin.math.sign
 
-object Day19 : Puzzle<Int, Int>(2022, 19) {
+object Day19 : Puzzle<Int, Int>(19) {
 
   override fun solvePart1(input: String): Int = parseInput(input).sumOf {
     it.largestGeodes(24) * it.id

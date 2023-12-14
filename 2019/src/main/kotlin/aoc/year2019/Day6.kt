@@ -2,7 +2,7 @@ package aoc.year2019
 
 import aoc.library.Puzzle
 
-object Day6 : Puzzle<Int, Int>(2019, 6) {
+object Day6 : Puzzle<Int, Int>(6) {
 
   override fun solvePart1(input: String): Int {
     val orbiter = input.lines()

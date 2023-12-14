@@ -4,7 +4,7 @@ import aoc.library.Puzzle
 import kotlin.math.absoluteValue
 import kotlin.math.ceil
 
-object Day14 : Puzzle<Long, Long>(2019, 14) {
+object Day14 : Puzzle<Long, Long>(14) {
 
   override fun solvePart1(input: String): Long = orePrice(reactions(input), 1)
 

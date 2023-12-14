@@ -3,7 +3,7 @@ package aoc.year2021
 import aoc.library.Point
 import aoc.library.Puzzle
 
-object Day11 : Puzzle<Long, Long>(2021, 11) {
+object Day11 : Puzzle<Long, Long>(11) {
 
   override fun solvePart1(input: String): Long {
     return generateSequence(Octopuses.parse(input)) { it.afterOneDay() }

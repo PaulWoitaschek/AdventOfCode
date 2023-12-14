@@ -4,7 +4,7 @@ package aoc.year2021
 
 import aoc.library.Puzzle
 
-object Day6 : Puzzle<Long, Long>(2021, 6) {
+object Day6 : Puzzle<Long, Long>(6) {
 
   override fun solvePart1(input: String): Long = totalFishesAfterDays(input, days = 80)
 

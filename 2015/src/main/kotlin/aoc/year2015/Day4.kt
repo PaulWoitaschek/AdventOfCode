@@ -3,7 +3,7 @@ package aoc.year2015
 import aoc.library.Puzzle
 import java.security.MessageDigest
 
-object Day4 : Puzzle<Int, Int>(2015, 4) {
+object Day4 : Puzzle<Int, Int>(4) {
 
   override fun solvePart1(input: String): Int = lowestMatching(input, leadingZeroes = 5)
   override fun solvePart2(input: String): Int = lowestMatching(input, leadingZeroes = 6)

@@ -2,7 +2,7 @@ package aoc.year2022
 
 import aoc.library.Puzzle
 
-object Day5 : Puzzle<String, String>(2022, 5) {
+object Day5 : Puzzle<String, String>(5) {
   override fun solvePart1(input: String) = input.solve(moveOneByOne = true)
   override fun solvePart2(input: String) = input.solve(moveOneByOne = false)
 }

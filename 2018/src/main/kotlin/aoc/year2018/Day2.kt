@@ -2,7 +2,7 @@ package aoc.year2018
 
 import aoc.library.Puzzle
 
-object Day2 : Puzzle<Int, String>(2018, 2) {
+object Day2 : Puzzle<Int, String>(2) {
 
   override fun solvePart1(input: String): Int {
     var pairs = 0

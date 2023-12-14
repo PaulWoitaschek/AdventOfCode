@@ -11,7 +11,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-object Day7 : Puzzle<Long, Long>(2019, 7) {
+object Day7 : Puzzle<Long, Long>(7) {
 
   override fun solvePart1(input: String): Long {
     val values = input.split(",").map(String::toLong)

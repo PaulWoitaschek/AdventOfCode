@@ -10,7 +10,7 @@ import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-object Day11 : Puzzle<Int, String>(2019, 11) {
+object Day11 : Puzzle<Int, String>(11) {
 
   override fun solvePart1(input: String): Int = process(input, 0).size
 

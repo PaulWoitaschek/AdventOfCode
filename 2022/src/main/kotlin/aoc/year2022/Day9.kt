@@ -7,7 +7,7 @@ import aoc.library.move
 import kotlin.math.absoluteValue
 import kotlin.math.sign
 
-object Day9 : Puzzle<Int, Int>(2022, 9) {
+object Day9 : Puzzle<Int, Int>(9) {
   override fun solvePart1(input: String) = solve(input, knots = 2)
   override fun solvePart2(input: String) = solve(input, knots = 10)
 }

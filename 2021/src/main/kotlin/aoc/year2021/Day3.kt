@@ -4,7 +4,7 @@ import aoc.library.Puzzle
 
 private typealias BitRow = List<Boolean>
 
-object Day3 : Puzzle<Long, Long>(2021, 3) {
+object Day3 : Puzzle<Long, Long>(3) {
 
   override fun solvePart1(input: String): Long {
     val bitRows = parseInput(input)

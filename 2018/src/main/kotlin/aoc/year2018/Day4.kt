@@ -2,7 +2,7 @@ package aoc.year2018
 
 import aoc.library.Puzzle
 
-object Day4 : Puzzle<Int, Int>(year = 2018, day = 4) {
+object Day4 : Puzzle<Int, Int>(day = 4) {
 
   override fun solvePart1(input: String): Int {
     val sleepyGuard = guards(input).maxBy { it.sleepTimes.size }

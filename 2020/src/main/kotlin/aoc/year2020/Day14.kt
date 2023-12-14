@@ -2,7 +2,7 @@ package aoc.year2020
 
 import aoc.library.Puzzle
 
-object Day14 : Puzzle<Long, Long>(year = 2020, day = 14) {
+object Day14 : Puzzle<Long, Long>(day = 14) {
   override fun solvePart1(input: String): Long {
     val memory = mutableMapOf<Int, Long>()
     val memoryRegex = """mem\[(\d+)] = (\d+)""".toRegex()

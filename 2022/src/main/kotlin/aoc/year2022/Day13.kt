@@ -7,7 +7,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.int
 
-object Day13 : Puzzle<Int, Int>(2022, 13) {
+object Day13 : Puzzle<Int, Int>(13) {
 
   override fun solvePart1(input: String): Int = input.split("\n\n").mapIndexedNotNull { index, group ->
     val (left, right) = group.lines().take(2).map { it.asJsonArray() }

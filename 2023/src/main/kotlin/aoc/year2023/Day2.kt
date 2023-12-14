@@ -2,7 +2,7 @@ package aoc.year2023
 
 import aoc.library.Puzzle
 
-object Day2 : Puzzle<Int, Int>(2023, 2) {
+object Day2 : Puzzle<Int, Int>(2) {
 
   override fun solvePart1(input: String): Int = solve(input) { games ->
     val bagContents = mapOf("red" to 12, "green" to 13, "blue" to 14)

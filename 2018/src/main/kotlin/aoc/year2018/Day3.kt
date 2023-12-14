@@ -5,7 +5,7 @@ import aoc.library.Puzzle
 import kotlin.math.max
 import kotlin.math.min
 
-object Day3 : Puzzle<Int, Int>(2018, 3) {
+object Day3 : Puzzle<Int, Int>(3) {
 
   override fun solvePart1(input: String): Int {
     return input.lines()

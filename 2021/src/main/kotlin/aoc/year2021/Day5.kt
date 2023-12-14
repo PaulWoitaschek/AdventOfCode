@@ -4,7 +4,7 @@ import aoc.library.Point
 import aoc.library.Puzzle
 import kotlin.math.abs
 
-object Day5 : Puzzle<Long, Long>(2021, 5) {
+object Day5 : Puzzle<Long, Long>(5) {
 
   override fun solvePart1(input: String): Long {
     return process(input, includeDiagonals = false)

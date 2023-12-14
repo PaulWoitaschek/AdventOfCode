@@ -3,7 +3,7 @@ package aoc.year2021
 import aoc.library.Puzzle
 import java.util.PriorityQueue
 
-object Day15 : Puzzle<Int, Int>(2021, 15) {
+object Day15 : Puzzle<Int, Int>(15) {
 
   data class Vertex(
     val x: Int,

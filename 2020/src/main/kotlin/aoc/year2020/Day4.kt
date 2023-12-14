@@ -4,7 +4,7 @@ import aoc.library.Puzzle
 
 private typealias Passport = Map<String, String>
 
-object Day4 : Puzzle<Int, Int>(2020, 4) {
+object Day4 : Puzzle<Int, Int>(4) {
 
   override fun solvePart1(input: String): Int {
     return input.split("\n\n").filter { it.isNotEmpty() }

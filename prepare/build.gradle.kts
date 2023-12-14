@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
   implementation(libs.clikt)
+  implementation(libs.okhttp)
   implementation(libs.kotlinPoet)
 }
 
