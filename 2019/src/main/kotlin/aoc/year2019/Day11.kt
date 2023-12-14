@@ -37,7 +37,7 @@ object Day11 : Puzzle<Int, String>(11) {
         val turnLeft = computer.outputs.receive() == 0L
         coloredArea[robotPosition] = color
         facing = if (turnLeft) facing.counterClockwise() else facing.clockwise()
-        robotPosition = robotPosition.move(facing, upIsPositive = false)
+        robotPosition = robotPosition.move(facing)
 
         inputs.send(
           if (coloredArea[robotPosition] == Color.White) 1 else 0,

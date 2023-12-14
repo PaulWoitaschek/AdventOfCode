@@ -16,7 +16,7 @@ object Day10 : Puzzle<Int, Int>(day = 10) {
     tailrec fun path(path: List<Point>): List<Point>? {
       val position = path.last()
       val next = tile(position).connecting
-        .map { direction -> position.move(direction, false) }
+        .map(position::move)
         .singleOrNull { it != path.getOrNull(path.lastIndex - 1) }
       return when (next) {
         null -> null

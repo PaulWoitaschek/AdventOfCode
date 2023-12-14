@@ -38,11 +38,11 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
       tiles.forEach { (position, tile) ->
         when (tile) {
           Tile.Stone -> {
-            val steps = generateSequence(position) { it.move(direction = direction, upIsPositive = false) }
+            val steps = generateSequence(position) { it.move(direction) }
               .drop(1)
               .takeWhile { it in bounds && tiles[it] != Tile.Wall }
               .count { tiles[it] == Tile.Floor || tiles[it] == null }
-            val newPosition = position.move(direction = direction, upIsPositive = false, steps = steps)
+            val newPosition = position.move(direction = direction, steps = steps)
             newTiles[newPosition] = Tile.Stone
           }
           else -> newTiles[position] = tile
