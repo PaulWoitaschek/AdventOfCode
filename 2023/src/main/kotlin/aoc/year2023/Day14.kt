@@ -12,18 +12,17 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
   override fun solvePart1(input: String): Int = RockMap.parse(input).move(Direction.Up).weight()
 
   override fun solvePart2(input: String): Int {
-    val visited = mutableMapOf<RockMap, Long>()
+    val visited = mutableSetOf<RockMap>()
     var current = RockMap.parse(input)
     val limit = 1000000000
     var i = 0L
     while (i++ < limit) {
       val moved = current.move(Direction.Up).move(Direction.Left).move(Direction.Down).move(Direction.Right)
-      if (moved in visited) {
-        val loopSize = visited.getValue(moved) - i
+      if (!visited.add(moved)) {
+        val loopSize = visited.indexOf(moved) + 1 - i
         val remainingSteps = limit - i
         i += (remainingSteps / loopSize) * loopSize
       }
-      visited[moved] = i
       current = moved
     }
     return current.weight()
