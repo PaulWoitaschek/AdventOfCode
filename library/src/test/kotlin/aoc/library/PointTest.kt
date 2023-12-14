@@ -15,8 +15,10 @@ class PointTest {
       Point(2, 0),
       Point(2, 1),
     ).printString() shouldBe """
-          ⬛⬛⬛
-          ⬜⬜⬛
+        ╔═══╗
+        ║███║
+        ║  █║
+        ╚═══╝
     """.trimIndent()
   }
 

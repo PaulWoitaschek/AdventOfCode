@@ -9,7 +9,6 @@ import com.squareup.kotlinpoet.INT
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -34,7 +33,7 @@ class Prepare : CliktCommand() {
       .addType(
         TypeSpec.objectBuilder("Day$day")
           .superclass(ClassName("aoc.library", "Puzzle").parameterizedBy(INT, INT))
-          .addSuperclassConstructorParameter("year = $year, day = $day")
+          .addSuperclassConstructorParameter("day = $day")
           .addFunction(createSolveFunction("Part1"))
           .addFunction(createSolveFunction("Part2"))
           .build(),
@@ -78,15 +77,10 @@ class Prepare : CliktCommand() {
     val testFileContent = FileSpec.builder("aoc.year$year", "Day${day}Test")
       .addType(
         TypeSpec.classBuilder("Day${day}Test")
-          .addProperty(
-            PropertySpec.builder("testInput", String::class)
-              .initializer("%S", "")
-              .build(),
-          )
-          .addFunction(createTestFunction(name = "part1", solveName = "solvePart1", disabled = true))
           .addFunction(createTestFunction(name = "part1TestInput", solveName = "solvePart1", disabled = false))
-          .addFunction(createTestFunction(name = "part2", solveName = "solvePart2", disabled = true))
+          .addFunction(createTestFunction(name = "part1", solveName = "solvePart1", disabled = true))
           .addFunction(createTestFunction(name = "part2TestInput", solveName = "solvePart2", disabled = true))
+          .addFunction(createTestFunction(name = "part2", solveName = "solvePart2", disabled = true))
           .build(),
       )
       .build()

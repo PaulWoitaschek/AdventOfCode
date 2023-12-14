@@ -66,32 +66,51 @@ data class Point(val x: Int, val y: Int) {
 fun Point.move(
   direction: Direction,
   upIsPositive: Boolean = true,
-) = Point(
-  x = x + when (direction) {
-    Direction.Left -> -1
-    Direction.Right -> 1
-    Direction.Up, Direction.Down -> 0
-  },
-  y = y + when (direction) {
-    Direction.Up -> if (upIsPositive) 1 else -1
-    Direction.Down -> if (upIsPositive) -1 else 1
-    Direction.Left, Direction.Right -> 0
-  },
-)
+  steps: Int = 1,
+): Point {
+  if (steps == 0) return this
+  return Point(
+    x = x + when (direction) {
+      Direction.Left -> -steps
+      Direction.Right -> steps
+      Direction.Up, Direction.Down -> 0
+    },
+    y = y + when (direction) {
+      Direction.Up -> if (upIsPositive) steps else -steps
+      Direction.Down -> if (upIsPositive) -steps else steps
+      Direction.Left, Direction.Right -> 0
+    },
+  )
+}
 
 fun Collection<Point>.printString(): String = associateWith { }.printString {
-  if (it in this) "⬛" else "⬜"
+  if (it in this) "█" else " "
 }
 
 inline fun <T> Map<Point, T>.printString(crossinline tile: (Point) -> String): String {
   if (isEmpty()) {
     return "EMPTY MAP"
   }
-  val points = keys
-  return (points.minOf { it.y }.rangeTo(points.maxOf { it.y })).joinToString(separator = "\n") { y ->
-    (points.minOf { it.x }.rangeTo(points.maxOf { it.x })).joinToString(separator = "") { x ->
-      tile(Point(x, y))
-    }
+  val bounds = keys.bounds()
+  return (bounds.top..bounds.bottom).joinToString(
+    separator = "\n",
+    prefix = buildString {
+      append('╔')
+      append("═".repeat(1 + bounds.right - bounds.left))
+      append('╗')
+      appendLine()
+    },
+    postfix = buildString {
+      appendLine()
+      append('╚')
+      append("═".repeat(1 + bounds.right - bounds.left))
+      append('╝')
+    },
+  ) { y ->
+    (bounds.left..bounds.right)
+      .joinToString(separator = "", prefix = "║", postfix = "║") { x ->
+        tile(Point(x, y))
+      }
   }
 }
 
@@ -103,7 +122,7 @@ inline fun <T> Map<Point, T>.print(crossinline tile: (Point) -> String) {
   println(printString(tile))
 }
 
-fun Collection<Point>.boundingBoxes(): Rect {
+fun Collection<Point>.bounds(): Rect {
   return Rect(
     left = minOf { it.x },
     right = maxOf { it.x },

@@ -3,7 +3,7 @@ package aoc.year2023
 import aoc.library.Direction
 import aoc.library.Point
 import aoc.library.Puzzle
-import aoc.library.boundingBoxes
+import aoc.library.bounds
 import aoc.library.move
 
 object Day10 : Puzzle<Int, Int>(day = 10) {
@@ -29,7 +29,7 @@ object Day10 : Puzzle<Int, Int>(day = 10) {
 
   override fun solvePart2(input: String): Int {
     val loop = findLoop(parse(input))
-    val bounds = loop.boundingBoxes()
+    val bounds = loop.bounds()
     return (bounds.left..bounds.right)
       .flatMap { x ->
         (bounds.top..bounds.bottom).map { y -> Point(x, y) }
