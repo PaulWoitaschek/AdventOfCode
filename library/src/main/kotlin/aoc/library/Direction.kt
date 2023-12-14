@@ -8,14 +8,17 @@ enum class Direction(var char: Char) {
   ;
 
   fun clockwise(): Direction {
-    return entries.getOrNull(ordinal + 1) ?: entries.first()
+    return entries[(ordinal + 1) % entries.size]
   }
 
   fun counterClockwise(): Direction {
-    return entries.getOrNull(ordinal - 1) ?: entries.last()
+    return entries[(ordinal + entries.size - 1) % entries.size]
   }
 
   companion object {
-    fun parse(input: Char) = entries.first { it.char == input }
+    private val byChar = entries.associateBy { it.char }
+    fun parse(input: Char): Direction {
+      return byChar[input] ?: throw IllegalArgumentException("Invalid char=$input")
+    }
   }
 }
