@@ -18,20 +18,16 @@ object Day15 : Puzzle<Int, Int>(day = 15) {
   }
 
   private fun distributeLenses(input: String): Map<Int, Map<String, Int>> {
-    val values = input.split(",")
     val boxes = mutableMapOf<Int, MutableMap<String, Int>>()
-    values
+    input.split(",")
       .forEach { value ->
         val (label, right) = value.split('=', '-')
-        val boxNumber = hash(label)
+        val box = boxes.getOrPut(hash(label)) { mutableMapOf() }
         if (right.isNotEmpty()) {
           // equals
-          val box = boxes.getOrPut(boxNumber) { mutableMapOf() }
-          val focalLength = right.toInt()
-          box[label] = focalLength
+          box[label] = right.toInt()
         } else {
           // dash
-          val box = boxes.getOrPut(boxNumber) { mutableMapOf() }
           box.remove(label)
         }
       }
