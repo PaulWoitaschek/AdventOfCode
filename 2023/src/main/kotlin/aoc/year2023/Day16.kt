@@ -49,13 +49,13 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
     startPoint: Point,
     startDirection: Direction,
   ): Int {
-    val visited = mutableSetOf<Pair<Point, Direction>>()
+    val visited = Direction.entries.associateWith { mutableSetOf<Point>() }
     fun trackBeam(
       beam: Point,
       direction: Direction,
     ) {
       val currentTile = map[beam] ?: return
-      if (!visited.add(beam to direction)) return
+      if (!visited.getValue(direction).add(beam)) return
 
       when (currentTile) {
         Floor -> trackBeam(beam.move(direction), direction)
@@ -107,8 +107,7 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
     }
 
     trackBeam(startPoint, startDirection)
-
-    return visited.map { it.first }.toSet().size
+    return visited.values.flatten().toSet().size
   }
 
   private enum class Tile(var char: Char) {
@@ -117,13 +116,18 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
     HorizontalSplitter('-'),
     LeftMirror('\\'),
     RightMirror('/'),
+    ;
+
+    companion object {
+      val byChar = entries.associateBy { it.char }
+    }
   }
 
   private fun parse(input: String): Map<Point, Tile> {
     val map = mutableMapOf<Point, Tile>()
     input.lines().forEachIndexed { y, line ->
       line.forEachIndexed { x, char ->
-        map[Point(x, y)] = Tile.entries.first { it.char == char }
+        map[Point(x, y)] = Tile.byChar.getValue(char)
       }
     }
     return map
