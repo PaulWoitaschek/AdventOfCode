@@ -14,6 +14,10 @@ import aoc.year2023.Day16.Tile.HorizontalSplitter
 import aoc.year2023.Day16.Tile.LeftMirror
 import aoc.year2023.Day16.Tile.RightMirror
 import aoc.year2023.Day16.Tile.VerticalSplitter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.runBlocking
 
 object Day16 : Puzzle<Int, Int>(day = 16) {
 
@@ -25,7 +29,7 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
   override fun solvePart2(input: String): Int {
     val map = parse(input)
     val bounds = map.keys.bounds()
-    return map
+    val toCheck = map
       .filterKeys {
         it.x == bounds.left || it.x == bounds.right || it.y == bounds.top || it.y == bounds.bottom
       }
@@ -37,11 +41,16 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
           if (point.y == bounds.bottom) add(Up)
         }
       }
-      .maxOf { (point, directions) ->
-        directions.maxOf { direction ->
+      .flatMap { (point, directions) ->
+        directions.map { direction -> point to direction }
+      }
+    return runBlocking(Dispatchers.Default) {
+      toCheck.map { (point, direction) ->
+        async {
           maximumEnergizedTiles(map, point, direction)
         }
-      }
+      }.awaitAll().max()
+    }
   }
 
   private fun maximumEnergizedTiles(
