@@ -10,10 +10,6 @@ import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeSpec
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okio.buffer
-import okio.sink
 import java.io.File
 import java.time.LocalDate
 
@@ -25,7 +21,6 @@ class Prepare : CliktCommand() {
   override fun run() {
     generateDayTestSourceFile()
     generateDaySourceFile()
-    downloadInput()
   }
 
   private fun generateDaySourceFile() {
@@ -86,38 +81,6 @@ class Prepare : CliktCommand() {
       .build()
 
     testFileContent.writeTo(File("$year/src/test/kotlin"))
-  }
-
-  private fun downloadInput() {
-    val file = File("$year/src/main/resources/$day.txt").apply {
-      parentFile.mkdirs()
-    }
-    if (!file.exists() || file.length() == 0L) {
-      val sessionCookie = System.getenv("AOC_SESSION")
-      check(!sessionCookie.isNullOrEmpty()) {
-        "AOC_SESSION environment variable must be set to your session cookie"
-      }
-      val client = OkHttpClient()
-      val response = client.newCall(
-        Request.Builder()
-          .url("https://adventofcode.com/$year/day/$day/input")
-          .addHeader(
-            "Cookie",
-            "session=$sessionCookie",
-          )
-          .build(),
-      ).execute()
-      check(response.isSuccessful) {
-        "Failed to download input for $year day $day: ${response.code}"
-      }
-      response.body!!.use {
-        it.source().use { source ->
-          file.sink().buffer().use { output ->
-            output.writeAll(source)
-          }
-        }
-      }
-    }
   }
 }
 
