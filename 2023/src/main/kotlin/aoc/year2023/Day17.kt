@@ -26,10 +26,7 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
     }
     val target = map.keys.maxBy { it.manhattanDistanceTo(Point.Zero) }
     val bounds = map.keys.bounds()
-    val queue = PriorityQueue(
-      compareBy<FlowWithHeat> { Point.Zero.manhattanDistanceTo(it.flow.position) }
-        .then(compareBy { it.heat }),
-    )
+    val queue = PriorityQueue<FlowWithHeat>(compareBy { it.heat })
     queue.add(
       FlowWithHeat(
         flow = Flow(Point.Zero, Direction.Right, 0),
