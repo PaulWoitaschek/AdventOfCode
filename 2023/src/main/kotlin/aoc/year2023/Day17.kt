@@ -26,32 +26,32 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
     }
     val target = map.keys.maxBy { it.manhattanDistanceTo(Point.Zero) }
     val bounds = map.keys.bounds()
-    val distanceComparator = compareByDescending<Flow> { Point.Zero.manhattanDistanceTo(it.position) }
-    val heatComparator = compareBy<Flow> { it.heat }
-    val comparator: Comparator<Flow> = distanceComparator.then(heatComparator)
-    val queue = PriorityQueue(comparator)
-    queue.add(Flow(Point.Zero, Direction.Right, 0, 0))
+    val queue = PriorityQueue(
+      compareBy<FlowWithHeat> { Point.Zero.manhattanDistanceTo(it.flow.position) }
+        .then(compareBy { it.heat }),
+    )
+    queue.add(
+      FlowWithHeat(
+        flow = Flow(Point.Zero, Direction.Right, 0),
+        heat = 0,
+      ),
+    )
     var min = Int.MAX_VALUE
 
-    val visited = mutableMapOf<Triple<Point, Direction, Int>, Int>()
+    val visited = mutableSetOf<Flow>()
     while (queue.isNotEmpty()) {
-      val flow = queue.remove()
+      val (flow, heat) = queue.remove()
       if (flow.position == target) {
-        if (flow.heat < min) {
-          println("found a smaller heat with ${flow.heat}")
+        if (heat < min) {
+          println("found a smaller heat with $heat")
         }
-        min = minOf(flow.heat, min)
+        min = minOf(heat, min)
         continue
       }
 
-      val visitationState = Triple(flow.position, flow.direction, flow.stepsInDirection)
-      val minHeatForKey = visited[visitationState]
-      if (minHeatForKey != null && flow.heat >= minHeatForKey) {
+      if (!visited.add(flow)) {
         continue
       }
-      visited[visitationState] = flow.heat
-
-      if (flow.heat + flow.position.manhattanDistanceTo(target) >= min) continue
 
       Direction.entries
         .filter { it != flow.direction.opposite() }
@@ -68,27 +68,31 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
             val newPosition = flow.position.move(direction)
             if (newPosition in bounds) {
               queue.add(
-                Flow(
-                  position = newPosition,
-                  direction = direction,
-                  heat = flow.heat + map[newPosition]!!,
-                  stepsInDirection = flow.stepsInDirection + 1,
+                FlowWithHeat(
+                  Flow(
+                    position = newPosition,
+                    direction = direction,
+                    stepsInDirection = flow.stepsInDirection + 1,
+                  ),
+                  heat + map[newPosition]!!,
                 ),
               )
             }
           } else {
             var newPosition = flow.position
-            var heat = flow.heat
+            var newHeat = heat
             repeat(stepsAfterTurn) {
               newPosition = newPosition.move(direction)
-              heat += map[newPosition] ?: return@forEach
+              newHeat += map[newPosition] ?: return@forEach
             }
             queue.add(
-              Flow(
-                position = newPosition,
-                direction = direction,
-                heat = heat,
-                stepsInDirection = stepsAfterTurn,
+              FlowWithHeat(
+                Flow(
+                  position = newPosition,
+                  direction = direction,
+                  stepsInDirection = stepsAfterTurn,
+                ),
+                newHeat,
               ),
             )
           }
@@ -101,6 +105,7 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
     val position: Point,
     val direction: Direction,
     val stepsInDirection: Int,
-    val heat: Int,
   )
+
+  private data class FlowWithHeat(val flow: Flow, val heat: Int)
 }
