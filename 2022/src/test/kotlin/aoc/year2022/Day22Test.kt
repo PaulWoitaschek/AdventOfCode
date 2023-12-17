@@ -8,8 +8,12 @@ import org.junit.jupiter.api.Test
 class Day22Test {
 
   @Test
-  fun test() {
-    Day22.solvePart1() shouldBe 89224
+  fun part1TestInput() {
     Day22.solvePart1WithTestInput() shouldBe 6032
+  }
+
+  @Test
+  fun part1() {
+    Day22.solvePart1() shouldBe 89224
   }
 }

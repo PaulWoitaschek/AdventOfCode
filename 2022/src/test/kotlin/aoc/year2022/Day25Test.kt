@@ -18,9 +18,13 @@ class Day25Test {
   ).mapKeys { Day25.SnafuNumber(it.key) }
 
   @Test
-  fun test() {
-    Day25.solvePart1() shouldBe "2=0--0---11--01=-100"
+  fun part1TestInput() {
     Day25.solvePart1WithTestInput() shouldBe "2=-1=0"
+  }
+
+  @Test
+  fun part1() {
+    Day25.solvePart1() shouldBe "2=0--0---11--01=-100"
   }
 
   @Test

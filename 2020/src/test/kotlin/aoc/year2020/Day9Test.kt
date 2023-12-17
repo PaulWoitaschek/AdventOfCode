@@ -10,12 +10,22 @@ import org.junit.jupiter.api.Test
 class Day9Test {
 
   @Test
-  fun test() {
-    val day9 = Day9(5)
-    day9.solvePart1WithTestInput() shouldBe 127
-    day9.solvePart2WithTestInput() shouldBe 62
-    val day91 = Day9(25)
-    day91.solvePart1() shouldBe 257342611
-    day91.solvePart2() shouldBe 35602097
+  fun part1TestInput() {
+    Day9(5).solvePart1WithTestInput() shouldBe 127
+  }
+
+  @Test
+  fun part2TestInput() {
+    Day9(5).solvePart2WithTestInput() shouldBe 62
+  }
+
+  @Test
+  fun part1() {
+    Day9(25).solvePart1() shouldBe 257342611
+  }
+
+  @Test
+  fun part2() {
+    Day9(25).solvePart2() shouldBe 35602097
   }
 }

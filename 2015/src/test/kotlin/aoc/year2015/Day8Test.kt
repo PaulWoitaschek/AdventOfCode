@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 class Day8Test {
 
   @Test
-  fun test() {
+  fun part1() {
     Day8.solvePart1() shouldBeExactly 1350
   }
 
