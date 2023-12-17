@@ -36,15 +36,13 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
         heat = 0,
       ),
     )
-    var min = Int.MAX_VALUE
 
     val visited = mutableSetOf<Flow>()
     while (queue.isNotEmpty()) {
       val (flow, heat) = queue.remove()
 
       if (flow.position == target) {
-        min = minOf(heat, min)
-        continue
+        return heat
       }
 
       if (!visited.add(flow)) {
@@ -89,7 +87,7 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
       addForTurn(flow.direction.clockwise())
       addForTurn(flow.direction.counterClockwise())
     }
-    return min
+    error("Invalid data")
   }
 
   private data class Flow(
