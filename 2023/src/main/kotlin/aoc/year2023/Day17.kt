@@ -41,10 +41,8 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
     val visited = mutableSetOf<Flow>()
     while (queue.isNotEmpty()) {
       val (flow, heat) = queue.remove()
+
       if (flow.position == target) {
-        if (heat < min) {
-          println("found a smaller heat with $heat")
-        }
         min = minOf(heat, min)
         continue
       }
@@ -53,50 +51,43 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
         continue
       }
 
-      Direction.entries
-        .filter { it != flow.direction.opposite() }
-        .filter {
-          if (it == flow.direction) {
-            flow.stepsInDirection < maxTurns
-          } else {
-            true
-          }
-        }
-        .forEach { direction ->
-          val sameDirection = direction == flow.direction
-          if (sameDirection) {
-            val newPosition = flow.position.move(direction)
-            if (newPosition in bounds) {
-              queue.add(
-                FlowWithHeat(
-                  Flow(
-                    position = newPosition,
-                    direction = direction,
-                    stepsInDirection = flow.stepsInDirection + 1,
-                  ),
-                  heat + map[newPosition]!!,
-                ),
-              )
-            }
-          } else {
-            var newPosition = flow.position
-            var newHeat = heat
-            repeat(stepsAfterTurn) {
-              newPosition = newPosition.move(direction)
-              newHeat += map[newPosition] ?: return@forEach
-            }
-            queue.add(
-              FlowWithHeat(
-                Flow(
-                  position = newPosition,
-                  direction = direction,
-                  stepsInDirection = stepsAfterTurn,
-                ),
-                newHeat,
+      if (flow.stepsInDirection < maxTurns) {
+        val newPosition = flow.position.move(flow.direction)
+        if (newPosition in bounds) {
+          queue.add(
+            FlowWithHeat(
+              flow = Flow(
+                position = newPosition,
+                direction = flow.direction,
+                stepsInDirection = flow.stepsInDirection + 1,
               ),
-            )
-          }
+              heat = heat + map[newPosition]!!,
+            ),
+          )
         }
+      }
+
+      fun addForTurn(direction: Direction) {
+        var newPosition = flow.position
+        var newHeat = heat
+        repeat(stepsAfterTurn) {
+          newPosition = newPosition.move(direction)
+          newHeat += map[newPosition] ?: return
+        }
+        queue.add(
+          FlowWithHeat(
+            flow = Flow(
+              position = newPosition,
+              direction = direction,
+              stepsInDirection = stepsAfterTurn,
+            ),
+            heat = newHeat,
+          ),
+        )
+      }
+
+      addForTurn(flow.direction.clockwise())
+      addForTurn(flow.direction.counterClockwise())
     }
     return min
   }
