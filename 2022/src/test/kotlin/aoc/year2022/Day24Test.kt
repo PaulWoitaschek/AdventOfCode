@@ -1,9 +1,7 @@
 package aoc.year2022
 
 import aoc.library.solvePart1
-import aoc.library.solvePart1WithTestInput
 import aoc.library.solvePart2
-import aoc.library.solvePart2WithTestInput
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -12,7 +10,16 @@ class Day24Test {
 
   @Test
   fun part1TestData() {
-    Day24.solvePart1WithTestInput() shouldBe 18
+    Day24.solvePart1(
+      """
+#.######
+#>>.<^<#
+#.<..<<#
+#>v.><>#
+#<^v^^>#
+######.#
+      """.trimIndent(),
+    ) shouldBe 18
   }
 
   @Test
@@ -23,7 +30,16 @@ class Day24Test {
 
   @Test
   fun part2TestData() {
-    Day24.solvePart2WithTestInput() shouldBe 54
+    Day24.solvePart2(
+      """
+#.######
+#>>.<^<#
+#.<..<<#
+#>v.><>#
+#<^v^^>#
+######.#
+      """.trimIndent(),
+    ) shouldBe 54
   }
 
   @Test

@@ -1,7 +1,6 @@
 package aoc.year2022
 
 import aoc.library.solvePart1
-import aoc.library.solvePart1WithTestInput
 import aoc.year2022.Day25.SnafuNumber.Companion.toSnafuNumber
 import io.kotest.assertions.assertSoftly
 import io.kotest.assertions.withClue
@@ -19,7 +18,23 @@ class Day25Test {
 
   @Test
   fun part1TestInput() {
-    Day25.solvePart1WithTestInput() shouldBe "2=-1=0"
+    Day25.solvePart1(
+      """
+1=-0-2
+12111
+2=0=
+21
+2=01
+111
+20012
+112
+1=-1=
+1-12
+12
+1=
+122
+      """.trimIndent(),
+    ) shouldBe "2=-1=0"
   }
 
   @Test
