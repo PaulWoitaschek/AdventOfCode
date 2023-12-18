@@ -3,9 +3,10 @@ package aoc.library
 import kotlin.math.abs
 
 fun shoelace(points: List<Point>): Long {
-  val polygon = points.toMutableList()
-  if (polygon.first() != polygon.last()) {
-    polygon.add(polygon.first())
+  val polygon = if (points.first() != points.last()) {
+    points + points.first()
+  } else {
+    points
   }
   val x = polygon.map(Point::x).map(Int::toLong)
   val y = polygon.map(Point::y).map(Int::toLong)

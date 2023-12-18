@@ -53,4 +53,17 @@ class ShoelaceTest {
       ),
     ) shouldBeExactly 30
   }
+
+  @Test
+  fun `test closed square perimeter`() {
+    shoelace(
+      listOf(
+        Point(0, 0),
+        Point(0, 10),
+        Point(10, 10),
+        Point(10, 0),
+        Point(0, 0),
+      ),
+    ) shouldBeExactly 100
+  }
 }
