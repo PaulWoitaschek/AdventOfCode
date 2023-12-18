@@ -37,19 +37,6 @@ data class Point(val x: Int, val y: Int) {
     return (Math.toDegrees(atan2) + 90 + 360) % 360
   }
 
-  fun isInPath(path: List<Point>): Boolean {
-    // https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm
-    var count = 0
-    var previous = path.last()
-    path.forEach { current ->
-      if (previous.y > y != current.y > y && x < (current.x - previous.x) * (y - previous.y) / (current.y - previous.y) + previous.x) {
-        count++
-      }
-      previous = current
-    }
-    return count % 2 != 0
-  }
-
   override fun toString(): String = "($x,$y)"
 
   operator fun plus(other: Point): Point = Point(x = x + other.x, y = y + other.y)

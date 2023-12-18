@@ -3,8 +3,8 @@ package aoc.year2023
 import aoc.library.Direction
 import aoc.library.Point
 import aoc.library.Puzzle
-import aoc.library.bounds
 import aoc.library.move
+import aoc.library.shoelace
 
 object Day10 : Puzzle<Int, Int>(day = 10) {
 
@@ -29,13 +29,7 @@ object Day10 : Puzzle<Int, Int>(day = 10) {
 
   override fun solvePart2(input: String): Int {
     val loop = findLoop(parse(input))
-    val bounds = loop.bounds()
-    return (bounds.left..bounds.right)
-      .flatMap { x ->
-        (bounds.top..bounds.bottom).map { y -> Point(x, y) }
-      }
-      .filter { it !in loop }
-      .count { it.isInPath(loop) }
+    return shoelace(loop).toInt() - loop.size / 2 + 1
   }
 
   private fun parse(input: String): Map<Point, Tile> {

@@ -4,6 +4,7 @@ import aoc.library.Direction
 import aoc.library.Point
 import aoc.library.Puzzle
 import aoc.library.move
+import aoc.library.shoelace
 
 object Day18 : Puzzle<Long, Long>(day = 18) {
 
@@ -21,14 +22,6 @@ object Day18 : Puzzle<Long, Long>(day = 18) {
     }
     val borderSize = instructions.sumOf { it.steps } / 2
     return shoelace(points) + borderSize + 1
-  }
-
-  private fun shoelace(points: List<Point>): Long {
-    val x = points.map(Point::x).map(Int::toLong)
-    val y = points.map(Point::y).map(Int::toLong)
-    val left = x.zip(y.drop(1), Long::times)
-    val right = x.drop(1).zip(y, Long::times)
-    return left.zip(right, Long::minus).sum() / 2
   }
 
   private data class Instruction(
