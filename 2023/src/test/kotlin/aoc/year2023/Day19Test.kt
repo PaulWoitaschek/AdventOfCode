@@ -3,15 +3,12 @@ package aoc.year2023
 import aoc.library.solvePart1
 import aoc.library.solvePart2
 import io.kotest.matchers.ints.shouldBeExactly
-import org.junit.jupiter.api.Disabled
+import io.kotest.matchers.longs.shouldBeExactly
 import org.junit.jupiter.api.Test
 
 class Day19Test {
 
-  @Test
-  fun part1TestInput() {
-    Day19.solvePart1(
-      """
+  private val testInput = """
       px{a<2006:qkq,m>2090:A,rfg}
       pv{a>1716:R,A}
       lnx{m>1548:A,A}
@@ -29,8 +26,11 @@ class Day19Test {
       {x=2036,m=264,a=79,s=2244}
       {x=2461,m=1339,a=466,s=291}
       {x=2127,m=1623,a=2188,s=1013}
-      """.trimIndent(),
-    ) shouldBeExactly 19114
+  """.trimIndent()
+
+  @Test
+  fun part1TestInput() {
+    Day19.solvePart1(testInput) shouldBeExactly 19114
   }
 
   @Test
@@ -39,14 +39,12 @@ class Day19Test {
   }
 
   @Test
-  @Disabled
   fun part2TestInput() {
-    Day19.solvePart2() shouldBeExactly 42
+    Day19.solvePart2(testInput) shouldBeExactly 167409079868000
   }
 
   @Test
-  @Disabled
   fun part2() {
-    Day19.solvePart2() shouldBeExactly 42
+    Day19.solvePart2() shouldBeExactly 132557544578569
   }
 }
