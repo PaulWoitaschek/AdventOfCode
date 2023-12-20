@@ -3,7 +3,6 @@ package aoc.year2023
 import aoc.library.solvePart1
 import aoc.library.solvePart2
 import io.kotest.matchers.longs.shouldBeExactly
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day20Test {
@@ -40,14 +39,7 @@ class Day20Test {
   }
 
   @Test
-  @Disabled
-  fun part2TestInput() {
-    Day20.solvePart2() shouldBeExactly 42
-  }
-
-  @Test
-  @Disabled
   fun part2() {
-    Day20.solvePart2() shouldBeExactly 42
+    Day20.solvePart2() shouldBeExactly 217317393039529
   }
 }
