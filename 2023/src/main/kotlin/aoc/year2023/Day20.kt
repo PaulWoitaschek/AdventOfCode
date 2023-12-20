@@ -29,7 +29,7 @@ object Day20 : Puzzle<Long, Long>(day = 20) {
             }
           }
           is Module.Conjunction -> {
-            module.memory[instruction.from] = instruction.low
+            module.memory[instruction.from] = !instruction.low
             val hasOnlyHighPulses = module.memory.all { it.value }
             module.destinations.mapTo(queue) { destination ->
               Instruction(low = hasOnlyHighPulses, to = destination, from = module.name)
@@ -39,7 +39,7 @@ object Day20 : Puzzle<Long, Long>(day = 20) {
             if (instruction.low) {
               module.on = !module.on
               module.destinations.mapTo(queue) { destination ->
-                Instruction(low = module.on, to = destination, from = module.name)
+                Instruction(low = !module.on, to = destination, from = module.name)
               }
             }
           }
