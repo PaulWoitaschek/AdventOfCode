@@ -1,0 +1,54 @@
+package aoc.year2023
+
+import aoc.library.solvePart1
+import aoc.library.solvePart2
+import io.kotest.matchers.longs.shouldBeExactly
+import io.kotest.matchers.longs.shouldBeGreaterThan
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
+
+class Day20Test {
+
+  @Test
+  fun part1TestInput1() {
+    Day20.solvePart1(
+      """
+      broadcaster -> a, b, c
+      %a -> b
+      %b -> c
+      %c -> inv
+      &inv -> a
+      """.trimIndent(),
+    ) shouldBeExactly 32000000
+  }
+
+  @Test
+  fun part1TestInput2() {
+    Day20.solvePart1(
+      """
+      broadcaster -> a
+      %a -> inv, con
+      &inv -> b
+      %b -> con
+      &con -> output
+      """.trimIndent(),
+    ) shouldBeExactly 11687500
+  }
+
+  @Test
+  fun part1() {
+    Day20.solvePart1() shouldBeGreaterThan 682895828
+  }
+
+  @Test
+  @Disabled
+  fun part2TestInput() {
+    Day20.solvePart2() shouldBeExactly 42
+  }
+
+  @Test
+  @Disabled
+  fun part2() {
+    Day20.solvePart2() shouldBeExactly 42
+  }
+}
