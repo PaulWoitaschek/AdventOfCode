@@ -1,6 +1,6 @@
 [versions]
 jupiter = "5.10.1"
-kotlin = "1.9.21"
+kotlin = "1.9.22"
 ktlintGradlePlugin = "12.0.3"
 
 [libraries]
