@@ -27,5 +27,13 @@ enum class Direction(var char: Char) {
     fun parse(input: Char): Direction {
       return byChar[input] ?: throw IllegalArgumentException("Invalid char=$input")
     }
+
+    fun fromArrowOrNull(arrow: Char): Direction? = when (arrow) {
+      '<' -> Left
+      '>' -> Right
+      '^' -> Up
+      'v' -> Down
+      else -> null
+    }
   }
 }

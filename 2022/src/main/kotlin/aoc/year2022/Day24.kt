@@ -139,13 +139,7 @@ object Day24 : Puzzle<Int, Int>(24) {
           .forEachIndexed { y, line ->
             line.drop(1).dropLast(1)
               .forEachIndexed { x, c ->
-                val direction = when (c) {
-                  '<' -> Direction.Left
-                  '>' -> Direction.Right
-                  '^' -> Direction.Up
-                  'v' -> Direction.Down
-                  else -> null
-                }
+                val direction = Direction.fromArrowOrNull(c)
                 if (direction != null) {
                   blizzards += Blizzard(Point(x, y), direction)
                 }
