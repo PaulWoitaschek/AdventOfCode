@@ -34,7 +34,14 @@ data class Point3(
 
   companion object {
     val Zero = Point3(0, 0, 0)
+
+    fun parse(input: String): Point3 {
+      val (x, y, z) = input.split(",").map(String::toInt)
+      return Point3(x = x, y = y, z = z)
+    }
   }
 
   enum class Axis { X, Y, Z }
+
+  override fun toString(): String = "$x,$y,$z"
 }
