@@ -45,7 +45,7 @@ object Day22 : Puzzle<Int, Int>(day = 22) {
   private fun move(bricks: List<Brick>) {
     bricks.forEach { candidate ->
       val highestSupportingBrick = bricks
-        .filter { it != candidate && it.xyPointsIntersect(candidate) && it.topZ() < candidate.bottomZ() }
+        .filter { it != candidate && it.topZ() < candidate.bottomZ() && it.xyPointsIntersect(candidate) }
         .maxOfOrNull { it.topZ() }
       val newBottom = (highestSupportingBrick ?: 0) + 1
       candidate.zOffset += candidate.bottomZ() - newBottom
