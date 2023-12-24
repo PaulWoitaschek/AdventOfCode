@@ -7,26 +7,19 @@ import aoc.library.intersects
 object Day22 : Puzzle<Int, Int>(day = 22) {
 
   override fun solvePart1(input: String): Int {
-    val bricks = input.lines().map(Brick::parse).sortedBy { it.bottomZ() }
+    val bricks = parse(input)
     move(bricks)
     val bricksWithSupporters = bricks.associateWith { brick ->
-      val supporters = bricks.filter { it != brick }
-        .filter { it.xyPointsIntersect(brick) }
-        .filter { it.topZ() == brick.bottomZ() - 1 }
-      val highestZSupport = supporters.maxOfOrNull { it.topZ() }
-      supporters.filter {
-        highestZSupport != null && it.topZ() >= highestZSupport
+      bricks.filter {
+        it != brick && it.topZ() == brick.bottomZ() - 1 && it.xyPointsIntersect(brick)
       }
     }
-    val vitalSupporters = bricks.filter { brick ->
-      val sup = bricksWithSupporters.values
-      listOf(brick) in sup
-    }
-    return bricks.size - vitalSupporters.size
+    val essentialSupporters = bricksWithSupporters.values.filter { it.size == 1 }.flatten().toSet()
+    return bricks.size - essentialSupporters.size
   }
 
   override fun solvePart2(input: String): Int {
-    val bricks = input.lines().map(Brick::parse).sortedBy { it.bottomZ() }
+    val bricks = parse(input)
 
     var ii = 0
     return bricks.sumOf { deintegrationCandidate ->
@@ -40,6 +33,10 @@ object Day22 : Puzzle<Int, Int>(day = 22) {
       offsets.zip(newOffets) { left, right -> left != right }
         .count { it }
     }
+  }
+
+  private fun parse(input: String): List<Brick> {
+    return input.lines().map(Brick::parse).sortedBy { it.bottomZ() }
   }
 
   private fun move(bricks: List<Brick>) {
