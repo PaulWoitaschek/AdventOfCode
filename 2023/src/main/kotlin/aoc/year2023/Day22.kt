@@ -1,8 +1,8 @@
 package aoc.year2023
 
-import aoc.library.Point
 import aoc.library.Point3
 import aoc.library.Puzzle
+import aoc.library.intersects
 
 object Day22 : Puzzle<Int, Int>(day = 22) {
 
@@ -56,36 +56,38 @@ object Day22 : Puzzle<Int, Int>(day = 22) {
 
     var zOffset = 0
 
+    fun topZ() = maxOf(from.z, to.z) - zOffset
+
+    fun bottomZ() = minOf(from.z, to.z) - zOffset
+
+    fun xyPointsIntersect(other: Brick): Boolean {
+      val horizontal = from.y == to.y
+      val otherHorizontal = other.from.y == other.to.y
+      return when {
+        horizontal && otherHorizontal -> {
+          // both horizontal
+          from.y == other.from.y && (from.x..to.x).intersects(other.from.x..other.to.x)
+        }
+        !horizontal && !otherHorizontal -> {
+          // both vertical
+          from.x == other.from.x && (from.y..to.y).intersects(other.from.y..other.to.y)
+        }
+        horizontal -> {
+          // self horizontal, other vertical
+          from.y in other.from.y..other.to.y && other.from.x in from.x..to.x
+        }
+        else -> {
+          // self vertical, other horizontal
+          from.x in other.from.x..other.to.x && other.from.y in from.y..to.y
+        }
+      }
+    }
+
     companion object {
       fun parse(input: String): Brick {
         val (from, to) = input.split("~").map(Point3::parse)
         return Brick(from = from, to = to)
       }
-    }
-
-    fun topZ() = maxOf(from.z, to.z) - zOffset
-
-    fun bottomZ() = minOf(from.z, to.z) - zOffset
-
-    val xyPoints: List<Point> = run {
-      if (from.x == to.x) {
-        val minY = minOf(from.y, to.y)
-        val maxY = maxOf(from.y, to.y)
-        (minY..maxY).map { Point(from.x, it) }
-      } else if (from.y == to.y) {
-        val minX = minOf(from.x, to.x)
-        val maxX = maxOf(from.x, to.x)
-        (minX..maxX).map { Point(it, from.y) }
-      } else {
-        error("Not lines")
-      }
-    }
-
-    private val xyPointsIntersectCache = mutableMapOf<Brick, Boolean>()
-
-    fun xyPointsIntersect(with: Brick): Boolean = xyPointsIntersectCache.getOrPut(with) {
-      val otherXyPoints = with.xyPoints
-      xyPoints.any { it in otherXyPoints }
     }
   }
 }
