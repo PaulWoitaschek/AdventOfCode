@@ -20,18 +20,14 @@ object Day22 : Puzzle<Int, Int>(day = 22) {
 
   override fun solvePart2(input: String): Int {
     val bricks = parse(input)
-
-    var ii = 0
-    return bricks.sumOf { deintegrationCandidate ->
-      println("${ii++} / ${bricks.size}")
+    return bricks.sumOf { toBeRemoved ->
       bricks.forEach { it.zOffset = 0 }
       move(bricks)
-      val withoutDeintegration = bricks - deintegrationCandidate
-      val offsets = withoutDeintegration.map { it.bottomZ() }
-      move(withoutDeintegration)
-      val newOffets = withoutDeintegration.map { it.bottomZ() }
-      offsets.zip(newOffets) { left, right -> left != right }
-        .count { it }
+      val withBrickRemoved = bricks - toBeRemoved
+      val originalOffsets = withBrickRemoved.map { it.bottomZ() }
+      move(withBrickRemoved)
+      val newOffsets = withBrickRemoved.map { it.bottomZ() }
+      originalOffsets.zip(newOffsets).count { it.first != it.second }
     }
   }
 
