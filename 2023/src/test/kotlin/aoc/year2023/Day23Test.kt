@@ -3,15 +3,11 @@ package aoc.year2023
 import aoc.library.solvePart1
 import aoc.library.solvePart2
 import io.kotest.matchers.ints.shouldBeExactly
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day23Test {
 
-  @Test
-  fun part1TestInput() {
-    Day23.solvePart1(
-      """
+  private val testInput = """
       #.#####################
       #.......#########...###
       #######.#########.#.###
@@ -35,8 +31,11 @@ class Day23Test {
       #.###.###.#.###.#.#v###
       #.....###...###...#...#
       #####################.#
-      """.trimIndent(),
-    ) shouldBeExactly 94
+  """.trimIndent()
+
+  @Test
+  fun part1TestInput() {
+    Day23.solvePart1(testInput) shouldBeExactly 94
   }
 
   @Test
@@ -45,14 +44,12 @@ class Day23Test {
   }
 
   @Test
-  @Disabled
   fun part2TestInput() {
-    Day23.solvePart2() shouldBeExactly 42
+    Day23.solvePart2(testInput) shouldBeExactly 154
   }
 
   @Test
-  @Disabled
   fun part2() {
-    Day23.solvePart2() shouldBeExactly 42
+    Day23.solvePart2() shouldBeExactly 6506
   }
 }
