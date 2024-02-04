@@ -1,5 +1,5 @@
 [versions]
-jupiter = "5.10.1"
+jupiter = "5.10.2"
 kotlin = "1.9.22"
 ktlintGradlePlugin = "12.1.0"
 
