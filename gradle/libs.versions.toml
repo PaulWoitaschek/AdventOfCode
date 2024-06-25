@@ -15,7 +15,7 @@ kotlinPoet = "com.squareup:kotlinpoet:1.17.0"
 jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
 jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
 
-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0"
+serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1"
 kotlin-jvmPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
