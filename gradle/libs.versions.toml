@@ -1,21 +1,21 @@
 [versions]
-jupiter = "5.10.2"
+jupiter = "5.10.3"
 kotlin = "2.0.0"
 ktlintGradlePlugin = "12.1.1"
 
 [libraries]
-kotest = "io.kotest:kotest-assertions-core:5.9.0"
+kotest = "io.kotest:kotest-assertions-core:5.9.1"
 ktlint = "com.pinterest.ktlint:ktlint-cli:1.2.1"
 ktlintGradlePlugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlintGradlePlugin" }
 coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1"
 okhttp = "com.squareup.okhttp3:okhttp:4.12.0"
 clikt = "com.github.ajalt.clikt:clikt:4.4.0"
-kotlinPoet = "com.squareup:kotlinpoet:1.16.0"
+kotlinPoet = "com.squareup:kotlinpoet:1.17.0"
 
 jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
 jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
 
-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
+serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1"
 kotlin-jvmPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
