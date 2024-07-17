@@ -10,14 +10,9 @@ object Day6 : Puzzle<Int, Int>(day = 6) {
 
   override fun solvePart2(input: String): Int = Round.parseAsSingleRound(input).waysToSolve()
 
-  private data class Round(
-    val time: Long,
-    val recordDistance: Long,
-  ) {
+  private data class Round(val time: Long, val recordDistance: Long) {
 
-    private fun accelerationStepsWin(steps: Long): Boolean {
-      return (time - steps) * steps > recordDistance
-    }
+    private fun accelerationStepsWin(steps: Long): Boolean = (time - steps) * steps > recordDistance
 
     fun waysToSolve(): Int {
       val start = (0..time).first(::accelerationStepsWin)

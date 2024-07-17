@@ -34,23 +34,14 @@ object Day9 : Puzzle<Int, Int>(day = 9) {
     return parent.score()
   }
 
-  private class Node(
-    val parent: Node?,
-    val children: MutableList<Node> = mutableListOf(),
-  ) {
+  private class Node(val parent: Node?, val children: MutableList<Node> = mutableListOf()) {
 
-    fun level(): Int {
-      return generateSequence(parent) { it.parent }.count()
-    }
+    fun level(): Int = generateSequence(parent) { it.parent }.count()
 
-    fun score(): Int {
-      return level() + children.sumOf { it.score() }
-    }
+    fun score(): Int = level() + children.sumOf { it.score() }
   }
 
-  private fun String.clean(onGarbageFound: (Int) -> Unit = {}): String {
-    return removeCancelled().removeGarbage(onGarbageFound)
-  }
+  private fun String.clean(onGarbageFound: (Int) -> Unit = {}): String = removeCancelled().removeGarbage(onGarbageFound)
 
   private fun String.removeCancelled(): String {
     val exclamationIndex = indexOf('!')

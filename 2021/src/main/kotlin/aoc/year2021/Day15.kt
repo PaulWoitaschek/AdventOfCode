@@ -5,12 +5,7 @@ import java.util.PriorityQueue
 
 object Day15 : Puzzle<Int, Int>(15) {
 
-  data class Vertex(
-    val x: Int,
-    val y: Int,
-    var totalRisk: Int,
-    val riskLevel: Int,
-  )
+  data class Vertex(val x: Int, val y: Int, var totalRisk: Int, val riskLevel: Int)
 
   override fun solvePart1(input: String): Int {
     val vertexes = input.lines()
@@ -23,9 +18,7 @@ object Day15 : Puzzle<Int, Int>(15) {
     fun vertex(
       x: Int,
       y: Int,
-    ): Vertex? {
-      return vertexes.getOrNull(y)?.getOrNull(x)
-    }
+    ): Vertex? = vertexes.getOrNull(y)?.getOrNull(x)
 
     fun Vertex.neighbors() = listOfNotNull(
       vertex(x - 1, y),

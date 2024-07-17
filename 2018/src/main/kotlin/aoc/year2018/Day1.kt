@@ -4,9 +4,7 @@ import aoc.library.Puzzle
 
 object Day1 : Puzzle<Int, Int>(day = 1) {
 
-  override fun solvePart1(input: String): Int {
-    return input.lines().map(String::toInt).fold(0, Int::plus)
-  }
+  override fun solvePart1(input: String): Int = input.lines().map(String::toInt).fold(0, Int::plus)
 
   override fun solvePart2(input: String): Int {
     val values = input.lines().map(String::toInt)

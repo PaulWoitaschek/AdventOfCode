@@ -4,25 +4,18 @@ import aoc.library.Puzzle
 
 object Day8 : Puzzle<Long, Long>(8) {
 
-  override fun solvePart1(input: String): Long {
-    return parseInput(input).sumOf { line ->
-      line.output.count {
-        it.size == 2 || it.size == 4 || it.size == 3 || it.size == 7
-      }.toLong()
-    }
+  override fun solvePart1(input: String): Long = parseInput(input).sumOf { line ->
+    line.output.count {
+      it.size == 2 || it.size == 4 || it.size == 3 || it.size == 7
+    }.toLong()
   }
 
-  override fun solvePart2(input: String): Long {
-    return parseInput(input).sumOf { it.outputValue().toLong() }
-  }
+  override fun solvePart2(input: String): Long = parseInput(input).sumOf { it.outputValue().toLong() }
 
   private fun parseInput(input: String): List<Display> = input.lines().map(Display.Companion::parse)
 }
 
-data class Display(
-  val input: List<Set<Char>>,
-  val output: List<Set<Char>>,
-) {
+data class Display(val input: List<Set<Char>>, val output: List<Set<Char>>) {
 
   fun outputValue(): Int {
     val one = input.single { it.count() == 2 }

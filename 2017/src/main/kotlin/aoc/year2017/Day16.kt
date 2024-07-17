@@ -36,22 +36,20 @@ object Day16 : Puzzle<String, String>(day = 16) {
     data class Exchange(val programAIndex: Int, val programBIndex: Int) : Instruction
     data class Partner(val programA: Char, val programB: Char) : Instruction
     companion object {
-      fun parse(instruction: String): Instruction {
-        return when (instruction.first()) {
-          's' -> {
-            val position = instruction.drop(1).toInt()
-            Spin(position)
-          }
-          'x' -> {
-            val (p1Index, p2Index) = instruction.drop(1).split("/").map(String::toInt)
-            Exchange(p1Index, p2Index)
-          }
-          'p' -> {
-            val (p1, p2) = instruction.drop(1).split("/").map(String::single)
-            Partner(p1, p2)
-          }
-          else -> error("Invalid instruction $instruction")
+      fun parse(instruction: String): Instruction = when (instruction.first()) {
+        's' -> {
+          val position = instruction.drop(1).toInt()
+          Spin(position)
         }
+        'x' -> {
+          val (p1Index, p2Index) = instruction.drop(1).split("/").map(String::toInt)
+          Exchange(p1Index, p2Index)
+        }
+        'p' -> {
+          val (p1, p2) = instruction.drop(1).split("/").map(String::single)
+          Partner(p1, p2)
+        }
+        else -> error("Invalid instruction $instruction")
       }
     }
   }

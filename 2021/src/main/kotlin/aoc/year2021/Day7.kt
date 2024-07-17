@@ -5,13 +5,9 @@ import kotlin.math.abs
 
 object Day7 : Puzzle<Long, Long>(7) {
 
-  override fun solvePart1(input: String): Long {
-    return solve(input) { it }
-  }
+  override fun solvePart1(input: String): Long = solve(input) { it }
 
-  override fun solvePart2(input: String): Long {
-    return solve(input) { (it * (it + 1)) / 2 }
-  }
+  override fun solvePart2(input: String): Long = solve(input) { (it * (it + 1)) / 2 }
 }
 
 private inline fun solve(

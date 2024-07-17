@@ -9,10 +9,8 @@ object Day4 : Puzzle<Int, Int>(day = 4) {
     return sleepyGuard.id * sleepyGuard.mostSleepingMinute
   }
 
-  override fun solvePart2(input: String): Int {
-    return guards(input).maxBy { it.occurrencesOfMostSleepingMinute }
-      .let { it.id * it.mostSleepingMinute }
-  }
+  override fun solvePart2(input: String): Int = guards(input).maxBy { it.occurrencesOfMostSleepingMinute }
+    .let { it.id * it.mostSleepingMinute }
 
   private fun guards(input: String): List<Guard> {
     val wholeRegex = ".*?:(\\d+)] (.*)$".toRegex()

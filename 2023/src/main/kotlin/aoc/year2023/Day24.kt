@@ -5,9 +5,7 @@ import kotlin.math.sign
 
 object Day24 : Puzzle<Int, Int>(day = 24) {
 
-  override fun solvePart1(input: String): Int {
-    return solvePart1(input, 200000000000000..400000000000000)
-  }
+  override fun solvePart1(input: String): Int = solvePart1(input, 200000000000000..400000000000000)
 
   fun solvePart1(
     input: String,
@@ -48,14 +46,7 @@ object Day24 : Puzzle<Int, Int>(day = 24) {
     return hailStones
   }
 
-  private data class HailStone(
-    val x: Long,
-    val y: Long,
-    val z: Long,
-    val vx: Long,
-    val vy: Long,
-    val vz: Long,
-  ) {
+  private data class HailStone(val x: Long, val y: Long, val z: Long, val vx: Long, val vy: Long, val vz: Long) {
 
     private val slope = vy.toDouble() / vx
     private val b = y - slope * x

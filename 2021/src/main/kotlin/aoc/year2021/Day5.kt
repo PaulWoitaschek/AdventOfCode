@@ -6,13 +6,9 @@ import kotlin.math.abs
 
 object Day5 : Puzzle<Long, Long>(5) {
 
-  override fun solvePart1(input: String): Long {
-    return process(input, includeDiagonals = false)
-  }
+  override fun solvePart1(input: String): Long = process(input, includeDiagonals = false)
 
-  override fun solvePart2(input: String): Long {
-    return process(input, includeDiagonals = true)
-  }
+  override fun solvePart2(input: String): Long = process(input, includeDiagonals = true)
 }
 
 private fun process(
@@ -31,44 +27,39 @@ private fun process(
   return pointScores.count { it.value >= 2 }.toLong()
 }
 
-private data class Line(
-  val from: Point,
-  val to: Point,
-) {
+private data class Line(val from: Point, val to: Point) {
 
-  fun pointsOnLine(includeDiagonals: Boolean): List<Point> {
-    return when {
-      from.x == to.x -> {
-        (minOf(from.y, to.y)..maxOf(from.y, to.y)).map { rangeY ->
-          Point(x = from.x, y = rangeY)
-        }
+  fun pointsOnLine(includeDiagonals: Boolean): List<Point> = when {
+    from.x == to.x -> {
+      (minOf(from.y, to.y)..maxOf(from.y, to.y)).map { rangeY ->
+        Point(x = from.x, y = rangeY)
       }
+    }
 
-      from.y == to.y -> {
-        (minOf(from.x, to.x)..maxOf(from.x, to.x)).map { rangeX ->
-          Point(x = rangeX, y = from.y)
-        }
+    from.y == to.y -> {
+      (minOf(from.x, to.x)..maxOf(from.x, to.x)).map { rangeX ->
+        Point(x = rangeX, y = from.y)
       }
+    }
 
-      includeDiagonals && (abs(from.x - to.x) == abs(from.y - to.y)) -> {
-        val results = mutableListOf<Point>()
-        results += from
-        var currentPoint = from
-        val up = from.y < to.y
-        val right = from.x < to.x
-        do {
-          currentPoint = Point(
-            x = currentPoint.x + if (right) 1 else -1,
-            y = currentPoint.y + if (up) 1 else -1,
-          )
-          results += currentPoint
-        } while (currentPoint != to)
-        results
-      }
+    includeDiagonals && (abs(from.x - to.x) == abs(from.y - to.y)) -> {
+      val results = mutableListOf<Point>()
+      results += from
+      var currentPoint = from
+      val up = from.y < to.y
+      val right = from.x < to.x
+      do {
+        currentPoint = Point(
+          x = currentPoint.x + if (right) 1 else -1,
+          y = currentPoint.y + if (up) 1 else -1,
+        )
+        results += currentPoint
+      } while (currentPoint != to)
+      results
+    }
 
-      else -> {
-        emptyList()
-      }
+    else -> {
+      emptyList()
     }
   }
 

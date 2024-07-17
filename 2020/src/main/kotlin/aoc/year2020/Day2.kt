@@ -16,12 +16,7 @@ object Day2 : Puzzle<Int, Int>(2) {
     }
   }
 
-  private data class PasswordPolicy(
-    val min: Int,
-    val max: Int,
-    val char: Char,
-    val password: String,
-  ) {
+  private data class PasswordPolicy(val min: Int, val max: Int, val char: Char, val password: String) {
     fun isValidForPart1(): Boolean = password.count { it == char } in min..max
     fun isValidForPart2(): Boolean = listOf(min, max).count { password[it - 1] == char } == 1
   }

@@ -27,10 +27,7 @@ object Day14 : Puzzle<Int, Int>(14) {
     }
   }
 
-  class Cave(
-    val sands: MutableSet<Point>,
-    val rocks: Set<Point>,
-  ) {
+  class Cave(val sands: MutableSet<Point>, val rocks: Set<Point>) {
 
     private var candidate: Point? = null
 

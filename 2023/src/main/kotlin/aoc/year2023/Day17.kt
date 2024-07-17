@@ -87,11 +87,7 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
     error("Invalid data")
   }
 
-  private data class Flow(
-    val position: Point,
-    val direction: Direction,
-    val stepsInDirection: Int,
-  )
+  private data class Flow(val position: Point, val direction: Direction, val stepsInDirection: Int)
 
   private data class FlowWithHeat(val flow: Flow, val heat: Int)
 }

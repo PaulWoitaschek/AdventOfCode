@@ -7,14 +7,12 @@ import kotlin.math.min
 
 object Day3 : Puzzle<Int, Int>(3) {
 
-  override fun solvePart1(input: String): Int {
-    return input.lines()
-      .map(Claim::parse)
-      .flatMap(Claim::points)
-      .groupingBy { it }
-      .eachCount()
-      .count { it.value > 1 }
-  }
+  override fun solvePart1(input: String): Int = input.lines()
+    .map(Claim::parse)
+    .flatMap(Claim::points)
+    .groupingBy { it }
+    .eachCount()
+    .count { it.value > 1 }
 
   override fun solvePart2(input: String): Int {
     val claims = input.lines().map(Claim::parse)
@@ -26,13 +24,7 @@ object Day3 : Puzzle<Int, Int>(3) {
     }.id
   }
 
-  data class Claim(
-    val id: Int,
-    val left: Int,
-    val top: Int,
-    val width: Int,
-    val height: Int,
-  ) {
+  data class Claim(val id: Int, val left: Int, val top: Int, val width: Int, val height: Int) {
 
     fun points(): List<Point> = (left..<right).flatMap { x ->
       (top..<bottom).map { y ->

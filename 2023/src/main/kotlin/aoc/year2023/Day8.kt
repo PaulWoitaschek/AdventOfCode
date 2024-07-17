@@ -7,10 +7,8 @@ import aoc.year2023.SandMap.Direction.Right
 
 object Day8 : Puzzle<Int, Long>(day = 8) {
 
-  override fun solvePart1(input: String): Int {
-    return SandMap.parse(input)
-      .steps(from = "AAA", to = { it == "ZZZ" })
-  }
+  override fun solvePart1(input: String): Int = SandMap.parse(input)
+    .steps(from = "AAA", to = { it == "ZZZ" })
 
   override fun solvePart2(input: String): Long {
     val sandMap = SandMap.parse(input)
@@ -26,27 +24,20 @@ object Day8 : Puzzle<Int, Long>(day = 8) {
   }
 }
 
-private data class SandMap(
-  val instructions: List<Direction>,
-  val nodes: Map<String, Map<Direction, String>>,
-) {
+private data class SandMap(val instructions: List<Direction>, val nodes: Map<String, Map<Direction, String>>) {
 
   private fun position(
     from: String,
     direction: Direction,
-  ): String {
-    return nodes.getValue(from).getValue(direction)
-  }
+  ): String = nodes.getValue(from).getValue(direction)
 
   private fun instructions(): Sequence<Direction> = generateSequence { instructions }.flatten()
 
   fun steps(
     from: String,
     to: (String) -> Boolean,
-  ): Int {
-    return instructions().runningFold(from, ::position)
-      .takeWhile { !to(it) }.count()
-  }
+  ): Int = instructions().runningFold(from, ::position)
+    .takeWhile { !to(it) }.count()
 
   enum class Direction { Left, Right }
 

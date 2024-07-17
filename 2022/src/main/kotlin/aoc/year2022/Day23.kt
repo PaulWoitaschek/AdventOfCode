@@ -90,43 +90,39 @@ object Day23 : Puzzle<Int, Int>(23) {
     fun next(): Direction = entries.getOrNull(ordinal + 1) ?: entries.first()
   }
 
-  data class Elf(
-    var position: Point,
-  ) {
+  data class Elf(var position: Point) {
 
-    fun proposePositions(direction: Direction): Sequence<List<Point>> {
-      return sequence {
-        var nextDirection = direction
-        while (true) {
-          yield(nextDirection)
-          nextDirection = nextDirection.next()
-        }
-      }.map {
-        val (x, y) = position
-        when (it) {
-          Direction.North -> listOf(
-            Point(x, y - 1),
-            Point(x - 1, y - 1),
-            Point(x + 1, y - 1),
-          )
-          Direction.South -> listOf(
-            Point(x, y + 1),
-            Point(x - 1, y + 1),
-            Point(x + 1, y + 1),
-          )
-          Direction.West -> listOf(
-            Point(x - 1, y),
-            Point(x - 1, y + 1),
-            Point(x - 1, y - 1),
-          )
-          Direction.East -> listOf(
-            Point(x + 1, y),
-            Point(x + 1, y + 1),
-            Point(x + 1, y - 1),
-          )
-        }
+    fun proposePositions(direction: Direction): Sequence<List<Point>> = sequence {
+      var nextDirection = direction
+      while (true) {
+        yield(nextDirection)
+        nextDirection = nextDirection.next()
       }
-        .take(4)
+    }.map {
+      val (x, y) = position
+      when (it) {
+        Direction.North -> listOf(
+          Point(x, y - 1),
+          Point(x - 1, y - 1),
+          Point(x + 1, y - 1),
+        )
+        Direction.South -> listOf(
+          Point(x, y + 1),
+          Point(x - 1, y + 1),
+          Point(x + 1, y + 1),
+        )
+        Direction.West -> listOf(
+          Point(x - 1, y),
+          Point(x - 1, y + 1),
+          Point(x - 1, y - 1),
+        )
+        Direction.East -> listOf(
+          Point(x + 1, y),
+          Point(x + 1, y + 1),
+          Point(x + 1, y - 1),
+        )
+      }
     }
+      .take(4)
   }
 }

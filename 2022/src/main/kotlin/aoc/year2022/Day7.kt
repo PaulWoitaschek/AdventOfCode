@@ -4,9 +4,7 @@ import aoc.library.Puzzle
 
 object Day7 : Puzzle<Long, Long>(7) {
 
-  override fun solvePart1(input: String): Long {
-    return directorySizes(input).filter { it <= 100_000 }.sum()
-  }
+  override fun solvePart1(input: String): Long = directorySizes(input).filter { it <= 100_000 }.sum()
 
   override fun solvePart2(input: String): Long {
     val directories = directorySizes(input)

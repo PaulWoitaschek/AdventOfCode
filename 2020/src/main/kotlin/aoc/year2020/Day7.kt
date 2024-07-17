@@ -9,13 +9,11 @@ object Day7 : Puzzle<Int, Int>(7) {
   override fun solvePart1(input: String): Int {
     val bagRules = parseInput(input)
 
-    fun canContainShinyGoldBag(color: String): Boolean {
-      return if (color == SHINY_GOLD) {
-        true
-      } else {
-        bagRules[color]!!.any {
-          canContainShinyGoldBag(it.key)
-        }
+    fun canContainShinyGoldBag(color: String): Boolean = if (color == SHINY_GOLD) {
+      true
+    } else {
+      bagRules[color]!!.any {
+        canContainShinyGoldBag(it.key)
       }
     }
 

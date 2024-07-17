@@ -57,28 +57,20 @@ object Day12 : Puzzle<Int, Long>(12) {
     }
   }
 
-  private fun moonPositions(input: String): List<Point3> {
-    return input.lines()
-      .map { value ->
-        val (x, y, z) = "<x=(.*?), y=(.*?), z=(.*?)>"
-          .toRegex()
-          .find(value)!!
-          .destructured.toList()
-          .map(String::toInt)
-        Point3(x, y, z)
-      }
-  }
+  private fun moonPositions(input: String): List<Point3> = input.lines()
+    .map { value ->
+      val (x, y, z) = "<x=(.*?), y=(.*?), z=(.*?)>"
+        .toRegex()
+        .find(value)!!
+        .destructured.toList()
+        .map(String::toInt)
+      Point3(x, y, z)
+    }
 }
 
-private data class Moon(
-  val originalPosition: Point3,
-  var position: Point3,
-  var velocity: Point3,
-) {
+private data class Moon(val originalPosition: Point3, var position: Point3, var velocity: Point3) {
 
   constructor(originalPosition: Point3) : this(originalPosition, originalPosition, Point3.Zero)
 
-  fun isStable(axis: Point3.Axis): Boolean {
-    return velocity[axis] == 0 && position[axis] == originalPosition[axis]
-  }
+  fun isStable(axis: Point3.Axis): Boolean = velocity[axis] == 0 && position[axis] == originalPosition[axis]
 }

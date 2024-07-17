@@ -41,10 +41,7 @@ object Day4 : Puzzle<Long, Long>(4) {
   }
 }
 
-private data class Game(
-  val allDraws: List<Int>,
-  val boards: List<Board>,
-) {
+private data class Game(val allDraws: List<Int>, val boards: List<Board>) {
 
   companion object {
     fun parse(input: String): Game {
@@ -65,9 +62,7 @@ private data class Game(
   }
 }
 
-private data class Board(
-  val numbers: List<List<Int>>,
-) {
+private data class Board(val numbers: List<List<Int>>) {
 
   private val rows: List<List<Int>> = numbers
   private val columns: List<List<Int>>
@@ -86,22 +81,16 @@ private data class Board(
     }
   }
 
-  fun hasWon(draws: List<Int>): Boolean {
-    return rows.any { it.hasWon(draws) } || columns.any { it.hasWon(draws) }
-  }
+  fun hasWon(draws: List<Int>): Boolean = rows.any { it.hasWon(draws) } || columns.any { it.hasWon(draws) }
 
-  fun score(draws: List<Int>): Long {
-    return (
-      numbers.flatten()
-        .filter { it !in draws }
-        .sum() * draws.last()
-      )
-      .toLong()
-  }
+  fun score(draws: List<Int>): Long = (
+    numbers.flatten()
+      .filter { it !in draws }
+      .sum() * draws.last()
+    )
+    .toLong()
 
-  private fun List<Int>.hasWon(draws: List<Int>): Boolean {
-    return all { it in draws }
-  }
+  private fun List<Int>.hasWon(draws: List<Int>): Boolean = all { it in draws }
 
   companion object {
 

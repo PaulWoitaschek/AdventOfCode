@@ -50,8 +50,5 @@ object Day2 : Puzzle<Int, Int>(2) {
     return solve(games)
   }
 
-  private data class Game(
-    val id: Int,
-    val shownCubes: List<Map<String, Int>>,
-  )
+  private data class Game(val id: Int, val shownCubes: List<Map<String, Int>>)
 }

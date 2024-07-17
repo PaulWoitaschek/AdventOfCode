@@ -4,13 +4,9 @@ import aoc.library.Puzzle
 
 object Day2 : Puzzle<Long, Long>(2) {
 
-  override fun solvePart1(input: String): Long {
-    return process(input, accountAim = false)
-  }
+  override fun solvePart1(input: String): Long = process(input, accountAim = false)
 
-  override fun solvePart2(input: String): Long {
-    return process(input, accountAim = true)
-  }
+  override fun solvePart2(input: String): Long = process(input, accountAim = true)
 }
 
 private fun process(
@@ -31,11 +27,7 @@ private enum class Connection {
   Down,
 }
 
-private data class Position(
-  val horizontal: Int,
-  val depth: Int,
-  val aim: Int,
-) {
+private data class Position(val horizontal: Int, val depth: Int, val aim: Int) {
 
   fun plusInstruction(
     instruction: Instruction,
@@ -65,10 +57,7 @@ private data class Position(
   }
 }
 
-private data class Instruction(
-  val direction: Connection,
-  val steps: Int,
-) {
+private data class Instruction(val direction: Connection, val steps: Int) {
   companion object {
     fun parse(input: String): Instruction {
       val (directionString, stepString) = input.split(" ")

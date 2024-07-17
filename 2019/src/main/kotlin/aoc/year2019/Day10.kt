@@ -40,16 +40,14 @@ object Day10 : Puzzle<Int, Int>(10) {
     }
   }
 
-  private fun parseAsteroids(input: String): List<Point> {
-    return input.lines()
-      .flatMapIndexed { y, line ->
-        line.mapIndexedNotNull { x, value ->
-          if (value == '#') {
-            Point(x, y)
-          } else {
-            null
-          }
+  private fun parseAsteroids(input: String): List<Point> = input.lines()
+    .flatMapIndexed { y, line ->
+      line.mapIndexedNotNull { x, value ->
+        if (value == '#') {
+          Point(x, y)
+        } else {
+          null
         }
       }
-  }
+    }
 }

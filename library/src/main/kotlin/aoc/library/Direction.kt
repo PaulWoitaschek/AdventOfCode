@@ -7,13 +7,9 @@ enum class Direction(var char: Char) {
   Down('D'),
   ;
 
-  fun clockwise(): Direction {
-    return entries[(ordinal + 1) % entries.size]
-  }
+  fun clockwise(): Direction = entries[(ordinal + 1) % entries.size]
 
-  fun counterClockwise(): Direction {
-    return entries[(ordinal + entries.size - 1) % entries.size]
-  }
+  fun counterClockwise(): Direction = entries[(ordinal + entries.size - 1) % entries.size]
 
   fun opposite(): Direction = when (this) {
     Left -> Right
@@ -24,9 +20,7 @@ enum class Direction(var char: Char) {
 
   companion object {
     private val byChar = entries.associateBy { it.char }
-    fun parse(input: Char): Direction {
-      return byChar[input] ?: throw IllegalArgumentException("Invalid char=$input")
-    }
+    fun parse(input: Char): Direction = byChar[input] ?: throw IllegalArgumentException("Invalid char=$input")
 
     fun fromArrowOrNull(arrow: Char): Direction? = when (arrow) {
       '<' -> Left

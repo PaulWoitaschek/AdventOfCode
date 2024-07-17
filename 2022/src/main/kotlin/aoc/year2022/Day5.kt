@@ -37,9 +37,7 @@ private value class Crates(val stacks: List<MutableList<Char>>) {
     }
   }
 
-  fun onTopOfStack(): String {
-    return String(stacks.mapNotNull { it.lastOrNull() }.toCharArray())
-  }
+  fun onTopOfStack(): String = String(stacks.mapNotNull { it.lastOrNull() }.toCharArray())
 
   companion object {
     fun parse(input: String): Crates {

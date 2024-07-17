@@ -24,10 +24,7 @@ object Day18 : Puzzle<Long, Long>(day = 18) {
     return shoelace(points) + borderSize + 1
   }
 
-  private data class Instruction(
-    val direction: Direction,
-    val steps: Int,
-  ) {
+  private data class Instruction(val direction: Direction, val steps: Int) {
     companion object {
 
       private val part1Regex = """(\w) (\d+)""".toRegex()

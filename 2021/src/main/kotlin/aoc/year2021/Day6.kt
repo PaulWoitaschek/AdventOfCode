@@ -14,22 +14,18 @@ object Day6 : Puzzle<Long, Long>(6) {
 private fun totalFishesAfterDays(
   input: String,
   days: Int,
-): Long {
-  return generateSequence(Ocean.parse(input)) { it.afterOneDay() }
-    .take(days + 1).last().totalFishes
-}
+): Long = generateSequence(Ocean.parse(input)) { it.afterOneDay() }
+  .take(days + 1).last().totalFishes
 
 @JvmInline
 private value class BreedTime(private val value: Int) {
 
   val willBreedToday: Boolean get() = value == 0
 
-  fun afterNextDay(): BreedTime {
-    return if (willBreedToday) {
-      AFTER_BREEDING
-    } else {
-      BreedTime(value - 1)
-    }
+  fun afterNextDay(): BreedTime = if (willBreedToday) {
+    AFTER_BREEDING
+  } else {
+    BreedTime(value - 1)
   }
 
   companion object {

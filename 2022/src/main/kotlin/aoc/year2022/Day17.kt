@@ -13,10 +13,7 @@ object Day17 : Puzzle<Long, Nothing>(17) {
   override fun solvePart1(input: String): Long {
     val cave = Cave()
 
-    data class Rock(
-      val shape: RockShape,
-      val coordinates: List<Point>,
-    )
+    data class Rock(val shape: RockShape, val coordinates: List<Point>)
 
     fun newRock(shape: RockShape): Rock {
       val top = cave.top() + 4

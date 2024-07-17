@@ -7,24 +7,20 @@ object Day5 : Puzzle<Int, Int>(5) {
 
   override fun solvePart1(input: String): Int = boardingPasses(input).max()
 
-  override fun solvePart2(input: String): Int {
-    return boardingPasses(input)
-      .sorted()
-      .zipWithNext()
-      .single { (current, next) ->
-        next != current + 1
-      }
-      .first + 1
-  }
+  override fun solvePart2(input: String): Int = boardingPasses(input)
+    .sorted()
+    .zipWithNext()
+    .single { (current, next) ->
+      next != current + 1
+    }
+    .first + 1
 
-  private fun boardingPasses(input: String): List<Int> {
-    return input.lines().filter { it.isNotEmpty() }
-      .map { boardingPass ->
-        val row = findValue(127, boardingPass.take(7))
-        val column = findValue(7, boardingPass.drop(7))
-        seatId(row, column)
-      }
-  }
+  private fun boardingPasses(input: String): List<Int> = input.lines().filter { it.isNotEmpty() }
+    .map { boardingPass ->
+      val row = findValue(127, boardingPass.take(7))
+      val column = findValue(7, boardingPass.drop(7))
+      seatId(row, column)
+    }
 
   private fun seatId(
     row: Int,

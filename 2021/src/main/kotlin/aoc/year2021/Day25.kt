@@ -4,21 +4,19 @@ import aoc.library.Puzzle
 
 object Day25 : Puzzle<Int, Int>(25) {
 
-  override fun solvePart1(input: String): Int {
-    return sequence {
-      var current = parse(input)
-      yield(current)
-      while (true) {
-        val next = current.move()
-        if (next == current) {
-          break
-        } else {
-          yield(next)
-          current = next
-        }
+  override fun solvePart1(input: String): Int = sequence {
+    var current = parse(input)
+    yield(current)
+    while (true) {
+      val next = current.move()
+      if (next == current) {
+        break
+      } else {
+        yield(next)
+        current = next
       }
-    }.count()
-  }
+    }
+  }.count()
 
   override fun solvePart2(input: String) = error("No part 2")
 }
@@ -27,23 +25,19 @@ private enum class Cucumber { Right, Down, Empty }
 
 private typealias CucumberMap = List<List<Cucumber>>
 
-private fun parse(input: String): CucumberMap {
-  return input.lines()
-    .map { line ->
-      line.map { direction ->
-        when (direction) {
-          'v' -> Cucumber.Down
-          '>' -> Cucumber.Right
-          '.' -> Cucumber.Empty
-          else -> error("Invalid direction $direction")
-        }
+private fun parse(input: String): CucumberMap = input.lines()
+  .map { line ->
+    line.map { direction ->
+      when (direction) {
+        'v' -> Cucumber.Down
+        '>' -> Cucumber.Right
+        '.' -> Cucumber.Empty
+        else -> error("Invalid direction $direction")
       }
     }
-}
+  }
 
-private fun CucumberMap.move(): CucumberMap {
-  return moveRight().moveDown()
-}
+private fun CucumberMap.move(): CucumberMap = moveRight().moveDown()
 
 private fun CucumberMap.moveRight(): CucumberMap {
   val result = toMutableList().map { it.toMutableList() }

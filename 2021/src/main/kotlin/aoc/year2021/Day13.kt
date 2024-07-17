@@ -24,19 +24,17 @@ object Day13 : Puzzle<Long, String>(13) {
   }
 }
 
-private fun Point.followInstruction(instruction: FoldingInstruction): Point {
-  return if (instruction.foldVertically) {
-    if (y <= instruction.coordinate) {
-      this
-    } else {
-      Point(x, instruction.coordinate - abs(y - instruction.coordinate))
-    }
+private fun Point.followInstruction(instruction: FoldingInstruction): Point = if (instruction.foldVertically) {
+  if (y <= instruction.coordinate) {
+    this
   } else {
-    if (x <= instruction.coordinate) {
-      this
-    } else {
-      Point(instruction.coordinate - abs(x - instruction.coordinate), y)
-    }
+    Point(x, instruction.coordinate - abs(y - instruction.coordinate))
+  }
+} else {
+  if (x <= instruction.coordinate) {
+    this
+  } else {
+    Point(instruction.coordinate - abs(x - instruction.coordinate), y)
   }
 }
 
@@ -58,7 +56,4 @@ private fun parse(input: String): Pair<Set<Point>, List<FoldingInstruction>> {
   return points to foldInstructions
 }
 
-private data class FoldingInstruction(
-  val foldVertically: Boolean,
-  val coordinate: Int,
-)
+private data class FoldingInstruction(val foldVertically: Boolean, val coordinate: Int)

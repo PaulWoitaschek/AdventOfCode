@@ -5,9 +5,7 @@ import kotlin.math.absoluteValue
 
 object Day16 : Puzzle<String, String>(16) {
 
-  override fun solvePart1(input: String): String {
-    return process(input, 100).take(8)
-  }
+  override fun solvePart1(input: String): String = process(input, 100).take(8)
 
   override fun solvePart2(input: String): String {
     TODO()
@@ -16,12 +14,10 @@ object Day16 : Puzzle<String, String>(16) {
   fun process(
     input: String,
     phases: Int,
-  ): String {
-    return process(
-      digits = input.toList().map { it.digitToInt() },
-      phases = phases,
-    ).joinToString("")
-  }
+  ): String = process(
+    digits = input.toList().map { it.digitToInt() },
+    phases = phases,
+  ).joinToString("")
 
   private fun process(
     digits: List<Int>,

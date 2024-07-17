@@ -37,11 +37,9 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
     adjacentPointsOfInterest: Map<Point, Set<Point>>,
     grid: Map<Point, Tile>,
     pointsOfInterest: Set<Point>,
-  ): Map<Point, Map<Point, Int>> {
-    return adjacentPointsOfInterest.mapValues { (from, other) ->
-      other.associateWith { o ->
-        maxPath(forest = grid, start = from, end = o, canClimbSlopes = true, stopPoints = pointsOfInterest - o)
-      }
+  ): Map<Point, Map<Point, Int>> = adjacentPointsOfInterest.mapValues { (from, other) ->
+    other.associateWith { o ->
+      maxPath(forest = grid, start = from, end = o, canClimbSlopes = true, stopPoints = pointsOfInterest - o)
     }
   }
 
@@ -115,13 +113,11 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
     return pointsOfInterest
   }
 
-  private fun parse(input: String): Map<Point, Tile> {
-    return grid(input) { char ->
-      when (char) {
-        '#' -> Tile.Forest
-        '.' -> Tile.Path
-        else -> Tile.Slope(Direction.fromArrowOrNull(char)!!)
-      }
+  private fun parse(input: String): Map<Point, Tile> = grid(input) { char ->
+    when (char) {
+      '#' -> Tile.Forest
+      '.' -> Tile.Path
+      else -> Tile.Slope(Direction.fromArrowOrNull(char)!!)
     }
   }
 

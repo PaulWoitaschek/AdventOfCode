@@ -28,29 +28,25 @@ object Day3 : Puzzle<Int, Int>(3) {
       }
   }
 
-  private fun paths(input: String): List<List<Point>> {
-    return input.lines()
-      .map { vectorString ->
-        val path = mutableListOf(Point.Zero)
-        vectorString.split(",").forEach { vector ->
-          val direction = Direction.parse(vector.first())
-          repeat(vector.drop(1).toInt()) {
-            path += path.last().move(direction)
-          }
+  private fun paths(input: String): List<List<Point>> = input.lines()
+    .map { vectorString ->
+      val path = mutableListOf(Point.Zero)
+      vectorString.split(",").forEach { vector ->
+        val direction = Direction.parse(vector.first())
+        repeat(vector.drop(1).toInt()) {
+          path += path.last().move(direction)
         }
-        path
       }
-  }
+      path
+    }
 
-  private fun intersections(paths: List<List<Point>>): Set<Point> {
-    return paths.indices.flatMap { leftIndex ->
-      paths.indices.flatMap { rightIndex ->
-        if (leftIndex != rightIndex) {
-          paths[leftIndex].intersect(paths[rightIndex].toSet())
-        } else {
-          emptySet()
-        }
+  private fun intersections(paths: List<List<Point>>): Set<Point> = paths.indices.flatMap { leftIndex ->
+    paths.indices.flatMap { rightIndex ->
+      if (leftIndex != rightIndex) {
+        paths[leftIndex].intersect(paths[rightIndex].toSet())
+      } else {
+        emptySet()
       }
-    }.toSet()
-  }
+    }
+  }.toSet()
 }

@@ -12,13 +12,11 @@ object Day6 : Puzzle<Int, Int>(6) {
         right to left
       }
     val distanceToComCache = mutableMapOf<String, Int>()
-    fun distanceToCom(spaceObject: String): Int {
-      return distanceToComCache.getOrPut(spaceObject) {
-        if (spaceObject == "COM") {
-          0
-        } else {
-          distanceToCom(orbiter[spaceObject]!!) + 1
-        }
+    fun distanceToCom(spaceObject: String): Int = distanceToComCache.getOrPut(spaceObject) {
+      if (spaceObject == "COM") {
+        0
+      } else {
+        distanceToCom(orbiter[spaceObject]!!) + 1
       }
     }
 

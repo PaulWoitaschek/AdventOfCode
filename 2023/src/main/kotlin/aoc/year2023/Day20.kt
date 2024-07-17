@@ -95,17 +95,10 @@ object Day20 : Puzzle<Long, Long>(day = 20) {
     val name: String
     val destinations: List<String>
 
-    data class FlipFlow(
-      var on: Boolean,
-      override val name: String,
-      override val destinations: List<String>,
-    ) : Module
+    data class FlipFlow(var on: Boolean, override val name: String, override val destinations: List<String>) : Module
 
-    data class Conjunction(
-      override val name: String,
-      override val destinations: List<String>,
-      val memory: MutableMap<String, Boolean>,
-    ) : Module
+    data class Conjunction(override val name: String, override val destinations: List<String>, val memory: MutableMap<String, Boolean>) :
+      Module
 
     data class Broadcaster(override val destinations: List<String>) : Module {
       override val name: String = "broadcaster"

@@ -25,9 +25,7 @@ data class Point(val x: Int, val y: Int) {
     }
   }
 
-  fun manhattanDistanceTo(other: Point): Int {
-    return (x - other.x).absoluteValue + (y - other.y).absoluteValue
-  }
+  fun manhattanDistanceTo(other: Point): Int = (x - other.x).absoluteValue + (y - other.y).absoluteValue
 
   fun degreesTo(other: Point): Double {
     val atan2 = atan2(
@@ -108,11 +106,9 @@ inline fun <T> Map<Point, T>.print(crossinline tile: (Point) -> String) {
   println(printString(tile))
 }
 
-fun Collection<Point>.bounds(): Rect {
-  return Rect(
-    left = minOf { it.x },
-    right = maxOf { it.x },
-    top = minOf { it.y },
-    bottom = maxOf { it.y },
-  )
-}
+fun Collection<Point>.bounds(): Rect = Rect(
+  left = minOf { it.x },
+  right = maxOf { it.x },
+  top = minOf { it.y },
+  bottom = maxOf { it.y },
+)
