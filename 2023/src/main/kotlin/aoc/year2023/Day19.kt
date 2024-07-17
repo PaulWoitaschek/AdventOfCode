@@ -13,10 +13,7 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
 
   override fun solvePart2(input: String): Long = System.parse(input).workflowCombinations()
 
-  private data class System(
-    val workflows: List<Workflow>,
-    val parts: List<Parts>,
-  ) {
+  private data class System(val workflows: List<Workflow>, val parts: List<Parts>) {
 
     fun workflowCombinations(): Long {
       val parts: Map<PartId, IntRange> = "xmas".associate {
@@ -123,9 +120,7 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
     }
   }
 
-  private data class Parts(
-    val parts: Map<PartId, Int>,
-  ) {
+  private data class Parts(val parts: Map<PartId, Int>) {
 
     operator fun get(partId: PartId) = parts.getValue(partId)
 
@@ -153,10 +148,7 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
   @JvmInline
   private value class PartId(val id: String)
 
-  private data class Workflow(
-    val name: WorkflowName,
-    val rules: List<Rule>,
-  ) {
+  private data class Workflow(val name: WorkflowName, val rules: List<Rule>) {
 
     fun process(parts: Parts): Destination {
       val rule = rules.first { rule ->
@@ -178,31 +170,27 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
 
   private data class Rule(val condition: Condition, val destination: Destination) {
 
-    fun evaluate(parts: Parts): Boolean {
-      return when (condition) {
-        Condition.AlwaysTrue -> true
-        is Condition.Compare -> {
-          if (condition.greaterThan) {
-            parts[condition.partId] > condition.value
-          } else {
-            parts[condition.partId] < condition.value
-          }
+    fun evaluate(parts: Parts): Boolean = when (condition) {
+      Condition.AlwaysTrue -> true
+      is Condition.Compare -> {
+        if (condition.greaterThan) {
+          parts[condition.partId] > condition.value
+        } else {
+          parts[condition.partId] < condition.value
         }
       }
     }
 
     companion object {
-      fun parse(input: String): Rule {
-        return if (input.contains(":")) {
-          val (conditionValue, destination) = input.split(":")
-          val condition = Condition.parse(conditionValue)
-          Rule(condition, Destination.parse(destination))
-        } else {
-          Rule(
-            condition = Condition.AlwaysTrue,
-            destination = Destination.parse(input),
-          )
-        }
+      fun parse(input: String): Rule = if (input.contains(":")) {
+        val (conditionValue, destination) = input.split(":")
+        val condition = Condition.parse(conditionValue)
+        Rule(condition, Destination.parse(destination))
+      } else {
+        Rule(
+          condition = Condition.AlwaysTrue,
+          destination = Destination.parse(input),
+        )
       }
     }
   }
@@ -213,12 +201,10 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
     data class ToWorkflow(val workflow: WorkflowName) : Destination
 
     companion object {
-      fun parse(input: String): Destination {
-        return when (input) {
-          "A" -> Accepted
-          "R" -> Rejected
-          else -> ToWorkflow(WorkflowName(input))
-        }
+      fun parse(input: String): Destination = when (input) {
+        "A" -> Accepted
+        "R" -> Rejected
+        else -> ToWorkflow(WorkflowName(input))
       }
     }
   }
@@ -234,8 +220,5 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
     }
   }
 
-  private data class Ranges(
-    val accepted: List<Map<PartId, IntRange>>,
-    val pending: List<Map<PartId, IntRange>>,
-  )
+  private data class Ranges(val accepted: List<Map<PartId, IntRange>>, val pending: List<Map<PartId, IntRange>>)
 }

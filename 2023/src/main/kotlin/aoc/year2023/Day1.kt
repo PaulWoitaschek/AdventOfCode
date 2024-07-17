@@ -4,15 +4,13 @@ import aoc.library.Puzzle
 
 object Day1 : Puzzle<Int, Int>(1) {
 
-  override fun solvePart1(input: String): Int {
-    return input.lines()
-      .map {
-        val firstDigit = it.first(Char::isDigit)
-        val lastDigit = it.reversed().first(Char::isDigit)
-        "$firstDigit$lastDigit".toInt()
-      }
-      .fold(0, Int::plus)
-  }
+  override fun solvePart1(input: String): Int = input.lines()
+    .map {
+      val firstDigit = it.first(Char::isDigit)
+      val lastDigit = it.reversed().first(Char::isDigit)
+      "$firstDigit$lastDigit".toInt()
+    }
+    .fold(0, Int::plus)
 
   override fun solvePart2(input: String): Int {
     val numbers = buildMap {

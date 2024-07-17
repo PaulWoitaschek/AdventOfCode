@@ -13,10 +13,8 @@ object Day7 : Puzzle<String, Int>(day = 7) {
     TODO()
   }
 
-  private fun findBottomProgram(programs: List<Program>): Program {
-    return programs.first { candidate ->
-      programs.none { candidate.name in it.above }
-    }
+  private fun findBottomProgram(programs: List<Program>): Program = programs.first { candidate ->
+    programs.none { candidate.name in it.above }
   }
 
   private data class Program(val name: String, val weight: Int, val above: List<String>) {

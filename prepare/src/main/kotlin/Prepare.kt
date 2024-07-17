@@ -38,35 +38,31 @@ class Prepare : CliktCommand() {
     sourceFileContent.writeTo(File("$year/src/main/kotlin"))
   }
 
-  private fun createSolveFunction(part: String): FunSpec {
-    return FunSpec.builder("solve$part")
-      .addParameter("input", String::class)
-      .addModifiers(KModifier.OVERRIDE)
-      .returns(Int::class)
-      .addStatement("TODO()")
-      .build()
-  }
+  private fun createSolveFunction(part: String): FunSpec = FunSpec.builder("solve$part")
+    .addParameter("input", String::class)
+    .addModifiers(KModifier.OVERRIDE)
+    .returns(Int::class)
+    .addStatement("TODO()")
+    .build()
 
   private fun createTestFunction(
     name: String,
     solveName: String,
     disabled: Boolean,
-  ): FunSpec {
-    return FunSpec.builder(name)
-      .addAnnotation(ClassName("org.junit.jupiter.api", "Test"))
-      .apply {
-        if (disabled) {
-          addAnnotation(ClassName("org.junit.jupiter.api", "Disabled"))
-        }
+  ): FunSpec = FunSpec.builder(name)
+    .addAnnotation(ClassName("org.junit.jupiter.api", "Test"))
+    .apply {
+      if (disabled) {
+        addAnnotation(ClassName("org.junit.jupiter.api", "Disabled"))
       }
-      .addStatement(
-        "Day%L.%M() %M 42",
-        day,
-        MemberName("aoc.library", solveName),
-        MemberName("io.kotest.matchers.ints", "shouldBeExactly"),
-      )
-      .build()
-  }
+    }
+    .addStatement(
+      "Day%L.%M() %M 42",
+      day,
+      MemberName("aoc.library", solveName),
+      MemberName("io.kotest.matchers.ints", "shouldBeExactly"),
+    )
+    .build()
 
   private fun generateDayTestSourceFile() {
     val testFileContent = FileSpec.builder("aoc.year$year", "Day${day}Test")

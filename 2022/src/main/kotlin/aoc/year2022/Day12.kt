@@ -47,14 +47,7 @@ object Day12 : Puzzle<Int, Int>(12) {
     }
   }
 
-  private data class Vertex(
-    val x: Int,
-    val y: Int,
-    var pathLength: Int,
-    val height: Int,
-    val isStart: Boolean,
-    val isEnd: Boolean,
-  )
+  private data class Vertex(val x: Int, val y: Int, var pathLength: Int, val height: Int, val isStart: Boolean, val isEnd: Boolean)
 
   private fun parseInput(input: String) = input.lines().filter(String::isNotEmpty)
     .mapIndexed { y, line ->

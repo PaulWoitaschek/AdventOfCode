@@ -32,11 +32,9 @@ object Day11 : Puzzle<Long, Long>(day = 11) {
     }
   }
 
-  private fun galaxyPairs(galaxies: Set<Point>): List<Pair<Point, Point>> {
-    return galaxies.flatMapIndexed { leftIndex: Int, left: Point ->
-      galaxies.drop(leftIndex + 1).map { right ->
-        left to right
-      }
+  private fun galaxyPairs(galaxies: Set<Point>): List<Pair<Point, Point>> = galaxies.flatMapIndexed { leftIndex: Int, left: Point ->
+    galaxies.drop(leftIndex + 1).map { right ->
+      left to right
     }
   }
 

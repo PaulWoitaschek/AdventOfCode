@@ -36,9 +36,7 @@ object Day11 : Puzzle<Int, Int>(11) {
     val adjacentSeats = mutableMapOf<Point, List<Point>>()
     val width = seats.first().size
     val height = seats.size
-    fun Point.onSeatMap(): Boolean {
-      return x in 0 until width && y in 0 until height
-    }
+    fun Point.onSeatMap(): Boolean = x in 0 until width && y in 0 until height
     seats.forEachIndexed { y, row ->
       row.forEachIndexed { x, tile ->
         if (tile != Tile.Floor) {

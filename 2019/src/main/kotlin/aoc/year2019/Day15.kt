@@ -59,14 +59,12 @@ object Day15 : Puzzle<Int, Int>(15) {
     map
   }
 
-  private fun Point.directionTo(other: Point): Direction {
-    return when {
-      other.x > x -> Direction.Left
-      other.x < x -> Direction.Right
-      other.y > y -> Direction.Up
-      other.y < y -> Direction.Down
-      else -> error("nope")
-    }
+  private fun Point.directionTo(other: Point): Direction = when {
+    other.x > x -> Direction.Left
+    other.x < x -> Direction.Right
+    other.y > y -> Direction.Up
+    other.y < y -> Direction.Down
+    else -> error("nope")
   }
 
   private fun findShortestPath(map: Map<Point, Tile>): Int {

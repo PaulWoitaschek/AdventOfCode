@@ -15,13 +15,11 @@ object Day7 : Puzzle<String, Int>(day = 7) {
     input: String,
     workerCount: Int,
     additionalSeconds: Int,
-  ): Int {
-    return solve(
-      input = input,
-      workerCount = workerCount,
-      additionalSeconds = additionalSeconds,
-    ).values.max() - 1
-  }
+  ): Int = solve(
+    input = input,
+    workerCount = workerCount,
+    additionalSeconds = additionalSeconds,
+  ).values.max() - 1
 
   private fun solve(
     input: String,
@@ -72,8 +70,5 @@ object Day7 : Puzzle<String, Int>(day = 7) {
     return chosen
   }
 
-  private data class Rule(
-    val before: Char,
-    val after: Char,
-  )
+  private data class Rule(val before: Char, val after: Char)
 }

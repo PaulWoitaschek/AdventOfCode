@@ -26,10 +26,8 @@ object Day3 : Puzzle<Long, Long>(3) {
   }
 }
 
-private fun parseInput(input: String): List<BitRow> {
-  return input.lines()
-    .map { line -> line.map { it == '1' } }
-}
+private fun parseInput(input: String): List<BitRow> = input.lines()
+  .map { line -> line.map { it == '1' } }
 
 private fun extractForBitCriteria(
   lines: List<BitRow>,
@@ -60,10 +58,6 @@ private fun extractForBitCriteria(
 
 private fun BitRow.count(selector: Boolean) = count { it == selector }
 
-private fun BitRow.toInt(): Int {
-  return joinToString(separator = "") { if (it) "1" else "0" }.toInt(2)
-}
+private fun BitRow.toInt(): Int = joinToString(separator = "") { if (it) "1" else "0" }.toInt(2)
 
-private fun BitRow.flipped(): BitRow {
-  return map { !it }
-}
+private fun BitRow.flipped(): BitRow = map { !it }

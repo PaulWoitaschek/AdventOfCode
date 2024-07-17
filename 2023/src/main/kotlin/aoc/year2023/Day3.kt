@@ -59,12 +59,7 @@ object Day3 : Puzzle<Int, Int>(3) {
     }
   }
 
-  private data class NumberWithCoordinates(
-    val number: Int,
-    val fromX: Int,
-    val toX: Int,
-    val y: Int,
-  ) {
+  private data class NumberWithCoordinates(val number: Int, val fromX: Int, val toX: Int, val y: Int) {
 
     val points = (fromX..toX).map { Point(it, y) }
   }

@@ -65,11 +65,7 @@ object Day21 : Puzzle<Long, Long>(21) {
     @JvmInline
     value class Value(val value: Long) : CalculationElement
 
-    data class Operation(
-      val operator: Operator,
-      val a: CalculationElement,
-      val b: CalculationElement,
-    ) : CalculationElement
+    data class Operation(val operator: Operator, val a: CalculationElement, val b: CalculationElement) : CalculationElement
   }
 
   enum class Operator(val char: Char) {

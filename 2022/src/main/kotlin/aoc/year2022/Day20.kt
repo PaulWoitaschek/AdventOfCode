@@ -45,8 +45,5 @@ object Day20 : Puzzle<Long, Long>(20) {
     return mixedNumbers.map { it.number }
   }
 
-  private data class NumberWithIndex(
-    val number: Long,
-    val index: Int,
-  )
+  private data class NumberWithIndex(val number: Long, val index: Int)
 }

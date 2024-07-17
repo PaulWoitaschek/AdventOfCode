@@ -6,10 +6,8 @@ import kotlin.math.floor
 
 object Day18 : Puzzle<Int, Int>(18) {
 
-  override fun solvePart1(input: String): Int {
-    return input.lines().map(::SnailFishNumber)
-      .reduce { a, b -> (a + b) }.magnitude()
-  }
+  override fun solvePart1(input: String): Int = input.lines().map(::SnailFishNumber)
+    .reduce { a, b -> (a + b) }.magnitude()
 
   override fun solvePart2(input: String): Int {
     val numbers = input.lines().map(::SnailFishNumber)
@@ -24,9 +22,7 @@ object Day18 : Puzzle<Int, Int>(18) {
 @JvmInline
 value class SnailFishNumber(val value: String) {
 
-  operator fun plus(other: SnailFishNumber): SnailFishNumber {
-    return SnailFishNumber("[$value,${other.value}]").reduce()
-  }
+  operator fun plus(other: SnailFishNumber): SnailFishNumber = SnailFishNumber("[$value,${other.value}]").reduce()
 
   private fun indexOfExplodingCandidate(): IntRange? {
     var level = 0
@@ -105,7 +101,5 @@ value class SnailFishNumber(val value: String) {
 private val multipleDigitsRegex = "\\d+".toRegex()
 private val twoDigitNumberRegex = "\\d\\d+".toRegex()
 private val numberPairRegex = "\\[(\\d+),(\\d+)]".toRegex()
-private fun String.parseNumberPair(): Pair<Int, Int> {
-  return numberPairRegex.find(this)!!.groupValues
-    .let { Pair(it[1].toInt(), it[2].toInt()) }
-}
+private fun String.parseNumberPair(): Pair<Int, Int> = numberPairRegex.find(this)!!.groupValues
+  .let { Pair(it[1].toInt(), it[2].toInt()) }

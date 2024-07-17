@@ -4,10 +4,7 @@ import aoc.library.Point
 import aoc.library.Puzzle
 import kotlin.math.absoluteValue
 
-class Day15(
-  private val lineToScan: Int,
-  private val rangeMax: Int,
-) : Puzzle<Int, Long>(15) {
+class Day15(private val lineToScan: Int, private val rangeMax: Int) : Puzzle<Int, Long>(15) {
 
   override fun solvePart1(input: String): Int {
     val sensorsWithBeacons = parseInput(input)
@@ -60,10 +57,7 @@ class Day15(
       .let { it.x.toLong() * 4000000 + it.y.toLong() }
   }
 
-  data class SensorWithBeacon(
-    val sensor: Point,
-    val closestBeacon: Point,
-  ) {
+  data class SensorWithBeacon(val sensor: Point, val closestBeacon: Point) {
     val distanceToClosestBeacon = sensor.manhattanDistanceTo(closestBeacon)
   }
 

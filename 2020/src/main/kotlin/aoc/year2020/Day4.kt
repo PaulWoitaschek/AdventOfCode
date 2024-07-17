@@ -6,35 +6,29 @@ private typealias Passport = Map<String, String>
 
 object Day4 : Puzzle<Int, Int>(4) {
 
-  override fun solvePart1(input: String): Int {
-    return input.split("\n\n").filter { it.isNotEmpty() }
-      .map {
-        it.split(" ", "\n").filter { it.isNotEmpty() }
-          .associate {
-            val (field, value) = it.split(":")
-            field to value
-          }
-      }
-      .count {
-        it.allFieldsPresent()
-      }
-  }
+  override fun solvePart1(input: String): Int = input.split("\n\n").filter { it.isNotEmpty() }
+    .map {
+      it.split(" ", "\n").filter { it.isNotEmpty() }
+        .associate {
+          val (field, value) = it.split(":")
+          field to value
+        }
+    }
+    .count {
+      it.allFieldsPresent()
+    }
 
-  override fun solvePart2(input: String): Int {
-    return input.split("\n\n").filter { it.isNotEmpty() }
-      .map { parsePassport(it) }
-      .count {
-        it.allFieldsCorrect()
-      }
-  }
+  override fun solvePart2(input: String): Int = input.split("\n\n").filter { it.isNotEmpty() }
+    .map { parsePassport(it) }
+    .count {
+      it.allFieldsCorrect()
+    }
 
-  fun parsePassport(passport: String): Passport {
-    return passport.split(" ", "\n").filter { it.isNotEmpty() }
-      .associate {
-        val (field, value) = it.split(":")
-        field to value
-      }
-  }
+  fun parsePassport(passport: String): Passport = passport.split(" ", "\n").filter { it.isNotEmpty() }
+    .associate {
+      val (field, value) = it.split(":")
+      field to value
+    }
 
   private fun Passport.hasValidBirthYear(): Boolean {
     val birthYearValue = get("byr") ?: return false
@@ -78,15 +72,14 @@ object Day4 : Puzzle<Int, Int>(4) {
     }
   }
 
-  private fun Passport.hasValidEyeColor(): Boolean {
-    return get("ecl") in listOf("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
-  }
+  private fun Passport.hasValidEyeColor(): Boolean = get("ecl") in listOf("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
 
   private fun Passport.hasValidPassportId(): Boolean {
     val passportId = get("pid") ?: return false
-    return passportId.length == 9 && passportId.all {
-      it.digitToIntOrNull() != null
-    }
+    return passportId.length == 9 &&
+      passportId.all {
+        it.digitToIntOrNull() != null
+      }
   }
 
   private fun Passport.allFieldsPresent(): Boolean {
@@ -94,13 +87,11 @@ object Day4 : Puzzle<Int, Int>(4) {
     return keysWithoutCountryId.size == 7
   }
 
-  fun Passport.allFieldsCorrect(): Boolean {
-    return hasValidHeight() &&
-      hasValidBirthYear() &&
-      hasValidExpatriationYear() &&
-      hasValidIssueYear() &&
-      hasValidHairColor() &&
-      hasValidPassportId() &&
-      hasValidEyeColor()
-  }
+  fun Passport.allFieldsCorrect(): Boolean = hasValidHeight() &&
+    hasValidBirthYear() &&
+    hasValidExpatriationYear() &&
+    hasValidIssueYear() &&
+    hasValidHairColor() &&
+    hasValidPassportId() &&
+    hasValidEyeColor()
 }

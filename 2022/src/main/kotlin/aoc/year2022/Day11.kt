@@ -55,12 +55,10 @@ object Day11 : Puzzle<Long, Long>(11) {
       data class Value(val value: Long) : OperationValue
       data object Old : OperationValue
       companion object {
-        fun parse(value: String): OperationValue {
-          return if (value == "old") {
-            Old
-          } else {
-            Value(value.toLong())
-          }
+        fun parse(value: String): OperationValue = if (value == "old") {
+          Old
+        } else {
+          Value(value.toLong())
         }
       }
     }

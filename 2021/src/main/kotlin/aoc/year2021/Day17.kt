@@ -41,22 +41,18 @@ private data class VelocityWithHighestY(val xVelocity: Int, val yVelocity: Int, 
 
 private data class Probe(val x: Int, val y: Int, val xVelocity: Int, val yVelocity: Int) {
 
-  fun outOfRange(of: TargetArea): Boolean {
-    return x > of.x.last || y < of.y.first
-  }
+  fun outOfRange(of: TargetArea): Boolean = x > of.x.last || y < of.y.first
 
-  fun afterStep(): Probe {
-    return Probe(
-      x = x + xVelocity,
-      y = y + yVelocity,
-      xVelocity = xVelocity + when {
-        xVelocity < 0 -> 1
-        xVelocity > 0 -> -1
-        else -> 0
-      },
-      yVelocity = yVelocity - 1,
-    )
-  }
+  fun afterStep(): Probe = Probe(
+    x = x + xVelocity,
+    y = y + yVelocity,
+    xVelocity = xVelocity + when {
+      xVelocity < 0 -> 1
+      xVelocity > 0 -> -1
+      else -> 0
+    },
+    yVelocity = yVelocity - 1,
+  )
 }
 
 private data class TargetArea(val x: IntRange, val y: IntRange) {

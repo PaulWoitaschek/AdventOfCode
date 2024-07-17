@@ -98,32 +98,20 @@ object Day24 : Puzzle<Int, Int>(24) {
     return fastestPath
   }
 
-  data class Journey(
-    val minute: Int,
-    val position: Point,
-    val targets: List<Point>,
-  )
+  data class Journey(val minute: Int, val position: Point, val targets: List<Point>)
 
-  data class World(
-    val width: Int,
-    val height: Int,
-    val blizzards: List<Blizzard>,
-    val start: Point,
-    val end: Point,
-  ) {
+  data class World(val width: Int, val height: Int, val blizzards: List<Blizzard>, val start: Point, val end: Point) {
 
     fun hasBlizzardAtMinute(
       point: Point,
       minute: Int,
-    ): Boolean {
-      return blizzards.any { blizzard ->
-        val blizzardPosition = blizzard.point
-        when (blizzard.direction) {
-          Direction.Left -> point.y == blizzardPosition.y && point.x == (blizzardPosition.x - minute).mod(width)
-          Direction.Right -> point.y == blizzardPosition.y && point.x == (blizzardPosition.x + minute).mod(width)
-          Direction.Up -> point.x == blizzardPosition.x && point.y == (blizzardPosition.y - minute).mod(height)
-          Direction.Down -> point.x == blizzardPosition.x && point.y == (blizzardPosition.y + minute).mod(height)
-        }
+    ): Boolean = blizzards.any { blizzard ->
+      val blizzardPosition = blizzard.point
+      when (blizzard.direction) {
+        Direction.Left -> point.y == blizzardPosition.y && point.x == (blizzardPosition.x - minute).mod(width)
+        Direction.Right -> point.y == blizzardPosition.y && point.x == (blizzardPosition.x + minute).mod(width)
+        Direction.Up -> point.x == blizzardPosition.x && point.y == (blizzardPosition.y - minute).mod(height)
+        Direction.Down -> point.x == blizzardPosition.x && point.y == (blizzardPosition.y + minute).mod(height)
       }
     }
 
@@ -159,8 +147,5 @@ object Day24 : Puzzle<Int, Int>(24) {
     }
   }
 
-  data class Blizzard(
-    val point: Point,
-    val direction: Direction,
-  )
+  data class Blizzard(val point: Point, val direction: Direction)
 }

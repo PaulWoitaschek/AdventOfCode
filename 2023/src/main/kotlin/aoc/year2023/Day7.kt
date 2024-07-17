@@ -10,16 +10,14 @@ object Day7 : Puzzle<Int, Int>(day = 7) {
   private fun solve(
     input: String,
     accountForJokers: Boolean,
-  ): Int {
-    return input.lines()
-      .map(Hand::parse)
-      .sortedWith(HandComparator(accountForJokers))
-      .mapIndexed { index, hand ->
-        val rank = index + 1
-        rank * hand.bid
-      }
-      .sum()
-  }
+  ): Int = input.lines()
+    .map(Hand::parse)
+    .sortedWith(HandComparator(accountForJokers))
+    .mapIndexed { index, hand ->
+      val rank = index + 1
+      rank * hand.bid
+    }
+    .sum()
 
   private data class Hand(val cards: String, val bid: Int) {
     companion object {
@@ -41,18 +39,16 @@ object Day7 : Puzzle<Int, Int>(day = 7) {
     override fun compare(
       o1: Hand,
       o2: Hand,
-    ): Int {
-      return compareValuesBy(
-        o2.cards,
-        o1.cards,
-        { it.type() },
-        { cardRanks.getValue(it[0]) },
-        { cardRanks.getValue(it[1]) },
-        { cardRanks.getValue(it[2]) },
-        { cardRanks.getValue(it[3]) },
-        { cardRanks.getValue(it[4]) },
-      )
-    }
+    ): Int = compareValuesBy(
+      o2.cards,
+      o1.cards,
+      { it.type() },
+      { cardRanks.getValue(it[0]) },
+      { cardRanks.getValue(it[1]) },
+      { cardRanks.getValue(it[2]) },
+      { cardRanks.getValue(it[3]) },
+      { cardRanks.getValue(it[4]) },
+    )
 
     private val types = mutableMapOf<String, Type>()
 

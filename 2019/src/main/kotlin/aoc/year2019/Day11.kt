@@ -56,12 +56,10 @@ object Day11 : Puzzle<Int, String>(11) {
     ;
 
     companion object {
-      fun parse(value: Long): Color {
-        return when (value) {
-          0L -> Black
-          1L -> White
-          else -> error("Invalid color=$value")
-        }
+      fun parse(value: Long): Color = when (value) {
+        0L -> Black
+        1L -> White
+        else -> error("Invalid color=$value")
       }
     }
   }

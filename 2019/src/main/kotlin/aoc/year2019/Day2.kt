@@ -5,9 +5,7 @@ import kotlinx.coroutines.runBlocking
 
 object Day2 : Puzzle<Long, Long>(2) {
 
-  override fun solvePart1(input: String): Long {
-    return runInstructions(instructions = input.split(",").map(String::toLong), verb = 2, noun = 12)
-  }
+  override fun solvePart1(input: String): Long = runInstructions(instructions = input.split(",").map(String::toLong), verb = 2, noun = 12)
 
   override fun solvePart2(input: String): Long {
     val originalInput = input.split(",").map(String::toLong)

@@ -28,10 +28,7 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
     return current.weight()
   }
 
-  private data class RockMap(
-    private val tiles: Map<Point, Tile>,
-    private val bounds: Rect,
-  ) {
+  private data class RockMap(private val tiles: Map<Point, Tile>, private val bounds: Rect) {
 
     fun move(direction: Direction): RockMap {
       val newTiles = mutableMapOf<Point, Tile>()
@@ -51,12 +48,10 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
       return copy(tiles = newTiles)
     }
 
-    fun weight(): Int {
-      return tiles.filterValues { it == Tile.Stone }.keys
-        .sumOf { point ->
-          bounds.height() + 1 - point.y
-        }
-    }
+    fun weight(): Int = tiles.filterValues { it == Tile.Stone }.keys
+      .sumOf { point ->
+        bounds.height() + 1 - point.y
+      }
 
     companion object {
       fun parse(input: String): RockMap {

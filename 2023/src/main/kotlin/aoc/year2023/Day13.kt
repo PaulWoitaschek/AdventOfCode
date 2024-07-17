@@ -4,37 +4,31 @@ import aoc.library.Puzzle
 
 object Day13 : Puzzle<Int, Int>(day = 13) {
 
-  override fun solvePart1(input: String): Int {
-    return input.split("\n\n").sumOf { pattern ->
-      reflectionLines(pattern.lines()).single().value()
-    }
+  override fun solvePart1(input: String): Int = input.split("\n\n").sumOf { pattern ->
+    reflectionLines(pattern.lines()).single().value()
   }
 
-  override fun solvePart2(input: String): Int {
-    return input.split("\n\n").sumOf { pattern ->
-      val old = reflectionLines(pattern.lines()).single()
-      val reflectionLine = smudgeReflections(pattern).first { it != old }
-      reflectionLine.value()
-    }
+  override fun solvePart2(input: String): Int = input.split("\n\n").sumOf { pattern ->
+    val old = reflectionLines(pattern.lines()).single()
+    val reflectionLine = smudgeReflections(pattern).first { it != old }
+    reflectionLine.value()
   }
 
   private fun reflectionLines(input: List<String>): List<ReflectionLine> {
-    fun line(lines: List<String>): List<Int> {
-      return lines
-        .zipWithNext { a, b -> a == b }
-        .mapIndexedNotNull { index, equal ->
-          if (equal) index + 1 else null
-        }
-        .filter {
-          val leftPart = lines.take(it).reversed()
-          val rightPart = lines.drop(it)
-          leftPart
-            .zip(rightPart) { left, right ->
-              left == right
-            }
-            .all { equal -> equal }
-        }
-    }
+    fun line(lines: List<String>): List<Int> = lines
+      .zipWithNext { a, b -> a == b }
+      .mapIndexedNotNull { index, equal ->
+        if (equal) index + 1 else null
+      }
+      .filter {
+        val leftPart = lines.take(it).reversed()
+        val rightPart = lines.drop(it)
+        leftPart
+          .zip(rightPart) { left, right ->
+            left == right
+          }
+          .all { equal -> equal }
+      }
 
     val top = line(input).map {
       ReflectionLine(horizontal = true, it)

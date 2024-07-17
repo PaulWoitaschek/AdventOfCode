@@ -38,10 +38,7 @@ object Day5 : Puzzle<Long, Long>(day = 5) {
     Location,
   }
 
-  private data class Almanac(
-    val numbers: List<Long>,
-    val elementMaps: List<ElementMap>,
-  ) {
+  private data class Almanac(val numbers: List<Long>, val elementMaps: List<ElementMap>) {
 
     // optimization
     private val elementLookup = elementMaps.associateBy { it.from }
@@ -81,11 +78,7 @@ object Day5 : Puzzle<Long, Long>(day = 5) {
     }
   }
 
-  private data class ElementMap(
-    val from: Element,
-    val to: Element,
-    val ranges: List<ElementRange>,
-  ) {
+  private data class ElementMap(val from: Element, val to: Element, val ranges: List<ElementRange>) {
 
     companion object {
       private val elementRegex = "(.*?)-to-(.*?) map:".toRegex()
@@ -102,11 +95,7 @@ object Day5 : Puzzle<Long, Long>(day = 5) {
     }
   }
 
-  private data class ElementRange(
-    val destinationRangeStart: Long,
-    val sourceRangeStart: Long,
-    val rangeLength: Long,
-  ) {
+  private data class ElementRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val rangeLength: Long) {
     companion object {
       fun parse(input: String): ElementRange {
         val numbers = input.split(" ").map(String::toLong)

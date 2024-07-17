@@ -21,10 +21,8 @@ object Day3 : Puzzle<Int, Int>(3) {
     }
 }
 
-private fun Char.score(): Int {
-  return if (isLowerCase()) {
-    this - 'a' + 1
-  } else {
-    this - 'A' + 27
-  }
+private fun Char.score(): Int = if (isLowerCase()) {
+  this - 'a' + 1
+} else {
+  this - 'A' + 27
 }

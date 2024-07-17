@@ -89,8 +89,5 @@ object Day12 : Puzzle<Long, Long>(day = 12) {
     return visit(damages = pattern, recognized = emptyList(), springConditions = springConditions)
   }
 
-  private data class Memo(
-    val recognized: List<Int>,
-    val remaining: String,
-  )
+  private data class Memo(val recognized: List<Int>, val remaining: String)
 }

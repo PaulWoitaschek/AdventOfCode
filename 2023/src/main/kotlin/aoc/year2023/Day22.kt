@@ -31,9 +31,7 @@ object Day22 : Puzzle<Int, Int>(day = 22) {
     }
   }
 
-  private fun parse(input: String): List<Brick> {
-    return input.lines().map(Brick::parse).sortedBy { it.bottomZ() }
-  }
+  private fun parse(input: String): List<Brick> = input.lines().map(Brick::parse).sortedBy { it.bottomZ() }
 
   private fun move(bricks: List<Brick>) {
     bricks.forEach { candidate ->

@@ -110,11 +110,7 @@ object Day16 : Puzzle<Int, Int>(16) {
     }
   }
 
-  private data class Valve(
-    val name: String,
-    val flowRate: Int,
-    val tunnelsTo: Set<String>,
-  ) {
+  private data class Valve(val name: String, val flowRate: Int, val tunnelsTo: Set<String>) {
     companion object {
       private val regex = "Valve (\\w+) has flow rate=(\\d+); tunnels? leads? to valves? (.*)".toRegex()
       fun parse(input: String): Valve {

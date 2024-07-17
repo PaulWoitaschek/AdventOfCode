@@ -25,22 +25,15 @@ object Day8 : Puzzle<Int, Int>(day = 8) {
     return readNode()
   }
 
-  private data class Node(
-    val nodes: List<Node>,
-    val metaData: List<Int>,
-  ) {
+  private data class Node(val nodes: List<Node>, val metaData: List<Int>) {
 
-    fun metaDataSum(): Int {
-      return metaData.reduce(Int::plus) + nodes.sumOf { it.metaDataSum() }
-    }
+    fun metaDataSum(): Int = metaData.reduce(Int::plus) + nodes.sumOf { it.metaDataSum() }
 
-    fun value(): Int {
-      return if (nodes.isEmpty()) {
-        metaData.reduce(Int::plus)
-      } else {
-        metaData.fold(0) { sum, value ->
-          sum + (nodes.getOrNull(value - 1)?.value() ?: 0)
-        }
+    fun value(): Int = if (nodes.isEmpty()) {
+      metaData.reduce(Int::plus)
+    } else {
+      metaData.fold(0) { sum, value ->
+        sum + (nodes.getOrNull(value - 1)?.value() ?: 0)
       }
     }
   }

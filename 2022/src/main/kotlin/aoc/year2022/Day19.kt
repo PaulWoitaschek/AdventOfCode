@@ -134,11 +134,7 @@ object Day19 : Puzzle<Int, Int>(19) {
       }
   }
 
-  data class Snapshot(
-    val minute: Int,
-    val material: Map<Material, Int>,
-    val robots: Map<Material, Int>,
-  ) {
+  data class Snapshot(val minute: Int, val material: Map<Material, Int>, val robots: Map<Material, Int>) {
 
     fun advanceTime(minutes: Int): Snapshot = copy(
       minute = minute + minutes,
@@ -148,15 +144,9 @@ object Day19 : Puzzle<Int, Int>(19) {
     )
   }
 
-  data class Blueprint(
-    val id: Int,
-    val robotBlueprints: List<RobotBlueprint>,
-  )
+  data class Blueprint(val id: Int, val robotBlueprints: List<RobotBlueprint>)
 
-  data class RobotBlueprint(
-    val produces: Material,
-    val costs: Map<Material, Int>,
-  )
+  data class RobotBlueprint(val produces: Material, val costs: Map<Material, Int>)
 
   enum class Material {
     Ore,

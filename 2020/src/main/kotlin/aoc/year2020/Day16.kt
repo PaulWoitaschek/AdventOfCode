@@ -50,11 +50,7 @@ object Day16 : Puzzle<Int, Long>(16) {
       }.map(Int::toLong).reduce(Long::times)
   }
 
-  private data class Input(
-    val rules: List<Rule>,
-    val ownTicket: Ticket,
-    val nearbyTickets: List<Ticket>,
-  ) {
+  private data class Input(val rules: List<Rule>, val ownTicket: Ticket, val nearbyTickets: List<Ticket>) {
     companion object {
       fun parse(input: String): Input {
         val (rulesString, ownTicketString, nearbyString) = input.split("\n\n")
@@ -77,19 +73,13 @@ object Day16 : Puzzle<Int, Long>(16) {
   }
 
   @JvmInline
-  private value class Ticket(
-    val values: List<Int>,
-  ) {
+  private value class Ticket(val values: List<Int>) {
     companion object {
       fun parse(input: String): Ticket = Ticket(input.split(",").map(String::toInt))
     }
   }
 
-  private data class Rule(
-    val label: String,
-    val firstRange: IntRange,
-    val secondRange: IntRange,
-  ) {
+  private data class Rule(val label: String, val firstRange: IntRange, val secondRange: IntRange) {
 
     operator fun contains(value: Int): Boolean = value in firstRange || value in secondRange
   }

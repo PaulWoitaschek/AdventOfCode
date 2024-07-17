@@ -5,22 +5,18 @@ import aoc.library.Puzzle
 
 object Day11 : Puzzle<Long, Long>(11) {
 
-  override fun solvePart1(input: String): Long {
-    return generateSequence(Octopuses.parse(input)) { it.afterOneDay() }
-      .take(101)
-      .last()
-      .flashes
-  }
+  override fun solvePart1(input: String): Long = generateSequence(Octopuses.parse(input)) { it.afterOneDay() }
+    .take(101)
+    .last()
+    .flashes
 
-  override fun solvePart2(input: String): Long {
-    return generateSequence(Octopuses.parse(input)) { it.afterOneDay() }
-      .zipWithNext { previous, current ->
-        previous.flashes + previous.octopuses.size != current.flashes
-      }
-      .takeWhile { it }
-      .count()
-      .toLong() + 1
-  }
+  override fun solvePart2(input: String): Long = generateSequence(Octopuses.parse(input)) { it.afterOneDay() }
+    .zipWithNext { previous, current ->
+      previous.flashes + previous.octopuses.size != current.flashes
+    }
+    .takeWhile { it }
+    .count()
+    .toLong() + 1
 }
 
 private data class Octopus(val point: Point, val energyLevel: Int, val flashes: Int)
@@ -60,19 +56,17 @@ private data class Octopuses(val octopuses: List<Octopus>) {
   }
 
   companion object {
-    fun parse(input: String): Octopuses {
-      return Octopuses(
-        octopuses = input.lines()
-          .flatMapIndexed { y, line ->
-            line.mapIndexed { x, value ->
-              Octopus(
-                point = Point(x = x, y = y),
-                energyLevel = value.digitToInt(),
-                flashes = 0,
-              )
-            }
-          },
-      )
-    }
+    fun parse(input: String): Octopuses = Octopuses(
+      octopuses = input.lines()
+        .flatMapIndexed { y, line ->
+          line.mapIndexed { x, value ->
+            Octopus(
+              point = Point(x = x, y = y),
+              energyLevel = value.digitToInt(),
+              flashes = 0,
+            )
+          }
+        },
+    )
   }
 }

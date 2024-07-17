@@ -74,10 +74,7 @@ object Day12 : Puzzle<Int, Int>(12) {
     return instructions
   }
 
-  private data class Instruction(
-    val count: Int,
-    val action: Action,
-  ) {
+  private data class Instruction(val count: Int, val action: Action) {
     enum class Action {
       North,
       East,

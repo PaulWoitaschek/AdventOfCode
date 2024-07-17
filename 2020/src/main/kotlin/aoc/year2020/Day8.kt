@@ -72,10 +72,7 @@ object Day8 : Puzzle<Int, Int>(8) {
     .filter(String::isNotEmpty)
     .map(Instruction::parse)
 
-  private data class Instruction(
-    val value: Int,
-    val type: Type,
-  ) {
+  private data class Instruction(val value: Int, val type: Type) {
     enum class Type(val value: String) {
       NoOp("nop"),
       Acc("acc"),

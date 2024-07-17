@@ -64,15 +64,9 @@ object Day14 : Puzzle<Long, Long>(14) {
     return reactions
   }
 
-  private data class Reaction(
-    val inputs: List<Product>,
-    val output: Product,
-  )
+  private data class Reaction(val inputs: List<Product>, val output: Product)
 
-  private data class Product(
-    val name: String,
-    val amount: Int,
-  ) {
+  private data class Product(val name: String, val amount: Int) {
     companion object {
       fun parse(input: String): Product {
         val (amount, name) = input.split(" ")

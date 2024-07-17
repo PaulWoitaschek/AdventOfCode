@@ -8,11 +8,7 @@ import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlin.math.pow
 
-class IntCodeComputer(
-  instructions: List<Long>,
-  val inputs: ReceiveChannel<Long>,
-  val outputs: Channel<Long> = Channel(UNLIMITED),
-) {
+class IntCodeComputer(instructions: List<Long>, val inputs: ReceiveChannel<Long>, val outputs: Channel<Long> = Channel(UNLIMITED)) {
 
   val instructions: MutableMap<Long, Long> = instructions.withIndex().associate {
     it.index.toLong() to it.value
@@ -88,9 +84,7 @@ class IntCodeComputer(
 
   private enum class Mode { Immediate, Positional, Relative; }
 
-  private fun value(key: Long): Long {
-    return instructions[key] ?: 0L
-  }
+  private fun value(key: Long): Long = instructions[key] ?: 0L
 
   private suspend fun runInstruction() {
     when (val opCode = (instructions.getValue(pointer) % 100).toInt()) {

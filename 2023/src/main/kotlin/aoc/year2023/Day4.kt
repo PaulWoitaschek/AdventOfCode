@@ -29,11 +29,7 @@ object Day4 : Puzzle<Int, Int>(4) {
     return hand.values.sum()
   }
 
-  private data class Card(
-    val id: Int,
-    private val winningNumbers: List<Int>,
-    private val ownNumbers: List<Int>,
-  ) {
+  private data class Card(val id: Int, private val winningNumbers: List<Int>, private val ownNumbers: List<Int>) {
 
     val winningCount: Int = ownNumbers.count { it in winningNumbers }
 

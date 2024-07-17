@@ -87,12 +87,10 @@ object Day25 : Puzzle<Int, Nothing>(day = 25) {
   }
 
   private data class Connection(val from: String, val to: String) {
-    fun connect(value: String): String? {
-      return when (value) {
-        from -> to
-        to -> from
-        else -> null
-      }
+    fun connect(value: String): String? = when (value) {
+      from -> to
+      to -> from
+      else -> null
     }
   }
 
