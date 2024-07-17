@@ -31,10 +31,9 @@ dependencies {
 
 tasks {
   withType<KotlinCompile>().configureEach {
-    kotlinOptions.freeCompilerArgs += listOf(
-      "-opt-in=kotlin.RequiresOptIn",
-      "-opt-in=kotlin.ExperimentalStdlibApi",
-    )
+    compilerOptions {
+      optIn.add("kotlin.ExperimentalStdlibApi")
+    }
   }
   withType<Test>().configureEach {
     useJUnitPlatform()
