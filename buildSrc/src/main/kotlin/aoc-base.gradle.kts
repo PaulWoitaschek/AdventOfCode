@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   kotlin("jvm")
   id("org.jlleitschuh.gradle.ktlint")
+  `jvm-test-suite`
 }
 
 kotlin {
@@ -25,8 +26,6 @@ dependencies {
   implementation(lib("serialization"))
   implementation(lib("coroutines"))
   testImplementation(lib("kotest"))
-  testImplementation(lib("jupiter.api"))
-  testRuntimeOnly(lib("jupiter.engine"))
 }
 
 tasks {
@@ -35,7 +34,12 @@ tasks {
       optIn.add("kotlin.ExperimentalStdlibApi")
     }
   }
-  withType<Test>().configureEach {
-    useJUnitPlatform()
+}
+
+testing {
+  suites {
+    val test by getting(JvmTestSuite::class) {
+      useJUnitJupiter()
+    }
   }
 }
