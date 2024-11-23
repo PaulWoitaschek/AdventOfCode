@@ -25,8 +25,8 @@ dependencies {
   implementation(lib("serialization"))
   implementation(lib("coroutines"))
   testImplementation(lib("kotest"))
-  testImplementation(lib("jupiter.api"))
-  testRuntimeOnly(lib("jupiter.engine"))
+  testImplementation(lib("jupiter"))
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks {

@@ -3,6 +3,6 @@ plugins {
 }
 
 dependencies {
-  implementation(libs.jupiter.api)
+  implementation(libs.jupiter)
   implementation(libs.okhttp)
 }
