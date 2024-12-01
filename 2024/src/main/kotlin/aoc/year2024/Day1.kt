@@ -18,15 +18,10 @@ object Day1 : Puzzle<Long, Long>(day = 1) {
     return left.sumOf { it * grouping.getOrElse(it) { 0 } }
   }
 
-  private fun parse(input: String): Pair<List<Long>, List<Long>> {
-    val left = mutableListOf<Long>()
-    val right = mutableListOf<Long>()
-    val numberRegex = "(\\d+) *(\\d+)".toRegex()
-    input.lines().forEach { line ->
-      val (leftValue, rightValue) = numberRegex.find(line)!!.destructured.toList().map(String::toLong)
-      left += leftValue
-      right += rightValue
+  private fun parse(input: String): Pair<List<Long>, List<Long>> = input
+    .lines()
+    .map {
+      it.substringBefore(" ").toLong() to it.substringAfterLast(" ").toLong()
     }
-    return left to right
-  }
+    .unzip()
 }
