@@ -17,7 +17,7 @@ object Day2 : Puzzle<Int, Int>(day = 2) {
     }
 
   private fun reportIsSafe(report: List<Int>): Boolean {
-    val steps = report.windowed(2).map { it[1] - it[0] }
+    val steps = report.zipWithNext { left, right -> left - right }
     val monotonic = steps.all { it > 0 } || steps.all { it < 0 }
     return monotonic && steps.all { it.absoluteValue in 1..3 }
   }
