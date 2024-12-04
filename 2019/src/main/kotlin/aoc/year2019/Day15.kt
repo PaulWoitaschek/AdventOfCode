@@ -75,7 +75,7 @@ object Day15 : Puzzle<Int, Int>(15) {
       length: Int,
     ) {
       if (length > min) return
-      position.adjacent()
+      position.adjacentOrthogonal()
         .filter { it !in visited }
         .forEach { neighbor ->
           val value = map.getValue(neighbor)
@@ -113,7 +113,7 @@ object Day15 : Puzzle<Int, Int>(15) {
     var minute = 0
     while (true) {
       val new = oxygen
-        .flatMap { it.adjacent() }
+        .flatMap { it.adjacentOrthogonal() }
         .filter { it !in oxygen && map[it] != Tile.Wall }
         .toSet()
       if (!oxygen.addAll(new)) {

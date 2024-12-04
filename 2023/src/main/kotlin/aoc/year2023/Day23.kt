@@ -54,7 +54,7 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
         if (!visited.add(from)) {
           return
         }
-        from.adjacent().forEach { adjacent ->
+        from.adjacentOrthogonal().forEach { adjacent ->
           if (adjacent in pointsOfInterest) {
             visitedPointsOfInterest += adjacent
           } else {
@@ -98,7 +98,7 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
         }
       }
       .filter { (point, _) ->
-        point.adjacent().count {
+        point.adjacentOrthogonal().count {
           when (grid[it]) {
             Tile.Forest -> false
             Tile.Path -> true
@@ -175,7 +175,7 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
           return
         }
       }
-      current.adjacent()
+      current.adjacentOrthogonal()
         .forEach { adjacent ->
           if (adjacent in stopPoints) {
             return@forEach

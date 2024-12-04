@@ -24,7 +24,7 @@ object Day10 : Puzzle<Int, Int>(day = 10) {
         else -> path(path + next)
       }
     }
-    return start.adjacent().firstNotNullOf { path(listOf(start, it)) }
+    return start.adjacentOrthogonal().firstNotNullOf { path(listOf(start, it)) }
   }
 
   override fun solvePart2(input: String): Int {

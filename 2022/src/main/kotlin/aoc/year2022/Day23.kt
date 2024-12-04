@@ -45,7 +45,7 @@ object Day23 : Puzzle<Int, Int>(23) {
     direction: Direction,
   ) {
     val candidates = elves.filter { elf ->
-      elf.position.adjacent(includeDiagonal = true).any { adjacentPosition ->
+      elf.position.adjacent().any { adjacentPosition ->
         elves.any { it.position == adjacentPosition }
       }
     }

@@ -42,7 +42,7 @@ object Day11 : Puzzle<Int, Int>(11) {
         if (tile != Tile.Floor) {
           val point = Point(x, y)
           adjacentSeats[point] = if (onlyConsiderNeighborSeats) {
-            point.adjacent(includeDiagonal = true)
+            point.adjacent()
               .filter {
                 it.onSeatMap() && tile(it) != Tile.Floor
               }

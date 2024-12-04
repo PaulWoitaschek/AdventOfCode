@@ -10,7 +10,7 @@ object Day3 : Puzzle<Int, Int>(3) {
     return parse(lines)
       .filterNot { number ->
         number.points.all { numberPoint ->
-          numberPoint.adjacent(includeDiagonal = true).all {
+          numberPoint.adjacent().all {
             val char = lines.getOrNull(it.y)?.getOrNull(it.x)
             char == null || char.isDigit() || char == '.'
           }
@@ -27,7 +27,7 @@ object Day3 : Puzzle<Int, Int>(3) {
       line.forEachIndexed { x, char ->
         if (char == '*') {
           val point = Point(x, y)
-          val adjacentPoints = point.adjacent(includeDiagonal = true)
+          val adjacentPoints = point.adjacent()
           val adjacentNumbers = numberWithCoordinates
             .filter { number ->
               number.points.any { numberPoint ->

@@ -36,7 +36,7 @@ private data class Octopuses(val octopuses: List<Octopus>) {
 
       flashed.addAll(flashingPoints)
 
-      flashingPoints.flatMap { it.adjacent(includeDiagonal = true) }.forEach { adjacentPoint ->
+      flashingPoints.flatMap { it.adjacent() }.forEach { adjacentPoint ->
         val octopus = result.find { it.point == adjacentPoint }
         if (octopus != null) {
           result[result.indexOf(octopus)] = octopus.copy(energyLevel = octopus.energyLevel + 1)

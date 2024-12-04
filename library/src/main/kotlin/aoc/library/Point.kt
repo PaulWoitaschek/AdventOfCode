@@ -5,25 +5,21 @@ import kotlin.math.atan2
 
 data class Point(val x: Int, val y: Int) {
 
-  fun adjacent(includeDiagonal: Boolean = false): List<Point> {
-    val horizontal = listOf(
-      Point(x = x, y = y - 1),
-      Point(x = x, y = y + 1),
-      Point(x = x - 1, y = y),
-      Point(x = x + 1, y = y),
-    )
-    return if (includeDiagonal) {
-      val diagonal = listOf(
-        Point(x = x - 1, y = y - 1),
-        Point(x = x - 1, y = y + 1),
-        Point(x = x + 1, y = y - 1),
-        Point(x = x + 1, y = y + 1),
-      )
-      horizontal + diagonal
-    } else {
-      horizontal
-    }
-  }
+  fun adjacent(): List<Point> = adjacentOrthogonal() + adjacentDiagonal()
+
+  fun adjacentOrthogonal(): List<Point> = listOf(
+    Point(x = x, y = y - 1),
+    Point(x = x, y = y + 1),
+    Point(x = x - 1, y = y),
+    Point(x = x + 1, y = y),
+  )
+
+  fun adjacentDiagonal(): List<Point> = listOf(
+    Point(x = x - 1, y = y - 1),
+    Point(x = x - 1, y = y + 1),
+    Point(x = x + 1, y = y - 1),
+    Point(x = x + 1, y = y + 1),
+  )
 
   fun manhattanDistanceTo(other: Point): Int = (x - other.x).absoluteValue + (y - other.y).absoluteValue
 
