@@ -6,8 +6,8 @@ import com.github.ajalt.clikt.parameters.types.int
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.INT
 import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.LONG
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeSpec
@@ -28,7 +28,7 @@ class Prepare : CliktCommand() {
     val sourceFileContent = FileSpec.builder("aoc.year$year", "Day$day")
       .addType(
         TypeSpec.objectBuilder("Day$day")
-          .superclass(ClassName("aoc.library", "Puzzle").parameterizedBy(INT, INT))
+          .superclass(ClassName("aoc.library", "Puzzle").parameterizedBy(LONG, LONG))
           .addSuperclassConstructorParameter("day = $day")
           .addFunction(createSolveFunction("Part1"))
           .addFunction(createSolveFunction("Part2"))
@@ -42,7 +42,7 @@ class Prepare : CliktCommand() {
   private fun createSolveFunction(part: String): FunSpec = FunSpec.builder("solve$part")
     .addParameter("input", String::class)
     .addModifiers(KModifier.OVERRIDE)
-    .returns(Int::class)
+    .returns(Long::class)
     .addStatement("TODO()")
     .build()
 
@@ -61,7 +61,7 @@ class Prepare : CliktCommand() {
       "Day%L.%M() %M 42",
       day,
       MemberName("aoc.library", solveName),
-      MemberName("io.kotest.matchers.ints", "shouldBeExactly"),
+      MemberName("io.kotest.matchers.longs", "shouldBeExactly"),
     )
     .build()
 
