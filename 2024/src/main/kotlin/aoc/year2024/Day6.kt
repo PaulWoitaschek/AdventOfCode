@@ -17,19 +17,29 @@ object Day6 : Puzzle<Int, Int>(day = 6) {
 
   override fun solvePart2(input: String): Int {
     val lab = ManufacturingLab.parse(input)
-    return (0..lab.width).sumOf { y ->
-      (0..lab.height).count { x ->
-        val newObstruction = Point(x, y)
-        if (newObstruction !in lab.obstructions && newObstruction != lab.position) {
-          val changedLab = lab.copy(obstructions = lab.obstructions + newObstruction)
-          when (walk(changedLab)) {
-            is WalkResult.ExitedNormally -> false
-            WalkResult.Looped -> true
-          }
-        } else {
-          false
+    return (0..lab.width)
+      .flatMap { y ->
+        (0..lab.height).map { x ->
+          Point(x, y)
         }
       }
+      .parallelStream()
+      .filter { newObstruction ->
+        isLoopingObstruction(newObstruction, lab)
+      }
+      .count().toInt()
+  }
+
+  private fun isLoopingObstruction(
+    newObstruction: Point,
+    lab: ManufacturingLab,
+  ): Boolean {
+    if (newObstruction in lab.obstructions) return false
+    if (newObstruction == lab.position) return false
+    val changedLab = lab.copy(obstructions = lab.obstructions + newObstruction)
+    return when (walk(changedLab)) {
+      is WalkResult.ExitedNormally -> false
+      WalkResult.Looped -> true
     }
   }
 
