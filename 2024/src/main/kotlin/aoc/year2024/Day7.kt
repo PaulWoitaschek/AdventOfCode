@@ -20,25 +20,23 @@ object Day7 : Puzzle<Long, Long>(day = 7) {
       .filter {
         val solution = it.first()
         val elements = it.drop(1)
-        val solutions = mutableListOf<Long>()
-        runEquations(operators, elements, solutions)
-        solution in solutions
+        isSolvable(solution, operators, elements)
       }
       .sumOf { it.first() }
   }
 
-  private fun runEquations(
+  private fun isSolvable(
+    solution: Long,
     operators: List<Operator>,
     input: List<Long>,
-    output: MutableList<Long>,
-  ) {
+  ): Boolean {
     if (input.size == 1) {
-      output.add(input.first())
-      return
+      return input.first() == solution
     }
 
-    operators.forEach { operator ->
-      runEquations(
+    return operators.any { operator ->
+      isSolvable(
+        solution,
         operators,
         input.toMutableList().apply {
           val first = removeAt(0)
@@ -50,7 +48,6 @@ object Day7 : Puzzle<Long, Long>(day = 7) {
           }
           add(0, value)
         },
-        output,
       )
     }
   }
