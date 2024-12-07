@@ -20,7 +20,13 @@ object Day7 : Puzzle<Long, Long>(day = 7) {
       .filter {
         val solution = it.first()
         val elements = it.drop(1)
-        isSolvable(solution, operators, elements)
+        isSolvable(
+          solution = solution,
+          operators = operators,
+          elements = elements,
+          index = 1,
+          sum = elements.first(),
+        )
       }
       .sumOf { it.first() }
   }
@@ -29,30 +35,28 @@ object Day7 : Puzzle<Long, Long>(day = 7) {
     solution: Long,
     operators: List<Operator>,
     elements: List<Long>,
+    sum: Long,
+    index: Int,
   ): Boolean {
-    if (elements.size == 1) {
-      return elements.first() == solution
+    if (index >= elements.size) {
+      return sum == solution
     }
-
     // performance optimization
-    if (elements.first() > solution) {
-      return false
-    }
+    if (sum > solution) return false
 
     return operators.any { operator ->
+      val nextElement = elements[index]
+      val newSum = when (operator) {
+        Operator.Add -> sum + nextElement
+        Operator.Multiply -> sum * nextElement
+        Operator.Concat -> (sum.toString() + nextElement.toString()).toLong()
+      }
       isSolvable(
         solution = solution,
         operators = operators,
-        elements = elements.toMutableList().apply {
-          val first = removeAt(0)
-          val second = removeAt(0)
-          val value = when (operator) {
-            Operator.Add -> first + second
-            Operator.Multiply -> first * second
-            Operator.Concat -> (first.toString() + second.toString()).toLong()
-          }
-          add(0, value)
-        },
+        elements = elements,
+        sum = newSum,
+        index = index + 1,
       )
     }
   }
