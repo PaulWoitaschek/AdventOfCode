@@ -28,17 +28,22 @@ object Day7 : Puzzle<Long, Long>(day = 7) {
   private fun isSolvable(
     solution: Long,
     operators: List<Operator>,
-    input: List<Long>,
+    elements: List<Long>,
   ): Boolean {
-    if (input.size == 1) {
-      return input.first() == solution
+    if (elements.size == 1) {
+      return elements.first() == solution
+    }
+
+    // performance optimization
+    if (elements.first() > solution) {
+      return false
     }
 
     return operators.any { operator ->
       isSolvable(
-        solution,
-        operators,
-        input.toMutableList().apply {
+        solution = solution,
+        operators = operators,
+        elements = elements.toMutableList().apply {
           val first = removeAt(0)
           val second = removeAt(0)
           val value = when (operator) {
