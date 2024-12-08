@@ -35,6 +35,8 @@ data class Point(val x: Int, val y: Int) {
 
   operator fun plus(other: Point): Point = Point(x = x + other.x, y = y + other.y)
 
+  operator fun minus(other: Point): Point = Point(x = x - other.x, y = y - other.y)
+
   companion object {
     val Zero = Point(0, 0)
     fun parse(from: String): Point {
