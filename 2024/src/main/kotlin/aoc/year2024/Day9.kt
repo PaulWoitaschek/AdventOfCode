@@ -20,7 +20,7 @@ object Day9 : Puzzle<Long, Long>(day = 9) {
     }
     while (true) {
       val lastFile = elements.indexOfLast { it != -1 }
-      val firstSpace = elements.indexOfFirst { it == -1 }
+      val firstSpace = elements.indexOf(-1)
       if (firstSpace > lastFile) {
         break
       }
