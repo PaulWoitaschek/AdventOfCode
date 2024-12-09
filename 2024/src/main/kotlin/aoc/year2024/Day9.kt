@@ -5,7 +5,7 @@ import aoc.library.Puzzle
 object Day9 : Puzzle<Long, Long>(day = 9) {
 
   override fun solvePart1(input: String): Long {
-    val elements = mutableListOf<Int?>()
+    val elements = mutableListOf<Int>()
     var id = 0
     input.toList().chunked(2) {
       repeat(it.first().digitToInt()) {
@@ -14,23 +14,21 @@ object Day9 : Puzzle<Long, Long>(day = 9) {
       id++
       if (it.size > 1) {
         repeat(it[1].digitToInt()) {
-          elements += null
+          elements += -1
         }
       }
     }
     while (true) {
-      val lastFile = elements.indexOfLast { it != null }
-      val firstSpace = elements.indexOfFirst { it == null }
+      val lastFile = elements.indexOfLast { it != -1 }
+      val firstSpace = elements.indexOfFirst { it == -1 }
       if (firstSpace > lastFile) {
         break
       }
       val file = elements.removeAt(lastFile)
-      val space = elements.removeAt(firstSpace)
-      elements.add(firstSpace, file)
-      elements.add(space)
+      elements[firstSpace] = file
     }
     return elements.withIndex().sumOf { (index, element) ->
-      index * (element?.toLong() ?: 0L)
+      if (element == -1) 0L else index * element.toLong()
     }
   }
 
