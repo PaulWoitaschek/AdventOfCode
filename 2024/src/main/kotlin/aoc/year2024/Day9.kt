@@ -5,29 +5,30 @@ import aoc.library.Puzzle
 object Day9 : Puzzle<Long, Long>(day = 9) {
 
   override fun solvePart1(input: String): Long {
-    val elements = mutableListOf<Int>()
+    val blocks = mutableListOf<Int>()
     var id = 0
     input.toList().chunked(2) {
       repeat(it.first().digitToInt()) {
-        elements += id
+        blocks += id
       }
       id++
       if (it.size > 1) {
         repeat(it[1].digitToInt()) {
-          elements += -1
+          blocks += -1
         }
       }
     }
     while (true) {
-      val lastFile = elements.indexOfLast { it != -1 }
-      val firstSpace = elements.indexOf(-1)
-      if (firstSpace > lastFile) {
-        break
+      val lastBlockIndex = blocks.lastIndex
+      if (blocks[lastBlockIndex] == -1) {
+        blocks.removeAt(lastBlockIndex)
+      } else {
+        val firstSpace = blocks.indexOf(-1)
+        if (firstSpace == -1) break
+        blocks[firstSpace] = blocks.removeAt(lastBlockIndex)
       }
-      val file = elements.removeAt(lastFile)
-      elements[firstSpace] = file
     }
-    return elements.withIndex().sumOf { (index, element) ->
+    return blocks.withIndex().sumOf { (index, element) ->
       if (element == -1) 0L else index * element.toLong()
     }
   }
