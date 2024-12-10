@@ -15,37 +15,32 @@ object Day10 : Puzzle<Int, Int>(day = 10) {
   ): Int {
     val mountains = input.lines().flatMapIndexed { y, line ->
       line.mapIndexed { x, char ->
-        Point(x, y) to (char.digitToIntOrNull() ?: -1)
+        Point(x, y) to char.digitToIntOrNull()
       }
     }.toMap()
-    return mountains.toList()
-      .sumOf { (point, height) ->
-        if (height == 0) {
-          val reachedNines = mutableListOf<Point>()
-          fun visit(
-            currentHeight: Int,
-            point: Point,
-          ) {
-            val heightAtPoint = mountains[point] ?: return
-            if (heightAtPoint == currentHeight + 1) {
-              if (heightAtPoint == 9) {
-                reachedNines += point
-              } else {
-                point.adjacentOrthogonal().forEach {
-                  visit(heightAtPoint, it)
-                }
-              }
-            }
-          }
-          visit(-1, point)
-          if (countUniqueTrails) {
-            reachedNines.toSet().size
-          } else {
-            reachedNines.size
-          }
+
+    fun visit(
+      currentHeight: Int,
+      point: Point,
+      reachedNines: MutableList<Point>,
+    ) {
+      val heightAtPoint = mountains[point] ?: return
+      if (heightAtPoint == currentHeight + 1) {
+        if (heightAtPoint == 9) {
+          reachedNines += point
         } else {
-          0
+          point.adjacentOrthogonal().forEach { adjacent ->
+            visit(heightAtPoint, adjacent, reachedNines)
+          }
         }
+      }
+    }
+    return mountains.toList()
+      .filter { (_, height) -> height == 0 }
+      .sumOf { (start, _) ->
+        val reachedNines = mutableListOf<Point>()
+        visit(-1, start, reachedNines)
+        if (countUniqueTrails) reachedNines.toSet().size else reachedNines.size
       }
   }
 }
