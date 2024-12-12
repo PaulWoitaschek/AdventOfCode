@@ -62,7 +62,7 @@ private data class HeightMap(private val heights: List<List<Int>>) {
     )
   }
 
-  private fun PointWithValue.surroundingPoints(): List<PointWithValue> = point.adjacent()
+  private fun PointWithValue.surroundingPoints(): List<PointWithValue> = point.adjacentOrthogonal()
     .mapNotNull { adjacentPoint -> allPoints.find { it.point == adjacentPoint } }
 
   private data class PointWithValue(val point: Point, val value: Int)
