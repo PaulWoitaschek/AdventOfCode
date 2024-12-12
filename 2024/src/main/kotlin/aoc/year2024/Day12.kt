@@ -17,13 +17,12 @@ object Day12 : Puzzle<Int, Int>(12) {
   ): Int {
     val garden = parse(input)
     return clusterByRegions(garden).sumOf {
-      val pointsInRegion = it.points
-      perimeter(pointsInRegion) * pointsInRegion.size
+      perimeter(it) * it.size
     }
   }
 
-  private fun clusterByRegions(garden: Map<Point, Char>): List<Region> {
-    val regions = mutableListOf<Region>()
+  private fun clusterByRegions(garden: Map<Point, Char>): List<Set<Point>> {
+    val regions = mutableListOf<Set<Point>>()
     val visited = mutableSetOf<Point>()
     garden.keys.forEach { start ->
       if (start !in visited) {
@@ -40,7 +39,7 @@ object Day12 : Puzzle<Int, Int>(12) {
             }
         }
         visit(start)
-        regions += Region(groupChar, group)
+        regions += group
         visited.addAll(group)
       }
     }
@@ -65,6 +64,4 @@ object Day12 : Puzzle<Int, Int>(12) {
       }
     }
   }
-
-  private data class Region(val char: Char, val points: Set<Point>)
 }
