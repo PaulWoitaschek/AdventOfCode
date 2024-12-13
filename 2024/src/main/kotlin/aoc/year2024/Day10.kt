@@ -2,6 +2,7 @@ package aoc.year2024
 
 import aoc.library.Point
 import aoc.library.Puzzle
+import aoc.library.grid
 
 object Day10 : Puzzle<Int, Int>(day = 10) {
 
@@ -13,11 +14,7 @@ object Day10 : Puzzle<Int, Int>(day = 10) {
     input: String,
     countUniqueTrails: Boolean,
   ): Int {
-    val mountains = input.lines().flatMapIndexed { y, line ->
-      line.mapIndexed { x, char ->
-        Point(x, y) to char.digitToIntOrNull()
-      }
-    }.toMap()
+    val mountains = grid(input, Char::digitToIntOrNull)
 
     fun visit(
       currentHeight: Int,

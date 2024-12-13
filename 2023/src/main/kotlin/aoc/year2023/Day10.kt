@@ -3,6 +3,7 @@ package aoc.year2023
 import aoc.library.Direction
 import aoc.library.Point
 import aoc.library.Puzzle
+import aoc.library.grid
 import aoc.library.move
 import aoc.library.shoelace
 
@@ -32,15 +33,7 @@ object Day10 : Puzzle<Int, Int>(day = 10) {
     return shoelace(loop).toInt() - loop.size / 2 + 1
   }
 
-  private fun parse(input: String): Map<Point, Tile> {
-    val map = mutableMapOf<Point, Tile>()
-    input.lines().flatMapIndexed { y, line ->
-      line.mapIndexed { x, symbol ->
-        map[Point(x, y)] = Tile.bySymbol.getValue(symbol)
-      }
-    }
-    return map
-  }
+  private fun parse(input: String): Map<Point, Tile> = grid(input, Tile.bySymbol::getValue)
 
   private enum class Tile(val symbol: Char, val connecting: List<Direction>) {
     Vertical('|', listOf(Direction.Up, Direction.Down)),

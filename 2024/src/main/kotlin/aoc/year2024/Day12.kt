@@ -3,6 +3,7 @@ package aoc.year2024
 import aoc.library.Direction
 import aoc.library.Point
 import aoc.library.Puzzle
+import aoc.library.grid
 import aoc.library.move
 
 object Day12 : Puzzle<Int, Int>(12) {
@@ -15,7 +16,7 @@ object Day12 : Puzzle<Int, Int>(12) {
     input: String,
     perimeter: (Set<Point>) -> Int,
   ): Int {
-    val garden = parse(input)
+    val garden = grid(input)
     return clusterByRegions(garden).sumOf {
       perimeter(it) * it.size
     }
@@ -45,12 +46,6 @@ object Day12 : Puzzle<Int, Int>(12) {
     }
     return regions
   }
-
-  private fun parse(input: String): Map<Point, Char> = input.lines().flatMapIndexed { y, line ->
-    line.mapIndexed { x, char ->
-      Point(x, y) to char
-    }
-  }.toMap()
 
   private fun perimeterV1(points: Set<Point>): Int = points.sumOf { point ->
     point.adjacentOrthogonal().count { it !in points }
