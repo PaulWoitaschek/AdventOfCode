@@ -40,20 +40,28 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
   }
     .elementAt(100)
     .groupBy {
-      val (x, y) = it.position
-      val centerX = width / 2
-      val centerY = height / 2
-      when {
-        x < centerX && y < centerY -> 1
-        x > centerX && y < centerY -> 2
-        x < centerX && y > centerY -> 3
-        x > centerX && y > centerY -> 4
-        else -> null
-      }
+      quadrant(it, width, height)
     }
     .mapValues { it.value.size }
     .filterKeys { it != null }.values
     .reduce(Int::times)
+
+  private fun quadrant(
+    robot: Robot,
+    width: Int,
+    height: Int,
+  ): Int? {
+    val (x, y) = robot.position
+    val centerX = width / 2
+    val centerY = height / 2
+    return when {
+      x < centerX && y < centerY -> 1
+      x > centerX && y < centerY -> 2
+      x < centerX && y > centerY -> 3
+      x > centerX && y > centerY -> 4
+      else -> null
+    }
+  }
 
   override fun solvePart2(input: String): Int = solvePart2(input, onStep = {})
 
