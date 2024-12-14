@@ -11,10 +11,15 @@ fun <Part1, Part2> Puzzle<Part1, Part2>.solvePart1(): Part1 = solvePart1(input()
 
 fun <Part1, Part2> Puzzle<Part1, Part2>.solvePart2(): Part2 = solvePart2(input())
 
-fun Puzzle<*, *>.input(): String = aocInput(day = day)
+fun Puzzle<*, *>.input(): String = aocInput(
+  year = File(System.getProperty("user.dir")).name.toInt(),
+  day = day,
+)
 
-private fun aocInput(day: Int): String {
-  val year = File(System.getProperty("user.dir")).name
+fun aocInput(
+  year: Int,
+  day: Int,
+): String {
   val file = File("../inputs/$year/$day.txt")
     .apply { parentFile.mkdirs() }
   if (!file.exists() || file.length() == 0L) {

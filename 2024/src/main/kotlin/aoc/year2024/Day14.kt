@@ -1,13 +1,35 @@
 package aoc.year2024
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.WindowState
+import androidx.compose.ui.window.singleWindowApplication
 import aoc.library.Point
 import aoc.library.Puzzle
-import aoc.library.print
+import aoc.library.aocInput
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.String
 
 object Day14 : Puzzle<Int, Int>(day = 14) {
 
-  override fun solvePart1(input: String): Int = solvePart1(input, 101, 103)
+  private const val DEFAULT_WIDTH = 101
+  private const val DEFAULT_HEIGHT = 103
+
+  override fun solvePart1(input: String): Int = solvePart1(input, DEFAULT_WIDTH, DEFAULT_HEIGHT)
 
   fun solvePart1(
     input: String,
@@ -33,19 +55,16 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
     .filterKeys { it != null }.values
     .reduce(Int::times)
 
-  override fun solvePart2(input: String): Int = generateSequence(parse(input)) { robots ->
-    robots.map { robot -> robot.step(101, 103) }
-  }.indexOfFirst { robots ->
-    hasRobotCluster(robots)
-      .also { hasCluster ->
-        if (hasCluster) {
-          val map = robots.groupingBy { it.position }.eachCount()
-          map.print {
-            map[it]?.toString() ?: "."
-          }
-        }
-      }
+  override fun solvePart2(input: String): Int = solvePart2(input, onStep = {})
+
+  private fun solvePart2(
+    input: String,
+    onStep: (List<Robot>) -> Unit,
+  ) = generateSequence(parse(input)) { robots ->
+    robots.map { robot -> robot.step(DEFAULT_WIDTH, DEFAULT_HEIGHT) }
   }
+    .onEach { onStep(it) }
+    .indexOfFirst(::hasRobotCluster)
 
   private fun hasRobotCluster(robots: List<Robot>): Boolean {
     val positions = robots.map { it.position }.toSet()
@@ -74,5 +93,46 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
         y = (position.y + velocity.y + height) % height,
       ),
     )
+  }
+
+  @JvmStatic
+  fun main(args: Array<String>) {
+    val tileSize = 8.dp
+    singleWindowApplication(
+      title = "Advent of Code in Kotlin",
+      state = WindowState(width = tileSize * DEFAULT_WIDTH, height = tileSize * DEFAULT_HEIGHT),
+    ) {
+      var state by remember { mutableStateOf<Set<Point>>(emptySet()) }
+      LaunchedEffect(Unit) {
+        val steps = mutableListOf<Set<Point>>()
+        solvePart2(
+          aocInput(2024, 14),
+          onStep = {
+            launch {
+              steps += it.map { it.position }.toSet()
+            }
+          },
+        )
+        withContext(Dispatchers.Default) {}
+        steps.forEach {
+          delay(1)
+          state = it
+        }
+      }
+      Column {
+        repeat(DEFAULT_HEIGHT) { y ->
+          Row {
+            repeat(DEFAULT_WIDTH) { x ->
+              val color = if (Point(x, y) in state) {
+                Color(0xFF228B22)
+              } else {
+                Color(0xFF001F3F)
+              }
+              Box(Modifier.size(tileSize).background(color))
+            }
+          }
+        }
+      }
+    }
   }
 }
