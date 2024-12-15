@@ -56,7 +56,6 @@ object Day15 : Puzzle<Long, Long>(day = 15) {
     direction: Direction,
   ): Map<Point, Char> {
     val robot = map.toList().find { it.second == Robot }!!.first
-    val newMap = map.toMutableMap()
 
     fun canPush(from: Point): Boolean {
       val next = from.move(direction)
@@ -67,6 +66,10 @@ object Day15 : Puzzle<Long, Long>(day = 15) {
       }
     }
 
+    val canPush = canPush(robot)
+    if (!canPush) return map
+
+    val newMap = map.toMutableMap()
     fun push(from: Point) {
       val value = map.getValue(from)
       if (value == Space) return
@@ -79,9 +82,7 @@ object Day15 : Puzzle<Long, Long>(day = 15) {
       push(next)
     }
 
-    if (canPush(robot)) {
-      push(robot)
-    }
+    push(robot)
 
     return newMap
   }
