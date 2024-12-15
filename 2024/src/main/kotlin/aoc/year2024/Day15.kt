@@ -68,14 +68,14 @@ object Day15 : Puzzle<Long, Long>(day = 15) {
     }
 
     fun push(from: Point) {
-      if (map.getValue(from) == Wall) return
+      val value = map.getValue(from)
+      if (value == Space) return
+
       val next = from.move(direction)
-      if (map.getValue(next) == Wall) return
-      newMap[next] = map.getValue(from)
+      newMap[next] = value
       if (from == robot) {
         newMap[from] = Space
       }
-      if (map.getValue(next) == Space) return
       push(next)
     }
 
