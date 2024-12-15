@@ -3,35 +3,27 @@ package aoc.year2024
 import aoc.library.Direction
 import aoc.library.Point
 import aoc.library.Puzzle
+import aoc.library.grid
 import aoc.library.move
-import aoc.year2024.Day15.Tile
 
 object Day15 : Puzzle<Long, Long>(day = 15) {
 
+  const val Space = '.'
+  const val Wall = '#'
+  const val SingleBox = 'O'
+  const val Robot = '@'
+  const val LeftBox = '['
+  const val RightBox = ']'
+
   override fun solvePart1(input: String): Long {
     val (mapValue, movementsValue) = input.split("\n\n")
-    var map = buildMap {
-      mapValue.lines().forEachIndexed { y, line ->
-        line.forEachIndexed { x, char ->
-          val tile = when (char) {
-            '@' -> Tile.Robot
-            '#' -> Tile.Wall
-            'O' -> Tile.Box
-            '.' -> null
-            else -> error("Invalid char $char")
-          }
-          if (tile != null) {
-            put(Point(x, y), tile)
-          }
-        }
-      }
-    }
+    var map = grid(mapValue)
     movementsValue.mapNotNull(Direction::fromArrowOrNull)
       .forEach { direction ->
-        map = map.walk(direction)
+        map = walk(map, direction)
       }
     return map
-      .filterValues { it == Tile.Box }
+      .filterValues { it == SingleBox }
       .keys
       .sumOf {
         100 * it.y + it.x
@@ -39,37 +31,58 @@ object Day15 : Puzzle<Long, Long>(day = 15) {
   }
 
   override fun solvePart2(input: String): Long {
-    TODO()
+    val (mapValue, movementsValue) = input.split("\n\n")
+    var map = grid(
+      mapValue
+        .replace("#", "##")
+        .replace("O", "[]")
+        .replace(".", "..")
+        .replace("@", "@."),
+    )
+    movementsValue.mapNotNull(Direction::fromArrowOrNull)
+      .forEach { direction ->
+        map = walk(map, direction)
+      }
+    return map
+      .filterValues { it == SingleBox }
+      .keys
+      .sumOf {
+        100 * it.y + it.x
+      }.toLong()
   }
 
-  enum class Tile {
-    Wall,
-    Box,
-    Robot,
-  }
-}
+  fun walk(
+    map: Map<Point, Char>,
+    direction: Direction,
+  ): Map<Point, Char> {
+    val robot = map.toList().find { it.second == Robot }!!.first
+    val newMap = map.toMutableMap()
 
-fun Map<Point, Tile>.walk(direction: Direction): Map<Point, Tile> {
-  val robot = toList().find { it.second == Tile.Robot }!!.first
-  val newMap = toMutableMap()
-
-  var currentPosition = robot
-  newMap.remove(currentPosition)
-
-  while (true) {
-    val nextPosition = currentPosition.move(direction)
-
-    val current = get(currentPosition)
-    val next = get(nextPosition)
-
-    if (next == Tile.Wall) return this
-
-    newMap[nextPosition] = current!!
-
-    if (next == null) {
-      return newMap
+    fun canPush(from: Point): Boolean {
+      val next = from.move(direction)
+      return when (map.getValue(next)) {
+        Wall -> false
+        Space -> true
+        else -> canPush(next)
+      }
     }
 
-    currentPosition = nextPosition
+    fun push(from: Point) {
+      if (map.getValue(from) == Wall) return
+      val next = from.move(direction)
+      if (map.getValue(next) == Wall) return
+      newMap[next] = map.getValue(from)
+      if (from == robot) {
+        newMap[from] = Space
+      }
+      if (map.getValue(next) == Space) return
+      push(next)
+    }
+
+    if (canPush(robot)) {
+      push(robot)
+    }
+
+    return newMap
   }
 }

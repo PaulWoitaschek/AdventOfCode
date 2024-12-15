@@ -69,28 +69,39 @@ fun Collection<Point>.printString(): String = associateWith { }.printString {
   if (it in this) "█" else " "
 }
 
-inline fun <T> Map<Point, T>.printString(crossinline tile: (Point) -> String): String {
+inline fun <T> Map<Point, T>.printString(
+  renderWalls: Boolean = true,
+  crossinline tile: (Point) -> String = { getValue(it).toString() },
+): String {
   if (isEmpty()) {
     return "EMPTY MAP"
   }
   val bounds = keys.bounds()
   return (bounds.top..bounds.bottom).joinToString(
     separator = "\n",
-    prefix = buildString {
-      append('╔')
-      append("═".repeat(1 + bounds.right - bounds.left))
-      append('╗')
-      appendLine()
+    prefix = if (renderWalls) {
+      buildString {
+        append('╔')
+        append("═".repeat(1 + bounds.right - bounds.left))
+        append('╗')
+        appendLine()
+      }
+    } else {
+      ""
     },
-    postfix = buildString {
-      appendLine()
-      append('╚')
-      append("═".repeat(1 + bounds.right - bounds.left))
-      append('╝')
+    postfix = if (renderWalls) {
+      buildString {
+        appendLine()
+        append('╚')
+        append("═".repeat(1 + bounds.right - bounds.left))
+        append('╝')
+      }
+    } else {
+      ""
     },
   ) { y ->
     (bounds.left..bounds.right)
-      .joinToString(separator = "", prefix = "║", postfix = "║") { x ->
+      .joinToString(separator = "", prefix = if (renderWalls) "║" else "", postfix = if (renderWalls) "║" else "") { x ->
         tile(Point(x, y))
       }
   }
@@ -100,8 +111,11 @@ fun Collection<Point>.print() {
   println(printString())
 }
 
-inline fun <T> Map<Point, T>.print(crossinline tile: (Point) -> String) {
-  println(printString(tile))
+inline fun <T> Map<Point, T>.print(
+  renderWalls: Boolean = true,
+  crossinline tile: (Point) -> String,
+) {
+  println(printString(renderWalls = renderWalls, tile = tile))
 }
 
 fun Collection<Point>.bounds(): Rect = Rect(

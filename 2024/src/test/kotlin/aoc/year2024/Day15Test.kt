@@ -1,7 +1,8 @@
 package aoc.year2024
 
 import aoc.library.Direction
-import aoc.library.Point
+import aoc.library.grid
+import aoc.library.printString
 import aoc.library.solvePart1
 import aoc.library.solvePart2
 import io.kotest.matchers.longs.shouldBeExactly
@@ -13,53 +14,46 @@ class Day15Test {
 
   @Test
   fun `robot does not move when next to rock`() {
-    val map = mapOf(
-      Point(0, 0) to Day15.Tile.Robot,
-      Point(1, 0) to Day15.Tile.Wall,
+    testWalk(
+      start = "@#",
+      expected = "@#",
+      direction = Direction.Right,
     )
-    map.walk(Direction.Right) shouldBe map
   }
 
   @Test
   fun `robot walks to empty spot`() {
-    val map = mapOf(
-      Point(0, 0) to Day15.Tile.Robot,
-      Point(2, 0) to Day15.Tile.Wall,
-    )
-    map.walk(Direction.Right) shouldBe mapOf(
-      Point(1, 0) to Day15.Tile.Robot,
-      Point(2, 0) to Day15.Tile.Wall,
+    testWalk(
+      start = "@.#",
+      expected = ".@#",
+      direction = Direction.Right,
     )
   }
 
   @Test
   fun `pushes boxes to empty spot`() {
-    val map = mapOf(
-      Point(0, 0) to Day15.Tile.Robot,
-      Point(1, 0) to Day15.Tile.Box,
-      Point(2, 0) to Day15.Tile.Box,
-      Point(4, 0) to Day15.Tile.Wall,
-    )
-    map.walk(Direction.Right) shouldBe mapOf(
-      Point(1, 0) to Day15.Tile.Robot,
-      Point(2, 0) to Day15.Tile.Box,
-      Point(3, 0) to Day15.Tile.Box,
-      Point(4, 0) to Day15.Tile.Wall,
-    )
+    testWalk("@OO.#", ".@OO#", Direction.Right)
   }
 
   @Test
   fun `does not push box against wall`() {
-    val map = mapOf(
-      Point(0, 0) to Day15.Tile.Robot,
-      Point(1, 0) to Day15.Tile.Box,
-      Point(2, 0) to Day15.Tile.Wall,
-    )
-    map.walk(Direction.Right) shouldBe mapOf(
-      Point(0, 0) to Day15.Tile.Robot,
-      Point(1, 0) to Day15.Tile.Box,
-      Point(2, 0) to Day15.Tile.Wall,
-    )
+    testWalk(start = "@O#", expected = "@O#", direction = Direction.Right)
+  }
+
+  private fun testWalk(
+    start: String,
+    expected: String,
+    direction: Direction,
+  ) {
+    Day15
+      .walk(
+        map = grid(start),
+        direction = direction,
+      )
+      .printString(renderWalls = false)
+      .shouldBe(
+        grid(expected).printString(renderWalls = false),
+      )
   }
 
   @Test
@@ -83,7 +77,7 @@ class Day15Test {
   @Test
   fun part1TestInput2() {
     Day15.solvePart1(
-"""
+      """
   ##########
   #..O..O.O#
   #......O.#
@@ -105,7 +99,7 @@ class Day15Test {
   <><^^>^^^<><vvvvv^v<v<<>^v<v>v<<^><<><<><<<^^<<<^<<>><<><^^^>^^<>^>v<>
   ^^>vv<^v^v<vv>^<><v<^v>^^^>>>^^vvv^>vvv<>>>^<^>>>>>^<<^v>^vvv<>^<><<v>
   v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^
-""".trimIndent(),
+      """.trimIndent(),
     ) shouldBeExactly 10092
   }
 
