@@ -82,19 +82,15 @@ object Day15 : Puzzle<Int, Int>(day = 15) {
       else -> error("Invalid char=$element")
     }
 
-    val canPush = canPush(robot)
-
-    if (canPush) {
-      val newMap = map.toMutableMap()
-      movingPieces.forEach {
-        newMap[it] = Floor
+    return if (canPush(robot)) {
+      map.toMutableMap().apply {
+        putAll(movingPieces.associateWith { Floor })
+        movingPieces.forEach {
+          this[it.move(direction)] = map.getValue(it)
+        }
       }
-      movingPieces.forEach {
-        newMap[it.move(direction)] = map.getValue(it)
-      }
-      return newMap
     } else {
-      return map
+      map
     }
   }
 }
