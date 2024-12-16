@@ -4,7 +4,6 @@ import aoc.library.solvePart1
 import aoc.library.solvePart2
 import io.kotest.matchers.ints.shouldBeExactly
 import io.kotest.matchers.longs.shouldBeExactly
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day16Test {
@@ -63,14 +62,30 @@ class Day16Test {
   }
 
   @Test
-  @Disabled
   fun part2TestInput() {
-    Day16.solvePart2() shouldBeExactly 42
+    Day16.solvePart2(
+      """
+      ###############
+      #.......#....E#
+      #.#.###.#.###.#
+      #.....#.#...#.#
+      #.###.#####.#.#
+      #.#.#.......#.#
+      #.#.#####.###.#
+      #...........#.#
+      ###.#.#####.#.#
+      #...#.....#.#.#
+      #.#.#.###.#.#.#
+      #.....#...#.#.#
+      #.###.#.#.#.#.#
+      #S..#.....#...#
+      ###############
+      """.trimIndent(),
+    ) shouldBeExactly 45
   }
 
   @Test
-  @Disabled
   fun part2() {
-    Day16.solvePart2() shouldBeExactly 42
+    Day16.solvePart2() shouldBeExactly 645
   }
 }
