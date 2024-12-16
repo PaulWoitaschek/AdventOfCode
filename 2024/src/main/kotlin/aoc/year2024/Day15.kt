@@ -8,7 +8,7 @@ import aoc.library.move
 
 object Day15 : Puzzle<Long, Long>(day = 15) {
 
-  const val Space = '.'
+  const val Floor = '.'
   const val Wall = '#'
   const val SingleBox = 'O'
   const val Robot = '@'
@@ -44,7 +44,7 @@ object Day15 : Puzzle<Long, Long>(day = 15) {
         map = walk(map, direction)
       }
     return map
-      .filterValues { it == SingleBox }
+      .filterValues { it == LeftBox }
       .keys
       .sumOf {
         100 * it.y + it.x
@@ -57,33 +57,51 @@ object Day15 : Puzzle<Long, Long>(day = 15) {
   ): Map<Point, Char> {
     val robot = map.toList().find { it.second == Robot }!!.first
 
-    fun canPush(from: Point): Boolean {
-      val next = from.move(direction)
-      return when (map.getValue(next)) {
-        Wall -> false
-        Space -> true
-        else -> canPush(next)
+    val movingPieces = mutableSetOf<Point>()
+
+    fun canPush(from: Point): Boolean = when (val element = map.getValue(from)) {
+      Robot, SingleBox -> {
+        movingPieces += from
+        canPush(from.move(direction))
       }
+      Floor -> true
+      Wall -> false
+      LeftBox -> {
+        val pushSelf = canPush(from.move(direction))
+        movingPieces += from
+        if (direction == Direction.Up || direction == Direction.Down) {
+          movingPieces += from.move(Direction.Right)
+          pushSelf && canPush(from.move(Direction.Right).move(direction))
+        } else {
+          pushSelf
+        }
+      }
+      RightBox -> {
+        val pushSelf = canPush(from.move(direction))
+        movingPieces += from
+        if (direction == Direction.Up || direction == Direction.Down) {
+          movingPieces += from.move(Direction.Left)
+          pushSelf && canPush(from.move(Direction.Left).move(direction))
+        } else {
+          pushSelf
+        }
+      }
+      else -> error("Invalid char=$element")
     }
 
     val canPush = canPush(robot)
-    if (!canPush) return map
 
-    val newMap = map.toMutableMap()
-    fun push(from: Point) {
-      val value = map.getValue(from)
-      if (value == Space) return
-
-      val next = from.move(direction)
-      newMap[next] = value
-      if (from == robot) {
-        newMap[from] = Space
+    if (canPush) {
+      val newMap = map.toMutableMap()
+      movingPieces.forEach {
+        newMap[it] = Floor
       }
-      push(next)
+      movingPieces.forEach {
+        newMap[it.move(direction)] = map.getValue(it)
+      }
+      return newMap
+    } else {
+      return map
     }
-
-    push(robot)
-
-    return newMap
   }
 }

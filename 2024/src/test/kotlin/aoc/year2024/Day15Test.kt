@@ -7,7 +7,6 @@ import aoc.library.solvePart1
 import aoc.library.solvePart2
 import io.kotest.matchers.longs.shouldBeExactly
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day15Test {
@@ -38,6 +37,72 @@ class Day15Test {
   @Test
   fun `does not push box against wall`() {
     testWalk(start = "@O#", expected = "@O#", direction = Direction.Right)
+  }
+
+  @Test
+  fun `push big box horizontally`() {
+    testWalk(start = ".[][]@.", expected = "[][]@..", direction = Direction.Left)
+  }
+
+  @Test
+  fun `push big box which pushes big boxes`() {
+    testWalk(
+      start = """
+      ....
+      [][]
+      .[].
+      .@..
+      """.trimIndent(),
+      expected =
+      """
+      [][]
+      .[].
+      .@..
+      ....
+      """.trimIndent(),
+      direction = Direction.Up,
+    )
+  }
+
+  @Test
+  fun `push big box which pushes big boxes which is close to wall`() {
+    testWalk(
+      start = """
+      ...#
+      [][]
+      .[].
+      .@..
+      """.trimIndent(),
+      expected =
+      """
+      ...#
+      [][]
+      .[].
+      .@..
+      """.trimIndent(),
+      direction = Direction.Up,
+    )
+  }
+
+  @Test
+  fun complex() {
+    testWalk(
+      """
+      @...
+      []..
+      .[].
+      ..[]
+      ###.
+      """.trimIndent(),
+      """
+      @...
+      []..
+      .[].
+      ..[]
+      ###.
+      """.trimIndent(),
+      Direction.Down,
+    )
   }
 
   private fun testWalk(
@@ -109,14 +174,65 @@ class Day15Test {
   }
 
   @Test
-  @Disabled
-  fun part2TestInput() {
-    Day15.solvePart2() shouldBeExactly 42
+  fun part2TestInput1() {
+    Day15.solvePart2(
+      """
+##########
+#..O..O.O#
+#......O.#
+#.OO..O.O#
+#..O@..O.#
+#O#..O...#
+#O..O..O.#
+#.OO.O.OO#
+#....O...#
+##########
+
+<vv>^<v^>v>^vv^v>v<>v^v<v<^vv<<<^><<><>>v<vvv<>^v^>^<<<><<v<<<v^vv^v>^
+vvv<<^>^v^^><<>>><>^<<><^vv^^<>vvv<>><^^v>^>vv<>v<<<<v<^v>^<^^>>>^<v<v
+><>vv>v^v^<>><>>>><^^>vv>v<^^^>>v^v^<^^>v^^>v^<^v>v<>>v^v^<v>v^^<^^vv<
+<<v<^>>^^^^>>>v^<>vvv^><v<<<>^^^vv^<vvv>^>v<^^^^v<>^>vvvv><>>v^<<^^^^^
+^><^><>>><>^^<<^^v>>><^<v>^<vv>>v>>>^v><>^v><<<<v>>v<v<v>vvv>^<><<>^><
+^>><>^v<><^vvv<^^<><v<<<<<><^v<<<><<<^^<v<^^^><^>>^<v^><<<^>>^v<v^v<v^
+>^>>^v>vv>^<<^v<>><<><<v<<v><>v<^vv<<<>^^v^>^^>>><<^v>>v^v><^^>>^<>vv^
+<><^^>^^^<><vvvvv^v<v<<>^v<v>v<<^><<><<><<<^^<<<^<<>><<><^^^>^^<>^>v<>
+^^>vv<^v^v<vv>^<><v<^v>^^^>>>^^vvv^>vvv<>>>^<^>>>>>^<<^v>^vvv<>^<><<v>
+v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^
+      """.trimIndent(),
+    ) shouldBeExactly 9021
   }
 
   @Test
-  @Disabled
+  fun part2TestInput2() {
+    Day15.solvePart2(
+"""
+  ##########
+  #..O..O.O#
+  #......O.#
+  #.OO..O.O#
+  #..O@..O.#
+  #O#..O...#
+  #O..O..O.#
+  #.OO.O.OO#
+  #....O...#
+  ##########
+
+  <vv>^<v^>v>^vv^v>v<>v^v<v<^vv<<<^><<><>>v<vvv<>^v^>^<<<><<v<<<v^vv^v>^
+  vvv<<^>^v^^><<>>><>^<<><^vv^^<>vvv<>><^^v>^>vv<>v<<<<v<^v>^<^^>>>^<v<v
+  ><>vv>v^v^<>><>>>><^^>vv>v<^^^>>v^v^<^^>v^^>v^<^v>v<>>v^v^<v>v^^<^^vv<
+  <<v<^>>^^^^>>>v^<>vvv^><v<<<>^^^vv^<vvv>^>v<^^^^v<>^>vvvv><>>v^<<^^^^^
+  ^><^><>>><>^^<<^^v>>><^<v>^<vv>>v>>>^v><>^v><<<<v>>v<v<v>vvv>^<><<>^><
+  ^>><>^v<><^vvv<^^<><v<<<<<><^v<<<><<<^^<v<^^^><^>>^<v^><<<^>>^v<v^v<v^
+  >^>>^v>vv>^<<^v<>><<><<v<<v><>v<^vv<<<>^^v^>^^>>><<^v>>v^v><^^>>^<>vv^
+  <><^^>^^^<><vvvvv^v<v<<>^v<v>v<<^><<><<><<<^^<<<^<<>><<><^^^>^^<>^>v<>
+  ^^>vv<^v^v<vv>^<><v<^v>^^^>>>^^vvv^>vvv<>>>^<^>>>>>^<<^v>^vvv<>^<><<v>
+  v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^
+""".trimIndent(),
+    ) shouldBeExactly 9021
+  }
+
+  @Test
   fun part2() {
-    Day15.solvePart2() shouldBeExactly 42
+    Day15.solvePart2() shouldBeExactly 1381446
   }
 }
