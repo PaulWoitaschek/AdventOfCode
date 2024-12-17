@@ -35,18 +35,14 @@ class Day17Test {
   @Test
   fun tc2() {
     Day17.Computer(a = 10, b = 0, c = 0, program = listOf(5, 0, 5, 1, 5, 4))
-      .apply {
-        run()
-        output shouldContainExactly listOf(0, 1, 2)
-      }
+      .run() shouldContainExactly listOf(0, 1, 2)
   }
 
   @Test
   fun tc3() {
     Day17.Computer(a = 2024, b = 0, c = 0, program = listOf(0, 1, 5, 4, 3, 0))
       .apply {
-        run()
-        output shouldContainExactly listOf(4, 2, 5, 6, 7, 7, 7, 7, 3, 1, 0)
+        run() shouldContainExactly listOf(4, 2, 5, 6, 7, 7, 7, 7, 3, 1, 0)
         a shouldBeExactly 0
       }
   }
@@ -79,7 +75,15 @@ class Day17Test {
   @Test
   @Disabled
   fun part2TestInput() {
-    Day17.solvePart2() shouldBeExactly 42
+    Day17.solvePart2(
+      """
+      Register A: 2024
+      Register B: 0
+      Register C: 0
+
+      Program: 0,3,5,4,3,0
+      """.trimIndent(),
+    ) shouldBeExactly 117440
   }
 
   @Test

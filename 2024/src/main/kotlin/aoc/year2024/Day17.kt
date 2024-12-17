@@ -5,14 +5,7 @@ import kotlin.math.pow
 
 object Day17 : Puzzle<List<Int>, Int>(day = 17) {
 
-  data class Computer(
-    var a: Int,
-    var b: Int,
-    var c: Int,
-    val program: List<Int>,
-    val output: MutableList<Int> = mutableListOf(),
-    var pointer: Int = 0,
-  ) {
+  data class Computer(var a: Int, var b: Int, var c: Int, val program: List<Int>, var pointer: Int = 0) {
 
     private fun literalOperand(): Int = program[pointer++]
 
@@ -31,9 +24,10 @@ object Day17 : Puzzle<List<Int>, Int>(day = 17) {
       return a / 2.0.pow(comboOperand)
     }
 
-    fun run() {
+    fun run(): List<Int> {
+      val output = mutableListOf<Int>()
       while (true) {
-        val opCode = opCode() ?: return
+        val opCode = opCode() ?: return output
         when (opCode) {
           0 -> {
             val d = advStyleCalculation()
@@ -87,11 +81,11 @@ object Day17 : Puzzle<List<Int>, Int>(day = 17) {
 
   override fun solvePart1(input: String): List<Int> {
     val computer = Computer.parse(input)
-    computer.run()
-    return computer.output
+    return computer.run()
   }
 
   override fun solvePart2(input: String): Int {
+    val computer = Computer.parse(input)
     TODO()
   }
 }
