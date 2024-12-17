@@ -5,11 +5,25 @@ import kotlin.math.pow
 
 object Day17 : Puzzle<List<Int>, Int>(day = 17) {
 
+  override fun solvePart1(input: String): List<Int> = Computer.parse(input).run()
+
+  override fun solvePart2(input: String): Int {
+    val computer = Computer.parse(input)
+    var i = 0
+    while (true) {
+      i++
+      val result = computer.copy(a = i).run()
+      if (result == computer.program) {
+        return i
+      }
+    }
+  }
+
   data class Computer(var a: Int, var b: Int, var c: Int, val program: List<Int>, var pointer: Int = 0) {
 
-    private fun literalOperand(): Int = program[pointer++]
+    private fun literalOperand(): Int = program[pointer + 1]
 
-    private fun comboOperand(): Int = when (val value = program[pointer++]) {
+    private fun comboOperand(): Int = when (val value = program[pointer + 1]) {
       0, 1, 2, 3 -> value
       4 -> a
       5 -> b
@@ -17,54 +31,28 @@ object Day17 : Puzzle<List<Int>, Int>(day = 17) {
       else -> error("Invalid operand $value")
     }
 
-    private fun opCode(): Int? = program.getOrNull(pointer++)
-
-    private fun advStyleCalculation(): Double {
-      val comboOperand = comboOperand()
-      return a / 2.0.pow(comboOperand)
-    }
+    private fun advStyleCalculation(): Int = a / 2.0.pow(comboOperand()).toInt()
 
     fun run(): List<Int> {
       val output = mutableListOf<Int>()
       while (true) {
-        val opCode = opCode() ?: return output
+        val opCode = program.getOrNull(pointer)
+          ?: return output
         when (opCode) {
-          0 -> {
-            val d = advStyleCalculation()
-            a = d.toInt()
+          0 -> a = advStyleCalculation()
+          1 -> b = b xor literalOperand()
+          2 -> b = comboOperand().mod(8)
+          3 -> if (a != 0) {
+            pointer = literalOperand()
+            continue
           }
-          1 -> {
-            b = b xor literalOperand()
-          }
-          2 -> {
-            val comboOperand = comboOperand()
-            b = comboOperand.mod(8)
-          }
-          3 -> {
-            if (a != 0) {
-              pointer = literalOperand()
-            } else {
-              pointer++
-            }
-          }
-          4 -> {
-            b = b xor c
-            pointer++
-          }
-          5 -> {
-            val comboOperand = comboOperand()
-            output.add(comboOperand.mod(8))
-          }
-          6 -> {
-            val d = advStyleCalculation()
-            b = d.toInt()
-          }
-          7 -> {
-            val d = advStyleCalculation()
-            c = d.toInt()
-          }
+          4 -> b = b xor c
+          5 -> output += comboOperand().mod(8)
+          6 -> b = advStyleCalculation()
+          7 -> c = advStyleCalculation()
           else -> error("Invalid opCode $opCode")
         }
+        pointer += 2
       }
     }
 
@@ -76,23 +64,6 @@ object Day17 : Puzzle<List<Int>, Int>(day = 17) {
         program = input.lines()[4].substringAfterLast(" ")
           .split(",").map(String::toInt),
       )
-    }
-  }
-
-  override fun solvePart1(input: String): List<Int> {
-    val computer = Computer.parse(input)
-    return computer.run()
-  }
-
-  override fun solvePart2(input: String): Int {
-    val computer = Computer.parse(input)
-    var i = 0
-    while (true) {
-      i++
-      val result = computer.copy(a = i).run()
-      if (result == computer.program) {
-        return i
-      }
     }
   }
 }
