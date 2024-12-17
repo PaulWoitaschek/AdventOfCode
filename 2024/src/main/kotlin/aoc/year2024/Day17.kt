@@ -86,6 +86,13 @@ object Day17 : Puzzle<List<Int>, Int>(day = 17) {
 
   override fun solvePart2(input: String): Int {
     val computer = Computer.parse(input)
-    TODO()
+    var i = 0
+    while (true) {
+      i++
+      val result = computer.copy(a = i).run()
+      if (result == computer.program) {
+        return i
+      }
+    }
   }
 }

@@ -73,7 +73,6 @@ class Day17Test {
   }
 
   @Test
-  @Disabled
   fun part2TestInput() {
     Day17.solvePart2(
       """
