@@ -1,18 +1,16 @@
 package aoc.year2024
 
+import aoc.library.Point
 import aoc.library.solvePart1
 import aoc.library.solvePart2
 import io.kotest.matchers.ints.shouldBeExactly
-import io.kotest.matchers.longs.shouldBeExactly
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day18Test {
 
-  @Test
-  fun part1TestInput() {
-    Day18.solvePart1(
-      input = """
+  private val testInput = """
             5,4
             4,2
             4,5
@@ -38,7 +36,12 @@ class Day18Test {
             0,5
             1,6
             2,0
-      """.trimIndent(),
+  """.trimIndent()
+
+  @Test
+  fun part1TestInput() {
+    Day18.solvePart1(
+      input = testInput,
       bytes = 12,
       size = 6,
     ) shouldBeExactly 22
@@ -50,14 +53,13 @@ class Day18Test {
   }
 
   @Test
-  @Disabled
   fun part2TestInput() {
-    Day18.solvePart2() shouldBeExactly 42
+    Day18.solvePart2(testInput, 6) shouldBe Point(6, 1)
   }
 
   @Test
   @Disabled
   fun part2() {
-    Day18.solvePart2() shouldBeExactly 42
+    Day18.solvePart2() shouldBe Point(0, 0)
   }
 }
