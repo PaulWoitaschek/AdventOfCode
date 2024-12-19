@@ -51,13 +51,9 @@ object Day18 : Puzzle<Int, Point>(day = 18) {
         val (x, y) = it.split(",")
         Point(x.toInt(), y.toInt())
       }
-    var bytes = 0
-    while (true) {
-      bytes++
-      if (!isSolvable(allBytes, bytes, size)) {
-        return allBytes.elementAt(bytes - 1)
-      }
-    }
+    val byte = (0..allBytes.lastIndex).toList()
+      .binarySearchHighestMatching { isSolvable(allBytes, it, size) }!!
+    return allBytes.elementAt(byte)
   }
 
   private fun isSolvable(
@@ -94,4 +90,40 @@ object Day18 : Puzzle<Int, Point>(day = 18) {
   }
 
   override fun solvePart2(input: String): Point = solvePart2(input, 70)
+}
+
+fun <T> List<T>.binarySearchLowestMatching(condition: (T) -> Boolean): Int? {
+  var low = 0
+  var high = size - 1
+  var result: Int? = null
+
+  while (low <= high) {
+    val mid = low + (high - low) / 2
+    if (condition(this[mid])) {
+      result = mid
+      high = mid - 1
+    } else {
+      low = mid + 1
+    }
+  }
+
+  return result
+}
+
+fun <T> List<T>.binarySearchHighestMatching(condition: (T) -> Boolean): Int? {
+  var low = 0
+  var high = lastIndex
+  var result: Int? = null
+
+  while (low <= high) {
+    val mid = low + (high - low) / 2
+    if (condition(this[mid])) {
+      result = mid
+      low = mid + 1
+    } else {
+      high = mid - 1
+    }
+  }
+
+  return result
 }

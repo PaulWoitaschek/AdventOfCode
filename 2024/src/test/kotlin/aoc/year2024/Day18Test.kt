@@ -5,7 +5,6 @@ import aoc.library.solvePart1
 import aoc.library.solvePart2
 import io.kotest.matchers.ints.shouldBeExactly
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class Day18Test {
@@ -58,8 +57,7 @@ class Day18Test {
   }
 
   @Test
-  @Disabled
   fun part2() {
-    Day18.solvePart2() shouldBe Point(0, 0)
+    Day18.solvePart2() shouldBe Point(20, 64)
   }
 }
