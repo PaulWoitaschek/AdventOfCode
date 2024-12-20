@@ -2,6 +2,7 @@ package aoc.year2024
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
+import io.kotest.matchers.ints.shouldBeExactly
 import io.kotest.matchers.longs.shouldBeExactly
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Disabled
