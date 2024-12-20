@@ -36,12 +36,12 @@ object Day20 : Puzzle<Long, Long>(day = 20) {
     val cheats = mutableMapOf<Int, Int>()
 
     val visited = mutableSetOf<Point>()
-    val fastestPaths = mutableMapOf<Point, Int>()
-    fun fastestPath(from: Point): Int = fastestPaths.getOrPut(from) {
-      fastestPath(from, end, walls)
+    val path = mutableListOf(start)
+    while (path.last() != end) {
+      path += path.last().adjacentOrthogonal().single { it !in walls && it !in path }
     }
 
-    println("done!")
+    fun fastestPath(from: Point): Int = path.size - path.indexOf(from)
 
     while (true) {
       val state = queue.remove()
@@ -73,30 +73,6 @@ object Day20 : Puzzle<Long, Long>(day = 20) {
 
     walls.print()
     return cheats.filter { it.key > 0 }
-  }
-
-  data class State(val point: Point, val steps: Int)
-
-  private fun fastestPath(
-    start: Point,
-    end: Point,
-    walls: Set<Point>,
-  ): Int {
-    val queue = PriorityQueue<State>(compareBy { it.steps })
-    queue += State(start, 0)
-
-    val visited = mutableSetOf<Point>()
-    while (true) {
-      val state = queue.remove()
-      if (!visited.add(state.point)) continue
-      if (state.point == end) {
-        return state.steps
-      }
-
-      state.point.adjacentOrthogonal()
-        .filter { it !in walls }
-        .mapTo(queue) { State(it, steps = state.steps + 1) }
-    }
   }
 
   override fun solvePart2(input: String): Long {
