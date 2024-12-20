@@ -31,19 +31,16 @@ object Day20 : Puzzle<Int, Long>(day = 20) {
       path += path.last().adjacentOrthogonal().single { it !in walls && it !in path }
     }
 
-    fun fastestPath(from: Point): Int = path.size - path.indexOf(from)
+    val fastestPaths = path.associateWith { path.size - path.indexOf(it) }
+
     val cheats = mutableMapOf<Int, Int>()
 
     path.forEach { point ->
       Direction.entries.forEach { direction ->
-        val inDirection = point.move(direction)
-        if (inDirection in walls) {
-          val next = inDirection.move(direction)
-          if (next !in walls && next in bounds) {
-            val took = fastestPath(next)
-            val saved = fastestPath(point) - took - 2
-            cheats[saved] = cheats.getOrDefault(saved, 0) + 1
-          }
+        val next = point.move(direction, 2)
+        if (next !in walls && next in bounds) {
+          val saved = fastestPaths.getValue(point) - fastestPaths.getValue(next) - 2
+          cheats[saved] = cheats.getOrDefault(saved, 0) + 1
         }
       }
     }
