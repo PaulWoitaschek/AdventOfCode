@@ -1,10 +1,10 @@
 package aoc.library
 
-enum class Direction(var char: Char) {
-  Left('L'),
-  Up('U'),
-  Right('R'),
-  Down('D'),
+enum class Direction(var char: Char, val arrow: Char) {
+  Left('L', '<'),
+  Up('U', '^'),
+  Right('R', '>'),
+  Down('D', 'v'),
   ;
 
   fun clockwise(): Direction = entries[(ordinal + 1) % entries.size]
@@ -20,14 +20,9 @@ enum class Direction(var char: Char) {
 
   companion object {
     private val byChar = entries.associateBy { it.char }
+    private val byArrow = entries.associateBy { it.arrow }
     fun parse(input: Char): Direction = byChar[input] ?: throw IllegalArgumentException("Invalid char=$input")
 
-    fun fromArrowOrNull(arrow: Char): Direction? = when (arrow) {
-      '<' -> Left
-      '>' -> Right
-      '^' -> Up
-      'v' -> Down
-      else -> null
-    }
+    fun fromArrowOrNull(arrow: Char): Direction? = byArrow[arrow]
   }
 }
