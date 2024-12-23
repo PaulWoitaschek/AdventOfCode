@@ -28,7 +28,6 @@ object Day23 : Puzzle<Int, List<String>>(day = 23) {
 
   private class LanPartyFinder(val connections: Set<Set<String>>) {
 
-    private val allElements = connections.flatten().toSet()
     private val connectionsCache = mutableMapOf<String, Set<String>>()
     fun connections(from: String): Set<String> = connectionsCache.getOrPut(from) {
       connections.filter { from in it }
@@ -36,20 +35,14 @@ object Day23 : Puzzle<Int, List<String>>(day = 23) {
         .toSet()
     }
 
-    fun addMoreConnections(found: Set<Set<String>>): Set<Set<String>> {
-      val new = mutableSetOf<Set<String>>()
-      found.forEach { current ->
-        allElements.forEach { candidate ->
-          if (candidate !in current) {
-            val shouldAdd = connections(candidate).containsAll(current)
-            if (shouldAdd) {
-              new += current + candidate
-            }
-          }
+    fun addMoreConnections(found: Set<Set<String>>): Set<Set<String>> = found.flatMap { current ->
+      current.asSequence().flatMap { connections(it) }.distinct()
+        .filter { it !in current }
+        .filter { connections(it).containsAll(current) }
+        .map { candidate ->
+          current + candidate
         }
-      }
-      return new
-    }
+    }.toSet()
 
     companion object {
       fun parse(input: String): LanPartyFinder {
