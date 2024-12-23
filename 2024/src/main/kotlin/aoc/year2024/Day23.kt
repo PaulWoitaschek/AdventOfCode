@@ -14,16 +14,11 @@ object Day23 : Puzzle<Int, List<String>>(day = 23) {
 
   override fun solvePart2(input: String): List<String> {
     val lanPartyFinder = LanPartyFinder.parse(input)
-
     var groups = lanPartyFinder.links
-    while (true) {
-      val newGroups = lanPartyFinder.addMoreConnections(groups)
-      if (newGroups.size == 1) {
-        return newGroups.single().sorted()
-      } else {
-        groups = newGroups
-      }
+    while (groups.size > 1) {
+      groups = lanPartyFinder.addMoreConnections(groups)
     }
+    return groups.single().sorted()
   }
 
   private class LanPartyFinder(val links: Set<Set<String>>) {
