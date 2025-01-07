@@ -13,7 +13,7 @@ kotlinPoet = "com.squareup:kotlinpoet:2.0.0"
 
 jupiter = "org.junit.jupiter:junit-jupiter:5.11.4"
 
-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3"
+serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0"
 kotlin-jvmPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
