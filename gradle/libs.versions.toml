@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.1.20"
+kotlin = "2.1.21"
 ktlintGradlePlugin = "12.2.0"
 
 [libraries]
