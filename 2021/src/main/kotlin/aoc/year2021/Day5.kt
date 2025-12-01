@@ -35,13 +35,11 @@ private data class Line(val from: Point, val to: Point) {
         Point(x = from.x, y = rangeY)
       }
     }
-
     from.y == to.y -> {
       (minOf(from.x, to.x)..maxOf(from.x, to.x)).map { rangeX ->
         Point(x = rangeX, y = from.y)
       }
     }
-
     includeDiagonals && (abs(from.x - to.x) == abs(from.y - to.y)) -> {
       val results = mutableListOf<Point>()
       results += from
@@ -57,7 +55,6 @@ private data class Line(val from: Point, val to: Point) {
       } while (currentPoint != to)
       results
     }
-
     else -> {
       emptyList()
     }
