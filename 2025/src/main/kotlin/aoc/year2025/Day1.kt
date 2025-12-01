@@ -16,7 +16,7 @@ object Day1 : Puzzle<Int, Int>(day = 1) {
         val right = it.first() == 'R'
         val turn = it.drop(1).toInt()
         if (right) position += turn else position -= turn
-        position = ((position + 100) % (100))
+        position %= 100
         if (position == 0) password++
       }
     return password
