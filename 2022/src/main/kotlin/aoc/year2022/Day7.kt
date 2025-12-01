@@ -47,7 +47,6 @@ object Day7 : Puzzle<Long, Long>(7) {
             else -> "$currentPath$path/"
           }
         }
-
         line.first().isDigit() -> {
           val (size, name) = line.split(" ")
           files.add(PuzzleFile(size = size.toLong(), path = currentPath + name))
