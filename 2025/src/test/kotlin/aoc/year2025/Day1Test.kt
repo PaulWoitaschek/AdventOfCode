@@ -44,6 +44,26 @@ class Day1Test {
   }
 
   @Test
+  fun part2TestInput3() {
+    Day1.solvePart2("R49") shouldBeExactly 0
+  }
+
+  @Test
+  fun part2TestInput4() {
+    Day1.solvePart2("R50") shouldBeExactly 1
+  }
+
+  @Test
+  fun part2TestInput5() {
+    Day1.solvePart2("L49") shouldBeExactly 0
+  }
+
+  @Test
+  fun part2TestInput6() {
+    Day1.solvePart2("L50") shouldBeExactly 1
+  }
+
+  @Test
   fun part2() {
     Day1.solvePart2() shouldBeExactly 6254
   }
