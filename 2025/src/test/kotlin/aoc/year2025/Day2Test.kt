@@ -20,7 +20,7 @@ class Day2Test {
   fun `part 1 valid ids test`() {
     listOf(10, 20, 1011, 111).forEach {
       withClue(it) {
-        Day2.isValidId(it.toLong()).shouldBeTrue()
+        Day2.isValidId1(it.toLong()).shouldBeTrue()
       }
     }
   }
@@ -29,7 +29,7 @@ class Day2Test {
   fun `part 1 invalid ids test`() {
     listOf(11, 22, 1010, 1188511885, 222222, 38593859).forEach {
       withClue(it) {
-        Day2.isValidId(it.toLong()).shouldBeFalse()
+        Day2.isValidId1(it.toLong()).shouldBeFalse()
       }
     }
   }
