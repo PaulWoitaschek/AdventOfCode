@@ -8,13 +8,7 @@ import aoc.library.grid
 object Day4 : Puzzle<Int, Int>(day = 4) {
 
   override fun solvePart1(input: String): Int {
-    val grid = grid(input).mapValues { (_, char) ->
-      when (char) {
-        '.' -> false
-        '@' -> true
-        else -> error("")
-      }
-    }
+    val grid = parse(input)
     return grid.filterValues { it }
       .count {
         isRemovable(grid, it.key)
@@ -22,13 +16,7 @@ object Day4 : Puzzle<Int, Int>(day = 4) {
   }
 
   override fun solvePart2(input: String): Int {
-    val grid = grid(input).mapValues { (_, char) ->
-      when (char) {
-        '.' -> false
-        '@' -> true
-        else -> error("")
-      }
-    }.toMutableMap()
+    val grid = parse(input).toMutableMap()
 
     var removed = 0
     while (true) {
@@ -48,6 +36,14 @@ object Day4 : Puzzle<Int, Int>(day = 4) {
     }
 
     return removed
+  }
+
+  private fun parse(input: String): Grid<Boolean> = grid(input).mapValues { (_, char) ->
+    when (char) {
+      '.' -> false
+      '@' -> true
+      else -> error("")
+    }
   }
 
   private fun isRemovable(
