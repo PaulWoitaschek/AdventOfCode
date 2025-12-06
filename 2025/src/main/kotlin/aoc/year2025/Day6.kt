@@ -13,11 +13,7 @@ object Day6 : Puzzle<Long, Long>(day = 6) {
     val operators = lines.last().split(" ").filter { it != " " && it != "" }
     return operators.withIndex().sumOf { (index, operator) ->
       val values = numbers.map { it[index] }
-      when (operator) {
-        "*" -> values.reduce(Long::times)
-        "+" -> values.reduce(Long::plus)
-        else -> error("")
-      }
+      values.reduce(parseOperator(operator.single()))
     }
   }
 
@@ -34,28 +30,25 @@ object Day6 : Puzzle<Long, Long>(day = 6) {
       val value = (0..<height - 1).map {
         lines.getOrNull(it)?.getOrNull(x) ?: ""
       }.joinToString("").trim().toIntOrNull()
-      val operator = lines.last().getOrNull(x)
+      val operatorChar = lines.last().getOrNull(x).takeUnless { it == ' ' }
 
       if (value != null) {
         numbers += value.toLong()
       }
-      if (operator != null && operator != ' ') {
-        val op: (Long, Long) -> Long = when (operator) {
-          '+' -> Long::plus
-          '*' -> Long::times
-          else -> error("")
-        }
-        val r = numbers.reduce(op)
+      if (operatorChar != null) {
+        val r = numbers.reduce(parseOperator(operatorChar))
         result += r
-        // println("the result of $numbers with $operator is $r")
         numbers.clear()
       }
-      //  println(value)
-      //  println(operator)
-
       x--
     }
 
     return result
+  }
+
+  private fun parseOperator(operator: Char): (Long, Long) -> Long = when (operator) {
+    '+' -> Long::plus
+    '*' -> Long::times
+    else -> error("Invalid operator=$operator")
   }
 }
