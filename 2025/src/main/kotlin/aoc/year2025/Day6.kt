@@ -10,10 +10,10 @@ object Day6 : Puzzle<Long, Long>(day = 6) {
       it.split(" ").toList()
         .mapNotNull(String::toLongOrNull)
     }
-    val operators = lines.last().split(" ").filter { it != " " && it != "" }
+    val operators = lines.last().mapNotNull(::parseOperator)
     return operators.withIndex().sumOf { (index, operator) ->
       val values = numbers.map { it[index] }
-      values.reduce(parseOperator(operator.single()))
+      values.reduce(operator)
     }
   }
 
@@ -24,7 +24,7 @@ object Day6 : Puzzle<Long, Long>(day = 6) {
 
     val numbers = mutableListOf<Long>()
     var x = width - 1
-    var result = 0L
+    var sum = 0L
 
     while (x >= 0) {
       val value = (0..<height - 1).map {
@@ -36,19 +36,18 @@ object Day6 : Puzzle<Long, Long>(day = 6) {
         numbers += value.toLong()
       }
       if (operatorChar != null) {
-        val r = numbers.reduce(parseOperator(operatorChar))
-        result += r
+        sum += numbers.reduce(parseOperator(operatorChar)!!)
         numbers.clear()
       }
       x--
     }
 
-    return result
+    return sum
   }
 
-  private fun parseOperator(operator: Char): (Long, Long) -> Long = when (operator) {
+  private fun parseOperator(operator: Char): ((Long, Long) -> Long)? = when (operator) {
     '+' -> Long::plus
     '*' -> Long::times
-    else -> error("Invalid operator=$operator")
+    else -> null
   }
 }
