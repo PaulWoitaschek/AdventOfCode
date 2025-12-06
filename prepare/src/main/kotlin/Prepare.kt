@@ -10,6 +10,8 @@ import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.LONG
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.STRING
 import com.squareup.kotlinpoet.TypeSpec
 import java.io.File
 import java.time.LocalDate
@@ -49,18 +51,14 @@ class Prepare : CliktCommand() {
   private fun createTestFunction(
     name: String,
     solveName: String,
-    disabled: Boolean,
+    withTestInput: Boolean = false,
   ): FunSpec = FunSpec.builder(name)
     .addAnnotation(ClassName("org.junit.jupiter.api", "Test"))
-    .apply {
-      if (disabled) {
-        addAnnotation(ClassName("org.junit.jupiter.api", "Disabled"))
-      }
-    }
     .addStatement(
-      "Day%L.%M() %M 42",
+      "Day%L.%M(%L) %M 42",
       day,
       MemberName("aoc.library", solveName),
+      if (withTestInput) "testInput" else "",
       MemberName("io.kotest.matchers.longs", "shouldBeExactly"),
     )
     .build()
@@ -69,10 +67,15 @@ class Prepare : CliktCommand() {
     val testFileContent = FileSpec.builder("aoc.year$year", "Day${day}Test")
       .addType(
         TypeSpec.classBuilder("Day${day}Test")
-          .addFunction(createTestFunction(name = "part1TestInput", solveName = "solvePart1", disabled = false))
-          .addFunction(createTestFunction(name = "part1", solveName = "solvePart1", disabled = true))
-          .addFunction(createTestFunction(name = "part2TestInput", solveName = "solvePart2", disabled = true))
-          .addFunction(createTestFunction(name = "part2", solveName = "solvePart2", disabled = true))
+          .addProperty(
+            PropertySpec.builder(name = "testInput", type = STRING, KModifier.PRIVATE)
+              .initializer("%S", "")
+              .build(),
+          )
+          .addFunction(createTestFunction(name = "part1TestInput", solveName = "solvePart1", withTestInput = true))
+          .addFunction(createTestFunction(name = "part1", solveName = "solvePart1"))
+          .addFunction(createTestFunction(name = "part2TestInput", solveName = "solvePart2", withTestInput = true))
+          .addFunction(createTestFunction(name = "part2", solveName = "solvePart2"))
           .build(),
       )
       .build()
