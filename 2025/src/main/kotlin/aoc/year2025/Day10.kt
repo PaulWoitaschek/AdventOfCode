@@ -1,38 +1,36 @@
 package aoc.year2025
 
 import aoc.library.Puzzle
+import java.util.PriorityQueue
 
 object Day10 : Puzzle<Int, Long>(day = 10) {
 
-  override fun solvePart1(input: String): Int {
-    val machines = input.lines().map(Machine::parse)
-    return machines
-      .mapIndexed { index, machine ->
-        println("machine $index / ${machines.size}")
-        var min = Int.MAX_VALUE
-        fun push(
-          pressed: Int,
-          state: Int,
-        ) {
-          if (pressed >= min) return
-          if (state == machine.lightDiagram) {
-            min = pressed
-            return
-          }
-          machine.wiring.forEachIndexed { index, button ->
-            if (index >= pressed) {
-              push(
-                pressed = pressed + 1,
-                state = state xor button,
-              )
-            }
+  override fun solvePart1(input: String): Int = input.lines()
+    .map(Machine::parse)
+    .sumOf { machine ->
+      var min = Int.MAX_VALUE
+
+      data class Task(val pressed: Int, val state: Int)
+
+      val queue = PriorityQueue<Task>(compareBy { it.pressed })
+      queue.add(Task(pressed = 0, state = 0))
+
+      while (queue.isNotEmpty()) {
+        val item = queue.remove()
+
+        if (item.pressed >= min) continue
+        if (item.state == machine.lightDiagram) {
+          min = item.pressed
+          continue
+        }
+        machine.wiring.forEachIndexed { index, button ->
+          if (index >= item.pressed) {
+            queue.add(Task(pressed = item.pressed + 1, state = item.state xor button))
           }
         }
-        push(pressed = 0, state = 0)
-        min
       }
-      .sum()
-  }
+      min
+    }
 
   override fun solvePart2(input: String): Long {
     TODO()
