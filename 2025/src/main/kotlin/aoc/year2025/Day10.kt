@@ -13,22 +13,22 @@ object Day10 : Puzzle<Int, Long>(day = 10) {
         fun push(
           pressed: Int,
           state: Int,
-          wiring: List<Int>,
         ) {
           if (pressed >= min) return
           if (state == machine.lightDiagram) {
             min = pressed
             return
           }
-          wiring.forEach { button ->
-            push(
-              pressed = pressed + 1,
-              state = state xor button,
-              wiring = wiring - button,
-            )
+          machine.wiring.forEachIndexed { index, button ->
+            if (index >= pressed) {
+              push(
+                pressed = pressed + 1,
+                state = state xor button,
+              )
+            }
           }
         }
-        push(pressed = 0, state = 0, wiring = machine.wiring)
+        push(pressed = 0, state = 0)
         min
       }
       .sum()
