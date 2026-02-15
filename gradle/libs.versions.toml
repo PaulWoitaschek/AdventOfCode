@@ -11,7 +11,7 @@ okhttp = "com.squareup.okhttp3:okhttp:5.3.2"
 clikt = "com.github.ajalt.clikt:clikt:5.1.0"
 kotlinPoet = "com.squareup:kotlinpoet:2.2.0"
 
-jupiter = "org.junit.jupiter:junit-jupiter:6.0.2"
+jupiter = "org.junit.jupiter:junit-jupiter:6.0.3"
 
 serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0"
 kotlin-jvmPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
