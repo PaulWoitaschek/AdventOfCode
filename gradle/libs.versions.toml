@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.3.10"
-ktlintGradlePlugin = "14.1.0"
+ktlintGradlePlugin = "14.2.0"
 
 [libraries]
 kotest = "io.kotest:kotest-assertions-core:6.1.6"
