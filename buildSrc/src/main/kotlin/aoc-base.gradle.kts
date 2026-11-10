@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   kotlin("jvm")
   kotlin("plugin.power-assert")
-  id("org.jlleitschuh.gradle.ktlint")
+  id("aoc-ktfmt")
 }
 
 kotlin {
@@ -18,14 +18,6 @@ powerAssert {
     "kotlin.test.assertEquals",
     "kotlin.test.assertTrue",
     "kotlin.test.assertFalse",
-  )
-}
-
-ktlint {
-  version.set(
-    versionCatalogs
-      .named("libs")
-      .findLibrary("ktlint").get().map { it.version!! },
   )
 }
 
