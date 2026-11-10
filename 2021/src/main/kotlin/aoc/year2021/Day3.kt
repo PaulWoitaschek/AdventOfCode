@@ -8,8 +8,8 @@ object Day3 : Puzzle<Long, Long>(3) {
 
   override fun solvePart1(input: String): Long {
     val bitRows = parseInput(input)
-    val gamma: BitRow = (0 until bitRows.first().size)
-      .map { index ->
+    val gamma: BitRow =
+      (0 until bitRows.first().size).map { index ->
         bitRows.count { it[index] } >= bitRows.size / 2
       }
     val epsilon = gamma.flipped()
@@ -26,8 +26,8 @@ object Day3 : Puzzle<Long, Long>(3) {
   }
 }
 
-private fun parseInput(input: String): List<BitRow> = input.lines()
-  .map { line -> line.map { it == '1' } }
+private fun parseInput(input: String): List<BitRow> =
+  input.lines().map { line -> line.map { it == '1' } }
 
 private fun extractForBitCriteria(
   lines: List<BitRow>,
@@ -40,11 +40,12 @@ private fun extractForBitCriteria(
     val bitRow = candidates.map { it[index] }
     val trueCount = bitRow.count(selector = true)
     val falseCount = bitRow.count(selector = false)
-    val toKeep = if (bitCriteria) {
-      trueCount >= falseCount
-    } else {
-      trueCount < falseCount
-    }
+    val toKeep =
+      if (bitCriteria) {
+        trueCount >= falseCount
+      } else {
+        trueCount < falseCount
+      }
     candidates = candidates.filter {
       it[index] == toKeep
     }

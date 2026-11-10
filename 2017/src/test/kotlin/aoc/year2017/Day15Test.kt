@@ -2,8 +2,8 @@ package aoc.year2017
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day15Test {
 
@@ -13,9 +13,10 @@ class Day15Test {
       588,
       Day15.solvePart1(
         """
-          Generator A starts with 65
-          Generator B starts with 8921
-        """.trimIndent(),
+        Generator A starts with 65
+        Generator B starts with 8921
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -31,9 +32,10 @@ class Day15Test {
       309,
       Day15.solvePart2(
         """
-          Generator A starts with 65
-          Generator B starts with 8921
-        """.trimIndent(),
+        Generator A starts with 65
+        Generator B starts with 8921
+        """
+          .trimIndent(),
       ),
     )
   }

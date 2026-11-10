@@ -1,27 +1,27 @@
 package aoc.library
 
+import java.io.File
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okio.buffer
 import okio.sink
 import org.junit.jupiter.api.Assumptions
-import java.io.File
 
 fun <Part1, Part2> Puzzle<Part1, Part2>.solvePart1(): Part1 = solvePart1(input())
 
 fun <Part1, Part2> Puzzle<Part1, Part2>.solvePart2(): Part2 = solvePart2(input())
 
-fun Puzzle<*, *>.input(): String = aocInput(
-  year = File(System.getProperty("user.dir")).name.toInt(),
-  day = day,
-)
+fun Puzzle<*, *>.input(): String =
+  aocInput(
+    year = File(System.getProperty("user.dir")).name.toInt(),
+    day = day,
+  )
 
 fun aocInput(
   year: Int,
   day: Int,
 ): String {
-  val file = File("../inputs/$year/$day.txt")
-    .apply { parentFile.mkdirs() }
+  val file = File("../inputs/$year/$day.txt").apply { parentFile.mkdirs() }
   if (!file.exists() || file.length() == 0L) {
     println("Downloading to $file")
     val sessionCookie = System.getenv("AOC_SESSION")
@@ -32,15 +32,18 @@ fun aocInput(
 
     check(cookieExist) { message }
     val client = OkHttpClient()
-    val response = client.newCall(
-      Request.Builder()
-        .url("https://adventofcode.com/$year/day/$day/input")
-        .addHeader(
-          "Cookie",
-          "session=$sessionCookie",
+    val response =
+      client
+        .newCall(
+          Request.Builder()
+            .url("https://adventofcode.com/$year/day/$day/input")
+            .addHeader(
+              "Cookie",
+              "session=$sessionCookie",
+            )
+            .build(),
         )
-        .build(),
-    ).execute()
+        .execute()
     check(response.isSuccessful) {
       "Failed to download input for $year day $day: ${response.code}"
     }

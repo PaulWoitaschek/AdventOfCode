@@ -7,11 +7,10 @@ object Day2 : Puzzle<Int, Int>(day = 2) {
 
   override fun solvePart1(input: String): Int = parse(input).count { reportIsSafe(it) }
 
-  override fun solvePart2(input: String): Int = parse(input)
-    .count { report ->
+  override fun solvePart2(input: String): Int =
+    parse(input).count { report ->
       report.indices.any { removeIndex ->
-        val adjustedReport = report.toMutableList()
-          .apply { removeAt(removeIndex) }
+        val adjustedReport = report.toMutableList().apply { removeAt(removeIndex) }
         reportIsSafe(adjustedReport)
       }
     }
@@ -22,7 +21,8 @@ object Day2 : Puzzle<Int, Int>(day = 2) {
     return monotonic && steps.all { it.absoluteValue in 1..3 }
   }
 
-  private fun parse(input: String): List<List<Int>> = input.lines().map {
-    it.split(" ").map(String::toInt)
-  }
+  private fun parse(input: String): List<List<Int>> =
+    input.lines().map {
+      it.split(" ").map(String::toInt)
+    }
 }

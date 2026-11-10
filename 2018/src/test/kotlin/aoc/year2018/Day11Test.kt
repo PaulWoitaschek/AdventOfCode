@@ -3,9 +3,9 @@ package aoc.year2018
 import aoc.library.Point
 import aoc.library.solvePart1
 import aoc.library.solvePart2
+import kotlin.test.assertEquals
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
 class Day11Test {
 

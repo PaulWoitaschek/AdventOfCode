@@ -9,17 +9,21 @@ object Day7 : Puzzle<String, Int>(day = 7) {
     return values.toList().sortedBy { it.second }.map { it.first }.joinToString("")
   }
 
-  override fun solvePart2(input: String): Int = solvePart2(input = input, workerCount = 5, additionalSeconds = 60)
+  override fun solvePart2(input: String): Int =
+    solvePart2(input = input, workerCount = 5, additionalSeconds = 60)
 
   fun solvePart2(
     input: String,
     workerCount: Int,
     additionalSeconds: Int,
-  ): Int = solve(
-    input = input,
-    workerCount = workerCount,
-    additionalSeconds = additionalSeconds,
-  ).values.max() - 1
+  ): Int =
+    solve(
+        input = input,
+        workerCount = workerCount,
+        additionalSeconds = additionalSeconds,
+      )
+      .values
+      .max() - 1
 
   private fun solve(
     input: String,
@@ -27,8 +31,8 @@ object Day7 : Puzzle<String, Int>(day = 7) {
     additionalSeconds: Int,
   ): MutableMap<Char, Int> {
     val regex = """^Step (.) must be finished before step (.) can begin\.$""".toRegex()
-    val rules = input.lines()
-      .map { line ->
+    val rules =
+      input.lines().map { line ->
         val (before, after) = regex.find(line)!!.destructured.toList().map { it.single() }
         Rule(before = before, after = after)
       }
@@ -53,14 +57,15 @@ object Day7 : Puzzle<String, Int>(day = 7) {
       workers.forEach { worker ->
         val idleTime = workerStates[worker]!!
         if (idleTime <= second) {
-          val step = steps
-            .filter { it !in chosen }
-            .filter { step ->
-              prerequisites[step]!!.all { prerequisite ->
-                second >= (chosen[prerequisite] ?: Int.MAX_VALUE)
+          val step =
+            steps
+              .filter { it !in chosen }
+              .filter { step ->
+                prerequisites[step]!!.all { prerequisite ->
+                  second >= (chosen[prerequisite] ?: Int.MAX_VALUE)
+                }
               }
-            }
-            .minOrNull() ?: return@forEach
+              .minOrNull() ?: return@forEach
           val stepValue = additionalSeconds + (step - 'A') + 1
           workerStates[worker] = second + stepValue
           chosen[step] = second + stepValue

@@ -2,8 +2,8 @@ package aoc.year2019
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day11Test {
 
@@ -16,15 +16,16 @@ class Day11Test {
   fun part2() {
     assertEquals(
       """
-          ╔═══════════════════════════════════════╗
-          ║████ ████  ██  █  █ █  █ ████  ██   ██ ║
-          ║█    █    █  █ █ █  █  █ █    █  █ █  █║
-          ║███  ███  █    ██   █  █ ███  █    █   ║
-          ║█    █    █    █ █  █  █ █    █ ██ █   ║
-          ║█    █    █  █ █ █  █  █ █    █  █ █  █║
-          ║████ █     ██  █  █  ██  ████  ███  ██ ║
-          ╚═══════════════════════════════════════╝
-      """.trimIndent(),
+      ╔═══════════════════════════════════════╗
+      ║████ ████  ██  █  █ █  █ ████  ██   ██ ║
+      ║█    █    █  █ █ █  █  █ █    █  █ █  █║
+      ║███  ███  █    ██   █  █ ███  █    █   ║
+      ║█    █    █    █ █  █  █ █    █ ██ █   ║
+      ║█    █    █  █ █ █  █  █ █    █  █ █  █║
+      ║████ █     ██  █  █  ██  ████  ███  ██ ║
+      ╚═══════════════════════════════════════╝
+      """
+        .trimIndent(),
       Day11.solvePart2(),
     )
   }

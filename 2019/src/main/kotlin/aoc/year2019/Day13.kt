@@ -1,20 +1,21 @@
 package aoc.year2019
 
 import aoc.library.Puzzle
+import kotlin.math.sign
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlin.math.sign
 
 object Day13 : Puzzle<Int, Int>(13) {
 
   override fun solvePart1(input: String): Int = runBlocking {
-    val computer = IntCodeComputer(
-      instructions = input.split(",").map(String::toLong),
-      inputs = Channel(),
-      outputs = Channel(),
-    )
+    val computer =
+      IntCodeComputer(
+        instructions = input.split(",").map(String::toLong),
+        inputs = Channel(),
+        outputs = Channel(),
+      )
     var blocks = 0
     launch {
       while (true) {
@@ -34,15 +35,15 @@ object Day13 : Puzzle<Int, Int>(13) {
 
   override fun solvePart2(input: String): Int = runBlocking {
     val inputs = Channel<Long>(capacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val computer = IntCodeComputer(
-      instructions = input.split(",").map(String::toLong)
-        .toMutableList()
-        .apply {
-          set(0, 2)
-        },
-      inputs = inputs,
-      outputs = Channel(),
-    )
+    val computer =
+      IntCodeComputer(
+        instructions =
+          input.split(",").map(String::toLong).toMutableList().apply {
+            set(0, 2)
+          },
+        inputs = inputs,
+        outputs = Channel(),
+      )
     var score = 0
     launch {
       var positionOfPaddle = 0

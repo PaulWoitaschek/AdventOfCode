@@ -35,11 +35,13 @@ object Day14 : Puzzle<Int, Int>(14) {
       val candidate = candidate
       if (candidate != null) {
         val y = candidate.y + 1
-        val newPosition = sequenceOf(0, -1, 1).map { Point(candidate.x + it, y) }
-          .firstOrNull {
-            val belowFloor = if (floor == null) false else it.y >= floor
-            !belowFloor && it !in sands && it !in rocks
-          }
+        val newPosition =
+          sequenceOf(0, -1, 1)
+            .map { Point(candidate.x + it, y) }
+            .firstOrNull {
+              val belowFloor = if (floor == null) false else it.y >= floor
+              !belowFloor && it !in sands && it !in rocks
+            }
         if (newPosition != null) {
           sands.add(newPosition)
           sands.remove(candidate)
@@ -56,9 +58,11 @@ object Day14 : Puzzle<Int, Int>(14) {
       val SandOrigin = Point(500, 0)
 
       fun parse(input: String): Cave {
-        val rocks = input.lines().filter(String::isNotEmpty)
-          .flatMap { line ->
-            line.split(" -> ", ",").chunked(2)
+        val rocks =
+          input.lines().filter(String::isNotEmpty).flatMap { line ->
+            line
+              .split(" -> ", ",")
+              .chunked(2)
               .map { (x, y) -> Point(x.toInt(), y.toInt()) }
               .zipWithNext { from, to ->
                 if (from.y == to.y) {

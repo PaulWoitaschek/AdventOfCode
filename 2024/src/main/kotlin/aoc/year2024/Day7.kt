@@ -4,16 +4,19 @@ import aoc.library.Puzzle
 
 object Day7 : Puzzle<Long, Long>(day = 7) {
 
-  override fun solvePart1(input: String): Long = solve(input, listOf(Operator.Add, Operator.Multiply))
+  override fun solvePart1(input: String): Long =
+    solve(input, listOf(Operator.Add, Operator.Multiply))
 
-  override fun solvePart2(input: String): Long = solve(input, listOf(Operator.Add, Operator.Multiply, Operator.Concat))
+  override fun solvePart2(input: String): Long =
+    solve(input, listOf(Operator.Add, Operator.Multiply, Operator.Concat))
 
   private fun solve(
     input: String,
     operators: List<Operator>,
   ): Long {
     val numberRegex = """(\d+)""".toRegex()
-    return input.lines()
+    return input
+      .lines()
       .map { line ->
         numberRegex.findAll(line).map { it.value.toLong() }.toList()
       }
@@ -46,11 +49,12 @@ object Day7 : Puzzle<Long, Long>(day = 7) {
 
     return operators.any { operator ->
       val nextElement = elements[index]
-      val newSum = when (operator) {
-        Operator.Add -> sum + nextElement
-        Operator.Multiply -> sum * nextElement
-        Operator.Concat -> (sum.toString() + nextElement.toString()).toLong()
-      }
+      val newSum =
+        when (operator) {
+          Operator.Add -> sum + nextElement
+          Operator.Multiply -> sum * nextElement
+          Operator.Concat -> (sum.toString() + nextElement.toString()).toLong()
+        }
       isSolvable(
         solution = solution,
         operators = operators,
@@ -61,5 +65,9 @@ object Day7 : Puzzle<Long, Long>(day = 7) {
     }
   }
 
-  private enum class Operator { Add, Multiply, Concat }
+  private enum class Operator {
+    Add,
+    Multiply,
+    Concat,
+  }
 }

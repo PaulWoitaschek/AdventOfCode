@@ -3,8 +3,8 @@ package aoc.year2017
 import aoc.library.solvePart1
 import aoc.library.solvePart2
 import aoc.year2017.Day16.solve
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day16Test {
 

@@ -9,6 +9,7 @@ import kotlin.math.sign
 
 object Day9 : Puzzle<Int, Int>(9) {
   override fun solvePart1(input: String) = solve(input, knots = 2)
+
   override fun solvePart2(input: String) = solve(input, knots = 10)
 }
 
@@ -37,10 +38,13 @@ private fun Point.follow(current: Point): Point {
   }
 }
 
-private fun parseInput(input: String): List<Direction> = input.lines().filter { it.isNotEmpty() }
-  .flatMap {
-    val direction = Direction.parse(it.first())
-    List(it.drop(2).toInt()) {
-      direction
+private fun parseInput(input: String): List<Direction> =
+  input
+    .lines()
+    .filter { it.isNotEmpty() }
+    .flatMap {
+      val direction = Direction.parse(it.first())
+      List(it.drop(2).toInt()) {
+        direction
+      }
     }
-  }

@@ -16,17 +16,22 @@ object Day25 : Puzzle<Int, Int>(25) {
         current = next
       }
     }
-  }.count()
+  }
+    .count()
 
   override fun solvePart2(input: String) = error("No part 2")
 }
 
-private enum class Cucumber { Right, Down, Empty }
+private enum class Cucumber {
+  Right,
+  Down,
+  Empty,
+}
 
 private typealias CucumberMap = List<List<Cucumber>>
 
-private fun parse(input: String): CucumberMap = input.lines()
-  .map { line ->
+private fun parse(input: String): CucumberMap =
+  input.lines().map { line ->
     line.map { direction ->
       when (direction) {
         'v' -> Cucumber.Down

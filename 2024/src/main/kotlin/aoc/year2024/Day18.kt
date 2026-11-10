@@ -25,13 +25,15 @@ object Day18 : Puzzle<Int, Point>(day = 18) {
     size: Int,
   ): Point {
     val allBytes = parse(input)
-    val byte = (0..allBytes.lastIndex).toList()
-      .binarySearchHighestMatching { solveBFS(allBytes.take(it), size) != null }!!
+    val byte =
+      (0..allBytes.lastIndex).toList().binarySearchHighestMatching {
+        solveBFS(allBytes.take(it), size) != null
+      }!!
     return allBytes.elementAt(byte)
   }
 
-  private fun parse(input: String): List<Point> = input.lines()
-    .map {
+  private fun parse(input: String): List<Point> =
+    input.lines().map {
       val (x, y) = it.split(",")
       Point(x.toInt(), y.toInt())
     }
@@ -56,9 +58,11 @@ object Day18 : Puzzle<Int, Point>(day = 18) {
 
       if (state.point == target) return state.steps
 
-      queue += state.point.adjacentOrthogonal()
-        .filter { it in bounds && it !in corrupted }
-        .map { State(it, state.steps + 1) }
+      queue +=
+        state.point
+          .adjacentOrthogonal()
+          .filter { it in bounds && it !in corrupted }
+          .map { State(it, state.steps + 1) }
     }
     return null
   }

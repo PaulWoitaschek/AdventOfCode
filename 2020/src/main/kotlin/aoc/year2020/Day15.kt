@@ -17,9 +17,13 @@ object Day15 : Puzzle<Int, Int>(15) {
       fun firstTimeSpoken() = before == null
     }
 
-    val spoken = initial.withIndex().associate {
-      it.value to Speak(last = it.index + 1)
-    }.toMutableMap()
+    val spoken =
+      initial
+        .withIndex()
+        .associate {
+          it.value to Speak(last = it.index + 1)
+        }
+        .toMutableMap()
 
     yieldAll(initial)
 

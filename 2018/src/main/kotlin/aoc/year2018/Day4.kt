@@ -9,8 +9,8 @@ object Day4 : Puzzle<Int, Int>(day = 4) {
     return sleepyGuard.id * sleepyGuard.mostSleepingMinute
   }
 
-  override fun solvePart2(input: String): Int = guards(input).maxBy { it.occurrencesOfMostSleepingMinute }
-    .let { it.id * it.mostSleepingMinute }
+  override fun solvePart2(input: String): Int =
+    guards(input).maxBy { it.occurrencesOfMostSleepingMinute }.let { it.id * it.mostSleepingMinute }
 
   private fun guards(input: String): List<Guard> {
     val wholeRegex = ".*?:(\\d+)] (.*)$".toRegex()
@@ -26,8 +26,7 @@ object Day4 : Puzzle<Int, Int>(day = 4) {
           fellAsleepAt = minute
         }
         "wakes up" -> {
-          guards.getOrPut(currentGuard) { mutableListOf() }
-            .addAll(fellAsleepAt..<minute)
+          guards.getOrPut(currentGuard) { mutableListOf() }.addAll(fellAsleepAt..<minute)
         }
         else -> {
           currentGuard = guardRegex.find(rest)!!.groupValues[1].toInt()
@@ -48,8 +47,7 @@ private data class Guard(val id: Int, val sleepTimes: List<Int>) {
       mostSleepingMinute = 0
       occurrencesOfMostSleepingMinute = 0
     } else {
-      val entry = sleepTimes.groupingBy { it }.eachCount()
-        .maxBy { it.value }
+      val entry = sleepTimes.groupingBy { it }.eachCount().maxBy { it.value }
       mostSleepingMinute = entry.key
       occurrencesOfMostSleepingMinute = entry.value
     }

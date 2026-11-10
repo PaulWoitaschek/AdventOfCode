@@ -2,8 +2,8 @@ package aoc.year2019
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day7Test {
 
@@ -24,7 +24,10 @@ class Day7Test {
 
   @Test
   fun part1TestCaseTwo() {
-    assertEquals(54321, Day7.solvePart1("3,23,3,24,1002,24,10,24,1002,23,-1,23,101,5,23,23,1,24,23,23,4,23,99,0,0"))
+    assertEquals(
+      54321,
+      Day7.solvePart1("3,23,3,24,1002,24,10,24,1002,23,-1,23,101,5,23,23,1,24,23,23,4,23,99,0,0"),
+    )
   }
 
   @Test

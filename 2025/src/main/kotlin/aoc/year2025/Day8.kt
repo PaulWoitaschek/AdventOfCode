@@ -10,27 +10,24 @@ class Day8(private val pairs: Int) : Puzzle<Long, Long>(day = 8) {
     val connections = parseAndFindConnections(input)
     val circuits = mutableListOf<MutableSet<Point3>>()
 
-    connections.take(pairs)
-      .forEach { connection ->
-        formCircuit(circuits, connection)
-      }
+    connections.take(pairs).forEach { connection ->
+      formCircuit(circuits, connection)
+    }
 
     reduceCircuit(circuits)
 
-    return circuits.map { it.size.toLong() }
-      .sortedDescending()
-      .take(3)
-      .reduce(Long::times)
+    return circuits.map { it.size.toLong() }.sortedDescending().take(3).reduce(Long::times)
   }
 
   private fun parseAndFindConnections(input: String): List<Connection> {
-    val coordinates = input.lines()
-      .map(Point3::parse)
-    return coordinates.flatMapIndexed { i1, p1 ->
-      coordinates.drop(i1 + 1).map { p2 ->
-        Connection(p1, p2)
+    val coordinates = input.lines().map(Point3::parse)
+    return coordinates
+      .flatMapIndexed { i1, p1 ->
+        coordinates.drop(i1 + 1).map { p2 ->
+          Connection(p1, p2)
+        }
       }
-    }.sortedBy { it.distance }
+      .sortedBy { it.distance }
   }
 
   private fun formCircuit(
@@ -79,10 +76,12 @@ class Day8(private val pairs: Int) : Puzzle<Long, Long>(day = 8) {
   }
 
   private data class Connection(val a: Point3, val b: Point3) {
-    val distance = sqrt(
-      (a.x - b.x).toFloat().pow(2) +
-        (a.y - b.y).toFloat().pow(2) +
-        (a.z - b.z).toFloat().pow(2),
-    ).toLong()
+    val distance =
+      sqrt(
+          (a.x - b.x).toFloat().pow(2) +
+            (a.y - b.y).toFloat().pow(2) +
+            (a.z - b.z).toFloat().pow(2),
+        )
+        .toLong()
   }
 }

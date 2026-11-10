@@ -19,14 +19,16 @@ object Day12 : Puzzle<Int, Int>(12) {
       y: Int,
     ): Vertex? = vertexes.getOrNull(y)?.getOrNull(x)
 
-    fun Vertex.neighborCandidates() = listOfNotNull(
-      vertex(x - 1, y),
-      vertex(x + 1, y),
-      vertex(x, y - 1),
-      vertex(x, y + 1),
-    ).filter { neighbor ->
-      height + 1 >= neighbor.height
-    }
+    fun Vertex.neighborCandidates() =
+      listOfNotNull(
+          vertex(x - 1, y),
+          vertex(x + 1, y),
+          vertex(x, y - 1),
+          vertex(x, y + 1),
+        )
+        .filter { neighbor ->
+          height + 1 >= neighbor.height
+        }
 
     val flatVertexes = vertexes.flatten()
     val end = flatVertexes.first { it.isEnd }
@@ -47,10 +49,17 @@ object Day12 : Puzzle<Int, Int>(12) {
     }
   }
 
-  private data class Vertex(val x: Int, val y: Int, var pathLength: Int, val height: Int, val isStart: Boolean, val isEnd: Boolean)
+  private data class Vertex(
+    val x: Int,
+    val y: Int,
+    var pathLength: Int,
+    val height: Int,
+    val isStart: Boolean,
+    val isEnd: Boolean,
+  )
 
-  private fun parseInput(input: String) = input.lines().filter(String::isNotEmpty)
-    .mapIndexed { y, line ->
+  private fun parseInput(input: String) =
+    input.lines().filter(String::isNotEmpty).mapIndexed { y, line ->
       line.mapIndexed { x, value ->
         val isStart = value == 'S'
         val isEnd = value == 'E'
@@ -58,11 +67,12 @@ object Day12 : Puzzle<Int, Int>(12) {
           x = x,
           y = y,
           pathLength = Int.MAX_VALUE,
-          height = when {
-            isStart -> 'a'
-            isEnd -> 'z'
-            else -> value
-          } - 'a',
+          height =
+            when {
+              isStart -> 'a'
+              isEnd -> 'z'
+              else -> value
+            } - 'a',
           isStart = isStart,
           isEnd = isEnd,
         )

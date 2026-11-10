@@ -11,26 +11,25 @@ object Day10 : Puzzle<Int, String>(day = 10) {
     input: String,
     listSize: Int,
   ): Int {
-    val list = runRounds(
-      inputLengths = input.split(",").map(String::toInt),
-      times = 1,
-      listSize = listSize,
-    )
+    val list =
+      runRounds(
+        inputLengths = input.split(",").map(String::toInt),
+        times = 1,
+        listSize = listSize,
+      )
     return list[0] * list[1]
   }
 
   override fun solvePart2(input: String): String {
-    val list = runRounds(
-      inputLengths = input.map(Char::code) + listOf(17, 31, 73, 47, 23),
-      times = 64,
-      listSize = 256,
-    )
-    return list.chunked(16)
-      .joinToString("") { values ->
-        values.reduce(Int::xor)
-          .toString(16)
-          .padStart(2, '0')
-      }
+    val list =
+      runRounds(
+        inputLengths = input.map(Char::code) + listOf(17, 31, 73, 47, 23),
+        times = 64,
+        listSize = 256,
+      )
+    return list.chunked(16).joinToString("") { values ->
+      values.reduce(Int::xor).toString(16).padStart(2, '0')
+    }
   }
 
   private fun runRounds(
@@ -47,7 +46,10 @@ object Day10 : Puzzle<Int, String>(day = 10) {
           while (true) {
             yieldAll(list)
           }
-        }.drop(position).take(inputLength).toList()
+        }
+          .drop(position)
+          .take(inputLength)
+          .toList()
         val reversed = values.reversed()
         val start = (position).rem(list.size)
         reversed.forEachIndexed { index, value ->

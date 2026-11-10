@@ -4,16 +4,17 @@ import aoc.library.Puzzle
 
 object Day10 : Puzzle<Long, Long>(10) {
 
-  override fun solvePart1(input: String): Long = input.lines()
-    .map(NavigationSubSystem.Companion::parse)
-    .sumOf { it.illegalScore().toLong() }
+  override fun solvePart1(input: String): Long =
+    input.lines().map(NavigationSubSystem.Companion::parse).sumOf { it.illegalScore().toLong() }
 
-  override fun solvePart2(input: String): Long = input.lines()
-    .map(NavigationSubSystem.Companion::parse)
-    .filterNot { it.isCorrupted() }
-    .map { it.closingSequencePoints() }
-    .sorted()
-    .let { it[it.size / 2] }
+  override fun solvePart2(input: String): Long =
+    input
+      .lines()
+      .map(NavigationSubSystem.Companion::parse)
+      .filterNot { it.isCorrupted() }
+      .map { it.closingSequencePoints() }
+      .sorted()
+      .let { it[it.size / 2] }
 }
 
 private data class NavigationSubSystem(private val chars: List<Char>) {
@@ -59,25 +60,32 @@ private data class NavigationSubSystem(private val chars: List<Char>) {
   }
 }
 
-private data class Surrounding(val opening: Char, val closing: Char, val illegalScore: Int, val closingScore: Int) {
+private data class Surrounding(
+  val opening: Char,
+  val closing: Char,
+  val illegalScore: Int,
+  val closingScore: Int,
+) {
 
   fun matches(char: Char): Boolean = char == opening || char == closing
 
-  fun isOpening(char: Char): Boolean = when (char) {
-    opening -> true
-    closing -> false
-    else -> error("Char $char does not match the surrounding")
-  }
+  fun isOpening(char: Char): Boolean =
+    when (char) {
+      opening -> true
+      closing -> false
+      else -> error("Char $char does not match the surrounding")
+    }
 
   companion object {
 
     fun byChar(char: Char): Surrounding = all.first { it.matches(char) }
 
-    val all = listOf(
-      Surrounding(opening = '(', closing = ')', illegalScore = 3, closingScore = 1),
-      Surrounding(opening = '[', closing = ']', illegalScore = 57, closingScore = 2),
-      Surrounding(opening = '{', closing = '}', illegalScore = 1197, closingScore = 3),
-      Surrounding(opening = '<', closing = '>', illegalScore = 25137, closingScore = 4),
-    )
+    val all =
+      listOf(
+        Surrounding(opening = '(', closing = ')', illegalScore = 3, closingScore = 1),
+        Surrounding(opening = '[', closing = ']', illegalScore = 57, closingScore = 2),
+        Surrounding(opening = '{', closing = '}', illegalScore = 1197, closingScore = 3),
+        Surrounding(opening = '<', closing = '>', illegalScore = 25137, closingScore = 4),
+      )
   }
 }

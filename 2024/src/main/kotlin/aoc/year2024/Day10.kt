@@ -32,7 +32,8 @@ object Day10 : Puzzle<Int, Int>(day = 10) {
         }
       }
     }
-    return mountains.toList()
+    return mountains
+      .toList()
       .filter { (_, height) -> height == 0 }
       .sumOf { (start, _) ->
         val reachedNines = mutableListOf<Point>()

@@ -1,8 +1,8 @@
 package aoc.year2022
 
 import aoc.library.solvePart1
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day17Test {
 

@@ -28,13 +28,14 @@ object Day3 : Puzzle<Int, Int>(3) {
         if (char == '*') {
           val point = Point(x, y)
           val adjacentPoints = point.adjacent()
-          val adjacentNumbers = numberWithCoordinates
-            .filter { number ->
-              number.points.any { numberPoint ->
-                numberPoint in adjacentPoints
+          val adjacentNumbers =
+            numberWithCoordinates
+              .filter { number ->
+                number.points.any { numberPoint ->
+                  numberPoint in adjacentPoints
+                }
               }
-            }
-            .map { it.number }
+              .map { it.number }
           if (adjacentNumbers.size == 2) {
             val ratio = adjacentNumbers[0] * adjacentNumbers[1]
             ratios += ratio
@@ -59,7 +60,12 @@ object Day3 : Puzzle<Int, Int>(3) {
     }
   }
 
-  private data class NumberWithCoordinates(val number: Int, val fromX: Int, val toX: Int, val y: Int) {
+  private data class NumberWithCoordinates(
+    val number: Int,
+    val fromX: Int,
+    val toX: Int,
+    val y: Int,
+  ) {
 
     val points = (fromX..toX).map { Point(it, y) }
   }

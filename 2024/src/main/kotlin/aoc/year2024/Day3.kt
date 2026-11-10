@@ -18,9 +18,12 @@ object Day3 : Puzzle<Long, Long>(day = 3) {
 
   private fun runMultiplications(input: String): Long {
     val regex = """mul\((\d+),(\d+)\)""".toRegex()
-    return regex.findAll(input).map {
-      val (x, y) = it.destructured
-      x.toLong() * y.toLong()
-    }.sum()
+    return regex
+      .findAll(input)
+      .map {
+        val (x, y) = it.destructured
+        x.toLong() * y.toLong()
+      }
+      .sum()
   }
 }

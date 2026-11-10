@@ -2,26 +2,28 @@ package aoc.year2023
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day17Test {
 
-  private val testInput = """
-      2413432311323
-      3215453535623
-      3255245654254
-      3446585845452
-      4546657867536
-      1438598798454
-      4457876987766
-      3637877979653
-      4654967986887
-      4564679986453
-      1224686865563
-      2546548887735
-      4322674655533
-  """.trimIndent()
+  private val testInput =
+    """
+    2413432311323
+    3215453535623
+    3255245654254
+    3446585845452
+    4546657867536
+    1438598798454
+    4457876987766
+    3637877979653
+    4654967986887
+    4564679986453
+    1224686865563
+    2546548887735
+    4322674655533
+    """
+      .trimIndent()
 
   @Test
   fun part1TestInput() {
@@ -49,7 +51,8 @@ class Day17Test {
         999999999991
         999999999991
         999999999991
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }

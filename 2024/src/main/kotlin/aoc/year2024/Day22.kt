@@ -4,13 +4,17 @@ import aoc.library.Puzzle
 
 object Day22 : Puzzle<Long, Long>(day = 22) {
 
-  override fun solvePart1(input: String): Long = input.lines().map { it.toLong() }.sumOf {
-    var secret = it
-    repeat(2000) {
-      secret = secretNumber(secret)
-    }
-    secret
-  }
+  override fun solvePart1(input: String): Long =
+    input
+      .lines()
+      .map { it.toLong() }
+      .sumOf {
+        var secret = it
+        repeat(2000) {
+          secret = secretNumber(secret)
+        }
+        secret
+      }
 
   override fun solvePart2(input: String): Long {
     TODO()

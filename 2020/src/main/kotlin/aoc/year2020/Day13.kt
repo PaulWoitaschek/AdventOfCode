@@ -18,13 +18,14 @@ object Day13 : Puzzle<Int, Int>(13) {
   private fun extracted(
     earliestBus: Int,
     busses: List<Int>,
-  ): Int = generateSequence(earliestBus) { it + 1 }
-    .firstNotNullOf { minute ->
-      val bus = busses.find { minute.mod(it) == 0 }
-      if (bus != null) {
-        (minute - earliestBus) * bus
-      } else {
-        null
+  ): Int =
+    generateSequence(earliestBus) { it + 1 }
+      .firstNotNullOf { minute ->
+        val bus = busses.find { minute.mod(it) == 0 }
+        if (bus != null) {
+          (minute - earliestBus) * bus
+        } else {
+          null
+        }
       }
-    }
 }

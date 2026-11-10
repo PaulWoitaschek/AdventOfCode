@@ -1,7 +1,7 @@
 package aoc.year2021
 
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class SnailFishNumberTests {
 
@@ -49,7 +49,10 @@ class SnailFishNumberTests {
 
   @Test
   fun split() {
-    assertEquals(SnailFishNumber("[[[[0,7],4],[[7,8],[0,13]]],[1,1]]"), SnailFishNumber("[[[[0,7],4],[15,[0,13]]],[1,1]]").split())
+    assertEquals(
+      SnailFishNumber("[[[[0,7],4],[[7,8],[0,13]]],[1,1]]"),
+      SnailFishNumber("[[[[0,7],4],[15,[0,13]]],[1,1]]").split(),
+    )
   }
 
   @Test

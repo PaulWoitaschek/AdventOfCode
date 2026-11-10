@@ -27,7 +27,8 @@ object Day6 : Puzzle<Int, Int>(day = 6) {
       .filter { newObstruction ->
         isLoopingObstruction(newObstruction, lab)
       }
-      .count().toInt()
+      .count()
+      .toInt()
   }
 
   private fun isLoopingObstruction(
@@ -77,7 +78,8 @@ object Day6 : Puzzle<Int, Int>(day = 6) {
     val height: Int,
   ) {
 
-    operator fun contains(point: Point): Boolean = point.x in 0 until width && point.y in 0 until height
+    operator fun contains(point: Point): Boolean =
+      point.x in 0 until width && point.y in 0 until height
 
     companion object {
 

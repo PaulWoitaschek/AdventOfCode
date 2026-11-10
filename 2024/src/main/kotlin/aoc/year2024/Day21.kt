@@ -17,45 +17,39 @@ object Day21 : Puzzle<Long, Long>(day = 21) {
   /**
    *     +---+---+
    *     | ^ | A |
-   * +---+---+---+
-   * | < | v | > |
-   * +---+---+---+
+   *
+   * +---+---+---+ | < | v | > | +---+---+---+
    */
-  private val DIRECTIONAL_KEYPAD = mapOf(
-    Point(1, 0) to UP,
-    Point(2, 0) to ACTIVATE,
-    Point(0, 1) to LEFT,
-    Point(1, 1) to DOWN,
-    Point(2, 1) to RIGHT,
-  )
+  private val DIRECTIONAL_KEYPAD =
+    mapOf(
+      Point(1, 0) to UP,
+      Point(2, 0) to ACTIVATE,
+      Point(0, 1) to LEFT,
+      Point(1, 1) to DOWN,
+      Point(2, 1) to RIGHT,
+    )
 
   /**
-   * +---+---+---+
-   * | 7 | 8 | 9 |
-   * +---+---+---+
-   * | 4 | 5 | 6 |
-   * +---+---+---+
-   * | 1 | 2 | 3 |
-   * +---+---+---+
-   *     | 0 | A |
-   *     +---+---+
+   * +---+---+---+ | 7 | 8 | 9 | +---+---+---+ | 4 | 5 | 6 | +---+---+---+ | 1 | 2 | 3 |
+   * +---+---+---+ | 0 | A | +---+---+
    */
-  private val NUMERICAL_KEYPAD = mapOf(
-    Point(0, 0) to '7',
-    Point(1, 0) to '8',
-    Point(2, 0) to '9',
-    Point(0, 1) to '4',
-    Point(1, 1) to '5',
-    Point(2, 1) to '6',
-    Point(0, 2) to '1',
-    Point(1, 2) to '2',
-    Point(2, 2) to '3',
-    Point(0, 2) to '1',
-    Point(1, 2) to '2',
-    Point(2, 2) to '3',
-    Point(1, 3) to '0',
-    Point(2, 3) to ACTIVATE,
-  )
+  private val NUMERICAL_KEYPAD =
+    mapOf(
+      Point(0, 0) to '7',
+      Point(1, 0) to '8',
+      Point(2, 0) to '9',
+      Point(0, 1) to '4',
+      Point(1, 1) to '5',
+      Point(2, 1) to '6',
+      Point(0, 2) to '1',
+      Point(1, 2) to '2',
+      Point(2, 2) to '3',
+      Point(0, 2) to '1',
+      Point(1, 2) to '2',
+      Point(2, 2) to '3',
+      Point(1, 3) to '0',
+      Point(2, 3) to ACTIVATE,
+    )
 
   override fun solvePart1(input: String): Long {
     TODO()
@@ -84,13 +78,12 @@ object Day21 : Puzzle<Long, Long>(day = 21) {
         return candidate.steps
       }
       if (!visited.add(candidate.position)) continue
-      Direction.entries
-        .forEach { direction ->
-          val point = candidate.position.move(direction)
-          if (point in pattern) {
-            queue += State(point, candidate.steps + direction.arrow)
-          }
+      Direction.entries.forEach { direction ->
+        val point = candidate.position.move(direction)
+        if (point in pattern) {
+          queue += State(point, candidate.steps + direction.arrow)
         }
+      }
     }
   }
 

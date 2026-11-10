@@ -41,15 +41,15 @@ object Day9 : Puzzle<Int, Int>(day = 9) {
     fun score(): Int = level() + children.sumOf { it.score() }
   }
 
-  private fun String.clean(onGarbageFound: (Int) -> Unit = {}): String = removeCancelled().removeGarbage(onGarbageFound)
+  private fun String.clean(onGarbageFound: (Int) -> Unit = {}): String =
+    removeCancelled().removeGarbage(onGarbageFound)
 
   private fun String.removeCancelled(): String {
     val exclamationIndex = indexOf('!')
     return if (exclamationIndex == -1) {
       this
     } else {
-      removeRange(exclamationIndex, exclamationIndex + 2)
-        .removeCancelled()
+      removeRange(exclamationIndex, exclamationIndex + 2).removeCancelled()
     }
   }
 
@@ -60,8 +60,7 @@ object Day9 : Puzzle<Int, Int>(day = 9) {
     } else {
       val garbageCloseIndex = indexOf('>')
       onGarbageFound(garbageCloseIndex - garbageOpenIndex - 1)
-      removeRange(garbageOpenIndex, garbageCloseIndex + 1)
-        .removeGarbage(onGarbageFound)
+      removeRange(garbageOpenIndex, garbageCloseIndex + 1).removeGarbage(onGarbageFound)
     }
   }
 }

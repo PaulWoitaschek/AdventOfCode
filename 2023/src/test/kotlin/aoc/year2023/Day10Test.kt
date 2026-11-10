@@ -2,8 +2,8 @@ package aoc.year2023
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day10Test {
 
@@ -23,7 +23,8 @@ class Day10Test {
         SJ.L7
         |F--J
         LJ...
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -39,7 +40,8 @@ class Day10Test {
         .|.|.
         .L-J.
         .....
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -56,7 +58,8 @@ class Day10Test {
         .|.|.
         .L-J.
         .....
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -82,7 +85,8 @@ class Day10Test {
         .....|FJLJ|FJ|F7|.LJ
         ....FJL-7.||.||||...
         ....L---J.LJ.LJLJ...
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }

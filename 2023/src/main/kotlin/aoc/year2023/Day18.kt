@@ -17,9 +17,10 @@ object Day18 : Puzzle<Long, Long>(day = 18) {
     parseInstruction: (String) -> Instruction,
   ): Long {
     val instructions = input.lines().map(parseInstruction)
-    val points = instructions.runningFold(Point.Zero) { point, instruction ->
-      point.move(instruction.direction, instruction.steps)
-    }
+    val points =
+      instructions.runningFold(Point.Zero) { point, instruction ->
+        point.move(instruction.direction, instruction.steps)
+      }
     val borderSize = instructions.sumOf { it.steps } / 2
     return shoelace(points) + borderSize + 1
   }
@@ -42,13 +43,14 @@ object Day18 : Puzzle<Long, Long>(day = 18) {
       fun parseForPart2(input: String): Instruction {
         val (steps, direction) = part2Regex.find(input)!!.destructured
         return Instruction(
-          direction = when (direction.toInt()) {
-            0 -> Direction.Right
-            1 -> Direction.Down
-            2 -> Direction.Left
-            3 -> Direction.Up
-            else -> error("Invalid direction")
-          },
+          direction =
+            when (direction.toInt()) {
+              0 -> Direction.Right
+              1 -> Direction.Down
+              2 -> Direction.Left
+              3 -> Direction.Up
+              else -> error("Invalid direction")
+            },
           steps = steps.toInt(radix = 16),
         )
       }

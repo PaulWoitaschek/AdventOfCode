@@ -8,7 +8,9 @@ class Day9(private val premableLength: Int) : Puzzle<Int, Int>(9) {
 
   override fun solvePart2(input: String): Int {
     val invalidNumber = invalidNumber(input)
-    input.lineSequence().mapNotNull(String::toIntOrNull)
+    input
+      .lineSequence()
+      .mapNotNull(String::toIntOrNull)
       .windowed(invalidNumber, 1, true)
       .forEach a@{ window ->
         val result = mutableListOf<Int>()
@@ -25,11 +27,13 @@ class Day9(private val premableLength: Int) : Puzzle<Int, Int>(9) {
     error("No secret number")
   }
 
-  private fun invalidNumber(input: String) = input.lineSequence()
-    .mapNotNull(String::toIntOrNull)
-    .windowed(premableLength + 1)
-    .first { !it.dropLast(1).hasSumPair(it.last()) }
-    .last()
+  private fun invalidNumber(input: String) =
+    input
+      .lineSequence()
+      .mapNotNull(String::toIntOrNull)
+      .windowed(premableLength + 1)
+      .first { !it.dropLast(1).hasSumPair(it.last()) }
+      .last()
 }
 
 private fun List<Int>.hasSumPair(sum: Int): Boolean {

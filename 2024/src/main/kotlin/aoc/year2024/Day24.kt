@@ -6,20 +6,27 @@ object Day24 : Puzzle<Long, Long>(day = 24) {
 
   override fun solvePart1(input: String): Long {
     val (wiresValue, gatesValue) = input.split("\n\n")
-    val wires = wiresValue.lines().associate {
-      val (name, value) = it.split(": ")
-      name to (value == "1")
-    }.toMutableMap()
+    val wires =
+      wiresValue
+        .lines()
+        .associate {
+          val (name, value) = it.split(": ")
+          name to (value == "1")
+        }
+        .toMutableMap()
     val gates = gatesValue.lines().map(Gate::parse)
 
     while (true) {
-      val solvableGate = gates.firstOrNull { gate ->
-        gate.left in wires && gate.right in wires && gate.output !in wires
-      } ?: break
-      wires[solvableGate.output] = solvableGate.operator(wires.getValue(solvableGate.left), wires.getValue(solvableGate.right))
+      val solvableGate =
+        gates.firstOrNull { gate ->
+          gate.left in wires && gate.right in wires && gate.output !in wires
+        } ?: break
+      wires[solvableGate.output] =
+        solvableGate.operator(wires.getValue(solvableGate.left), wires.getValue(solvableGate.right))
     }
 
-    return wires.filterKeys { it.startsWith("z") }
+    return wires
+      .filterKeys { it.startsWith("z") }
       .toSortedMap()
       .values
       .reversed()
@@ -42,21 +49,22 @@ object Day24 : Puzzle<Long, Long>(day = 24) {
   enum class Operator {
     Xor,
     Or,
-    And,
-    ;
+    And;
 
     operator fun invoke(
       left: Boolean,
       right: Boolean,
-    ): Boolean = when (this) {
-      Xor -> left xor right
-      Or -> left or right
-      And -> left and right
-    }
+    ): Boolean =
+      when (this) {
+        Xor -> left xor right
+        Or -> left or right
+        And -> left and right
+      }
 
     companion object {
-      fun parse(input: String): Operator = entries.find { it.name.equals(input, ignoreCase = true) }
-        ?: error("Invalid operator=$input")
+      fun parse(input: String): Operator =
+        entries.find { it.name.equals(input, ignoreCase = true) }
+          ?: error("Invalid operator=$input")
     }
   }
 

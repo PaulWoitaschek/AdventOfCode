@@ -24,10 +24,9 @@ class Day15(private val lineToScan: Int, private val rangeMax: Int) : Puzzle<Int
           false
         }
         else -> {
-          sensorsWithBeacons
-            .any {
-              it.distanceToClosestBeacon >= it.sensor.manhattanDistanceTo(point)
-            }
+          sensorsWithBeacons.any {
+            it.distanceToClosestBeacon >= it.sensor.manhattanDistanceTo(point)
+          }
         }
       }
     }
@@ -36,7 +35,8 @@ class Day15(private val lineToScan: Int, private val rangeMax: Int) : Puzzle<Int
   override fun solvePart2(input: String): Long {
     val sensorsWithBeacons = parseInput(input)
     val range = 0..rangeMax
-    return sensorsWithBeacons.asSequence()
+    return sensorsWithBeacons
+      .asSequence()
       .flatMap { sensorWithBeacon ->
         val distance = sensorWithBeacon.distanceToClosestBeacon + 1
         (-distance..distance).asSequence().flatMap { dx ->
@@ -62,12 +62,14 @@ class Day15(private val lineToScan: Int, private val rangeMax: Int) : Puzzle<Int
   }
 
   private fun parseInput(input: String): List<SensorWithBeacon> {
-    val regex = "Sensor at x=(-?\\d+), y=(-?\\d+): closest beacon is at x=(-?\\d+), y=(-?\\d+)".toRegex()
-    return input.lines()
+    val regex =
+      "Sensor at x=(-?\\d+), y=(-?\\d+): closest beacon is at x=(-?\\d+), y=(-?\\d+)".toRegex()
+    return input
+      .lines()
       .filter { it.isNotEmpty() }
       .map {
-        val (sensorX, sensorY, beaconX, beaconY) = regex.find(it)!!.destructured
-          .toList().map(String::toInt)
+        val (sensorX, sensorY, beaconX, beaconY) =
+          regex.find(it)!!.destructured.toList().map(String::toInt)
         SensorWithBeacon(Point(sensorX, sensorY), Point(beaconX, beaconY))
       }
   }

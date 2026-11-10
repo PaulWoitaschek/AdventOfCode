@@ -2,24 +2,25 @@ package aoc.year2025
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Disabled
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day1Test {
 
-  private val testInput = """
-      L68
-      L30
-      R48
-      L5
-      R60
-      L55
-      L1
-      L99
-      R14
-      L82
-  """.trimIndent()
+  private val testInput =
+    """
+    L68
+    L30
+    R48
+    L5
+    R60
+    L55
+    L1
+    L99
+    R14
+    L82
+    """
+      .trimIndent()
 
   @Test
   fun part1TestInput() {

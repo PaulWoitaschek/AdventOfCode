@@ -31,13 +31,12 @@ object Day12 : Puzzle<Int, Int>(12) {
         val group = mutableSetOf<Point>()
         fun visit(point: Point) {
           if (!group.add(point)) return
-          point.adjacentOrthogonal()
-            .forEach { adjacent ->
-              val char = garden[adjacent]
-              if (char == groupChar) {
-                visit(adjacent)
-              }
+          point.adjacentOrthogonal().forEach { adjacent ->
+            val char = garden[adjacent]
+            if (char == groupChar) {
+              visit(adjacent)
             }
+          }
         }
         visit(start)
         regions += group
