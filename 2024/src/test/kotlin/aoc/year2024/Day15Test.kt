@@ -5,34 +5,36 @@ import aoc.library.grid
 import aoc.library.printString
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day15Test {
 
-  private val biggerTestSet = """
-  ##########
-  #..O..O.O#
-  #......O.#
-  #.OO..O.O#
-  #..O@..O.#
-  #O#..O...#
-  #O..O..O.#
-  #.OO.O.OO#
-  #....O...#
-  ##########
+  private val biggerTestSet =
+    """
+    ##########
+    #..O..O.O#
+    #......O.#
+    #.OO..O.O#
+    #..O@..O.#
+    #O#..O...#
+    #O..O..O.#
+    #.OO.O.OO#
+    #....O...#
+    ##########
 
-  <vv>^<v^>v>^vv^v>v<>v^v<v<^vv<<<^><<><>>v<vvv<>^v^>^<<<><<v<<<v^vv^v>^
-  vvv<<^>^v^^><<>>><>^<<><^vv^^<>vvv<>><^^v>^>vv<>v<<<<v<^v>^<^^>>>^<v<v
-  ><>vv>v^v^<>><>>>><^^>vv>v<^^^>>v^v^<^^>v^^>v^<^v>v<>>v^v^<v>v^^<^^vv<
-  <<v<^>>^^^^>>>v^<>vvv^><v<<<>^^^vv^<vvv>^>v<^^^^v<>^>vvvv><>>v^<<^^^^^
-  ^><^><>>><>^^<<^^v>>><^<v>^<vv>>v>>>^v><>^v><<<<v>>v<v<v>vvv>^<><<>^><
-  ^>><>^v<><^vvv<^^<><v<<<<<><^v<<<><<<^^<v<^^^><^>>^<v^><<<^>>^v<v^v<v^
-  >^>>^v>vv>^<<^v<>><<><<v<<v><>v<^vv<<<>^^v^>^^>>><<^v>>v^v><^^>>^<>vv^
-  <><^^>^^^<><vvvvv^v<v<<>^v<v>v<<^><<><<><<<^^<<<^<<>><<><^^^>^^<>^>v<>
-  ^^>vv<^v^v<vv>^<><v<^v>^^^>>>^^vvv^>vvv<>>>^<^>>>>>^<<^v>^vvv<>^<><<v>
-  v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^
-  """.trimIndent()
+    <vv>^<v^>v>^vv^v>v<>v^v<v<^vv<<<^><<><>>v<vvv<>^v^>^<<<><<v<<<v^vv^v>^
+    vvv<<^>^v^^><<>>><>^<<><^vv^^<>vvv<>><^^v>^>vv<>v<<<<v<^v>^<^^>>>^<v<v
+    ><>vv>v^v^<>><>>>><^^>vv>v<^^^>>v^v^<^^>v^^>v^<^v>v<>>v^v^<v>v^^<^^vv<
+    <<v<^>>^^^^>>>v^<>vvv^><v<<<>^^^vv^<vvv>^>v<^^^^v<>^>vvvv><>>v^<<^^^^^
+    ^><^><>>><>^^<<^^v>>><^<v>^<vv>>v>>>^v><>^v><<<<v>>v<v<v>vvv>^<><<>^><
+    ^>><>^v<><^vvv<^^<><v<<<<<><^v<<<><<<^^<v<^^^><^>>^<v^><<<^>>^v<v^v<v^
+    >^>>^v>vv>^<<^v<>><<><<v<<v><>v<^vv<<<>^^v^>^^>>><<^v>>v^v><^^>>^<>vv^
+    <><^^>^^^<><vvvvv^v<v<<>^v<v>v<<^><<><<><<<^^<<<^<<>><<><^^^>^^<>^>v<>
+    ^^>vv<^v^v<vv>^<><v<^v>^^^>>>^^vvv^>vvv<>>>^<^>>>>>^<<^v>^vvv<>^<><<v>
+    v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^
+    """
+      .trimIndent()
 
   @Test
   fun `robot does not move when next to rock`() {
@@ -70,19 +72,22 @@ class Day15Test {
   @Test
   fun `push big box which pushes big boxes`() {
     testWalk(
-      start = """
-      ....
-      [][]
-      .[].
-      .@..
-      """.trimIndent(),
+      start =
+        """
+        ....
+        [][]
+        .[].
+        .@..
+        """
+          .trimIndent(),
       expected =
-      """
-      [][]
-      .[].
-      .@..
-      ....
-      """.trimIndent(),
+        """
+        [][]
+        .[].
+        .@..
+        ....
+        """
+          .trimIndent(),
       direction = Direction.Up,
     )
   }
@@ -90,19 +95,22 @@ class Day15Test {
   @Test
   fun `push big box which pushes big boxes which is close to wall`() {
     testWalk(
-      start = """
-      ...#
-      [][]
-      .[].
-      .@..
-      """.trimIndent(),
+      start =
+        """
+        ...#
+        [][]
+        .[].
+        .@..
+        """
+          .trimIndent(),
       expected =
-      """
-      ...#
-      [][]
-      .[].
-      .@..
-      """.trimIndent(),
+        """
+        ...#
+        [][]
+        .[].
+        .@..
+        """
+          .trimIndent(),
       direction = Direction.Up,
     )
   }
@@ -116,14 +124,16 @@ class Day15Test {
       .[].
       ..[]
       ###.
-      """.trimIndent(),
+      """
+        .trimIndent(),
       """
       @...
       []..
       .[].
       ..[]
       ###.
-      """.trimIndent(),
+      """
+        .trimIndent(),
       Direction.Down,
     )
   }
@@ -135,8 +145,7 @@ class Day15Test {
   ) {
     assertEquals(
       grid(expected).printString(renderWalls = false),
-      Day15
-        .walk(
+      Day15.walk(
           map = grid(start),
           direction = direction,
         )
@@ -160,7 +169,8 @@ class Day15Test {
         ########
 
         <^^>>>vv<v>>v<<
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }

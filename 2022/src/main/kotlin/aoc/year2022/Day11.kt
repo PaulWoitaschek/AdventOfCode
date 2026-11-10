@@ -41,25 +41,30 @@ object Day11 : Puzzle<Long, Long>(11) {
     var inspectionCount: Long = 0,
   ) {
 
-    fun inspect(item: Long): Long = operation(
-      item,
-      when (operationCount) {
-        OperationValue.Old -> item
-        is OperationValue.Value -> operationCount.value
-      },
-    )
+    fun inspect(item: Long): Long =
+      operation(
+        item,
+        when (operationCount) {
+          OperationValue.Old -> item
+          is OperationValue.Value -> operationCount.value
+        },
+      )
 
-    fun willThrowItemTo(item: Long): Int = if (item % testDivision == 0L) throwToIfTrue else throwToIfFalse
+    fun willThrowItemTo(item: Long): Int =
+      if (item % testDivision == 0L) throwToIfTrue else throwToIfFalse
 
     sealed interface OperationValue {
       data class Value(val value: Long) : OperationValue
+
       data object Old : OperationValue
+
       companion object {
-        fun parse(value: String): OperationValue = if (value == "old") {
-          Old
-        } else {
-          Value(value.toLong())
-        }
+        fun parse(value: String): OperationValue =
+          if (value == "old") {
+            Old
+          } else {
+            Value(value.toLong())
+          }
       }
     }
 
@@ -67,10 +72,15 @@ object Day11 : Puzzle<Long, Long>(11) {
       fun parse(input: String): Monkey {
         val lines = input.lines()
         return Monkey(
-          items = lines[1].removePrefix("  Starting items: ")
-            .split(",").map { it.trim().toLong() }.toMutableList(),
+          items =
+            lines[1]
+              .removePrefix("  Starting items: ")
+              .split(",")
+              .map { it.trim().toLong() }
+              .toMutableList(),
           operation = if ('*' in lines[2]) Long::times else Long::plus,
-          operationCount = OperationValue.parse((lines[2].removePrefix("  Operation: new = old ").drop(2))),
+          operationCount =
+            OperationValue.parse((lines[2].removePrefix("  Operation: new = old ").drop(2))),
           testDivision = lines[3].removePrefix("  Test: divisible by ").toInt(),
           throwToIfTrue = lines[4].removePrefix("    If true: throw to monkey ").toInt(),
           throwToIfFalse = lines[5].removePrefix("    If false: throw to monkey ").toInt(),

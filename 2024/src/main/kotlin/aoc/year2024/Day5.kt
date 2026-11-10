@@ -6,9 +6,7 @@ object Day5 : Puzzle<Int, Int>(day = 5) {
 
   override fun solvePart1(input: String): Int {
     val (pages, comparator) = parse(input)
-    return pages
-      .filter { it.sortedWith(comparator) == it }
-      .sumOf { it[it.count() / 2] }
+    return pages.filter { it.sortedWith(comparator) == it }.sumOf { it[it.count() / 2] }
   }
 
   override fun solvePart2(input: String): Int {
@@ -24,9 +22,10 @@ object Day5 : Puzzle<Int, Int>(day = 5) {
     return getPages(pagesValue) to comparator(orderingRulesValue)
   }
 
-  private fun getPages(pagesValue: String) = pagesValue.lines().map { page ->
-    page.split(",").map(String::toInt)
-  }
+  private fun getPages(pagesValue: String) =
+    pagesValue.lines().map { page ->
+      page.split(",").map(String::toInt)
+    }
 
   private fun comparator(orderingRulesValue: String): Comparator<Int> {
     val orderingRules = mutableMapOf<Pair<Int, Int>, Int>()

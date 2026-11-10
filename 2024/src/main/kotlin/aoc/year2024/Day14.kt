@@ -18,11 +18,11 @@ import androidx.compose.ui.window.singleWindowApplication
 import aoc.library.Point
 import aoc.library.Puzzle
 import aoc.library.aocInput
+import kotlin.String
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.String
 
 object Day14 : Puzzle<Int, Int>(day = 14) {
 
@@ -35,16 +35,18 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
     input: String,
     width: Int,
     height: Int,
-  ): Int = generateSequence(parse(input)) { robots ->
-    robots.map { robot -> robot.step(width, height) }
-  }
-    .elementAt(100)
-    .groupBy {
-      quadrant(it, width, height)
-    }
-    .mapValues { it.value.size }
-    .filterKeys { it != null }.values
-    .reduce(Int::times)
+  ): Int =
+    generateSequence(parse(input)) { robots ->
+        robots.map { robot -> robot.step(width, height) }
+      }
+      .elementAt(100)
+      .groupBy {
+        quadrant(it, width, height)
+      }
+      .mapValues { it.value.size }
+      .filterKeys { it != null }
+      .values
+      .reduce(Int::times)
 
   private fun quadrant(
     robot: Robot,
@@ -68,11 +70,12 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
   private fun solvePart2(
     input: String,
     onStep: (List<Robot>) -> Unit,
-  ) = generateSequence(parse(input)) { robots ->
-    robots.map { robot -> robot.step(DEFAULT_WIDTH, DEFAULT_HEIGHT) }
-  }
-    .onEach { onStep(it) }
-    .indexOfFirst(::hasRobotCluster)
+  ) =
+    generateSequence(parse(input)) { robots ->
+        robots.map { robot -> robot.step(DEFAULT_WIDTH, DEFAULT_HEIGHT) }
+      }
+      .onEach { onStep(it) }
+      .indexOfFirst(::hasRobotCluster)
 
   private fun hasRobotCluster(robots: List<Robot>): Boolean {
     val positions = robots.map { it.position }.toSet()
@@ -86,6 +89,7 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
   private data class Robot(val position: Point, val velocity: Point) {
     companion object {
       private val regex = """^p=(\d+),(\d+) v=(-?\d+),(-?\d+)$""".toRegex()
+
       fun parse(input: String): Robot {
         val (px, py, vx, vy) = regex.find(input)!!.destructured.toList().map(String::toInt)
         return Robot(position = Point(px, py), velocity = Point(vx, vy))
@@ -95,12 +99,14 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
     fun step(
       width: Int,
       height: Int,
-    ): Robot = copy(
-      position = Point(
-        x = (position.x + velocity.x + width) % width,
-        y = (position.y + velocity.y + height) % height,
-      ),
-    )
+    ): Robot =
+      copy(
+        position =
+          Point(
+            x = (position.x + velocity.x + width) % width,
+            y = (position.y + velocity.y + height) % height,
+          ),
+      )
   }
 
   @JvmStatic
@@ -131,11 +137,12 @@ object Day14 : Puzzle<Int, Int>(day = 14) {
         repeat(DEFAULT_HEIGHT) { y ->
           Row {
             repeat(DEFAULT_WIDTH) { x ->
-              val color = if (Point(x, y) in state) {
-                Color(0xFF228B22)
-              } else {
-                Color(0xFF001F3F)
-              }
+              val color =
+                if (Point(x, y) in state) {
+                  Color(0xFF228B22)
+                } else {
+                  Color(0xFF001F3F)
+                }
               Box(Modifier.size(tileSize).background(color))
             }
           }

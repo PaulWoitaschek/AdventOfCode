@@ -25,11 +25,12 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
     val end = grid.end
     val pointsOfInterest = pointsOfInterest(start, end, grid)
     val adjacentPointsOfInterest = adjacentPointsOfInterest(pointsOfInterest, grid)
-    val distancesBetweenPointsOfInterest = distancesBetweenPointsOfInterest(
-      adjacentPointsOfInterest = adjacentPointsOfInterest,
-      grid = grid,
-      pointsOfInterest = pointsOfInterest,
-    )
+    val distancesBetweenPointsOfInterest =
+      distancesBetweenPointsOfInterest(
+        adjacentPointsOfInterest = adjacentPointsOfInterest,
+        grid = grid,
+        pointsOfInterest = pointsOfInterest,
+      )
     return maxWalk(paths = distancesBetweenPointsOfInterest, start = start, end = end)
   }
 
@@ -39,7 +40,13 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
     pointsOfInterest: Set<Point>,
   ): Map<Point, Map<Point, Int>> = adjacentPointsOfInterest.mapValues { (from, other) ->
     other.associateWith { o ->
-      maxPath(forest = grid, start = from, end = o, canClimbSlopes = true, stopPoints = pointsOfInterest - o)
+      maxPath(
+        forest = grid,
+        start = from,
+        end = o,
+        canClimbSlopes = true,
+        stopPoints = pointsOfInterest - o,
+      )
     }
   }
 
@@ -61,14 +68,11 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
             val tile = grid[adjacent]
             when (tile) {
               Tile.Path,
-              is Tile.Slope,
-              -> {
+              is Tile.Slope -> {
                 walk(adjacent)
               }
               Tile.Forest,
-              null,
-              -> {
-              }
+              null -> {}
             }
           }
         }
@@ -93,8 +97,7 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
         when (tile) {
           Tile.Forest -> false
           Tile.Path,
-          is Tile.Slope,
-          -> true
+          is Tile.Slope -> true
         }
       }
       .filter { (point, _) ->
@@ -113,16 +116,20 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
     return pointsOfInterest
   }
 
-  private fun parse(input: String): Map<Point, Tile> = grid(input) { char ->
-    when (char) {
-      '#' -> Tile.Forest
-      '.' -> Tile.Path
-      else -> Tile.Slope(Direction.fromArrowOrNull(char)!!)
+  private fun parse(input: String): Map<Point, Tile> =
+    grid(input) { char ->
+      when (char) {
+        '#' -> Tile.Forest
+        '.' -> Tile.Path
+        else -> Tile.Slope(Direction.fromArrowOrNull(char)!!)
+      }
     }
-  }
 
-  private val Map<Point, Tile>.start: Point get() = filterValues { it is Tile.Path }.minBy { it.key.y }.key
-  private val Map<Point, Tile>.end: Point get() = filterValues { it is Tile.Path }.maxBy { it.key.y }.key
+  private val Map<Point, Tile>.start: Point
+    get() = filterValues { it is Tile.Path }.minBy { it.key.y }.key
+
+  private val Map<Point, Tile>.end: Point
+    get() = filterValues { it is Tile.Path }.maxBy { it.key.y }.key
 
   private fun maxWalk(
     paths: Map<Point, Map<Point, Int>>,
@@ -175,22 +182,21 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
           return
         }
       }
-      current.adjacentOrthogonal()
-        .forEach { adjacent ->
-          if (adjacent in stopPoints) {
-            return@forEach
-          }
-          if (adjacent !in path) {
-            when (forest[adjacent]) {
-              Tile.Path,
-              is Tile.Slope,
-              -> {
-                walk(path + adjacent)
-              }
-              Tile.Forest, null -> {}
+      current.adjacentOrthogonal().forEach { adjacent ->
+        if (adjacent in stopPoints) {
+          return@forEach
+        }
+        if (adjacent !in path) {
+          when (forest[adjacent]) {
+            Tile.Path,
+            is Tile.Slope -> {
+              walk(path + adjacent)
             }
+            Tile.Forest,
+            null -> {}
           }
         }
+      }
     }
 
     walk(listOf(start))
@@ -200,7 +206,9 @@ object Day23 : Puzzle<Int, Int>(day = 23) {
 
   private sealed interface Tile {
     data object Path : Tile
+
     data object Forest : Tile
+
     data class Slope(var direction: Direction) : Tile
   }
 }

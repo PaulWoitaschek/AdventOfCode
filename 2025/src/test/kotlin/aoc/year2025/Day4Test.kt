@@ -2,23 +2,25 @@ package aoc.year2025
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day4Test {
 
-  private val testInput = """
-      ..@@.@@@@.
-      @@@.@.@.@@
-      @@@@@.@.@@
-      @.@@@@..@.
-      @@.@@@@.@@
-      .@@@@@@@.@
-      .@.@.@.@@@
-      @.@@@.@@@@
-      .@@@@@@@@.
-      @.@.@@@.@.
-  """.trimIndent()
+  private val testInput =
+    """
+    ..@@.@@@@.
+    @@@.@.@.@@
+    @@@@@.@.@@
+    @.@@@@..@.
+    @@.@@@@.@@
+    .@@@@@@@.@
+    .@.@.@.@@@
+    @.@@@.@@@@
+    .@@@@@@@@.
+    @.@.@@@.@.
+    """
+      .trimIndent()
 
   @Test
   fun part1TestInput() {

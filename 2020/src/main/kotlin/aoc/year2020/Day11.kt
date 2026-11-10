@@ -7,9 +7,11 @@ private typealias SeatMap = List<List<Day11.Tile>>
 
 object Day11 : Puzzle<Int, Int>(11) {
 
-  override fun solvePart1(input: String): Int = solve(input, onlyConsiderNeighborSeats = true, emptyThreshold = 4)
+  override fun solvePart1(input: String): Int =
+    solve(input, onlyConsiderNeighborSeats = true, emptyThreshold = 4)
 
-  override fun solvePart2(input: String): Int = solve(input, onlyConsiderNeighborSeats = false, emptyThreshold = 5)
+  override fun solvePart2(input: String): Int =
+    solve(input, onlyConsiderNeighborSeats = false, emptyThreshold = 5)
 
   private fun solve(
     input: String,
@@ -41,30 +43,33 @@ object Day11 : Puzzle<Int, Int>(11) {
       row.forEachIndexed { x, tile ->
         if (tile != Tile.Floor) {
           val point = Point(x, y)
-          adjacentSeats[point] = if (onlyConsiderNeighborSeats) {
-            point.adjacent()
-              .filter {
+          adjacentSeats[point] =
+            if (onlyConsiderNeighborSeats) {
+              point.adjacent().filter {
                 it.onSeatMap() && tile(it) != Tile.Floor
               }
-          } else {
-            listOf(
-              Point(1, 0),
-              Point(1, 1),
-              Point(1, -1),
-              Point(0, 1),
-              Point(0, -1),
-              Point(-1, 0),
-              Point(-1, 1),
-              Point(-1, -1),
-            ).mapNotNull { direction ->
-              generateSequence(point) { it + direction }
-                .drop(1).takeWhile {
-                  it.onSeatMap()
-                }.firstOrNull {
-                  tile(it) != Tile.Floor
+            } else {
+              listOf(
+                  Point(1, 0),
+                  Point(1, 1),
+                  Point(1, -1),
+                  Point(0, 1),
+                  Point(0, -1),
+                  Point(-1, 0),
+                  Point(-1, 1),
+                  Point(-1, -1),
+                )
+                .mapNotNull { direction ->
+                  generateSequence(point) { it + direction }
+                    .drop(1)
+                    .takeWhile {
+                      it.onSeatMap()
+                    }
+                    .firstOrNull {
+                      tile(it) != Tile.Floor
+                    }
                 }
             }
-          }
         }
       }
     }
@@ -88,7 +93,9 @@ object Day11 : Puzzle<Int, Int>(11) {
             }
           }
           Tile.OccupiedSeat -> {
-            if (adjacentSeats[Point(x, y)]!!.count { tile(it) == Tile.OccupiedSeat } >= emptyTreshold) {
+            if (
+              adjacentSeats[Point(x, y)]!!.count { tile(it) == Tile.OccupiedSeat } >= emptyTreshold
+            ) {
               Tile.EmptySeat
             } else {
               tile
@@ -99,8 +106,8 @@ object Day11 : Puzzle<Int, Int>(11) {
     }
   }
 
-  private fun parseInput(input: String): SeatMap = input.lines().filter(String::isNotEmpty)
-    .map { row ->
+  private fun parseInput(input: String): SeatMap =
+    input.lines().filter(String::isNotEmpty).map { row ->
       row.map {
         when (it) {
           'L' -> Tile.EmptySeat

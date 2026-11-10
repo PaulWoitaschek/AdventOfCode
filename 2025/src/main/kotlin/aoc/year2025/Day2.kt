@@ -25,12 +25,14 @@ object Day2 : Puzzle<Long, Long>(day = 2) {
   private fun solve(
     input: String,
     isValid: (Long) -> Boolean,
-  ): Long = input.replace("\n", "")
-    .split(",")
-    .flatMap {
-      val (from, to) = it.split("-").map(String::toLong)
-      from..to
-    }
-    .filterNot { isValid(it) }
-    .sum()
+  ): Long =
+    input
+      .replace("\n", "")
+      .split(",")
+      .flatMap {
+        val (from, to) = it.split("-").map(String::toLong)
+        from..to
+      }
+      .filterNot { isValid(it) }
+      .sum()
 }

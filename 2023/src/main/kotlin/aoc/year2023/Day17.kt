@@ -9,9 +9,11 @@ import java.util.PriorityQueue
 
 object Day17 : Puzzle<Int, Int>(day = 17) {
 
-  override fun solvePart1(input: String): Int = solve(input = input, stepsAfterTurn = 1, maxTurns = 3)
+  override fun solvePart1(input: String): Int =
+    solve(input = input, stepsAfterTurn = 1, maxTurns = 3)
 
-  override fun solvePart2(input: String): Int = solve(input = input, stepsAfterTurn = 4, maxTurns = 10)
+  override fun solvePart2(input: String): Int =
+    solve(input = input, stepsAfterTurn = 4, maxTurns = 10)
 
   private fun solve(
     input: String,
@@ -51,11 +53,12 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
         if (newPosition in bounds) {
           queue.add(
             FlowWithHeat(
-              flow = Flow(
-                position = newPosition,
-                direction = flow.direction,
-                stepsInDirection = flow.stepsInDirection + 1,
-              ),
+              flow =
+                Flow(
+                  position = newPosition,
+                  direction = flow.direction,
+                  stepsInDirection = flow.stepsInDirection + 1,
+                ),
               heat = heat + map[newPosition]!!,
             ),
           )
@@ -71,11 +74,12 @@ object Day17 : Puzzle<Int, Int>(day = 17) {
         }
         queue.add(
           FlowWithHeat(
-            flow = Flow(
-              position = newPosition,
-              direction = direction,
-              stepsInDirection = stepsAfterTurn,
-            ),
+            flow =
+              Flow(
+                position = newPosition,
+                direction = direction,
+                stepsInDirection = stepsAfterTurn,
+              ),
             heat = newHeat,
           ),
         )

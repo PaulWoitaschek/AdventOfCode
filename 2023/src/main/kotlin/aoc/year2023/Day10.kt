@@ -16,9 +16,10 @@ object Day10 : Puzzle<Int, Int>(day = 10) {
     fun tile(point: Point) = map[point] ?: Tile.Ground
     tailrec fun path(path: List<Point>): List<Point>? {
       val position = path.last()
-      val next = tile(position).connecting
-        .map(position::move)
-        .singleOrNull { it != path.getOrNull(path.lastIndex - 1) }
+      val next =
+        tile(position).connecting.map(position::move).singleOrNull {
+          it != path.getOrNull(path.lastIndex - 1)
+        }
       return when (next) {
         null -> null
         start -> path
@@ -43,8 +44,7 @@ object Day10 : Puzzle<Int, Int>(day = 10) {
     SouthWest('7', listOf(Direction.Down, Direction.Left)),
     SouthEast('F', listOf(Direction.Down, Direction.Right)),
     Ground('.', emptyList()),
-    Start('S', Direction.entries),
-    ;
+    Start('S', Direction.entries);
 
     companion object {
       val bySymbol = Tile.entries.associateBy { it.symbol }

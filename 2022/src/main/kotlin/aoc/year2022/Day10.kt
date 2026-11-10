@@ -22,7 +22,8 @@ object Day10 : Puzzle<Int, String>(10) {
       }
     }
     return String(CharArray(240) { if (it in drawAt) '█' else ' ' })
-      .chunked(40).joinToString(separator = "\n")
+      .chunked(40)
+      .joinToString(separator = "\n")
   }
 
   private fun runCycles(
@@ -35,14 +36,17 @@ object Day10 : Puzzle<Int, String>(10) {
       cycle++
       onCycle(x, cycle)
     }
-    input.lines().filter { it.isNotEmpty() }.forEach { instruction ->
-      if (instruction == "noop") {
-        runCycle()
-      } else {
-        runCycle()
-        runCycle()
-        x += instruction.removePrefix("addx ").toInt()
+    input
+      .lines()
+      .filter { it.isNotEmpty() }
+      .forEach { instruction ->
+        if (instruction == "noop") {
+          runCycle()
+        } else {
+          runCycle()
+          runCycle()
+          x += instruction.removePrefix("addx ").toInt()
+        }
       }
-    }
   }
 }

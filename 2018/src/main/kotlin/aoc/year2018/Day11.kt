@@ -6,13 +6,14 @@ import aoc.library.Puzzle
 object Day11 : Puzzle<String, Long>(day = 11) {
   override fun solvePart1(input: String): String {
     val serialNumber = input.toInt()
-    val powerLevels = (1..300)
-      .flatMap { x ->
-        (1..300).map { y ->
-          Point(x, y)
+    val powerLevels =
+      (1..300)
+        .flatMap { x ->
+          (1..300).map { y ->
+            Point(x, y)
+          }
         }
-      }
-      .associateWith { powerLevel(it, serialNumber) }
+        .associateWith { powerLevel(it, serialNumber) }
     return (1..297)
       .flatMap { x ->
         (1..297).map { y ->
@@ -29,7 +30,8 @@ object Day11 : Puzzle<String, Long>(day = 11) {
           .map { point + it }
           .sumOf { powerLevels.getValue(it) }
       }
-      .maxBy { it.value }.also { println(it) }
+      .maxBy { it.value }
+      .also { println(it) }
       .key
       .let { "${it.x},${it.y}" }
   }

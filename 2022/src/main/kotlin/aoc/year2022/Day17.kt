@@ -23,21 +23,25 @@ object Day17 : Puzzle<Long, Nothing>(17) {
     var rock = newRock(RockShape.A)
 
     fun moveRock(direction: Direction): Boolean {
-      val newCoordinates = rock.coordinates.map {
-        it.copy(
-          x = it.x + when (direction) {
-            Direction.Left -> -1
-            Direction.Right -> +1
-            Direction.Down -> 0
-          },
-          y = it.y + when (direction) {
-            Direction.Left,
-            Direction.Right,
-            -> 0
-            Direction.Down -> -1
-          },
-        )
-      }
+      val newCoordinates =
+        rock.coordinates.map {
+          it.copy(
+            x =
+              it.x +
+                when (direction) {
+                  Direction.Left -> -1
+                  Direction.Right -> +1
+                  Direction.Down -> 0
+                },
+            y =
+              it.y +
+                when (direction) {
+                  Direction.Left,
+                  Direction.Right -> 0
+                  Direction.Down -> -1
+                },
+          )
+        }
       val inBonds = newCoordinates.all { (x, y) ->
         x in 0 until Cave.WIDTH && y > 0 && !cave.hasRock(x, y)
       }
@@ -79,50 +83,59 @@ object Day17 : Puzzle<Long, Nothing>(17) {
     return generateSequence { jetPattern }.flatten()
   }
 
-  enum class Direction { Left, Right, Down }
+  enum class Direction {
+    Left,
+    Right,
+    Down,
+  }
+
   enum class RockShape(shapeString: String) {
     A("####"),
     B(
       """
-    .#.
-    ###
-    .#.
-      """.trimIndent(),
+      .#.
+      ###
+      .#.
+      """
+        .trimIndent(),
     ),
     C(
       """
-    ..#
-    ..#
-    ###
-      """.trimIndent(),
+      ..#
+      ..#
+      ###
+      """
+        .trimIndent(),
     ),
     D(
       """
-    #
-    #
-    #
-    #
-      """.trimIndent(),
+      #
+      #
+      #
+      #
+      """
+        .trimIndent(),
     ),
     E(
       """
-    ##
-    ##
-      """.trimIndent(),
-    ),
-    ;
+      ##
+      ##
+      """
+        .trimIndent(),
+    );
 
     fun next(): RockShape = entries.getOrNull(ordinal + 1) ?: A
 
-    val points = shapeString.lines().reversed().flatMapIndexed { y, line ->
-      line.mapIndexedNotNull { x, char ->
-        if (char == '#') {
-          Point(x, y)
-        } else {
-          null
+    val points =
+      shapeString.lines().reversed().flatMapIndexed { y, line ->
+        line.mapIndexedNotNull { x, char ->
+          if (char == '#') {
+            Point(x, y)
+          } else {
+            null
+          }
         }
       }
-    }
   }
 
   class Cave {

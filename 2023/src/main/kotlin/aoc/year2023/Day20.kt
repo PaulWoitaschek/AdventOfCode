@@ -26,9 +26,11 @@ object Day20 : Puzzle<Long, Long>(day = 20) {
     val modules = parse(input)
 
     val conjunctionToRx = modules.single { "rx" in it.destinations }
-    val valuesForHighPulse = modules.filter { conjunctionToRx.name in it.destinations }
-      .associate { it.name to 0 }
-      .toMutableMap()
+    val valuesForHighPulse =
+      modules
+        .filter { conjunctionToRx.name in it.destinations }
+        .associate { it.name to 0 }
+        .toMutableMap()
 
     var buttonPresses = 0
     while (valuesForHighPulse.any { (_, value) -> value == 0 }) {
@@ -95,10 +97,17 @@ object Day20 : Puzzle<Long, Long>(day = 20) {
     val name: String
     val destinations: List<String>
 
-    data class FlipFlow(var on: Boolean, override val name: String, override val destinations: List<String>) : Module
+    data class FlipFlow(
+      var on: Boolean,
+      override val name: String,
+      override val destinations: List<String>,
+    ) : Module
 
-    data class Conjunction(override val name: String, override val destinations: List<String>, val memory: MutableMap<String, Boolean>) :
-      Module
+    data class Conjunction(
+      override val name: String,
+      override val destinations: List<String>,
+      val memory: MutableMap<String, Boolean>,
+    ) : Module
 
     data class Broadcaster(override val destinations: List<String>) : Module {
       override val name: String = "broadcaster"
@@ -106,22 +115,24 @@ object Day20 : Puzzle<Long, Long>(day = 20) {
   }
 
   private fun parse(input: String): List<Module> {
-    val modules = input.lines()
-      .map { line ->
+    val modules =
+      input.lines().map { line ->
         val (moduleValue, destinationsValue) = line.split(" -> ")
         val destinations = destinationsValue.split(", ")
         when {
-          moduleValue.startsWith('%') -> Module.FlipFlow(
-            on = false,
-            name = moduleValue.drop(1),
-            destinations = destinations,
-          )
+          moduleValue.startsWith('%') ->
+            Module.FlipFlow(
+              on = false,
+              name = moduleValue.drop(1),
+              destinations = destinations,
+            )
           moduleValue == "broadcaster" -> Module.Broadcaster(destinations)
-          moduleValue.startsWith("&") -> Module.Conjunction(
-            name = moduleValue.drop(1),
-            destinations = destinations,
-            memory = mutableMapOf(),
-          )
+          moduleValue.startsWith("&") ->
+            Module.Conjunction(
+              name = moduleValue.drop(1),
+              destinations = destinations,
+              memory = mutableMapOf(),
+            )
           else -> error("Invalid module $moduleValue")
         }
       }

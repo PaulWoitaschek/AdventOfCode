@@ -27,7 +27,12 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
     val grid = grid(input)
     val reindeer = grid.filterValues { it == REINDEER }.keys.single()
 
-    data class State(val position: Point, val facing: Direction, val score: Int, val path: List<Point>)
+    data class State(
+      val position: Point,
+      val facing: Direction,
+      val score: Int,
+      val path: List<Point>,
+    )
 
     val queue = PriorityQueue<State>(compareBy { it.score })
     var minScore = scoreForFastestPath(reindeer, grid)
@@ -37,9 +42,10 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
     while (queue.isNotEmpty()) {
       val state = queue.remove()
 
-      val checkpointScore = checkpointScores.getOrPut(state.position to state.facing) {
-        state.score
-      }
+      val checkpointScore =
+        checkpointScores.getOrPut(state.position to state.facing) {
+          state.score
+        }
       if (checkpointScore < state.score) continue
 
       if (state.score > minScore) continue
@@ -53,26 +59,27 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
         bestPathsPoints += state.path
         continue
       }
-      queue += listOf(
-        State(
-          position = state.position.move(state.facing),
-          facing = state.facing,
-          score = state.score + WALK_PRICE,
-          path = state.path + state.position.move(state.facing),
-        ),
-        State(
-          position = state.position.move(state.facing.clockwise()),
-          facing = state.facing.clockwise(),
-          score = state.score + TURN_PRICE + WALK_PRICE,
-          path = state.path + state.position.move(state.facing.clockwise()),
-        ),
-        State(
-          position = state.position.move(state.facing.counterClockwise()),
-          facing = state.facing.counterClockwise(),
-          score = state.score + TURN_PRICE + WALK_PRICE,
-          path = state.path + state.position.move(state.facing.counterClockwise()),
-        ),
-      )
+      queue +=
+        listOf(
+          State(
+            position = state.position.move(state.facing),
+            facing = state.facing,
+            score = state.score + WALK_PRICE,
+            path = state.path + state.position.move(state.facing),
+          ),
+          State(
+            position = state.position.move(state.facing.clockwise()),
+            facing = state.facing.clockwise(),
+            score = state.score + TURN_PRICE + WALK_PRICE,
+            path = state.path + state.position.move(state.facing.clockwise()),
+          ),
+          State(
+            position = state.position.move(state.facing.counterClockwise()),
+            facing = state.facing.counterClockwise(),
+            score = state.score + TURN_PRICE + WALK_PRICE,
+            path = state.path + state.position.move(state.facing.counterClockwise()),
+          ),
+        )
     }
 
     return bestPathsPoints.size
@@ -100,23 +107,24 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
         minScore = minOf(minScore, state.score)
         continue
       }
-      queue += listOf(
-        State(
-          position = state.position.move(state.facing),
-          facing = state.facing,
-          score = state.score + WALK_PRICE,
-        ),
-        State(
-          position = state.position.move(state.facing.clockwise()),
-          facing = state.facing.clockwise(),
-          score = state.score + TURN_PRICE + WALK_PRICE,
-        ),
-        State(
-          position = state.position.move(state.facing.counterClockwise()),
-          facing = state.facing.counterClockwise(),
-          score = state.score + TURN_PRICE + WALK_PRICE,
-        ),
-      )
+      queue +=
+        listOf(
+          State(
+            position = state.position.move(state.facing),
+            facing = state.facing,
+            score = state.score + WALK_PRICE,
+          ),
+          State(
+            position = state.position.move(state.facing.clockwise()),
+            facing = state.facing.clockwise(),
+            score = state.score + TURN_PRICE + WALK_PRICE,
+          ),
+          State(
+            position = state.position.move(state.facing.counterClockwise()),
+            facing = state.facing.counterClockwise(),
+            score = state.score + TURN_PRICE + WALK_PRICE,
+          ),
+        )
     }
 
     return minScore

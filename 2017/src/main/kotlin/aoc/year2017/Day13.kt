@@ -5,8 +5,8 @@ import kotlin.String
 
 object Day13 : Puzzle<Int, Int>(day = 13) {
 
-  override fun solvePart1(input: String): Int = input.lines().map(Layer::parse)
-    .sumOf { currentLayer ->
+  override fun solvePart1(input: String): Int =
+    input.lines().map(Layer::parse).sumOf { currentLayer ->
       currentLayer.tick(currentLayer.depth)
       if (currentLayer.position == 0) {
         currentLayer.depth * currentLayer.range
@@ -31,7 +31,12 @@ object Day13 : Puzzle<Int, Int>(day = 13) {
     }
   }
 
-  private data class Layer(val depth: Int, val range: Int, var position: Int = 0, var direction: Int = 1) {
+  private data class Layer(
+    val depth: Int,
+    val range: Int,
+    var position: Int = 0,
+    var direction: Int = 1,
+  ) {
 
     fun reset() {
       position = 0

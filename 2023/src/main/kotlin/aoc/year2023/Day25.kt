@@ -63,9 +63,7 @@ object Day25 : Puzzle<Int, Nothing>(day = 25) {
         }
       }
     }
-    connections.flatMap { listOf(it.from, it.to) }.toSet()
-      .take(50)
-      .forEach { visit(it) }
+    connections.flatMap { listOf(it.from, it.to) }.toSet().take(50).forEach { visit(it) }
     return counter.toList().sortedByDescending { it.second }.map { it.first }
   }
 
@@ -87,11 +85,12 @@ object Day25 : Puzzle<Int, Nothing>(day = 25) {
   }
 
   private data class Connection(val from: String, val to: String) {
-    fun connect(value: String): String? = when (value) {
-      from -> to
-      to -> from
-      else -> null
-    }
+    fun connect(value: String): String? =
+      when (value) {
+        from -> to
+        to -> from
+        else -> null
+      }
   }
 
   override fun solvePart2(input: String): Nothing = error("Does not exist")

@@ -6,12 +6,12 @@ import kotlin.String
 
 object Day3 : Puzzle<Long, Long>(day = 3) {
 
-  override fun solvePart1(input: String): Long = input.lines()
-    .sumOf { jolt(it, 2) }
+  override fun solvePart1(input: String): Long = input.lines().sumOf { jolt(it, 2) }
 
-  override fun solvePart2(input: String): Long = input.lines().sumOf {
-    jolt(it, 12)
-  }
+  override fun solvePart2(input: String): Long =
+    input.lines().sumOf {
+      jolt(it, 12)
+    }
 
   private fun jolt(
     input: String,

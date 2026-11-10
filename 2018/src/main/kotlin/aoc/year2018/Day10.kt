@@ -13,11 +13,13 @@ object Day10 : Puzzle<String, Int>(day = 10) {
 
   private fun parse(input: String): Pair<List<Point>, List<Point>> {
     val numbersRegex = "(-?\\d+)".toRegex()
-    return input.lines()
+    return input
+      .lines()
       .map { line ->
         val (x, y, velX, velY) = numbersRegex.findAll(line).map { it.value.toInt() }.toList()
         Point(x, y) to Point(velX, velY)
-      }.unzip()
+      }
+      .unzip()
   }
 
   private fun solve(input: String): Pair<String, Int> {

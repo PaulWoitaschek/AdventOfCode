@@ -17,15 +17,14 @@ object Day10 : Puzzle<Int, Int>(10) {
     val station = asteroids.maxBy { target ->
       asteroids.groupBy { target.degreesTo(it) }.size
     }
-    val otherAsteroids = asteroids
-      .groupBy { station.degreesTo(it) }
-      .mapValues { (_, asteroids) ->
-        asteroids
-          .sortedBy { station.manhattanDistanceTo(it) }
-          .toMutableList()
-      }
-      .toList()
-      .sortedBy { (degrees, _) -> degrees }
+    val otherAsteroids =
+      asteroids
+        .groupBy { station.degreesTo(it) }
+        .mapValues { (_, asteroids) ->
+          asteroids.sortedBy { station.manhattanDistanceTo(it) }.toMutableList()
+        }
+        .toList()
+        .sortedBy { (degrees, _) -> degrees }
 
     var killCount = 0
     while (true) {
@@ -40,8 +39,8 @@ object Day10 : Puzzle<Int, Int>(10) {
     }
   }
 
-  private fun parseAsteroids(input: String): List<Point> = input.lines()
-    .flatMapIndexed { y, line ->
+  private fun parseAsteroids(input: String): List<Point> =
+    input.lines().flatMapIndexed { y, line ->
       line.mapIndexedNotNull { x, value ->
         if (value == '#') {
           Point(x, y)

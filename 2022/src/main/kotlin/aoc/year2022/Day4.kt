@@ -15,7 +15,8 @@ object Day4 : Puzzle<Int, Int>(4) {
 
 private data class Ranges(val x1: Int, val x2: Int, val y1: Int, val y2: Int)
 
-private inline fun String.rangeMatches(match: Ranges.() -> Boolean): Int = lines().filter(String::isNotEmpty).count { line ->
-  val values = line.split(",", "-").map { it.toInt() }
-  match(Ranges(values[0], values[1], values[2], values[3]))
-}
+private inline fun String.rangeMatches(match: Ranges.() -> Boolean): Int =
+  lines().filter(String::isNotEmpty).count { line ->
+    val values = line.split(",", "-").map { it.toInt() }
+    match(Ranges(values[0], values[1], values[2], values[3]))
+  }

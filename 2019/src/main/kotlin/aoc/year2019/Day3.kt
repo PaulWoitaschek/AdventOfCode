@@ -22,14 +22,13 @@ object Day3 : Puzzle<Int, Int>(3) {
       .filter { it != Point.Zero }
       .minOf { intersection ->
         paths.sumOf { line ->
-          line.indexOf(intersection)
-            .coerceAtLeast(0)
+          line.indexOf(intersection).coerceAtLeast(0)
         }
       }
   }
 
-  private fun paths(input: String): List<List<Point>> = input.lines()
-    .map { vectorString ->
+  private fun paths(input: String): List<List<Point>> =
+    input.lines().map { vectorString ->
       val path = mutableListOf(Point.Zero)
       vectorString.split(",").forEach { vector ->
         val direction = Direction.parse(vector.first())
@@ -40,13 +39,16 @@ object Day3 : Puzzle<Int, Int>(3) {
       path
     }
 
-  private fun intersections(paths: List<List<Point>>): Set<Point> = paths.indices.flatMap { leftIndex ->
-    paths.indices.flatMap { rightIndex ->
-      if (leftIndex != rightIndex) {
-        paths[leftIndex].intersect(paths[rightIndex].toSet())
-      } else {
-        emptySet()
+  private fun intersections(paths: List<List<Point>>): Set<Point> =
+    paths.indices
+      .flatMap { leftIndex ->
+        paths.indices.flatMap { rightIndex ->
+          if (leftIndex != rightIndex) {
+            paths[leftIndex].intersect(paths[rightIndex].toSet())
+          } else {
+            emptySet()
+          }
+        }
       }
-    }
-  }.toSet()
+      .toSet()
 }

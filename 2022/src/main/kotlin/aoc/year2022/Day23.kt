@@ -50,7 +50,8 @@ object Day23 : Puzzle<Int, Int>(23) {
       }
     }
     val proposedPosition = candidates.groupBy { elf ->
-      elf.proposePositions(direction)
+      elf
+        .proposePositions(direction)
         .firstOrNull { proposedPositions ->
           proposedPositions.all { positionLookingAt ->
             elves.none { otherElf ->
@@ -84,8 +85,7 @@ object Day23 : Puzzle<Int, Int>(23) {
     North,
     South,
     West,
-    East,
-    ;
+    East;
 
     fun next(): Direction = entries.getOrNull(ordinal + 1) ?: entries.first()
   }
@@ -98,31 +98,36 @@ object Day23 : Puzzle<Int, Int>(23) {
         yield(nextDirection)
         nextDirection = nextDirection.next()
       }
-    }.map {
-      val (x, y) = position
-      when (it) {
-        Direction.North -> listOf(
-          Point(x, y - 1),
-          Point(x - 1, y - 1),
-          Point(x + 1, y - 1),
-        )
-        Direction.South -> listOf(
-          Point(x, y + 1),
-          Point(x - 1, y + 1),
-          Point(x + 1, y + 1),
-        )
-        Direction.West -> listOf(
-          Point(x - 1, y),
-          Point(x - 1, y + 1),
-          Point(x - 1, y - 1),
-        )
-        Direction.East -> listOf(
-          Point(x + 1, y),
-          Point(x + 1, y + 1),
-          Point(x + 1, y - 1),
-        )
-      }
     }
+      .map {
+        val (x, y) = position
+        when (it) {
+          Direction.North ->
+            listOf(
+              Point(x, y - 1),
+              Point(x - 1, y - 1),
+              Point(x + 1, y - 1),
+            )
+          Direction.South ->
+            listOf(
+              Point(x, y + 1),
+              Point(x - 1, y + 1),
+              Point(x + 1, y + 1),
+            )
+          Direction.West ->
+            listOf(
+              Point(x - 1, y),
+              Point(x - 1, y + 1),
+              Point(x - 1, y - 1),
+            )
+          Direction.East ->
+            listOf(
+              Point(x + 1, y),
+              Point(x + 1, y + 1),
+              Point(x + 1, y - 1),
+            )
+        }
+      }
       .take(4)
   }
 }

@@ -6,6 +6,7 @@ import java.security.MessageDigest
 object Day4 : Puzzle<Int, Int>(4) {
 
   override fun solvePart1(input: String): Int = lowestMatching(input, leadingZeroes = 5)
+
   override fun solvePart2(input: String): Int = lowestMatching(input, leadingZeroes = 6)
 
   private fun lowestMatching(

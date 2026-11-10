@@ -4,7 +4,8 @@ import aoc.library.Puzzle
 
 object Day7 : Puzzle<Long, Long>(7) {
 
-  override fun solvePart1(input: String): Long = directorySizes(input).filter { it <= 100_000 }.sum()
+  override fun solvePart1(input: String): Long =
+    directorySizes(input).filter { it <= 100_000 }.sum()
 
   override fun solvePart2(input: String): Long {
     val directories = directorySizes(input)
@@ -16,7 +17,9 @@ object Day7 : Puzzle<Long, Long>(7) {
 
   private fun directorySizes(input: String): List<Long> {
     val files = parseFiles(input)
-    return files.flatMap { file -> file.directories() }.toSet()
+    return files
+      .flatMap { file -> file.directories() }
+      .toSet()
       .map { dir ->
         files.filter { file -> file.path.startsWith(dir) }.sumOf { it.size }
       }
@@ -41,11 +44,12 @@ object Day7 : Puzzle<Long, Long>(7) {
       when {
         line.startsWith("\$ cd") -> {
           val path = line.drop(5)
-          currentPath = when (path) {
-            ".." -> currentPath.dropLast(1).dropLastWhile { it != '/' }
-            "/" -> "/"
-            else -> "$currentPath$path/"
-          }
+          currentPath =
+            when (path) {
+              ".." -> currentPath.dropLast(1).dropLastWhile { it != '/' }
+              "/" -> "/"
+              else -> "$currentPath$path/"
+            }
         }
         line.first().isDigit() -> {
           val (size, name) = line.split(" ")

@@ -20,6 +20,7 @@ object Day7 : Puzzle<String, Int>(day = 7) {
   private data class Program(val name: String, val weight: Int, val above: List<String>) {
     companion object {
       private val regex = """(\w+) \((\d+)\)(?: -> )?([\w, ]+)?$""".toRegex()
+
       fun parse(input: String): Program {
         val (name, weight, above) = regex.find(input)!!.destructured
         return Program(

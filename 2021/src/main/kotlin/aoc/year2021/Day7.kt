@@ -15,9 +15,7 @@ private inline fun solve(
   fuelCostPerDistance: (Long) -> Long,
 ): Long {
   val positions = input.split(",").map(String::toLong)
-  return (positions.minOf { it }.rangeTo(positions.maxOf { it }))
-    .minOf { candidate ->
-      positions.map { abs(candidate - it) }
-        .sumOf(fuelCostPerDistance)
-    }
+  return (positions.minOf { it }.rangeTo(positions.maxOf { it })).minOf { candidate ->
+    positions.map { abs(candidate - it) }.sumOf(fuelCostPerDistance)
+  }
 }

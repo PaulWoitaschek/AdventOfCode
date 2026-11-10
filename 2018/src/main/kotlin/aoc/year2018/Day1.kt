@@ -9,7 +9,8 @@ object Day1 : Puzzle<Int, Int>(day = 1) {
   override fun solvePart2(input: String): Int {
     val values = input.lines().map(String::toInt)
     val emitted = mutableSetOf<Int>()
-    return generateSequence { values }.flatten()
+    return generateSequence { values }
+      .flatten()
       .runningFold(0, Int::plus)
       .first {
         !emitted.add(it)

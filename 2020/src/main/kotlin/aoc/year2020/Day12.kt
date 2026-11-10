@@ -37,22 +37,25 @@ object Day12 : Puzzle<Int, Int>(12) {
           }
         }
         Instruction.Action.Forward -> {
-          position = Point(
-            x = position.x + when (facing) {
-              Direction.Left -> -instruction.count
-              Direction.Right -> instruction.count
-              Direction.Up,
-              Direction.Down,
-              -> 0
-            },
-            y = position.y + when (facing) {
-              Direction.Left,
-              Direction.Right,
-              -> 0
-              Direction.Up -> -instruction.count
-              Direction.Down -> instruction.count
-            },
-          )
+          position =
+            Point(
+              x =
+                position.x +
+                  when (facing) {
+                    Direction.Left -> -instruction.count
+                    Direction.Right -> instruction.count
+                    Direction.Up,
+                    Direction.Down -> 0
+                  },
+              y =
+                position.y +
+                  when (facing) {
+                    Direction.Left,
+                    Direction.Right -> 0
+                    Direction.Up -> -instruction.count
+                    Direction.Down -> instruction.count
+                  },
+            )
         }
       }
     }
@@ -65,12 +68,16 @@ object Day12 : Puzzle<Int, Int>(12) {
   }
 
   private fun parseInstructions(input: String): List<Instruction> {
-    val instructions = input.lines().filter { it.isNotEmpty() }.map {
-      Instruction(
-        count = it.drop(1).toInt(),
-        action = Instruction.Action.byChar.getValue(it.first()),
-      )
-    }
+    val instructions =
+      input
+        .lines()
+        .filter { it.isNotEmpty() }
+        .map {
+          Instruction(
+            count = it.drop(1).toInt(),
+            action = Instruction.Action.byChar.getValue(it.first()),
+          )
+        }
     return instructions
   }
 
@@ -82,8 +89,7 @@ object Day12 : Puzzle<Int, Int>(12) {
       West,
       Left,
       Right,
-      Forward,
-      ;
+      Forward;
 
       companion object {
         val byChar = Action.entries.associateBy { it.name.first() }

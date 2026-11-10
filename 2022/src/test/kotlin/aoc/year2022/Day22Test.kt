@@ -1,8 +1,8 @@
 package aoc.year2022
 
 import aoc.library.solvePart1
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day22Test {
 
@@ -12,21 +12,22 @@ class Day22Test {
       6032,
       Day22.solvePart1(
         """
-...#
-        .#..
-        #...
-        ....
-...#.......#
-........#...
-..#....#....
-..........#.
-        ...#....
-        .....#..
-        .#......
-        ......#.
+        ...#
+                .#..
+                #...
+                ....
+        ...#.......#
+        ........#...
+        ..#....#....
+        ..........#.
+                ...#....
+                .....#..
+                .#......
+                ......#.
 
-10R5L5R10L4R5L5
-        """.trimIndent(),
+        10R5L5R10L4R5L5
+        """
+          .trimIndent(),
       ),
     )
   }

@@ -5,18 +5,17 @@ import aoc.library.Puzzle
 
 object Day11 : Puzzle<Long, Long>(11) {
 
-  override fun solvePart1(input: String): Long = generateSequence(Octopuses.parse(input)) { it.afterOneDay() }
-    .take(101)
-    .last()
-    .flashes
+  override fun solvePart1(input: String): Long =
+    generateSequence(Octopuses.parse(input)) { it.afterOneDay() }.take(101).last().flashes
 
-  override fun solvePart2(input: String): Long = generateSequence(Octopuses.parse(input)) { it.afterOneDay() }
-    .zipWithNext { previous, current ->
-      previous.flashes + previous.octopuses.size != current.flashes
-    }
-    .takeWhile { it }
-    .count()
-    .toLong() + 1
+  override fun solvePart2(input: String): Long =
+    generateSequence(Octopuses.parse(input)) { it.afterOneDay() }
+      .zipWithNext { previous, current ->
+        previous.flashes + previous.octopuses.size != current.flashes
+      }
+      .takeWhile { it }
+      .count()
+      .toLong() + 1
 }
 
 private data class Octopus(val point: Point, val energyLevel: Int, val flashes: Int)
@@ -31,17 +30,20 @@ private data class Octopuses(val octopuses: List<Octopus>) {
     val result = afterEnergyIncrease.toMutableList()
     val flashed = mutableSetOf<Point>()
     while (true) {
-      val flashingPoints = result.filter { it.point !in flashed && it.energyLevel > 9 }.map { it.point }
+      val flashingPoints =
+        result.filter { it.point !in flashed && it.energyLevel > 9 }.map { it.point }
       if (flashingPoints.isEmpty()) break
 
       flashed.addAll(flashingPoints)
 
-      flashingPoints.flatMap { it.adjacent() }.forEach { adjacentPoint ->
-        val octopus = result.find { it.point == adjacentPoint }
-        if (octopus != null) {
-          result[result.indexOf(octopus)] = octopus.copy(energyLevel = octopus.energyLevel + 1)
+      flashingPoints
+        .flatMap { it.adjacent() }
+        .forEach { adjacentPoint ->
+          val octopus = result.find { it.point == adjacentPoint }
+          if (octopus != null) {
+            result[result.indexOf(octopus)] = octopus.copy(energyLevel = octopus.energyLevel + 1)
+          }
         }
-      }
     }
 
     val afterFlashing = result.map {
@@ -56,17 +58,18 @@ private data class Octopuses(val octopuses: List<Octopus>) {
   }
 
   companion object {
-    fun parse(input: String): Octopuses = Octopuses(
-      octopuses = input.lines()
-        .flatMapIndexed { y, line ->
-          line.mapIndexed { x, value ->
-            Octopus(
-              point = Point(x = x, y = y),
-              energyLevel = value.digitToInt(),
-              flashes = 0,
-            )
-          }
-        },
-    )
+    fun parse(input: String): Octopuses =
+      Octopuses(
+        octopuses =
+          input.lines().flatMapIndexed { y, line ->
+            line.mapIndexed { x, value ->
+              Octopus(
+                point = Point(x = x, y = y),
+                energyLevel = value.digitToInt(),
+                flashes = 0,
+              )
+            }
+          },
+      )
   }
 }

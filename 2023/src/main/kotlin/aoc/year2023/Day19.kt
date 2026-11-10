@@ -16,18 +16,18 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
   private data class System(val workflows: List<Workflow>, val parts: List<Parts>) {
 
     fun workflowCombinations(): Long {
-      val parts: Map<PartId, IntRange> = "xmas".associate {
-        PartId(it.toString()) to 1..4000
+      val parts: Map<PartId, IntRange> =
+        "xmas"
+          .associate {
+            PartId(it.toString()) to 1..4000
+          }
+      return findRanges(parts, WorkflowName.Input).accepted.sumOf {
+        it.values
+          .map { range ->
+            range.last.toLong() - range.first.toLong() + 1
+          }
+          .reduce(Long::times)
       }
-      return findRanges(parts, WorkflowName.Input)
-        .accepted
-        .sumOf {
-          it.values
-            .map { range ->
-              range.last.toLong() - range.first.toLong() + 1
-            }
-            .reduce(Long::times)
-        }
     }
 
     private fun findRanges(
@@ -35,66 +35,72 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
       workflowName: WorkflowName,
     ): Ranges {
       val workflow = workflows.first { it.name == workflowName }
-      return workflow.rules.runningFold(
-        Ranges(
-          accepted = listOf(),
-          pending = listOf(parts),
-        ),
-      ) { combinations, rule ->
-        val accepted = combinations.accepted.toMutableList()
-        val newPending = mutableListOf<Map<PartId, IntRange>>()
-        combinations.pending.forEach { current ->
-          when (rule.condition) {
-            Condition.AlwaysTrue -> {
-              when (rule.destination) {
-                Destination.Accepted -> accepted.add(current)
-                Destination.Rejected -> newPending.add(current)
-                is Destination.ToWorkflow -> {
-                  accepted.addAll(findRanges(current, rule.destination.workflow).accepted)
+      return workflow.rules
+        .runningFold(
+          Ranges(
+            accepted = listOf(),
+            pending = listOf(parts),
+          ),
+        ) { combinations, rule ->
+          val accepted = combinations.accepted.toMutableList()
+          val newPending = mutableListOf<Map<PartId, IntRange>>()
+          combinations.pending.forEach { current ->
+            when (rule.condition) {
+              Condition.AlwaysTrue -> {
+                when (rule.destination) {
+                  Destination.Accepted -> accepted.add(current)
+                  Destination.Rejected -> newPending.add(current)
+                  is Destination.ToWorkflow -> {
+                    accepted.addAll(findRanges(current, rule.destination.workflow).accepted)
+                  }
                 }
               }
-            }
-            is Condition.Compare -> {
-              val conditionValue = rule.condition.value
-              val conditionPartId = rule.condition.partId
-              val range = current.getValue(conditionPartId)
-              val inRange = current.plus(
-                conditionPartId to
-                  if (rule.condition.greaterThan) {
-                    maxOf(conditionValue + 1, range.first)..range.last
-                  } else {
-                    range.first..minOf(conditionValue - 1, range.last)
-                  },
-              )
-              val outOfRange = current.plus(
-                conditionPartId to
-                  if (rule.condition.greaterThan) {
-                    range.first..minOf(conditionValue, range.last)
-                  } else {
-                    maxOf(conditionValue, range.first)..range.last
-                  },
-              )
-              when (rule.destination) {
-                Destination.Accepted -> {
-                  accepted += inRange
-                  newPending += outOfRange
-                }
-                Destination.Rejected -> {
-                  newPending += outOfRange
-                }
-                is Destination.ToWorkflow -> {
-                  accepted += findRanges(
-                    parts = inRange,
-                    workflowName = rule.destination.workflow,
-                  ).accepted
-                  newPending += outOfRange
+              is Condition.Compare -> {
+                val conditionValue = rule.condition.value
+                val conditionPartId = rule.condition.partId
+                val range = current.getValue(conditionPartId)
+                val inRange =
+                  current.plus(
+                    conditionPartId to
+                      if (rule.condition.greaterThan) {
+                        maxOf(conditionValue + 1, range.first)..range.last
+                      } else {
+                        range.first..minOf(conditionValue - 1, range.last)
+                      },
+                  )
+                val outOfRange =
+                  current.plus(
+                    conditionPartId to
+                      if (rule.condition.greaterThan) {
+                        range.first..minOf(conditionValue, range.last)
+                      } else {
+                        maxOf(conditionValue, range.first)..range.last
+                      },
+                  )
+                when (rule.destination) {
+                  Destination.Accepted -> {
+                    accepted += inRange
+                    newPending += outOfRange
+                  }
+                  Destination.Rejected -> {
+                    newPending += outOfRange
+                  }
+                  is Destination.ToWorkflow -> {
+                    accepted +=
+                      findRanges(
+                          parts = inRange,
+                          workflowName = rule.destination.workflow,
+                        )
+                        .accepted
+                    newPending += outOfRange
+                  }
                 }
               }
             }
           }
+          Ranges(accepted, newPending)
         }
-        Ranges(accepted, newPending)
-      }.last()
+        .last()
     }
 
     fun process(
@@ -126,9 +132,8 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
 
     companion object {
       fun parse(input: String): Parts {
-        val parts = input.removeSurrounding("{", "}")
-          .split(",")
-          .associate {
+        val parts =
+          input.removeSurrounding("{", "}").split(",").associate {
             val (id, value) = it.split("=")
             PartId(id) to value.toInt()
           }
@@ -145,8 +150,7 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
     }
   }
 
-  @JvmInline
-  private value class PartId(val id: String)
+  @JvmInline private value class PartId(val id: String)
 
   private data class Workflow(val name: WorkflowName, val rules: List<Rule>) {
 
@@ -160,9 +164,7 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
     companion object {
       fun parse(input: String): Workflow {
         val name = input.substringBefore('{')
-        val rules = input.substringAfter('{').substringBefore('}')
-          .split(",")
-          .map(Rule::parse)
+        val rules = input.substringAfter('{').substringBefore('}').split(",").map(Rule::parse)
         return Workflow(WorkflowName(name), rules)
       }
     }
@@ -170,48 +172,55 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
 
   private data class Rule(val condition: Condition, val destination: Destination) {
 
-    fun evaluate(parts: Parts): Boolean = when (condition) {
-      Condition.AlwaysTrue -> true
-      is Condition.Compare -> {
-        if (condition.greaterThan) {
-          parts[condition.partId] > condition.value
-        } else {
-          parts[condition.partId] < condition.value
+    fun evaluate(parts: Parts): Boolean =
+      when (condition) {
+        Condition.AlwaysTrue -> true
+        is Condition.Compare -> {
+          if (condition.greaterThan) {
+            parts[condition.partId] > condition.value
+          } else {
+            parts[condition.partId] < condition.value
+          }
         }
       }
-    }
 
     companion object {
-      fun parse(input: String): Rule = if (input.contains(":")) {
-        val (conditionValue, destination) = input.split(":")
-        val condition = Condition.parse(conditionValue)
-        Rule(condition, Destination.parse(destination))
-      } else {
-        Rule(
-          condition = Condition.AlwaysTrue,
-          destination = Destination.parse(input),
-        )
-      }
+      fun parse(input: String): Rule =
+        if (input.contains(":")) {
+          val (conditionValue, destination) = input.split(":")
+          val condition = Condition.parse(conditionValue)
+          Rule(condition, Destination.parse(destination))
+        } else {
+          Rule(
+            condition = Condition.AlwaysTrue,
+            destination = Destination.parse(input),
+          )
+        }
     }
   }
 
   private sealed interface Destination {
     data object Accepted : Destination
+
     data object Rejected : Destination
+
     data class ToWorkflow(val workflow: WorkflowName) : Destination
 
     companion object {
-      fun parse(input: String): Destination = when (input) {
-        "A" -> Accepted
-        "R" -> Rejected
-        else -> ToWorkflow(WorkflowName(input))
-      }
+      fun parse(input: String): Destination =
+        when (input) {
+          "A" -> Accepted
+          "R" -> Rejected
+          else -> ToWorkflow(WorkflowName(input))
+        }
     }
   }
 
   private sealed interface Condition {
     data class Compare(val partId: PartId, val value: Int, val greaterThan: Boolean) : Condition
+
     data object AlwaysTrue : Condition
+
     companion object {
       fun parse(input: String): Condition {
         val (partId, value) = input.split('<', '>')
@@ -220,5 +229,8 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
     }
   }
 
-  private data class Ranges(val accepted: List<Map<PartId, IntRange>>, val pending: List<Map<PartId, IntRange>>)
+  private data class Ranges(
+    val accepted: List<Map<PartId, IntRange>>,
+    val pending: List<Map<PartId, IntRange>>,
+  )
 }

@@ -14,5 +14,6 @@ object Day1 : Puzzle<Int, Int>(day = 1) {
   private fun List<Int>.solveCaptcha(step: Int): Int = filterIndexed { index, number ->
     val next = this[(index + step) % size]
     number == next
-  }.sum()
+  }
+    .sum()
 }

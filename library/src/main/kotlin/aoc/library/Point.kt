@@ -7,27 +7,31 @@ data class Point(val x: Int, val y: Int) {
 
   fun adjacent(): List<Point> = adjacentOrthogonal() + adjacentDiagonal()
 
-  fun adjacentOrthogonal(): List<Point> = listOf(
-    Point(x = x, y = y - 1),
-    Point(x = x, y = y + 1),
-    Point(x = x - 1, y = y),
-    Point(x = x + 1, y = y),
-  )
+  fun adjacentOrthogonal(): List<Point> =
+    listOf(
+      Point(x = x, y = y - 1),
+      Point(x = x, y = y + 1),
+      Point(x = x - 1, y = y),
+      Point(x = x + 1, y = y),
+    )
 
-  fun adjacentDiagonal(): List<Point> = listOf(
-    Point(x = x - 1, y = y - 1),
-    Point(x = x - 1, y = y + 1),
-    Point(x = x + 1, y = y - 1),
-    Point(x = x + 1, y = y + 1),
-  )
+  fun adjacentDiagonal(): List<Point> =
+    listOf(
+      Point(x = x - 1, y = y - 1),
+      Point(x = x - 1, y = y + 1),
+      Point(x = x + 1, y = y - 1),
+      Point(x = x + 1, y = y + 1),
+    )
 
-  fun manhattanDistanceTo(other: Point): Int = (x - other.x).absoluteValue + (y - other.y).absoluteValue
+  fun manhattanDistanceTo(other: Point): Int =
+    (x - other.x).absoluteValue + (y - other.y).absoluteValue
 
   fun degreesTo(other: Point): Double {
-    val atan2 = atan2(
-      y = (other.y - this.y).toDouble(),
-      x = (other.x - this.x).toDouble(),
-    )
+    val atan2 =
+      atan2(
+        y = (other.y - this.y).toDouble(),
+        x = (other.x - this.x).toDouble(),
+      )
     return (Math.toDegrees(atan2) + 90 + 360) % 360
   }
 
@@ -39,6 +43,7 @@ data class Point(val x: Int, val y: Int) {
 
   companion object {
     val Zero = Point(0, 0)
+
     fun parse(from: String): Point {
       val (x, y) = from.split(",")
       return Point(x = x.toInt(), y = y.toInt())
@@ -52,22 +57,29 @@ fun Point.move(
 ): Point {
   if (steps == 0) return this
   return Point(
-    x = x + when (direction) {
-      Direction.Left -> -steps
-      Direction.Right -> steps
-      Direction.Up, Direction.Down -> 0
-    },
-    y = y + when (direction) {
-      Direction.Up -> -steps
-      Direction.Down -> steps
-      Direction.Left, Direction.Right -> 0
-    },
+    x =
+      x +
+        when (direction) {
+          Direction.Left -> -steps
+          Direction.Right -> steps
+          Direction.Up,
+          Direction.Down -> 0
+        },
+    y =
+      y +
+        when (direction) {
+          Direction.Up -> -steps
+          Direction.Down -> steps
+          Direction.Left,
+          Direction.Right -> 0
+        },
   )
 }
 
-fun Collection<Point>.printString(): String = associateWith { }.printString {
-  if (it in this) "█" else " "
-}
+fun Collection<Point>.printString(): String = associateWith {}
+  .printString {
+    if (it in this) "█" else " "
+  }
 
 inline fun <T> Map<Point, T>.printString(
   renderWalls: Boolean = true,
@@ -79,31 +91,36 @@ inline fun <T> Map<Point, T>.printString(
   val bounds = keys.bounds()
   return (bounds.top..bounds.bottom).joinToString(
     separator = "\n",
-    prefix = if (renderWalls) {
-      buildString {
-        append('╔')
-        append("═".repeat(1 + bounds.right - bounds.left))
-        append('╗')
-        appendLine()
-      }
-    } else {
-      ""
-    },
-    postfix = if (renderWalls) {
-      buildString {
-        appendLine()
-        append('╚')
-        append("═".repeat(1 + bounds.right - bounds.left))
-        append('╝')
-      }
-    } else {
-      ""
-    },
+    prefix =
+      if (renderWalls) {
+        buildString {
+          append('╔')
+          append("═".repeat(1 + bounds.right - bounds.left))
+          append('╗')
+          appendLine()
+        }
+      } else {
+        ""
+      },
+    postfix =
+      if (renderWalls) {
+        buildString {
+          appendLine()
+          append('╚')
+          append("═".repeat(1 + bounds.right - bounds.left))
+          append('╝')
+        }
+      } else {
+        ""
+      },
   ) { y ->
-    (bounds.left..bounds.right)
-      .joinToString(separator = "", prefix = if (renderWalls) "║" else "", postfix = if (renderWalls) "║" else "") { x ->
-        tile(Point(x, y))
-      }
+    (bounds.left..bounds.right).joinToString(
+      separator = "",
+      prefix = if (renderWalls) "║" else "",
+      postfix = if (renderWalls) "║" else "",
+    ) { x ->
+      tile(Point(x, y))
+    }
   }
 }
 
@@ -118,9 +135,10 @@ inline fun <T> Map<Point, T>.print(
   println(printString(renderWalls = renderWalls, tile = tile))
 }
 
-fun Collection<Point>.bounds(): Rect = Rect(
-  left = minOf { it.x },
-  right = maxOf { it.x },
-  top = minOf { it.y },
-  bottom = maxOf { it.y },
-)
+fun Collection<Point>.bounds(): Rect =
+  Rect(
+    left = minOf { it.x },
+    right = maxOf { it.x },
+    top = minOf { it.y },
+    bottom = maxOf { it.y },
+  )

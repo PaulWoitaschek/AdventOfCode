@@ -15,17 +15,23 @@ object Day5 : Puzzle<Long, Long>(day = 5) {
     }
   }
 
-  override fun solvePart2(input: String): Long = runBlocking(Dispatchers.Default) {
-    val almanac = Almanac.parse(input)
-    almanac.numbers.chunked(2)
-      .map { it[0]..<it[0] + it[1] }.map { range ->
-        async {
-          sequence {
-            yieldAll(range)
-          }.minOf { almanac.findLocation(it, Element.Seed) }
+  override fun solvePart2(input: String): Long =
+    runBlocking(Dispatchers.Default) {
+      val almanac = Almanac.parse(input)
+      almanac.numbers
+        .chunked(2)
+        .map { it[0]..<it[0] + it[1] }
+        .map { range ->
+          async {
+            sequence {
+              yieldAll(range)
+            }
+              .minOf { almanac.findLocation(it, Element.Seed) }
+          }
         }
-      }.awaitAll().min()
-  }
+        .awaitAll()
+        .min()
+    }
 
   private enum class Element {
     Seed,
@@ -68,20 +74,22 @@ object Day5 : Puzzle<Long, Long>(day = 5) {
     companion object {
       fun parse(input: String): Almanac {
         val split = input.split("\n\n")
-        val seeds = split.first()
-          .removePrefix("seeds: ")
-          .split(" ")
-          .map(String::toLong)
+        val seeds = split.first().removePrefix("seeds: ").split(" ").map(String::toLong)
         val maps = split.drop(1).map(ElementMap::parse)
         return Almanac(seeds, maps)
       }
     }
   }
 
-  private data class ElementMap(val from: Element, val to: Element, val ranges: List<ElementRange>) {
+  private data class ElementMap(
+    val from: Element,
+    val to: Element,
+    val ranges: List<ElementRange>,
+  ) {
 
     companion object {
       private val elementRegex = "(.*?)-to-(.*?) map:".toRegex()
+
       fun parse(input: String): ElementMap {
         val lines = input.lines()
         val (from, to) = elementRegex.find(lines[0])!!.destructured
@@ -95,7 +103,11 @@ object Day5 : Puzzle<Long, Long>(day = 5) {
     }
   }
 
-  private data class ElementRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val rangeLength: Long) {
+  private data class ElementRange(
+    val destinationRangeStart: Long,
+    val sourceRangeStart: Long,
+    val rangeLength: Long,
+  ) {
     companion object {
       fun parse(input: String): ElementRange {
         val numbers = input.split(" ").map(String::toLong)

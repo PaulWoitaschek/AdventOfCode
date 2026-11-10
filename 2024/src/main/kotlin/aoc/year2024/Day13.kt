@@ -28,7 +28,11 @@ object Day13 : Puzzle<Long, Long>(day = 13) {
     }
     return input.split("\n\n").map {
       val (a, b, prize) = it.lines()
-      ClawMachine(aButton = a.parseAsButton(), bButton = b.parseAsButton(), prize = prize.parseAsPrize())
+      ClawMachine(
+        aButton = a.parseAsButton(),
+        bButton = b.parseAsButton(),
+        prize = prize.parseAsPrize(),
+      )
     }
   }
 

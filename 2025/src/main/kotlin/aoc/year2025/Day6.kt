@@ -6,10 +6,10 @@ object Day6 : Puzzle<Long, Long>(day = 6) {
 
   override fun solvePart1(input: String): Long {
     val lines = input.lines()
-    val numbers = lines.dropLast(1).map {
-      it.split(" ").toList()
-        .mapNotNull(String::toLongOrNull)
-    }
+    val numbers =
+      lines.dropLast(1).map {
+        it.split(" ").toList().mapNotNull(String::toLongOrNull)
+      }
     val operators = lines.last().mapNotNull(::parseOperator)
     return operators.withIndex().sumOf { (index, operator) ->
       val values = numbers.map { it[index] }
@@ -27,9 +27,14 @@ object Day6 : Puzzle<Long, Long>(day = 6) {
     var sum = 0L
 
     while (x >= 0) {
-      val value = (0..<height - 1).map {
-        lines.getOrNull(it)?.getOrNull(x) ?: ""
-      }.joinToString("").trim().toIntOrNull()
+      val value =
+        (0..<height - 1)
+          .map {
+            lines.getOrNull(it)?.getOrNull(x) ?: ""
+          }
+          .joinToString("")
+          .trim()
+          .toIntOrNull()
       val operatorChar = lines.last().getOrNull(x).takeUnless { it == ' ' }
 
       if (value != null) {
@@ -45,9 +50,10 @@ object Day6 : Puzzle<Long, Long>(day = 6) {
     return sum
   }
 
-  private fun parseOperator(operator: Char): ((Long, Long) -> Long)? = when (operator) {
-    '+' -> Long::plus
-    '*' -> Long::times
-    else -> null
-  }
+  private fun parseOperator(operator: Char): ((Long, Long) -> Long)? =
+    when (operator) {
+      '+' -> Long::plus
+      '*' -> Long::times
+      else -> null
+    }
 }

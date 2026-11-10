@@ -14,22 +14,25 @@ object Day16 : Puzzle<String, String>(16) {
   fun process(
     input: String,
     phases: Int,
-  ): String = process(
-    digits = input.toList().map { it.digitToInt() },
-    phases = phases,
-  ).joinToString("")
+  ): String =
+    process(
+        digits = input.toList().map { it.digitToInt() },
+        phases = phases,
+      )
+      .joinToString("")
 
   private fun process(
     digits: List<Int>,
     phases: Int,
   ): List<Int> {
-    val patterns = digits.indices.map { index ->
-      pattern(index = index, size = digits.size)
-    }
+    val patterns =
+      digits.indices.map { index ->
+        pattern(index = index, size = digits.size)
+      }
     var current = digits
     repeat(phases) {
-      current = current.indices
-        .map { index ->
+      current =
+        current.indices.map { index ->
           current.zip(patterns[index], Int::times).sum().rem(10).absoluteValue
         }
     }
@@ -42,13 +45,16 @@ object Day16 : Puzzle<String, String>(16) {
   ): List<Int> {
     val basePattern = listOf(0, 1, 0, -1)
     return sequence {
-      while (true) {
-        basePattern.forEach { value ->
-          repeat(index + 1) {
-            yield(value)
+        while (true) {
+          basePattern.forEach { value ->
+            repeat(index + 1) {
+              yield(value)
+            }
           }
         }
       }
-    }.drop(1).take(size).toList()
+      .drop(1)
+      .take(size)
+      .toList()
   }
 }

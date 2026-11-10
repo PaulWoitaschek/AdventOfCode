@@ -19,10 +19,8 @@ object Day11 : Puzzle<Long, Long>(day = 11) {
     return numbers.values.sum()
   }
 
-  private fun parse(input: String): Map<Long, Long> = input.split(" ")
-    .groupingBy(String::toLong)
-    .eachCount()
-    .mapValues { it.value.toLong() }
+  private fun parse(input: String): Map<Long, Long> =
+    input.split(" ").groupingBy(String::toLong).eachCount().mapValues { it.value.toLong() }
 
   private fun Map<Long, Long>.blink(): Map<Long, Long> {
     val afterBlink = mutableMapOf<Long, Long>()
@@ -35,16 +33,17 @@ object Day11 : Puzzle<Long, Long>(day = 11) {
     return afterBlink
   }
 
-  private fun Long.blink(): List<Long> = when {
-    this == 0L -> listOf(1)
-    toString().length % 2 == 0 -> {
-      val asString = this.toString()
-      val center = asString.length / 2
-      listOf(
-        asString.take(center).toLong(),
-        asString.drop(center).toLong(),
-      )
+  private fun Long.blink(): List<Long> =
+    when {
+      this == 0L -> listOf(1)
+      toString().length % 2 == 0 -> {
+        val asString = this.toString()
+        val center = asString.length / 2
+        listOf(
+          asString.take(center).toLong(),
+          asString.drop(center).toLong(),
+        )
+      }
+      else -> listOf(this * 2024)
     }
-    else -> listOf(this * 2024)
-  }
 }

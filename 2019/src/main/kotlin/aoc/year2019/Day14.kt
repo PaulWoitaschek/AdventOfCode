@@ -33,29 +33,34 @@ object Day14 : Puzzle<Long, Long>(14) {
   ): Long {
     val balance = mutableMapOf("FUEL" to -fuel)
     while (true) {
-      val missing = balance.firstNotNullOfOrNull {
-        if (it.key != ORE && it.value < 0) {
-          it.key
-        } else {
-          null
-        }
-      } ?: break
+      val missing =
+        balance.firstNotNullOfOrNull {
+          if (it.key != ORE && it.value < 0) {
+            it.key
+          } else {
+            null
+          }
+        } ?: break
 
       val reaction = reactions.single { it.output.name == missing }
-      val neededReactions = ceil(
-        balance.getValue(missing).absoluteValue.toDouble() / reaction.output.amount,
-      ).toLong()
+      val neededReactions =
+        ceil(
+            balance.getValue(missing).absoluteValue.toDouble() / reaction.output.amount,
+          )
+          .toLong()
       reaction.inputs.forEach { productInput ->
-        balance[productInput.name] = balance.getOrDefault(productInput.name, 0) - productInput.amount * neededReactions
+        balance[productInput.name] =
+          balance.getOrDefault(productInput.name, 0) - productInput.amount * neededReactions
       }
-      balance[reaction.output.name] = balance.getOrDefault(reaction.output.name, 0) + reaction.output.amount * neededReactions
+      balance[reaction.output.name] =
+        balance.getOrDefault(reaction.output.name, 0) + reaction.output.amount * neededReactions
     }
     return -balance.getValue(ORE)
   }
 
   private fun reactions(input: String): List<Reaction> {
-    val reactions = input.lines()
-      .map { line ->
+    val reactions =
+      input.lines().map { line ->
         val (inputs, output) = line.split(" => ")
         val inputProducts = inputs.split(", ").map(Product::parse)
         val outputProduct = Product.parse(output)

@@ -24,9 +24,8 @@ object Day9 : Puzzle<Int, Int>(9) {
     input: String,
     onPathCompleted: (Int) -> Unit,
   ) {
-    val routes = input.lines()
-      .map(Route::parse)
-      .flatMap {
+    val routes =
+      input.lines().map(Route::parse).flatMap {
         listOf(it, it.copy(from = it.to, to = it.from))
       }
     val cities = routes.flatMap { listOf(it.from, it.to) }.toSet()
@@ -58,6 +57,7 @@ object Day9 : Puzzle<Int, Int>(9) {
   data class Route(val from: String, val to: String, val distance: Int) {
     companion object {
       private val pattern = "(.*?) to (.*?) = (\\d+)".toRegex()
+
       fun parse(input: String): Route {
         val (from, to, distance) = pattern.find(input)!!.destructured
         return Route(from = from, to = to, distance = distance.toInt())

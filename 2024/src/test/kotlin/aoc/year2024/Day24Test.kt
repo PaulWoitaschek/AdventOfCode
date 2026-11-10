@@ -2,9 +2,9 @@ package aoc.year2024
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
+import kotlin.test.assertEquals
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
 class Day24Test {
 
@@ -61,7 +61,8 @@ class Day24Test {
         hwm AND bqk -> z03
         tgd XOR rvg -> z12
         tnw OR pbm -> gnj
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
