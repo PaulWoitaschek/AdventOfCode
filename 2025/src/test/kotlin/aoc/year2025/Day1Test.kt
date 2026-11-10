@@ -2,11 +2,9 @@ package aoc.year2025
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.ints.shouldBeAtLeast
-import io.kotest.matchers.ints.shouldBeExactly
-import io.kotest.matchers.longs.shouldBeExactly
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day1Test {
 
@@ -25,46 +23,46 @@ class Day1Test {
 
   @Test
   fun part1TestInput() {
-    Day1.solvePart1(testInput) shouldBeExactly 3
+    assertEquals(3, Day1.solvePart1(testInput))
   }
 
   @Test
   fun part1() {
-    Day1.solvePart1() shouldBeExactly 1074
+    assertEquals(1074, Day1.solvePart1())
   }
 
   @Test
   fun part2TestInput() {
-    Day1.solvePart2(testInput) shouldBeExactly 6
+    assertEquals(6, Day1.solvePart2(testInput))
   }
 
   @Test
   fun part2TestInput2() {
-    Day1.solvePart2("R1000") shouldBeExactly 10
+    assertEquals(10, Day1.solvePart2("R1000"))
   }
 
   @Test
   fun part2TestInput3() {
-    Day1.solvePart2("R49") shouldBeExactly 0
+    assertEquals(0, Day1.solvePart2("R49"))
   }
 
   @Test
   fun part2TestInput4() {
-    Day1.solvePart2("R50") shouldBeExactly 1
+    assertEquals(1, Day1.solvePart2("R50"))
   }
 
   @Test
   fun part2TestInput5() {
-    Day1.solvePart2("L49") shouldBeExactly 0
+    assertEquals(0, Day1.solvePart2("L49"))
   }
 
   @Test
   fun part2TestInput6() {
-    Day1.solvePart2("L50") shouldBeExactly 1
+    assertEquals(1, Day1.solvePart2("L50"))
   }
 
   @Test
   fun part2() {
-    Day1.solvePart2() shouldBeExactly 6254
+    assertEquals(6254, Day1.solvePart2())
   }
 }

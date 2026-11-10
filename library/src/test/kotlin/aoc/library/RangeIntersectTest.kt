@@ -1,35 +1,35 @@
 package aoc.library
 
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class RangeIntersectTest {
 
   @Test
   fun nonOverlappingRangesShouldNotIntersect() {
-    (0..5).intersects(6..10) shouldBe false
-    (10..15).intersects(0..9) shouldBe false
+    assertEquals(false, (0..5).intersects(6..10))
+    assertEquals(false, (10..15).intersects(0..9))
   }
 
   @Test
   fun overlappingRangesShouldIntersect() {
-    (0..5).intersects(5..10) shouldBe true
-    (3..8).intersects(6..10) shouldBe true
+    assertEquals(true, (0..5).intersects(5..10))
+    assertEquals(true, (3..8).intersects(6..10))
   }
 
   @Test
   fun nestedRangesShouldIntersect() {
-    (0..10).intersects(2..8) shouldBe true
-    (2..8).intersects(0..10) shouldBe true
+    assertEquals(true, (0..10).intersects(2..8))
+    assertEquals(true, (2..8).intersects(0..10))
   }
 
   @Test
   fun sameRangesShouldIntersect() {
-    (0..5).intersects(0..5) shouldBe true
+    assertEquals(true, (0..5).intersects(0..5))
   }
 
   @Test
   fun adjacentRangesShouldNotIntersect() {
-    (0..5).intersects(6..6) shouldBe false
+    assertEquals(false, (0..5).intersects(6..6))
   }
 }

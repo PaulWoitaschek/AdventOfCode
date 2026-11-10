@@ -2,10 +2,8 @@ package aoc.year2022
 
 import aoc.library.solvePart1
 import aoc.year2022.Day25.SnafuNumber.Companion.toSnafuNumber
-import io.kotest.assertions.assertSoftly
-import io.kotest.assertions.withClue
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day25Test {
 
@@ -18,8 +16,10 @@ class Day25Test {
 
   @Test
   fun part1TestInput() {
-    Day25.solvePart1(
-      """
+    assertEquals(
+      "2=-1=0",
+      Day25.solvePart1(
+        """
 1=-0-2
 12111
 2=0=
@@ -33,34 +33,27 @@ class Day25Test {
 12
 1=
 122
-      """.trimIndent(),
-    ) shouldBe "2=-1=0"
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part1() {
-    Day25.solvePart1() shouldBe "2=0--0---11--01=-100"
+    assertEquals("2=0--0---11--01=-100", Day25.solvePart1())
   }
 
   @Test
   fun snafuNumberToDecimal() {
-    assertSoftly {
-      numberMapping.forEach { (snafuNumber, decimal) ->
-        withClue("snafu=$snafuNumber, shouldBe decimal=$decimal") {
-          snafuNumber.toDecimal() shouldBe decimal
-        }
-      }
+    numberMapping.forEach { (snafuNumber, decimal) ->
+      assertEquals(decimal, snafuNumber.toDecimal())
     }
   }
 
   @Test
   fun decimalToSnafuNumber() {
-    assertSoftly {
-      numberMapping.forEach { (snafuNumber, decimal) ->
-        withClue("snafu=$snafuNumber, shouldBe decimal=$decimal") {
-          decimal.toSnafuNumber() shouldBe snafuNumber
-        }
-      }
+    numberMapping.forEach { (snafuNumber, decimal) ->
+      assertEquals(snafuNumber, decimal.toSnafuNumber())
     }
   }
 }

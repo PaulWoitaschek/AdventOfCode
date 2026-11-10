@@ -2,15 +2,17 @@ package aoc.year2022
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day11Test {
 
   @Test
   fun part1TestInput() {
-    Day11.solvePart1(
-      """
+    assertEquals(
+      10605,
+      Day11.solvePart1(
+        """
 Monkey 0:
   Starting items: 79, 98
   Operation: new = old * 19
@@ -38,14 +40,17 @@ Monkey 3:
   Test: divisible by 17
     If true: throw to monkey 0
     If false: throw to monkey 1
-      """.trimIndent(),
-    ) shouldBe 10605
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2TestInput() {
-    Day11.solvePart2(
-      """
+    assertEquals(
+      2713310158,
+      Day11.solvePart2(
+        """
 Monkey 0:
   Starting items: 79, 98
   Operation: new = old * 19
@@ -73,17 +78,18 @@ Monkey 3:
   Test: divisible by 17
     If true: throw to monkey 0
     If false: throw to monkey 1
-      """.trimIndent(),
-    ) shouldBe 2713310158
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part1() {
-    Day11.solvePart1() shouldBe 99840
+    assertEquals(99840, Day11.solvePart1())
   }
 
   @Test
   fun part2() {
-    Day11.solvePart2() shouldBe 20683044837
+    assertEquals(20683044837, Day11.solvePart2())
   }
 }

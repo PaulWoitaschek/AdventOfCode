@@ -1,8 +1,8 @@
 package aoc.year2021
 
 import aoc.library.solvePart1
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day13Test {
 
@@ -32,24 +32,27 @@ class Day13Test {
 
   @Test
   fun part1TestInput() {
-    Day13.solvePart1(testInput) shouldBe 17
+    assertEquals(17, Day13.solvePart1(testInput))
   }
 
   @Test
   fun part1() {
-    Day13.solvePart1() shouldBe 684
+    assertEquals(684, Day13.solvePart1())
   }
 
   @Test
   fun part2() {
-    Day13.solvePart2(testInput) shouldBe """
-            ╔═════╗
-            ║█████║
-            ║█   █║
-            ║█   █║
-            ║█   █║
-            ║█████║
-            ╚═════╝
-    """.trimIndent()
+    assertEquals(
+      """
+              ╔═════╗
+              ║█████║
+              ║█   █║
+              ║█   █║
+              ║█   █║
+              ║█████║
+              ╚═════╝
+      """.trimIndent(),
+      Day13.solvePart2(testInput),
+    )
   }
 }

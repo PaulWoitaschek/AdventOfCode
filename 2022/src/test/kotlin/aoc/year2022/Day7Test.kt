@@ -2,15 +2,17 @@ package aoc.year2022
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day7Test {
 
   @Test
   fun part1TestInput() {
-    Day7.solvePart1(
-      """
+    assertEquals(
+      95437,
+      Day7.solvePart1(
+        """
 $ cd /
 $ ls
 dir a
@@ -34,14 +36,17 @@ $ ls
 8033020 d.log
 5626152 d.ext
 7214296 k
-      """.trimIndent(),
-    ) shouldBe 95437
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2TestInput() {
-    Day7.solvePart2(
-      """
+    assertEquals(
+      24933642,
+      Day7.solvePart2(
+        """
 $ cd /
 $ ls
 dir a
@@ -65,17 +70,18 @@ $ ls
 8033020 d.log
 5626152 d.ext
 7214296 k
-      """.trimIndent(),
-    ) shouldBe 24933642
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part1() {
-    Day7.solvePart1() shouldBe 1477771
+    assertEquals(1477771, Day7.solvePart1())
   }
 
   @Test
   fun part2() {
-    Day7.solvePart2() shouldBe 3579501
+    assertEquals(3579501, Day7.solvePart2())
   }
 }

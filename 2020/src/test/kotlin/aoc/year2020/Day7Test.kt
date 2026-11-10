@@ -2,16 +2,18 @@ package aoc.year2020
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day7Test {
 
   @Test
   fun part1() {
-    Day7.solvePart1() shouldBe 370
-    Day7.solvePart1(
-      """
+    assertEquals(370, Day7.solvePart1())
+    assertEquals(
+      4,
+      Day7.solvePart1(
+        """
 light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
 bright white bags contain 1 shiny gold bag.
@@ -21,15 +23,18 @@ dark olive bags contain 3 faded blue bags, 4 dotted black bags.
 vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.
-      """.trimIndent(),
-    ) shouldBe 4
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2() {
-    Day7.solvePart2() shouldBe 29547
-    Day7.solvePart2(
-      """
+    assertEquals(29547, Day7.solvePart2())
+    assertEquals(
+      32,
+      Day7.solvePart2(
+        """
 light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
 bright white bags contain 1 shiny gold bag.
@@ -39,7 +44,8 @@ dark olive bags contain 3 faded blue bags, 4 dotted black bags.
 vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.
-      """.trimIndent(),
-    ) shouldBe 32
+        """.trimIndent(),
+      ),
+    )
   }
 }

@@ -5,9 +5,8 @@ import aoc.library.grid
 import aoc.library.printString
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.ints.shouldBeExactly
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day15Test {
 
@@ -134,52 +133,55 @@ class Day15Test {
     expected: String,
     direction: Direction,
   ) {
-    Day15
-      .walk(
-        map = grid(start),
-        direction = direction,
-      )
-      .printString(renderWalls = false)
-      .shouldBe(
-        grid(expected).printString(renderWalls = false),
-      )
+    assertEquals(
+      grid(expected).printString(renderWalls = false),
+      Day15
+        .walk(
+          map = grid(start),
+          direction = direction,
+        )
+        .printString(renderWalls = false),
+    )
   }
 
   @Test
   fun part1TestInput1() {
-    Day15.solvePart1(
-      """
-      ########
-      #..O.O.#
-      ##@.O..#
-      #...O..#
-      #.#.O..#
-      #...O..#
-      #......#
-      ########
+    assertEquals(
+      2028,
+      Day15.solvePart1(
+        """
+        ########
+        #..O.O.#
+        ##@.O..#
+        #...O..#
+        #.#.O..#
+        #...O..#
+        #......#
+        ########
 
-      <^^>>>vv<v>>v<<
-      """.trimIndent(),
-    ) shouldBeExactly 2028
+        <^^>>>vv<v>>v<<
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part1TestInput2() {
-    Day15.solvePart1(biggerTestSet) shouldBeExactly 10092
+    assertEquals(10092, Day15.solvePart1(biggerTestSet))
   }
 
   @Test
   fun part1() {
-    Day15.solvePart1() shouldBeExactly 1360570
+    assertEquals(1360570, Day15.solvePart1())
   }
 
   @Test
   fun part2TestInput() {
-    Day15.solvePart2(biggerTestSet) shouldBeExactly 9021
+    assertEquals(9021, Day15.solvePart2(biggerTestSet))
   }
 
   @Test
   fun part2() {
-    Day15.solvePart2() shouldBeExactly 1381446
+    assertEquals(1381446, Day15.solvePart2())
   }
 }

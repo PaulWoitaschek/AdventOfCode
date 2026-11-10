@@ -2,36 +2,34 @@ package aoc.year2019
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.longs.shouldBeExactly
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldHaveLength
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day9Test {
 
   @Test
   fun part1() {
-    Day9.solvePart1() shouldBeExactly 3241900951
+    assertEquals(3241900951, Day9.solvePart1())
   }
 
   @Test
   fun part2() {
-    Day9.solvePart2() shouldBeExactly 83089
+    assertEquals(83089, Day9.solvePart2())
   }
 
   @Test
   fun relativeBaseTestOne() {
     val computer = IntCodeComputer(instructions = listOf(104, 1125899906842624, 99), inputs = emptyList())
     runBlocking { computer.run() }
-    computer.fullOutput.last() shouldBeExactly 1125899906842624
+    assertEquals(1125899906842624, computer.fullOutput.last())
   }
 
   @Test
   fun relativeBaseTestTwo() {
     val computer = IntCodeComputer(instructions = listOf(1102, 34915192, 34915192, 7, 4, 7, 99, 0), inputs = emptyList())
     runBlocking { computer.run() }
-    computer.fullOutput.last().toString() shouldHaveLength 16
+    assertEquals(16, computer.fullOutput.last().toString().length)
   }
 
   @Test
@@ -40,6 +38,6 @@ class Day9Test {
     val computer =
       IntCodeComputer(instructions = instructions, inputs = emptyList())
     runBlocking { computer.run() }
-    computer.fullOutput shouldBe instructions
+    assertEquals(instructions, computer.fullOutput)
   }
 }

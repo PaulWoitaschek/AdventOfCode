@@ -55,11 +55,11 @@ class Prepare : CliktCommand() {
   ): FunSpec = FunSpec.builder(name)
     .addAnnotation(ClassName("org.junit.jupiter.api", "Test"))
     .addStatement(
-      "Day%L.%M(%L) %M 42",
+      "%M(42, Day%L.%M(%L))",
+      MemberName("kotlin.test", "assertEquals"),
       day,
       MemberName("aoc.library", solveName),
       if (withTestInput) "testInput" else "",
-      MemberName("io.kotest.matchers.longs", "shouldBeExactly"),
     )
     .build()
 

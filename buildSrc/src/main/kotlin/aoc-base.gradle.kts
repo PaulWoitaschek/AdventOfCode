@@ -1,12 +1,24 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   kotlin("jvm")
+  kotlin("plugin.power-assert")
   id("org.jlleitschuh.gradle.ktlint")
 }
 
 kotlin {
   jvmToolchain(17)
+}
+
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
+powerAssert {
+  functions.addAll(
+    "kotlin.assert",
+    "kotlin.test.assertEquals",
+    "kotlin.test.assertTrue",
+    "kotlin.test.assertFalse",
+  )
 }
 
 ktlint {
@@ -24,7 +36,7 @@ dependencies {
   }
   implementation(lib("serialization"))
   implementation(lib("coroutines"))
-  testImplementation(lib("kotest"))
+  testImplementation(kotlin("test"))
   testImplementation(lib("jupiter"))
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

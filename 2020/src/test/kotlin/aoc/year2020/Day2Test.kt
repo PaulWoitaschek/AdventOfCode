@@ -2,40 +2,46 @@ package aoc.year2020
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day2Test {
 
   @Test
   fun part1TestInput() {
-    Day2.solvePart1(
-      """
+    assertEquals(
+      2,
+      Day2.solvePart1(
+        """
 1-3 a: abcde
 1-3 b: cdefg
 2-9 c: ccccccccc
-      """.trimIndent(),
-    ) shouldBe 2
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2TestInput() {
-    Day2.solvePart2(
-      """
+    assertEquals(
+      1,
+      Day2.solvePart2(
+        """
 1-3 a: abcde
 1-3 b: cdefg
 2-9 c: ccccccccc
-      """.trimIndent(),
-    ) shouldBe 1
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part1() {
-    Day2.solvePart1() shouldBe 424
+    assertEquals(424, Day2.solvePart1())
   }
 
   @Test
   fun part2() {
-    Day2.solvePart2() shouldBe 747
+    assertEquals(747, Day2.solvePart2())
   }
 }

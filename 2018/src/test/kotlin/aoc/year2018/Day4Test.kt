@@ -2,20 +2,22 @@ package aoc.year2018
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.ints.shouldBeExactly
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day4Test {
 
   @Test
   fun part1() {
-    Day4.solvePart1() shouldBeExactly 143415
+    assertEquals(143415, Day4.solvePart1())
   }
 
   @Test
   fun part1TestInput() {
-    Day4.solvePart1(
-      """
+    assertEquals(
+      240,
+      Day4.solvePart1(
+        """
 [1518-11-01 00:00] Guard #10 begins shift
 [1518-11-01 00:05] falls asleep
 [1518-11-01 00:25] wakes up
@@ -33,19 +35,22 @@ class Day4Test {
 [1518-11-05 00:03] Guard #99 begins shift
 [1518-11-05 00:45] falls asleep
 [1518-11-05 00:55] wakes up
-      """.trimIndent(),
-    ) shouldBeExactly 240
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2() {
-    Day4.solvePart2() shouldBeExactly 49944
+    assertEquals(49944, Day4.solvePart2())
   }
 
   @Test
   fun part2TestInput() {
-    Day4.solvePart2(
-      """
+    assertEquals(
+      4455,
+      Day4.solvePart2(
+        """
 [1518-11-01 00:00] Guard #10 begins shift
 [1518-11-01 00:05] falls asleep
 [1518-11-01 00:25] wakes up
@@ -63,7 +68,8 @@ class Day4Test {
 [1518-11-05 00:03] Guard #99 begins shift
 [1518-11-05 00:45] falls asleep
 [1518-11-05 00:55] wakes up
-      """.trimIndent(),
-    ) shouldBeExactly 4455
+        """.trimIndent(),
+      ),
+    )
   }
 }

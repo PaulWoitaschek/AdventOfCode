@@ -2,21 +2,23 @@ package aoc.year2022
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day23Test {
 
   @Test
   fun part1() {
-    Day23.solvePart1() shouldBe 4025
+    assertEquals(4025, Day23.solvePart1())
   }
 
   @Test
   fun part1TestInput() {
-    Day23.solvePart1(
-      """
+    assertEquals(
+      110,
+      Day23.solvePart1(
+        """
 ..............
 ..............
 .......#......
@@ -29,20 +31,23 @@ class Day23Test {
 ..............
 ..............
 ..............
-      """.trimIndent(),
-    ) shouldBe 110
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   @Disabled("Too slow")
   fun part2() {
-    Day23.solvePart2() shouldBe 935
+    assertEquals(935, Day23.solvePart2())
   }
 
   @Test
   fun part2TestInput() {
-    Day23.solvePart2(
-      """
+    assertEquals(
+      20,
+      Day23.solvePart2(
+        """
 ..............
 ..............
 .......#......
@@ -55,7 +60,8 @@ class Day23Test {
 ..............
 ..............
 ..............
-      """.trimIndent(),
-    ) shouldBe 20
+        """.trimIndent(),
+      ),
+    )
   }
 }
