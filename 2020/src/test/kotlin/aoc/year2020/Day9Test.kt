@@ -2,15 +2,17 @@ package aoc.year2020
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day9Test {
 
   @Test
   fun part1TestInput() {
-    Day9(5).solvePart1(
-      """
+    assertEquals(
+      127,
+      Day9(5).solvePart1(
+        """
 35
 20
 15
@@ -31,14 +33,17 @@ class Day9Test {
 277
 309
 576
-      """.trimIndent(),
-    ) shouldBe 127
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2TestInput() {
-    Day9(5).solvePart2(
-      """
+    assertEquals(
+      62,
+      Day9(5).solvePart2(
+        """
 35
 20
 15
@@ -59,17 +64,18 @@ class Day9Test {
 277
 309
 576
-      """.trimIndent(),
-    ) shouldBe 62
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part1() {
-    Day9(25).solvePart1() shouldBe 257342611
+    assertEquals(257342611, Day9(25).solvePart1())
   }
 
   @Test
   fun part2() {
-    Day9(25).solvePart2() shouldBe 35602097
+    assertEquals(35602097, Day9(25).solvePart2())
   }
 }

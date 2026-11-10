@@ -2,21 +2,23 @@ package aoc.year2023
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.longs.shouldBeExactly
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day5Test {
 
   @Test
   fun part1() {
-    Day5.solvePart1() shouldBeExactly 261668924
+    assertEquals(261668924, Day5.solvePart1())
   }
 
   @Test
   fun part1TestInput() {
-    Day5.solvePart1(
-      """
+    assertEquals(
+      35,
+      Day5.solvePart1(
+        """
 seeds: 79 14 55 13
 
 seed-to-soil map:
@@ -50,20 +52,23 @@ temperature-to-humidity map:
 humidity-to-location map:
 60 56 37
 56 93 4
-      """.trimIndent(),
-    ) shouldBeExactly 35
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   @Disabled("Bruteforce. Works within 3 minutes on a M1")
   fun part2() {
-    Day5.solvePart2() shouldBeExactly 24261545
+    assertEquals(24261545, Day5.solvePart2())
   }
 
   @Test
   fun part2TestInput() {
-    Day5.solvePart2(
-      """
+    assertEquals(
+      46,
+      Day5.solvePart2(
+        """
 seeds: 79 14 55 13
 
 seed-to-soil map:
@@ -97,7 +102,8 @@ temperature-to-humidity map:
 humidity-to-location map:
 60 56 37
 56 93 4
-      """.trimIndent(),
-    ) shouldBeExactly 46
+        """.trimIndent(),
+      ),
+    )
   }
 }

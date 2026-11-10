@@ -2,28 +2,28 @@ package aoc.year2024
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.longs.shouldBeExactly
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day9Test {
 
   @Test
   fun part1TestInput() {
-    Day9.solvePart1("2333133121414131402") shouldBeExactly 1928
+    assertEquals(1928, Day9.solvePart1("2333133121414131402"))
   }
 
   @Test
   fun part1() {
-    Day9.solvePart1() shouldBeExactly 6154342787400
+    assertEquals(6154342787400, Day9.solvePart1())
   }
 
   @Test
   fun part2TestInput() {
-    Day9.solvePart2("2333133121414131402") shouldBeExactly 2858
+    assertEquals(2858, Day9.solvePart2("2333133121414131402"))
   }
 
   @Test
   fun part2() {
-    Day9.solvePart2() shouldBeExactly 6183632723350
+    assertEquals(6183632723350, Day9.solvePart2())
   }
 }

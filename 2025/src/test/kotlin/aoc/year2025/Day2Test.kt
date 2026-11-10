@@ -2,11 +2,10 @@ package aoc.year2025
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.assertions.withClue
-import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
-import io.kotest.matchers.longs.shouldBeExactly
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class Day2Test {
 
@@ -19,49 +18,46 @@ class Day2Test {
   @Test
   fun `part 1 valid ids test`() {
     listOf(10, 20, 1011, 111).forEach {
-      withClue(it) {
-        Day2.isValidId1(it.toLong()).shouldBeTrue()
-      }
+      assertTrue(Day2.isValidId1(it.toLong()))
     }
   }
 
   @Test
   fun `part 1 invalid ids test`() {
     listOf(11, 22, 1010, 1188511885, 222222, 38593859).forEach {
-      withClue(it) {
-        Day2.isValidId1(it.toLong()).shouldBeFalse()
-      }
+      assertFalse(Day2.isValidId1(it.toLong()))
     }
   }
 
   @Test
   fun `part 2 invalid ids test`() {
     listOf(824824824).forEach {
-      withClue(it) {
-        Day2.isValidId2(it.toLong()).shouldBeFalse()
-      }
+      assertFalse(Day2.isValidId2(it.toLong()))
     }
   }
 
   @Test
   fun part1TestInput() {
-    Day2.solvePart1(
-      testInput,
-    ) shouldBeExactly 1227775554
+    assertEquals(
+      1227775554,
+      Day2.solvePart1(
+        testInput,
+      ),
+    )
   }
 
   @Test
   fun part1() {
-    Day2.solvePart1() shouldBeExactly 28846518423
+    assertEquals(28846518423, Day2.solvePart1())
   }
 
   @Test
   fun part2TestInput() {
-    Day2.solvePart2(testInput) shouldBeExactly 4174379265
+    assertEquals(4174379265, Day2.solvePart2(testInput))
   }
 
   @Test
   fun part2() {
-    Day2.solvePart2() shouldBeExactly 31578210022
+    assertEquals(31578210022, Day2.solvePart2())
   }
 }

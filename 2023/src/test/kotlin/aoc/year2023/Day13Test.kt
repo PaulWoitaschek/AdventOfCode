@@ -2,8 +2,8 @@ package aoc.year2023
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.ints.shouldBeExactly
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day13Test {
 
@@ -27,46 +27,49 @@ class Day13Test {
 
   @Test
   fun part1() {
-    Day13.solvePart1() shouldBeExactly 33975
+    assertEquals(33975, Day13.solvePart1())
   }
 
   @Test
   fun part1TestInput() {
-    Day13.solvePart1(testInput) shouldBeExactly 405
+    assertEquals(405, Day13.solvePart1(testInput))
   }
 
   @Test
   fun part2() {
-    Day13.solvePart2() shouldBeExactly 29083
+    assertEquals(29083, Day13.solvePart2())
   }
 
   @Test
   fun part2Problematic() {
-    Day13.solvePart2(
-      """
-      #...##...#..#.#..
-      #...##...#..#.#..
-      .#.#...#.#....#..
-      #.#..#.##..##.#.#
-      #..###.#..#..#...
-      ###.#####.##.#.#.
-      ##############...
-      #.....#######..#.
-      ..##..##.####..##
-      #.####..##.#..#.#
-      #.####..##.#..#.#
-      ..##..##.####..##
-      #.....#######..#.
-      ##############..#
-      ###.#####.##.#.#.
-      #..###.#..#..#...
-      #.#..#.##..##.#.#
-      """.trimIndent(),
-    ) shouldBeExactly 1000
+    assertEquals(
+      1000,
+      Day13.solvePart2(
+        """
+        #...##...#..#.#..
+        #...##...#..#.#..
+        .#.#...#.#....#..
+        #.#..#.##..##.#.#
+        #..###.#..#..#...
+        ###.#####.##.#.#.
+        ##############...
+        #.....#######..#.
+        ..##..##.####..##
+        #.####..##.#..#.#
+        #.####..##.#..#.#
+        ..##..##.####..##
+        #.....#######..#.
+        ##############..#
+        ###.#####.##.#.#.
+        #..###.#..#..#...
+        #.#..#.##..##.#.#
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2TestInput() {
-    Day13.solvePart2(testInput) shouldBeExactly 400
+    assertEquals(400, Day13.solvePart2(testInput))
   }
 }

@@ -1,16 +1,18 @@
 package aoc.year2022
 
 import aoc.library.solvePart1
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day21Test {
 
   @Test
   fun part1() {
-    Day21.solvePart1() shouldBe 291425799367130
-    Day21.solvePart1(
-      """
+    assertEquals(291425799367130, Day21.solvePart1())
+    assertEquals(
+      152,
+      Day21.solvePart1(
+        """
 root: pppw + sjmn
 dbpl: 5
 cczh: sllz + lgvd
@@ -26,7 +28,8 @@ pppw: cczh / lfqf
 lgvd: ljgn * ptdq
 drzm: hmdt - zczc
 hmdt: 32
-      """.trimIndent(),
-    ) shouldBe 152
+        """.trimIndent(),
+      ),
+    )
   }
 }

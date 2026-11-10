@@ -2,25 +2,27 @@ package aoc.year2019
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.longs.shouldBeExactly
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day14Test {
 
   @Test
   fun part1() {
-    Day14.solvePart1() shouldBeExactly 278404
+    assertEquals(278404, Day14.solvePart1())
   }
 
   @Test
   fun part2() {
-    Day14.solvePart2() shouldBeExactly 4436981
+    assertEquals(4436981, Day14.solvePart2())
   }
 
   @Test
   fun part1Test1() {
-    Day14.solvePart1(
-      """
+    assertEquals(
+      165,
+      Day14.solvePart1(
+        """
 9 ORE => 2 A
 8 ORE => 3 B
 7 ORE => 5 C
@@ -28,14 +30,17 @@ class Day14Test {
 5 B, 7 C => 1 BC
 4 C, 1 A => 1 CA
 2 AB, 3 BC, 4 CA => 1 FUEL
-      """.trimIndent(),
-    ) shouldBeExactly 165
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part1Test2() {
-    Day14.solvePart1(
-      """
+    assertEquals(
+      13312,
+      Day14.solvePart1(
+        """
 157 ORE => 5 NZVS
 165 ORE => 6 DCFZ
 44 XJWVT, 5 KHKGT, 1 QDVJ, 29 NZVS, 9 GPVTF, 48 HKGWZ => 1 FUEL
@@ -45,14 +50,17 @@ class Day14Test {
 7 DCFZ, 7 PSHF => 2 XJWVT
 165 ORE => 2 GPVTF
 3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT
-      """.trimIndent(),
-    ) shouldBeExactly 13312
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part1Test3() {
-    Day14.solvePart1(
-      """
+    assertEquals(
+      180697,
+      Day14.solvePart1(
+        """
 2 VPVL, 7 FWMGM, 2 CXFTF, 11 MNCFX => 1 STKFG
 17 NVRVD, 3 JNWZP => 8 VPVL
 53 STKFG, 6 MNCFX, 46 VJHF, 81 HVMC, 68 CXFTF, 25 GNMV => 1 FUEL
@@ -65,14 +73,17 @@ class Day14Test {
 1 NVRVD => 8 CXFTF
 1 VJHF, 6 MNCFX => 4 RFSQX
 176 ORE => 6 VJHF
-      """.trimIndent(),
-    ) shouldBeExactly 180697
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part1Test4() {
-    Day14.solvePart1(
-      """
+    assertEquals(
+      2210736,
+      Day14.solvePart1(
+        """
 171 ORE => 8 CNZTR
 7 ZLQW, 3 BMBT, 9 XCVML, 26 XMNCP, 1 WPTQ, 2 MZWV, 1 RJRHP => 4 PLWSL
 114 ORE => 4 BHXH
@@ -90,14 +101,17 @@ class Day14Test {
 121 ORE => 7 VRPVC
 7 XCVML => 6 RJRHP
 5 BHXH, 4 VRPVC => 5 LTCX
-      """.trimIndent(),
-    ) shouldBeExactly 2210736
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2Test1() {
-    Day14.solvePart2(
-      """
+    assertEquals(
+      82892753,
+      Day14.solvePart2(
+        """
 157 ORE => 5 NZVS
 165 ORE => 6 DCFZ
 44 XJWVT, 5 KHKGT, 1 QDVJ, 29 NZVS, 9 GPVTF, 48 HKGWZ => 1 FUEL
@@ -107,14 +121,17 @@ class Day14Test {
 7 DCFZ, 7 PSHF => 2 XJWVT
 165 ORE => 2 GPVTF
 3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT
-      """.trimIndent(),
-    ) shouldBeExactly 82892753
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2Test2() {
-    Day14.solvePart2(
-      """
+    assertEquals(
+      460664,
+      Day14.solvePart2(
+        """
 171 ORE => 8 CNZTR
 7 ZLQW, 3 BMBT, 9 XCVML, 26 XMNCP, 1 WPTQ, 2 MZWV, 1 RJRHP => 4 PLWSL
 114 ORE => 4 BHXH
@@ -132,7 +149,8 @@ class Day14Test {
 121 ORE => 7 VRPVC
 7 XCVML => 6 RJRHP
 5 BHXH, 4 VRPVC => 5 LTCX
-      """.trimIndent(),
-    ) shouldBeExactly 460664
+        """.trimIndent(),
+      ),
+    )
   }
 }

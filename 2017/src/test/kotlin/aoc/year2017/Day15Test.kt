@@ -2,38 +2,44 @@ package aoc.year2017
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.ints.shouldBeExactly
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day15Test {
 
   @Test
   fun part1TestInput() {
-    Day15.solvePart1(
-      """
-        Generator A starts with 65
-        Generator B starts with 8921
-      """.trimIndent(),
-    ) shouldBeExactly 588
+    assertEquals(
+      588,
+      Day15.solvePart1(
+        """
+          Generator A starts with 65
+          Generator B starts with 8921
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part1() {
-    Day15.solvePart1() shouldBeExactly 650
+    assertEquals(650, Day15.solvePart1())
   }
 
   @Test
   fun part2TestInput() {
-    Day15.solvePart2(
-      """
-        Generator A starts with 65
-        Generator B starts with 8921
-      """.trimIndent(),
-    ) shouldBeExactly 309
+    assertEquals(
+      309,
+      Day15.solvePart2(
+        """
+          Generator A starts with 65
+          Generator B starts with 8921
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2() {
-    Day15.solvePart2() shouldBeExactly 336
+    assertEquals(336, Day15.solvePart2())
   }
 }

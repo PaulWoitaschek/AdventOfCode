@@ -1,73 +1,82 @@
 package aoc.year2023
 
 import aoc.library.solvePart1
-import io.kotest.matchers.ints.shouldBeExactly
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day21Test {
 
   @Test
   fun positionAfter6Steps() {
-    Day21.positionsAfterSteps(
-      input = """
-      ...........
-      .....###.#.
-      .###.##..#.
-      ..#.#...#..
-      ....#.#....
-      .##..S####.
-      .##..#...#.
-      .......##..
-      .##.#.####.
-      .##..##.##.
-      ...........
-      """.trimIndent(),
-      steps = 6,
-    ) shouldBeExactly 16
+    assertEquals(
+      16,
+      Day21.positionsAfterSteps(
+        input = """
+        ...........
+        .....###.#.
+        .###.##..#.
+        ..#.#...#..
+        ....#.#....
+        .##..S####.
+        .##..#...#.
+        .......##..
+        .##.#.####.
+        .##..##.##.
+        ...........
+        """.trimIndent(),
+        steps = 6,
+      ),
+    )
   }
 
   @Test
   fun positionAfter10Steps() {
-    Day21.positionsAfterSteps(
-      input = """
-      ...........
-      .....###.#.
-      .###.##..#.
-      ..#.#...#..
-      ....#.#....
-      .##..S####.
-      .##..#...#.
-      .......##..
-      .##.#.####.
-      .##..##.##.
-      ...........
-      """.trimIndent(),
-      steps = 10,
-    ) shouldBeExactly 50
+    assertEquals(
+      50,
+      Day21.positionsAfterSteps(
+        input = """
+        ...........
+        .....###.#.
+        .###.##..#.
+        ..#.#...#..
+        ....#.#....
+        .##..S####.
+        .##..#...#.
+        .......##..
+        .##.#.####.
+        .##..##.##.
+        ...........
+        """.trimIndent(),
+        steps = 10,
+      ),
+    )
   }
 
   @Test
   fun positionAfter50Steps() {
-    Day21.positionsAfterSteps(
-      input = """
-      ...........
-      .....###.#.
-      .###.##..#.
-      ..#.#...#..
-      ....#.#....
-      .##..S####.
-      .##..#...#.
-      .......##..
-      .##.#.####.
-      .##..##.##.
-      ...........
-      """.trimIndent(),
-      steps = 50,
-    ) shouldBeExactly 1594
+    assertEquals(
+      1594,
+      Day21.positionsAfterSteps(
+        input = """
+        ...........
+        .....###.#.
+        .###.##..#.
+        ..#.#...#..
+        ....#.#....
+        .##..S####.
+        .##..#...#.
+        .......##..
+        .##.#.####.
+        .##..##.##.
+        ...........
+        """.trimIndent(),
+        steps = 50,
+      ),
+    )
   }
 
   @Test
   fun part1() {
-    Day21.solvePart1() shouldBeExactly 3660
+    assertEquals(3660, Day21.solvePart1())
   }
 }

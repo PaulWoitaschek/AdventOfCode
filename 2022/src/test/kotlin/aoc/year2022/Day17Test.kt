@@ -1,35 +1,35 @@
 package aoc.year2022
 
 import aoc.library.solvePart1
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day17Test {
 
   @Test
   fun part1Test() {
-    Day17.solvePart1(">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>") shouldBe 3068L
+    assertEquals(3068L, Day17.solvePart1(">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>"))
   }
 
   @Test
   fun part1() {
-    Day17.solvePart1() shouldBe 3181L
+    assertEquals(3181L, Day17.solvePart1())
   }
 
   @Test
   fun caveRocks() {
     val cave = Day17.Cave()
-    cave.hasRock(0, 0) shouldBe false
+    assertEquals(false, cave.hasRock(0, 0))
     cave.putRock(0, 0)
-    cave.hasRock(0, 0) shouldBe true
+    assertEquals(true, cave.hasRock(0, 0))
     cave.putRock(1, 1)
-    cave.hasRock(0, 0) shouldBe true
-    cave.hasRock(1, 1) shouldBe true
+    assertEquals(true, cave.hasRock(0, 0))
+    assertEquals(true, cave.hasRock(1, 1))
 
     cave.putRock(4, 2)
-    cave.hasRock(4, 2) shouldBe true
-    cave.hasRock(1, 1) shouldBe true
-    cave.hasRock(1, 4) shouldBe false
+    assertEquals(true, cave.hasRock(4, 2))
+    assertEquals(true, cave.hasRock(1, 1))
+    assertEquals(false, cave.hasRock(1, 4))
   }
 
   @Test
@@ -37,24 +37,24 @@ class Day17Test {
     val cave = Day17.Cave()
 
     cave.putRock(0, 0)
-    cave.top() shouldBe 0L
+    assertEquals(0, cave.top())
 
     cave.putRock(6, 0)
-    cave.top() shouldBe 0L
+    assertEquals(0, cave.top())
 
     cave.putRock(6, 1)
-    cave.top() shouldBe 1L
+    assertEquals(1, cave.top())
 
     cave.putRock(2, 4)
-    cave.top() shouldBe 4
+    assertEquals(4, cave.top())
 
     cave.putRock(6, 5)
-    cave.top() shouldBe 5L
+    assertEquals(5, cave.top())
 
     cave.putRock(6, 1)
-    cave.top() shouldBe 5L
+    assertEquals(5, cave.top())
 
     cave.putRock(6, 7)
-    cave.top() shouldBe 7L
+    assertEquals(7, cave.top())
   }
 }

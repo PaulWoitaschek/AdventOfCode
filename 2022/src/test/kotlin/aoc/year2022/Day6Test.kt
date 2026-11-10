@@ -2,10 +2,8 @@ package aoc.year2022
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.assertions.assertSoftly
-import io.kotest.assertions.withClue
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day6Test {
 
@@ -18,17 +16,13 @@ class Day6Test {
       "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg" to 10,
       "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw" to 11,
     ).forEach { (input, expected) ->
-      withClue("input=$input") {
-        assertSoftly {
-          Day6.solvePart1(input) shouldBe expected
-        }
-      }
+      assertEquals(expected, Day6.solvePart1(input))
     }
   }
 
   @Test
   fun day6() {
-    Day6.solvePart1() shouldBe 1892
-    Day6.solvePart2() shouldBe 2313
+    assertEquals(1892, Day6.solvePart1())
+    assertEquals(2313, Day6.solvePart2())
   }
 }

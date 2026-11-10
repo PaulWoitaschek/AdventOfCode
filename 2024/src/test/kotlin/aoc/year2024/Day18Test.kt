@@ -3,9 +3,8 @@ package aoc.year2024
 import aoc.library.Point
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.ints.shouldBeExactly
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day18Test {
 
@@ -39,25 +38,28 @@ class Day18Test {
 
   @Test
   fun part1TestInput() {
-    Day18.solvePart1(
-      input = testInput,
-      bytes = 12,
-      size = 6,
-    ) shouldBeExactly 22
+    assertEquals(
+      22,
+      Day18.solvePart1(
+        input = testInput,
+        bytes = 12,
+        size = 6,
+      ),
+    )
   }
 
   @Test
   fun part1() {
-    Day18.solvePart1() shouldBeExactly 286
+    assertEquals(286, Day18.solvePart1())
   }
 
   @Test
   fun part2TestInput() {
-    Day18.solvePart2(testInput, 6) shouldBe Point(6, 1)
+    assertEquals(Point(6, 1), Day18.solvePart2(testInput, 6))
   }
 
   @Test
   fun part2() {
-    Day18.solvePart2() shouldBe Point(20, 64)
+    assertEquals(Point(20, 64), Day18.solvePart2())
   }
 }

@@ -1,14 +1,14 @@
 package aoc.year2021
 
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class SnailFishNumberTests {
 
   @Test
   fun plus() {
     val sum = SnailFishNumber("[[[[4,3],4],4],[7,[[8,4],9]]]") + SnailFishNumber("[1,1]")
-    sum shouldBe SnailFishNumber("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]")
+    assertEquals(SnailFishNumber("[[[[0,7],4],[[7,8],[6,0]]],[8,1]]"), sum)
   }
 
   @Test
@@ -49,8 +49,7 @@ class SnailFishNumberTests {
 
   @Test
   fun split() {
-    SnailFishNumber("[[[[0,7],4],[15,[0,13]]],[1,1]]").split()
-      .shouldBe(SnailFishNumber("[[[[0,7],4],[[7,8],[0,13]]],[1,1]]"))
+    assertEquals(SnailFishNumber("[[[[0,7],4],[[7,8],[0,13]]],[1,1]]"), SnailFishNumber("[[[[0,7],4],[15,[0,13]]],[1,1]]").split())
   }
 
   @Test
@@ -67,13 +66,13 @@ class SnailFishNumberTests {
     value: String,
     expected: Int,
   ) {
-    SnailFishNumber(value).magnitude() shouldBe expected
+    assertEquals(expected, SnailFishNumber(value).magnitude())
   }
 
   private fun testExplode(
     value: String,
     expected: String,
   ) {
-    SnailFishNumber(value).explode() shouldBe SnailFishNumber(expected)
+    assertEquals(SnailFishNumber(expected), SnailFishNumber(value).explode())
   }
 }

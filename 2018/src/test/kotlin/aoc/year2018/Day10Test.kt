@@ -2,9 +2,8 @@ package aoc.year2018
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.ints.shouldBeExactly
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day10Test {
 
@@ -44,45 +43,51 @@ class Day10Test {
 
   @Test
   fun part1TestInput() {
-    Day10.solvePart1(testInput) shouldBe """
-      ╔══════════╗
-      ║█   █  ███║
-      ║█   █   █ ║
-      ║█   █   █ ║
-      ║█████   █ ║
-      ║█   █   █ ║
-      ║█   █   █ ║
-      ║█   █   █ ║
-      ║█   █  ███║
-      ╚══════════╝
-    """.trimIndent()
+    assertEquals(
+      """
+        ╔══════════╗
+        ║█   █  ███║
+        ║█   █   █ ║
+        ║█   █   █ ║
+        ║█████   █ ║
+        ║█   █   █ ║
+        ║█   █   █ ║
+        ║█   █   █ ║
+        ║█   █  ███║
+        ╚══════════╝
+      """.trimIndent(),
+      Day10.solvePart1(testInput),
+    )
   }
 
   @Test
   fun part1() {
-    Day10.solvePart1() shouldBe """
-      ╔══════════════════════════════════════════════════════════════╗
-      ║█████   ██████  ██████  ██████   ████   █    █  █    █  ██████║
-      ║█    █  █       █            █  █    █  ██   █  █    █  █     ║
-      ║█    █  █       █            █  █       ██   █   █  █   █     ║
-      ║█    █  █       █           █   █       █ █  █   █  █   █     ║
-      ║█████   █████   █████      █    █       █ █  █    ██    █████ ║
-      ║█    █  █       █         █     █       █  █ █    ██    █     ║
-      ║█    █  █       █        █      █       █  █ █   █  █   █     ║
-      ║█    █  █       █       █       █       █   ██   █  █   █     ║
-      ║█    █  █       █       █       █    █  █   ██  █    █  █     ║
-      ║█████   █       █       ██████   ████   █    █  █    █  ██████║
-      ╚══════════════════════════════════════════════════════════════╝
-    """.trimIndent()
+    assertEquals(
+      """
+        ╔══════════════════════════════════════════════════════════════╗
+        ║█████   ██████  ██████  ██████   ████   █    █  █    █  ██████║
+        ║█    █  █       █            █  █    █  ██   █  █    █  █     ║
+        ║█    █  █       █            █  █       ██   █   █  █   █     ║
+        ║█    █  █       █           █   █       █ █  █   █  █   █     ║
+        ║█████   █████   █████      █    █       █ █  █    ██    █████ ║
+        ║█    █  █       █         █     █       █  █ █    ██    █     ║
+        ║█    █  █       █        █      █       █  █ █   █  █   █     ║
+        ║█    █  █       █       █       █       █   ██   █  █   █     ║
+        ║█    █  █       █       █       █    █  █   ██  █    █  █     ║
+        ║█████   █       █       ██████   ████   █    █  █    █  ██████║
+        ╚══════════════════════════════════════════════════════════════╝
+      """.trimIndent(),
+      Day10.solvePart1(),
+    )
   }
 
   @Test
   fun part2TestInput() {
-    Day10.solvePart2(testInput) shouldBeExactly 3
+    assertEquals(3, Day10.solvePart2(testInput))
   }
 
   @Test
   fun part2() {
-    Day10.solvePart2() shouldBeExactly 10391
+    assertEquals(10391, Day10.solvePart2())
   }
 }

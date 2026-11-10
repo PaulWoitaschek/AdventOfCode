@@ -2,20 +2,22 @@ package aoc.year2022
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day10Test {
 
   @Test
   fun part1() {
-    Day10.solvePart1() shouldBe 16060
+    assertEquals(16060, Day10.solvePart1())
   }
 
   @Test
   fun part1TestInput() {
-    Day10.solvePart1(
-      """
+    assertEquals(
+      13140,
+      Day10.solvePart1(
+        """
 addx 15
 addx -11
 addx 6
@@ -162,30 +164,40 @@ addx -11
 noop
 noop
 noop
-      """.trimIndent(),
-    ) shouldBe 13140
+        """.trimIndent(),
+      ),
+    )
   }
 
   @Test
   fun part2() {
-    Day10.solvePart2()
-      .lines().joinToString(separator = "\n") { it.trim() }
-      .shouldBe(
-        """
+    assertEquals(
+      """
       ███   ██   ██  ████ █  █ █    █  █ ████
       █  █ █  █ █  █ █    █ █  █    █  █ █
       ███  █  █ █    ███  ██   █    ████ ███
       █  █ ████ █    █    █ █  █    █  █ █
       █  █ █  █ █  █ █    █ █  █    █  █ █
       ███  █  █  ██  ████ █  █ ████ █  █ █
-        """.trimIndent(),
-      )
+      """.trimIndent(),
+      Day10.solvePart2()
+        .lines().joinToString(separator = "\n") { it.trim() },
+    )
   }
 
   @Test
   fun part2TestInput() {
-    Day10.solvePart2(
+    assertEquals(
       """
+      ██  ██  ██  ██  ██  ██  ██  ██  ██  ██
+      ███   ███   ███   ███   ███   ███   ███
+      ████    ████    ████    ████    ████
+      █████     █████     █████     █████
+      ██████      ██████      ██████      ████
+      ███████       ███████       ███████
+      """.trimIndent(),
+      Day10.solvePart2(
+        """
 addx 15
 addx -11
 addx 6
@@ -332,18 +344,9 @@ addx -11
 noop
 noop
 noop
-      """.trimIndent(),
-    )
-      .lines().joinToString(separator = "\n") { it.trim() }
-      .shouldBe(
-        """
-      ██  ██  ██  ██  ██  ██  ██  ██  ██  ██
-      ███   ███   ███   ███   ███   ███   ███
-      ████    ████    ████    ████    ████
-      █████     █████     █████     █████
-      ██████      ██████      ██████      ████
-      ███████       ███████       ███████
         """.trimIndent(),
       )
+        .lines().joinToString(separator = "\n") { it.trim() },
+    )
   }
 }

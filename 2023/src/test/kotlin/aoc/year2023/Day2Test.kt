@@ -2,9 +2,8 @@ package aoc.year2023
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.ints.shouldBeExactly
-import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day2Test {
 
@@ -18,21 +17,21 @@ class Day2Test {
 
   @Test
   fun part1TestInput() {
-    Day2.solvePart1(testInput) shouldBeExactly 8
+    assertEquals(8, Day2.solvePart1(testInput))
   }
 
   @Test
   fun part1() {
-    Day2.solvePart1() shouldBe 2283
+    assertEquals(2283, Day2.solvePart1())
   }
 
   @Test
   fun part2TestInput() {
-    Day2.solvePart2(testInput) shouldBeExactly 2286
+    assertEquals(2286, Day2.solvePart2(testInput))
   }
 
   @Test
   fun part2() {
-    Day2.solvePart2() shouldBe 78669
+    assertEquals(78669, Day2.solvePart2())
   }
 }

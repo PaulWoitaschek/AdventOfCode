@@ -2,31 +2,31 @@ package aoc.year2017
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import io.kotest.matchers.ints.shouldBeExactly
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class Day9Test {
 
   @Test
   fun score() {
-    Day9.score("{{<!!>},{<!!>},{<!!>},{<!!>}}") shouldBeExactly 9
-    Day9.score("{{<a!>},{<a!>},{<a!>},{<ab>}}") shouldBeExactly 3
+    assertEquals(9, Day9.score("{{<!!>},{<!!>},{<!!>},{<!!>}}"))
+    assertEquals(3, Day9.score("{{<a!>},{<a!>},{<a!>},{<ab>}}"))
   }
 
   @Test
   fun garbageCount() {
-    Day9.garbageCount("<>") shouldBeExactly 0
-    Day9.garbageCount("<random characters>") shouldBeExactly 17
-    Day9.garbageCount("<<<<>") shouldBeExactly 3
+    assertEquals(0, Day9.garbageCount("<>"))
+    assertEquals(17, Day9.garbageCount("<random characters>"))
+    assertEquals(3, Day9.garbageCount("<<<<>"))
   }
 
   @Test
   fun part1() {
-    Day9.solvePart1() shouldBeExactly 21037
+    assertEquals(21037, Day9.solvePart1())
   }
 
   @Test
   fun part2() {
-    Day9.solvePart2() shouldBeExactly 9495
+    assertEquals(9495, Day9.solvePart2())
   }
 }
