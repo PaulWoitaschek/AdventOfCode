@@ -4,10 +4,12 @@ import aoc.library.Puzzle
 
 object Day12 : Puzzle<Int, Int>(day = 12) {
 
-  override fun solvePart1(input: String): Int = visit(
-    connections = parse(input),
-    from = 0,
-  ).size
+  override fun solvePart1(input: String): Int =
+    visit(
+        connections = parse(input),
+        from = 0,
+      )
+      .size
 
   override fun solvePart2(input: String): Int {
     val connections = parse(input)
@@ -39,10 +41,11 @@ object Day12 : Puzzle<Int, Int>(day = 12) {
     return visited
   }
 
-  private fun parse(input: String): Map<Int, Set<Int>> = input.lines().associate { line ->
-    val (left, right) = line.split(" <-> ")
-    val from = left.toInt()
-    val targets = right.split(", ").map(String::toInt).toSet()
-    from to targets
-  }
+  private fun parse(input: String): Map<Int, Set<Int>> =
+    input.lines().associate { line ->
+      val (left, right) = line.split(" <-> ")
+      val from = left.toInt()
+      val targets = right.split(", ").map(String::toInt).toSet()
+      from to targets
+    }
 }

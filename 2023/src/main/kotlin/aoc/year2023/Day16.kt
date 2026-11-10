@@ -29,27 +29,31 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
   override fun solvePart2(input: String): Int {
     val map = parse(input)
     val bounds = map.keys.bounds()
-    val toCheck = map
-      .filterKeys {
-        it.x == bounds.left || it.x == bounds.right || it.y == bounds.top || it.y == bounds.bottom
-      }
-      .mapValues { (point, _) ->
-        buildList {
-          if (point.x == bounds.left) add(Right)
-          if (point.x == bounds.right) add(Left)
-          if (point.y == bounds.top) add(Down)
-          if (point.y == bounds.bottom) add(Up)
+    val toCheck =
+      map
+        .filterKeys {
+          it.x == bounds.left || it.x == bounds.right || it.y == bounds.top || it.y == bounds.bottom
         }
-      }
-      .flatMap { (point, directions) ->
-        directions.map { direction -> point to direction }
-      }
+        .mapValues { (point, _) ->
+          buildList {
+            if (point.x == bounds.left) add(Right)
+            if (point.x == bounds.right) add(Left)
+            if (point.y == bounds.top) add(Down)
+            if (point.y == bounds.bottom) add(Up)
+          }
+        }
+        .flatMap { (point, directions) ->
+          directions.map { direction -> point to direction }
+        }
     return runBlocking(Dispatchers.Default) {
-      toCheck.map { (point, direction) ->
-        async {
-          maximumEnergizedTiles(map, point, direction)
+      toCheck
+        .map { (point, direction) ->
+          async {
+            maximumEnergizedTiles(map, point, direction)
+          }
         }
-      }.awaitAll().max()
+        .awaitAll()
+        .max()
     }
   }
 
@@ -71,45 +75,43 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
         VerticalSplitter -> {
           when (direction) {
             Left,
-            Right,
-            -> {
+            Right -> {
               trackBeam(beam.move(Up), Up)
               trackBeam(beam.move(Down), Down)
             }
             Up,
-            Down,
-            -> trackBeam(beam.move(direction), direction)
+            Down -> trackBeam(beam.move(direction), direction)
           }
         }
         HorizontalSplitter -> {
           when (direction) {
             Left,
-            Right,
-            -> trackBeam(beam.move(direction), direction)
+            Right -> trackBeam(beam.move(direction), direction)
             Up,
-            Down,
-            -> {
+            Down -> {
               trackBeam(beam.move(Left), Left)
               trackBeam(beam.move(Right), Right)
             }
           }
         }
         LeftMirror -> {
-          val newDirection = when (direction) {
-            Left -> Up
-            Up -> Left
-            Right -> Down
-            Down -> Right
-          }
+          val newDirection =
+            when (direction) {
+              Left -> Up
+              Up -> Left
+              Right -> Down
+              Down -> Right
+            }
           trackBeam(beam.move(newDirection), newDirection)
         }
         RightMirror -> {
-          val newDirection = when (direction) {
-            Left -> Down
-            Up -> Right
-            Right -> Up
-            Down -> Left
-          }
+          val newDirection =
+            when (direction) {
+              Left -> Down
+              Up -> Right
+              Right -> Up
+              Down -> Left
+            }
           trackBeam(beam.move(newDirection), newDirection)
         }
       }
@@ -124,8 +126,7 @@ object Day16 : Puzzle<Int, Int>(day = 16) {
     VerticalSplitter('|'),
     HorizontalSplitter('-'),
     LeftMirror('\\'),
-    RightMirror('/'),
-    ;
+    RightMirror('/');
 
     companion object {
       val byChar = entries.associateBy { it.char }

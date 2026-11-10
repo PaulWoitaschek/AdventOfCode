@@ -1,8 +1,8 @@
 package aoc.year2020
 
+import kotlin.test.assertEquals
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
 class Day15Test {
 

@@ -62,10 +62,11 @@ object Day7 : Puzzle<Long, Long>(day = 7) {
     tick(initial, initial)
 
     val cache = mutableMapOf<Point, Long>()
-    fun walk(last: Point): Long = cache.getOrPut(last) {
-      val reachable = paths[last] ?: emptyList()
-      reachable.sumOf { walk(it) } + 1
-    }
+    fun walk(last: Point): Long =
+      cache.getOrPut(last) {
+        val reachable = paths[last] ?: emptyList()
+        reachable.sumOf { walk(it) } + 1
+      }
 
     return walk(initial)
   }

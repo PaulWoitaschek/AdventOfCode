@@ -1,8 +1,8 @@
 package aoc.library
 
 import aoc.library.Point3.Axis
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Point3Test {
 

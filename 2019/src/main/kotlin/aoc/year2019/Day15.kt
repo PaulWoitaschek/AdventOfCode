@@ -11,6 +11,7 @@ import kotlinx.coroutines.runBlocking
 object Day15 : Puzzle<Int, Int>(15) {
 
   override fun solvePart1(input: String): Int = findShortestPath(extractMap(input))
+
   override fun solvePart2(input: String): Int = oxygenFillTime(extractMap(input))
 
   private fun extractMap(input: String): Map<Point, Tile> = runBlocking {
@@ -33,39 +34,40 @@ object Day15 : Puzzle<Int, Int>(15) {
     }
 
     suspend fun walk(point: Point) {
-      Direction.entries
-        .forEach { direction ->
-          val newPosition = point.move(direction)
-          if (newPosition !in map) {
-            send(direction)
-            when (val status = computer.outputs.receive().toInt()) {
-              0 -> {
-                map[newPosition] = Tile.Wall
-              }
-              1, 2 -> {
-                map[newPosition] = if (status == 1) Tile.Floor else Tile.Target
-                walk(newPosition)
-                val oppositeDuration = point.directionTo(newPosition)
-                send(oppositeDuration)
-                computer.outputs.receive()
-              }
-              else -> error("nope")
+      Direction.entries.forEach { direction ->
+        val newPosition = point.move(direction)
+        if (newPosition !in map) {
+          send(direction)
+          when (val status = computer.outputs.receive().toInt()) {
+            0 -> {
+              map[newPosition] = Tile.Wall
             }
+            1,
+            2 -> {
+              map[newPosition] = if (status == 1) Tile.Floor else Tile.Target
+              walk(newPosition)
+              val oppositeDuration = point.directionTo(newPosition)
+              send(oppositeDuration)
+              computer.outputs.receive()
+            }
+            else -> error("nope")
           }
         }
+      }
     }
     walk(Point.Zero)
     computerProcessing.cancel()
     map
   }
 
-  private fun Point.directionTo(other: Point): Direction = when {
-    other.x > x -> Direction.Left
-    other.x < x -> Direction.Right
-    other.y > y -> Direction.Up
-    other.y < y -> Direction.Down
-    else -> error("nope")
-  }
+  private fun Point.directionTo(other: Point): Direction =
+    when {
+      other.x > x -> Direction.Left
+      other.x < x -> Direction.Right
+      other.y > y -> Direction.Up
+      other.y < y -> Direction.Down
+      else -> error("nope")
+    }
 
   private fun findShortestPath(map: Map<Point, Tile>): Int {
     var min = Int.MAX_VALUE
@@ -75,7 +77,8 @@ object Day15 : Puzzle<Int, Int>(15) {
       length: Int,
     ) {
       if (length > min) return
-      position.adjacentOrthogonal()
+      position
+        .adjacentOrthogonal()
         .filter { it !in visited }
         .forEach { neighbor ->
           val value = map.getValue(neighbor)
@@ -112,10 +115,11 @@ object Day15 : Puzzle<Int, Int>(15) {
     val oxygen = mutableSetOf(startPoint)
     var minute = 0
     while (true) {
-      val new = oxygen
-        .flatMap { it.adjacentOrthogonal() }
-        .filter { it !in oxygen && map[it] != Tile.Wall }
-        .toSet()
+      val new =
+        oxygen
+          .flatMap { it.adjacentOrthogonal() }
+          .filter { it !in oxygen && map[it] != Tile.Wall }
+          .toSet()
       if (!oxygen.addAll(new)) {
         return minute
       }

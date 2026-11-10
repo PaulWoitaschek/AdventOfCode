@@ -17,7 +17,8 @@ object Day22 : Puzzle<Int, Int>(22) {
     val board = mapLines.map { line ->
       List(width) {
         when (line.getOrNull(it)) {
-          null, ' ' -> Tile.Void
+          null,
+          ' ' -> Tile.Void
           '.' -> Tile.Floor
           '#' -> Tile.Wall
           else -> error("Unknown tile=$it")
@@ -69,22 +70,25 @@ object Day22 : Puzzle<Int, Int>(22) {
           repeat(instruction.steps) {
             val previousPosition = position
             while (true) {
-              position = Point(
-                x = (position.x + facing.x).let {
-                  when {
-                    it < 0 -> width - 1
-                    it > width - 1 -> 0
-                    else -> it
-                  }
-                },
-                y = (position.y + facing.y).let {
-                  when {
-                    it < 0 -> height - 1
-                    it > height - 1 -> 0
-                    else -> it
-                  }
-                },
-              )
+              position =
+                Point(
+                  x =
+                    (position.x + facing.x).let {
+                      when {
+                        it < 0 -> width - 1
+                        it > width - 1 -> 0
+                        else -> it
+                      }
+                    },
+                  y =
+                    (position.y + facing.y).let {
+                      when {
+                        it < 0 -> height - 1
+                        it > height - 1 -> 0
+                        else -> it
+                      }
+                    },
+                )
               when (board[position.y][position.x]) {
                 Tile.Wall -> {
                   position = previousPosition
@@ -118,16 +122,16 @@ object Day22 : Puzzle<Int, Int>(22) {
     Left(-1, 0, 2),
     Up(0, -1, 3),
     Right(1, 0, 0),
-    Down(0, 1, 1),
-    ;
+    Down(0, 1, 1);
 
     fun turnLeft(): Facing = entries.getOrNull(ordinal - 1) ?: entries.last()
+
     fun turnRight(): Facing = entries.getOrNull(ordinal + 1) ?: entries.first()
   }
 
   sealed interface Instruction {
-    @JvmInline
-    value class Move(val steps: Int) : Instruction
+    @JvmInline value class Move(val steps: Int) : Instruction
+
     data object TurnLeft : Instruction
 
     data object TurnRight : Instruction

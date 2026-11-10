@@ -1,12 +1,13 @@
 package aoc.year2021
 
 import aoc.library.solvePart1
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day13Test {
 
-  private val testInput = """
+  private val testInput =
+    """
     6,10
     0,14
     9,10
@@ -28,7 +29,8 @@ class Day13Test {
 
     fold along y=7
     fold along x=5
-  """.trimIndent()
+    """
+      .trimIndent()
 
   @Test
   fun part1TestInput() {
@@ -44,14 +46,15 @@ class Day13Test {
   fun part2() {
     assertEquals(
       """
-              ╔═════╗
-              ║█████║
-              ║█   █║
-              ║█   █║
-              ║█   █║
-              ║█████║
-              ╚═════╝
-      """.trimIndent(),
+      ╔═════╗
+      ║█████║
+      ║█   █║
+      ║█   █║
+      ║█   █║
+      ║█████║
+      ╚═════╝
+      """
+        .trimIndent(),
       Day13.solvePart2(testInput),
     )
   }

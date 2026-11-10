@@ -2,8 +2,8 @@ package aoc.year2016
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day3Test {
 
@@ -30,7 +30,8 @@ class Day3Test {
         201 401 601
         202 402 602
         203 403 603
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }

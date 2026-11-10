@@ -15,8 +15,8 @@ object Day5 : Puzzle<Int, Long>(day = 5) {
 
   private fun parse(input: String): Pair<List<LongRange>, List<Long>> {
     val (freshString, availableString) = input.split("\n\n")
-    val fresh = freshString.lines()
-      .map {
+    val fresh =
+      freshString.lines().map {
         val (from, to) = it.split("-").map(String::toLong)
         from..to
       }

@@ -2,15 +2,17 @@ package aoc.year2022
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day14Test {
 
-  private val testInput = """
+  private val testInput =
+    """
     498,4 -> 498,6 -> 496,6
     503,4 -> 502,4 -> 502,9 -> 494,9
-  """.trimIndent()
+    """
+      .trimIndent()
 
   @Test
   fun part1TestInput() {

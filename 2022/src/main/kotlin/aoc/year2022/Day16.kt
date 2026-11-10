@@ -5,22 +5,26 @@ import java.util.PriorityQueue
 
 object Day16 : Puzzle<Int, Int>(16) {
 
-  override fun solvePart1(input: String): Int = solve(input = input, availableMinutes = 30, withElephant = false)
+  override fun solvePart1(input: String): Int =
+    solve(input = input, availableMinutes = 30, withElephant = false)
 
-  override fun solvePart2(input: String): Int = solve(input = input, availableMinutes = 26, withElephant = true)
+  override fun solvePart2(input: String): Int =
+    solve(input = input, availableMinutes = 26, withElephant = true)
 
   private fun solve(
     input: String,
     availableMinutes: Int,
     withElephant: Boolean,
   ): Int {
-    val valves = input.lines().filter(String::isNotEmpty).map(Valve::parse)
-      .sortedByDescending { it.flowRate }
+    val valves =
+      input.lines().filter(String::isNotEmpty).map(Valve::parse).sortedByDescending { it.flowRate }
 
     val distances = valves.associateWith { start ->
-      valves.filter { it.flowRate > 0 }.associateWith { end ->
-        shortestDistanceBetweenNodes(start, end, valves)
-      }
+      valves
+        .filter { it.flowRate > 0 }
+        .associateWith { end ->
+          shortestDistanceBetweenNodes(start, end, valves)
+        }
     }
 
     val startValve = valves.first { it.name == "AA" }
@@ -37,10 +41,12 @@ object Day16 : Puzzle<Int, Int>(16) {
       maxPressureReleased = maxOf(releasedPressure, maxPressureReleased)
 
       if (!spawnElephant) {
-        val possiblePressureRelease = (valves - visited)
-          .zip((availableMinutes - minute - 2 downTo 0 step 2)) { futureValve, futureMinute ->
-            futureValve.flowRate * futureMinute
-          }.sum()
+        val possiblePressureRelease =
+          (valves - visited)
+            .zip((availableMinutes - minute - 2 downTo 0 step 2)) { futureValve, futureMinute ->
+              futureValve.flowRate * futureMinute
+            }
+            .sum()
         if (possiblePressureRelease + releasedPressure < maxPressureReleased) return
       }
 
@@ -48,7 +54,8 @@ object Day16 : Puzzle<Int, Int>(16) {
         val newMinute = minute + distance + 1
         if (newMinute < availableMinutes && candidate !in visited) {
           search(
-            releasedPressure = releasedPressure + (availableMinutes - newMinute) * candidate.flowRate,
+            releasedPressure =
+              releasedPressure + (availableMinutes - newMinute) * candidate.flowRate,
             position = candidate,
             visited = visited + candidate,
             minute = newMinute,
@@ -112,7 +119,9 @@ object Day16 : Puzzle<Int, Int>(16) {
 
   private data class Valve(val name: String, val flowRate: Int, val tunnelsTo: Set<String>) {
     companion object {
-      private val regex = "Valve (\\w+) has flow rate=(\\d+); tunnels? leads? to valves? (.*)".toRegex()
+      private val regex =
+        "Valve (\\w+) has flow rate=(\\d+); tunnels? leads? to valves? (.*)".toRegex()
+
       fun parse(input: String): Valve {
         val (name, flowRate, tunnelsTo) = regex.find(input)!!.destructured
         return Valve(

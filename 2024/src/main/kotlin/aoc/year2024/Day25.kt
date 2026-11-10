@@ -16,9 +16,10 @@ object Day25 : Puzzle<Int, Unit>(day = 25) {
   private fun keyMatchesLock(
     key: List<Int>,
     lock: List<Int>,
-  ): Boolean = key.zip(lock).all { (k, l) ->
-    k + l <= 5
-  }
+  ): Boolean =
+    key.zip(lock).all { (k, l) ->
+      k + l <= 5
+    }
 
   private fun parse(input: String): Pair<List<List<Int>>, List<List<Int>>> {
     val keys = mutableListOf<List<Int>>()
@@ -26,16 +27,16 @@ object Day25 : Puzzle<Int, Unit>(day = 25) {
     input.split("\n\n").map {
       val lines = it.lines()
       val isKey = lines[0][0] == '#'
-      val pins = List(5) { row ->
-        (1..5).count { column ->
-          lines[column][row] == '#'
+      val pins =
+        List(5) { row ->
+          (1..5).count { column ->
+            lines[column][row] == '#'
+          }
         }
-      }
       if (isKey) keys += pins else locks += pins
     }
     return keys to locks
   }
 
-  override fun solvePart2(input: String) {
-  }
+  override fun solvePart2(input: String) {}
 }

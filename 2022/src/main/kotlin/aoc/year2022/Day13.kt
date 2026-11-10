@@ -9,10 +9,14 @@ import kotlinx.serialization.json.int
 
 object Day13 : Puzzle<Int, Int>(13) {
 
-  override fun solvePart1(input: String): Int = input.split("\n\n").mapIndexedNotNull { index, group ->
-    val (left, right) = group.lines().take(2).map { it.asJsonArray() }
-    (index + 1).takeIf { order(left, right)!! <= 0 }
-  }.reduce(Int::plus)
+  override fun solvePart1(input: String): Int =
+    input
+      .split("\n\n")
+      .mapIndexedNotNull { index, group ->
+        val (left, right) = group.lines().take(2).map { it.asJsonArray() }
+        (index + 1).takeIf { order(left, right)!! <= 0 }
+      }
+      .reduce(Int::plus)
 
   override fun solvePart2(input: String): Int {
     val distressPackages = listOf("[[2]]", "[[6]]").map { it.asJsonArray() }

@@ -1,8 +1,8 @@
 package aoc.year2020
 
 import aoc.library.solvePart1
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day14Test {
 
@@ -21,7 +21,8 @@ class Day14Test {
         mem[8] = 11
         mem[7] = 101
         mem[8] = 0
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }

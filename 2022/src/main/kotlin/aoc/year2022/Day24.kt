@@ -17,23 +17,25 @@ object Day24 : Puzzle<Int, Int>(24) {
   ): Int {
     val world = World.parse(input)
 
-    val queue = PriorityQueue<Journey>(
-      compareBy(
-        { it.minute },
-        { it.targets.size },
-        { it.position.manhattanDistanceTo(it.targets.first()) },
-      ),
-    )
+    val queue =
+      PriorityQueue<Journey>(
+        compareBy(
+          { it.minute },
+          { it.targets.size },
+          { it.position.manhattanDistanceTo(it.targets.first()) },
+        ),
+      )
 
     queue.add(
       Journey(
         minute = 1,
         position = world.start,
-        targets = if (part2) {
-          listOf(world.end, world.start, world.end)
-        } else {
-          listOf(world.end)
-        },
+        targets =
+          if (part2) {
+            listOf(world.end, world.start, world.end)
+          } else {
+            listOf(world.end)
+          },
       ),
     )
 
@@ -51,7 +53,8 @@ object Day24 : Puzzle<Int, Int>(24) {
       }
 
       val quickestPossiblePath =
-        journey.targets.first().manhattanDistanceTo(journey.position) + (journey.targets.size - 1) * distanceFromStartToEnd
+        journey.targets.first().manhattanDistanceTo(journey.position) +
+          (journey.targets.size - 1) * distanceFromStartToEnd
       if (journey.minute + quickestPossiblePath >= fastestPath) {
         continue
       }
@@ -61,38 +64,40 @@ object Day24 : Puzzle<Int, Int>(24) {
       }
 
       val position = journey.position
-      val targets = if (journey.position == journey.targets.first()) {
-        journey.targets.drop(1)
-      } else {
-        journey.targets
-      }
+      val targets =
+        if (journey.position == journey.targets.first()) {
+          journey.targets.drop(1)
+        } else {
+          journey.targets
+        }
       listOf(
-        position,
-        position.copy(x = position.x - 1),
-        position.copy(x = position.x + 1),
-        position.copy(y = position.y - 1),
-        position.copy(y = position.y + 1),
-      ).filter { newPosition ->
-        newPosition == world.start ||
-          newPosition == world.end ||
-          (
-            newPosition.x in 0 until world.width &&
+          position,
+          position.copy(x = position.x - 1),
+          position.copy(x = position.x + 1),
+          position.copy(y = position.y - 1),
+          position.copy(y = position.y + 1),
+        )
+        .filter { newPosition ->
+          newPosition == world.start ||
+            newPosition == world.end ||
+            (newPosition.x in 0 until world.width &&
               (newPosition.y in 0 until world.height) &&
               !world.hasBlizzardAtMinute(
                 newPosition,
                 journey.minute + 1,
-              )
-            )
-      }.forEach { moveTo ->
-        val newJourney = Journey(
-          minute = journey.minute + 1,
-          position = moveTo,
-          targets = targets,
-        )
-        if (visited.add(newJourney)) {
-          queue.add(newJourney)
+              ))
         }
-      }
+        .forEach { moveTo ->
+          val newJourney =
+            Journey(
+              minute = journey.minute + 1,
+              position = moveTo,
+              targets = targets,
+            )
+          if (visited.add(newJourney)) {
+            queue.add(newJourney)
+          }
+        }
     }
 
     return fastestPath
@@ -100,7 +105,13 @@ object Day24 : Puzzle<Int, Int>(24) {
 
   data class Journey(val minute: Int, val position: Point, val targets: List<Point>)
 
-  data class World(val width: Int, val height: Int, val blizzards: List<Blizzard>, val start: Point, val end: Point) {
+  data class World(
+    val width: Int,
+    val height: Int,
+    val blizzards: List<Blizzard>,
+    val start: Point,
+    val end: Point,
+  ) {
 
     fun hasBlizzardAtMinute(
       point: Point,
@@ -108,10 +119,14 @@ object Day24 : Puzzle<Int, Int>(24) {
     ): Boolean = blizzards.any { blizzard ->
       val blizzardPosition = blizzard.point
       when (blizzard.direction) {
-        Direction.Left -> point.y == blizzardPosition.y && point.x == (blizzardPosition.x - minute).mod(width)
-        Direction.Right -> point.y == blizzardPosition.y && point.x == (blizzardPosition.x + minute).mod(width)
-        Direction.Up -> point.x == blizzardPosition.x && point.y == (blizzardPosition.y - minute).mod(height)
-        Direction.Down -> point.x == blizzardPosition.x && point.y == (blizzardPosition.y + minute).mod(height)
+        Direction.Left ->
+          point.y == blizzardPosition.y && point.x == (blizzardPosition.x - minute).mod(width)
+        Direction.Right ->
+          point.y == blizzardPosition.y && point.x == (blizzardPosition.x + minute).mod(width)
+        Direction.Up ->
+          point.x == blizzardPosition.x && point.y == (blizzardPosition.y - minute).mod(height)
+        Direction.Down ->
+          point.x == blizzardPosition.x && point.y == (blizzardPosition.y + minute).mod(height)
       }
     }
 
@@ -122,17 +137,14 @@ object Day24 : Puzzle<Int, Int>(24) {
         val height = lines.size - 2
 
         val blizzards = mutableListOf<Blizzard>()
-        lines.drop(1)
-          .dropLast(1)
-          .forEachIndexed { y, line ->
-            line.drop(1).dropLast(1)
-              .forEachIndexed { x, c ->
-                val direction = Direction.fromArrowOrNull(c)
-                if (direction != null) {
-                  blizzards += Blizzard(Point(x, y), direction)
-                }
-              }
+        lines.drop(1).dropLast(1).forEachIndexed { y, line ->
+          line.drop(1).dropLast(1).forEachIndexed { x, c ->
+            val direction = Direction.fromArrowOrNull(c)
+            if (direction != null) {
+              blizzards += Blizzard(Point(x, y), direction)
+            }
           }
+        }
 
         val start = Point(0, -1)
         val end = Point(width - 1, height)

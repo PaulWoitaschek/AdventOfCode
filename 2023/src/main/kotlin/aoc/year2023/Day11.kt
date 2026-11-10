@@ -17,26 +17,29 @@ object Day11 : Puzzle<Long, Long>(day = 11) {
     val galaxies = parse(input)
     val pairs = galaxyPairs(galaxies)
     val galaxyBounds = galaxies.bounds()
-    val xGaps = (galaxyBounds.left..galaxyBounds.right).filter { x ->
-      galaxies.none { galaxy -> galaxy.x == x }
-    }
-    val yGaps = (galaxyBounds.top..galaxyBounds.bottom).filter { y ->
-      galaxies.none { galaxy -> galaxy.y == y }
-    }
+    val xGaps =
+      (galaxyBounds.left..galaxyBounds.right).filter { x ->
+        galaxies.none { galaxy -> galaxy.x == x }
+      }
+    val yGaps =
+      (galaxyBounds.top..galaxyBounds.bottom).filter { y ->
+        galaxies.none { galaxy -> galaxy.y == y }
+      }
     return pairs.sumOf { (left, right) ->
-      val xGapAdditions = (minOf(left.x, right.x)..maxOf(left.x, right.x))
-        .count { it in xGaps } * (emptySpace - 1)
-      val yGapAdditions = (minOf(left.y, right.y)..maxOf(left.y, right.y))
-        .count { it in yGaps } * (emptySpace - 1)
+      val xGapAdditions =
+        (minOf(left.x, right.x)..maxOf(left.x, right.x)).count { it in xGaps } * (emptySpace - 1)
+      val yGapAdditions =
+        (minOf(left.y, right.y)..maxOf(left.y, right.y)).count { it in yGaps } * (emptySpace - 1)
       left.manhattanDistanceTo(right).toLong() + xGapAdditions + yGapAdditions
     }
   }
 
-  private fun galaxyPairs(galaxies: Set<Point>): List<Pair<Point, Point>> = galaxies.flatMapIndexed { leftIndex: Int, left: Point ->
-    galaxies.drop(leftIndex + 1).map { right ->
-      left to right
+  private fun galaxyPairs(galaxies: Set<Point>): List<Pair<Point, Point>> =
+    galaxies.flatMapIndexed { leftIndex: Int, left: Point ->
+      galaxies.drop(leftIndex + 1).map { right ->
+        left to right
+      }
     }
-  }
 
   private fun parse(input: String): Set<Point> {
     val galaxies = mutableSetOf<Point>()

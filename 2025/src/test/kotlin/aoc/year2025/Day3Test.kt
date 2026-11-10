@@ -2,9 +2,8 @@ package aoc.year2025
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Disabled
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day3Test {
 
@@ -18,7 +17,8 @@ class Day3Test {
         811111111111119
         234234234234278
         818181911112111
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -38,7 +38,8 @@ class Day3Test {
         811111111111119
         234234234234278
         818181911112111
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }

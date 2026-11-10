@@ -23,8 +23,7 @@ object Day11 : Puzzle<Int, String>(11) {
     input: String,
     initialInput: Int,
   ): Map<Point, Color> = runBlocking {
-    val inputs = Channel<Long>(UNLIMITED)
-      .also { it.send(initialInput.toLong()) }
+    val inputs = Channel<Long>(UNLIMITED).also { it.send(initialInput.toLong()) }
 
     val computer = IntCodeComputer(input.split(",").map(String::toLong), inputs)
     val coloredArea = mutableMapOf<Point, Color>()
@@ -52,15 +51,15 @@ object Day11 : Puzzle<Int, String>(11) {
 
   enum class Color {
     White,
-    Black,
-    ;
+    Black;
 
     companion object {
-      fun parse(value: Long): Color = when (value) {
-        0L -> Black
-        1L -> White
-        else -> error("Invalid color=$value")
-      }
+      fun parse(value: Long): Color =
+        when (value) {
+          0L -> Black
+          1L -> White
+          else -> error("Invalid color=$value")
+        }
     }
   }
 }

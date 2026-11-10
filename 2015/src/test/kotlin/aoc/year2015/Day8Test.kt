@@ -2,8 +2,8 @@ package aoc.year2015
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day8Test {
 
@@ -22,7 +22,8 @@ class Day8Test {
         "abc"
         "aaa\"aaa"
         "\x27"
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -34,7 +35,8 @@ class Day8Test {
       Day8.memoryCount(
         """
         ""
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -46,7 +48,8 @@ class Day8Test {
       Day8.memoryCount(
         """
         "abc"
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -58,7 +61,8 @@ class Day8Test {
       Day8.memoryCount(
         """
         "aaa\"aaa"
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -70,7 +74,8 @@ class Day8Test {
       Day8.memoryCount(
         """
         "\x27"
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -82,7 +87,8 @@ class Day8Test {
       Day8.encodedSize(
         """
         ""
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -94,7 +100,8 @@ class Day8Test {
       Day8.encodedSize(
         """
         "abc"
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -106,7 +113,8 @@ class Day8Test {
       Day8.encodedSize(
         """
         "aaa\"aaa"
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -118,7 +126,8 @@ class Day8Test {
       Day8.encodedSize(
         """
         "\x27"
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -133,7 +142,8 @@ class Day8Test {
         "abc"
         "aaa\"aaa"
         "\x27"
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }

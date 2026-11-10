@@ -2,8 +2,8 @@ package aoc.year2015
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day9Test {
 
@@ -21,7 +21,8 @@ class Day9Test {
         London to Dublin = 464
         London to Belfast = 518
         Dublin to Belfast = 141
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -35,7 +36,8 @@ class Day9Test {
         London to Dublin = 464
         London to Belfast = 518
         Dublin to Belfast = 141
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }

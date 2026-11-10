@@ -21,8 +21,7 @@ object Day8 : Puzzle<Int, Int>(day = 8) {
           if (a != b) {
             val distance = second - first
             if (accountForResonance) {
-              antiNodes += generateSequence(second) { it + distance }
-                .takeWhile { it in antennaMap }
+              antiNodes += generateSequence(second) { it + distance }.takeWhile { it in antennaMap }
             } else {
               val point = second + distance
               if (point in antennaMap) {
@@ -36,9 +35,14 @@ object Day8 : Puzzle<Int, Int>(day = 8) {
     return antiNodes.count()
   }
 
-  private data class AntennaMap(val groupedByFrequency: Map<Char, List<Point>>, private val width: Int, private val height: Int) {
+  private data class AntennaMap(
+    val groupedByFrequency: Map<Char, List<Point>>,
+    private val width: Int,
+    private val height: Int,
+  ) {
 
-    operator fun contains(point: Point): Boolean = point.x in 0 until width && point.y in 0 until height
+    operator fun contains(point: Point): Boolean =
+      point.x in 0 until width && point.y in 0 until height
 
     companion object {
       fun parse(input: String): AntennaMap {
@@ -51,9 +55,11 @@ object Day8 : Puzzle<Int, Int>(day = 8) {
             }
           }
         }
-        val groupedByFrequency = allAntennas.toList()
-          .groupBy { it.second }
-          .mapValues { (_, entries) -> entries.map { it.first } }
+        val groupedByFrequency =
+          allAntennas
+            .toList()
+            .groupBy { it.second }
+            .mapValues { (_, entries) -> entries.map { it.first } }
 
         return AntennaMap(
           groupedByFrequency = groupedByFrequency,

@@ -5,9 +5,8 @@ import java.util.PriorityQueue
 
 object Day10 : Puzzle<Int, Long>(day = 10) {
 
-  override fun solvePart1(input: String): Int = input.lines()
-    .map(Machine::parse)
-    .sumOf { machine ->
+  override fun solvePart1(input: String): Int =
+    input.lines().map(Machine::parse).sumOf { machine ->
       var min = Int.MAX_VALUE
 
       data class Task(val pressed: Int, val state: Int)
@@ -36,40 +35,45 @@ object Day10 : Puzzle<Int, Long>(day = 10) {
     TODO()
   }
 
-  private data class Machine(val lightDiagram: Int, val wiring: List<Int>, val joltageRequirements: List<List<Int>>) {
+  private data class Machine(
+    val lightDiagram: Int,
+    val wiring: List<Int>,
+    val joltageRequirements: List<List<Int>>,
+  ) {
 
     companion object {
       fun parse(input: String): Machine {
-        val lightDiagram = input
-          .drop(1)
-          .substringBefore(']')
-          .map {
-            when (it) {
-              '.' -> false
-              '#' -> true
-              else -> error("Invalid $it")
+        val lightDiagram =
+          input
+            .drop(1)
+            .substringBefore(']')
+            .map {
+              when (it) {
+                '.' -> false
+                '#' -> true
+                else -> error("Invalid $it")
+              }
             }
-          }
-          .foldIndexed(0) { index, acc, on ->
-            if (on) acc or (1 shl index) else acc
-          }
-        val wiring = """\((.*?)\)""".toRegex()
-          .findAll(input)
-          .flatMap { result ->
-            result.destructured.toList().map { values ->
-              values.split(",").map(String::toInt)
+            .foldIndexed(0) { index, acc, on ->
+              if (on) acc or (1 shl index) else acc
             }
-          }
-          .map { indices ->
-            indices.fold(0) { acc, buttonIndex ->
-              acc or (1 shl buttonIndex)
+        val wiring =
+          """\((.*?)\)"""
+            .toRegex()
+            .findAll(input)
+            .flatMap { result ->
+              result.destructured.toList().map { values ->
+                values.split(",").map(String::toInt)
+              }
             }
-          }
-          .toList()
-        val joltageRequirements: List<List<Int>> = """\{(.*?)}$""".toRegex()
-          .find(input)!!.destructured
-          .toList()
-          .map {
+            .map { indices ->
+              indices.fold(0) { acc, buttonIndex ->
+                acc or (1 shl buttonIndex)
+              }
+            }
+            .toList()
+        val joltageRequirements: List<List<Int>> =
+          """\{(.*?)}$""".toRegex().find(input)!!.destructured.toList().map {
             it.split(",").map(String::toInt)
           }
         return Machine(

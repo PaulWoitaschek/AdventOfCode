@@ -36,8 +36,7 @@ object Day4 : Puzzle<Long, Long>(4) {
         lastDraw = draws
       }
     }
-    return checkNotNull(lastWinner) { "No winners!" }
-      .score(lastDraw)
+    return checkNotNull(lastWinner) { "No winners!" }.score(lastDraw)
   }
 }
 
@@ -48,15 +47,15 @@ private data class Game(val allDraws: List<Int>, val boards: List<Board>) {
       val lines = input.lines()
       val draws = lines.first().split(",").map { it.toInt() }
 
-      val boards = lines.drop(1)
-        .filter { it.isNotEmpty() }
-        .map { line ->
-          line.split("\\s+".toRegex())
-            .filter { it.isNotBlank() }
-            .map { it.toInt() }
-        }
-        .chunked(Board.SIZE)
-        .map { Board(it) }
+      val boards =
+        lines
+          .drop(1)
+          .filter { it.isNotEmpty() }
+          .map { line ->
+            line.split("\\s+".toRegex()).filter { it.isNotBlank() }.map { it.toInt() }
+          }
+          .chunked(Board.SIZE)
+          .map { Board(it) }
       return Game(draws, boards)
     }
   }
@@ -81,14 +80,11 @@ private data class Board(val numbers: List<List<Int>>) {
     }
   }
 
-  fun hasWon(draws: List<Int>): Boolean = rows.any { it.hasWon(draws) } || columns.any { it.hasWon(draws) }
+  fun hasWon(draws: List<Int>): Boolean =
+    rows.any { it.hasWon(draws) } || columns.any { it.hasWon(draws) }
 
-  fun score(draws: List<Int>): Long = (
-    numbers.flatten()
-      .filter { it !in draws }
-      .sum() * draws.last()
-    )
-    .toLong()
+  fun score(draws: List<Int>): Long =
+    (numbers.flatten().filter { it !in draws }.sum() * draws.last()).toLong()
 
   private fun List<Int>.hasWon(draws: List<Int>): Boolean = all { it in draws }
 

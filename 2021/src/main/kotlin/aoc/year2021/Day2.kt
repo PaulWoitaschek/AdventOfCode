@@ -13,11 +13,13 @@ private fun process(
   input: String,
   accountAim: Boolean,
 ): Long {
-  val position = input.lineSequence()
-    .map { Instruction.parse(it) }
-    .fold(Position.INITIAL) { position, instruction ->
-      position.plusInstruction(instruction, accountAim)
-    }
+  val position =
+    input
+      .lineSequence()
+      .map { Instruction.parse(it) }
+      .fold(Position.INITIAL) { position, instruction ->
+        position.plusInstruction(instruction, accountAim)
+      }
   return (position.depth * position.horizontal).toLong()
 }
 
@@ -36,10 +38,11 @@ private data class Position(val horizontal: Int, val depth: Int, val aim: Int) {
     val steps = instruction.steps
     return if (accountAim) {
       when (instruction.direction) {
-        Connection.Forward -> copy(
-          horizontal = horizontal + steps,
-          depth = depth + aim * steps,
-        )
+        Connection.Forward ->
+          copy(
+            horizontal = horizontal + steps,
+            depth = depth + aim * steps,
+          )
         Connection.Up -> copy(aim = aim - steps)
         Connection.Down -> copy(aim = aim + steps)
       }
@@ -61,12 +64,13 @@ private data class Instruction(val direction: Connection, val steps: Int) {
   companion object {
     fun parse(input: String): Instruction {
       val (directionString, stepString) = input.split(" ")
-      val direction = when (directionString) {
-        "forward" -> Connection.Forward
-        "down" -> Connection.Down
-        "up" -> Connection.Up
-        else -> error("Invalid direction=$directionString")
-      }
+      val direction =
+        when (directionString) {
+          "forward" -> Connection.Forward
+          "down" -> Connection.Down
+          "up" -> Connection.Up
+          else -> error("Invalid direction=$directionString")
+        }
       val steps = stepString.toInt()
       return Instruction(steps = steps, direction = direction)
     }

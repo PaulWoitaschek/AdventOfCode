@@ -5,7 +5,8 @@ import kotlinx.coroutines.runBlocking
 
 object Day2 : Puzzle<Long, Long>(2) {
 
-  override fun solvePart1(input: String): Long = runInstructions(instructions = input.split(",").map(String::toLong), verb = 2, noun = 12)
+  override fun solvePart1(input: String): Long =
+    runInstructions(instructions = input.split(",").map(String::toLong), verb = 2, noun = 12)
 
   override fun solvePart2(input: String): Long {
     val originalInput = input.split(",").map(String::toLong)
@@ -14,11 +15,12 @@ object Day2 : Puzzle<Long, Long>(2) {
       max++
       (0..max).forEach { verb ->
         (0..max).forEach { noun ->
-          val out = runInstructions(
-            instructions = originalInput,
-            verb = verb.toLong(),
-            noun = noun.toLong(),
-          )
+          val out =
+            runInstructions(
+              instructions = originalInput,
+              verb = verb.toLong(),
+              noun = noun.toLong(),
+            )
           if (out == 19690720L) {
             return 100L * noun + verb
           }
@@ -32,15 +34,14 @@ object Day2 : Puzzle<Long, Long>(2) {
     verb: Long,
     noun: Long,
   ): Long {
-    val computer = IntCodeComputer(
-      instructions
-        .toMutableList()
-        .apply {
+    val computer =
+      IntCodeComputer(
+        instructions.toMutableList().apply {
           set(1, noun)
           set(2, verb)
         },
-      emptyList(),
-    )
+        emptyList(),
+      )
     runBlocking {
       computer.run()
     }

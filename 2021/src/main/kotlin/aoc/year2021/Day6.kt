@@ -14,19 +14,21 @@ object Day6 : Puzzle<Long, Long>(6) {
 private fun totalFishesAfterDays(
   input: String,
   days: Int,
-): Long = generateSequence(Ocean.parse(input)) { it.afterOneDay() }
-  .take(days + 1).last().totalFishes
+): Long =
+  generateSequence(Ocean.parse(input)) { it.afterOneDay() }.take(days + 1).last().totalFishes
 
 @JvmInline
 private value class BreedTime(private val value: Int) {
 
-  val willBreedToday: Boolean get() = value == 0
+  val willBreedToday: Boolean
+    get() = value == 0
 
-  fun afterNextDay(): BreedTime = if (willBreedToday) {
-    AFTER_BREEDING
-  } else {
-    BreedTime(value - 1)
-  }
+  fun afterNextDay(): BreedTime =
+    if (willBreedToday) {
+      AFTER_BREEDING
+    } else {
+      BreedTime(value - 1)
+    }
 
   companion object {
     val FOR_NEW_FISH = BreedTime(8)
@@ -36,7 +38,8 @@ private value class BreedTime(private val value: Int) {
 
 private data class Ocean(private val fishesPerBreedTime: Map<BreedTime, Long>) {
 
-  val totalFishes: Long get() = fishesPerBreedTime.values.sum()
+  val totalFishes: Long
+    get() = fishesPerBreedTime.values.sum()
 
   fun afterOneDay(): Ocean {
     val result = mutableMapOf<BreedTime, Long>()
@@ -52,13 +55,15 @@ private data class Ocean(private val fishesPerBreedTime: Map<BreedTime, Long>) {
 
   companion object {
     fun parse(input: String): Ocean {
-      val fishesPerBreedTime = input.lines()
-        .single()
-        .split(",")
-        .map(String::toInt)
-        .map(::BreedTime)
-        .groupBy { it }
-        .mapValues { it.value.size.toLong() }
+      val fishesPerBreedTime =
+        input
+          .lines()
+          .single()
+          .split(",")
+          .map(String::toInt)
+          .map(::BreedTime)
+          .groupBy { it }
+          .mapValues { it.value.size.toLong() }
       return Ocean(fishesPerBreedTime)
     }
   }

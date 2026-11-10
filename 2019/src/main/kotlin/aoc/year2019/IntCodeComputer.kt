@@ -3,24 +3,32 @@ package aoc.year2019
 import aoc.year2019.IntCodeComputer.Mode.Immediate
 import aoc.year2019.IntCodeComputer.Mode.Positional
 import aoc.year2019.IntCodeComputer.Mode.Relative
+import kotlin.math.pow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
 import kotlinx.coroutines.channels.ReceiveChannel
-import kotlin.math.pow
 
-class IntCodeComputer(instructions: List<Long>, val inputs: ReceiveChannel<Long>, val outputs: Channel<Long> = Channel(UNLIMITED)) {
+class IntCodeComputer(
+  instructions: List<Long>,
+  val inputs: ReceiveChannel<Long>,
+  val outputs: Channel<Long> = Channel(UNLIMITED),
+) {
 
-  val instructions: MutableMap<Long, Long> = instructions.withIndex().associate {
-    it.index.toLong() to it.value
-  }.toMutableMap()
+  val instructions: MutableMap<Long, Long> =
+    instructions
+      .withIndex()
+      .associate {
+        it.index.toLong() to it.value
+      }
+      .toMutableMap()
 
   constructor(
     instructions: List<Long>,
     inputs: List<Long>,
   ) : this(
     instructions = instructions,
-    inputs = Channel<Long>(UNLIMITED)
-      .also { channel ->
+    inputs =
+      Channel<Long>(UNLIMITED).also { channel ->
         inputs.forEach {
           check(channel.trySend(it).isSuccess)
         }
@@ -35,8 +43,10 @@ class IntCodeComputer(instructions: List<Long>, val inputs: ReceiveChannel<Long>
 
   val concatFullOutput: Long
     get() = output.joinToString("").toLong()
+
   val fullOutput: List<Long>
     get() = output.toList()
+
   val firstInstruction: Long
     get() = instructions.getValue(0)
 
@@ -82,7 +92,11 @@ class IntCodeComputer(instructions: List<Long>, val inputs: ReceiveChannel<Long>
     }
   }
 
-  private enum class Mode { Immediate, Positional, Relative; }
+  private enum class Mode {
+    Immediate,
+    Positional,
+    Relative,
+  }
 
   private fun value(key: Long): Long = instructions[key] ?: 0L
 

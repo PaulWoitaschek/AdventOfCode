@@ -27,58 +27,74 @@ class Prepare : CliktCommand() {
   }
 
   private fun generateDaySourceFile() {
-    val sourceFileContent = FileSpec.builder("aoc.year$year", "Day$day")
-      .addType(
-        TypeSpec.objectBuilder("Day$day")
-          .superclass(ClassName("aoc.library", "Puzzle").parameterizedBy(LONG, LONG))
-          .addSuperclassConstructorParameter("day = $day")
-          .addFunction(createSolveFunction("Part1"))
-          .addFunction(createSolveFunction("Part2"))
-          .build(),
-      )
-      .build()
+    val sourceFileContent =
+      FileSpec.builder("aoc.year$year", "Day$day")
+        .addType(
+          TypeSpec.objectBuilder("Day$day")
+            .superclass(ClassName("aoc.library", "Puzzle").parameterizedBy(LONG, LONG))
+            .addSuperclassConstructorParameter("day = $day")
+            .addFunction(createSolveFunction("Part1"))
+            .addFunction(createSolveFunction("Part2"))
+            .build(),
+        )
+        .build()
 
     sourceFileContent.writeTo(File("$year/src/main/kotlin"))
   }
 
-  private fun createSolveFunction(part: String): FunSpec = FunSpec.builder("solve$part")
-    .addParameter("input", String::class)
-    .addModifiers(KModifier.OVERRIDE)
-    .returns(Long::class)
-    .addStatement("TODO()")
-    .build()
+  private fun createSolveFunction(part: String): FunSpec =
+    FunSpec.builder("solve$part")
+      .addParameter("input", String::class)
+      .addModifiers(KModifier.OVERRIDE)
+      .returns(Long::class)
+      .addStatement("TODO()")
+      .build()
 
   private fun createTestFunction(
     name: String,
     solveName: String,
     withTestInput: Boolean = false,
-  ): FunSpec = FunSpec.builder(name)
-    .addAnnotation(ClassName("org.junit.jupiter.api", "Test"))
-    .addStatement(
-      "%M(42, Day%L.%M(%L))",
-      MemberName("kotlin.test", "assertEquals"),
-      day,
-      MemberName("aoc.library", solveName),
-      if (withTestInput) "testInput" else "",
-    )
-    .build()
-
-  private fun generateDayTestSourceFile() {
-    val testFileContent = FileSpec.builder("aoc.year$year", "Day${day}Test")
-      .addType(
-        TypeSpec.classBuilder("Day${day}Test")
-          .addProperty(
-            PropertySpec.builder(name = "testInput", type = STRING, KModifier.PRIVATE)
-              .initializer("%S", "")
-              .build(),
-          )
-          .addFunction(createTestFunction(name = "part1TestInput", solveName = "solvePart1", withTestInput = true))
-          .addFunction(createTestFunction(name = "part1", solveName = "solvePart1"))
-          .addFunction(createTestFunction(name = "part2TestInput", solveName = "solvePart2", withTestInput = true))
-          .addFunction(createTestFunction(name = "part2", solveName = "solvePart2"))
-          .build(),
+  ): FunSpec =
+    FunSpec.builder(name)
+      .addAnnotation(ClassName("org.junit.jupiter.api", "Test"))
+      .addStatement(
+        "%M(42, Day%L.%M(%L))",
+        MemberName("kotlin.test", "assertEquals"),
+        day,
+        MemberName("aoc.library", solveName),
+        if (withTestInput) "testInput" else "",
       )
       .build()
+
+  private fun generateDayTestSourceFile() {
+    val testFileContent =
+      FileSpec.builder("aoc.year$year", "Day${day}Test")
+        .addType(
+          TypeSpec.classBuilder("Day${day}Test")
+            .addProperty(
+              PropertySpec.builder(name = "testInput", type = STRING, KModifier.PRIVATE)
+                .initializer("%S", "")
+                .build(),
+            )
+            .addFunction(
+              createTestFunction(
+                name = "part1TestInput",
+                solveName = "solvePart1",
+                withTestInput = true,
+              ),
+            )
+            .addFunction(createTestFunction(name = "part1", solveName = "solvePart1"))
+            .addFunction(
+              createTestFunction(
+                name = "part2TestInput",
+                solveName = "solvePart2",
+                withTestInput = true,
+              ),
+            )
+            .addFunction(createTestFunction(name = "part2", solveName = "solvePart2"))
+            .build(),
+        )
+        .build()
 
     testFileContent.writeTo(File("$year/src/test/kotlin"))
   }

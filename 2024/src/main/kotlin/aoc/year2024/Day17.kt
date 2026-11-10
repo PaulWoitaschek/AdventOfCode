@@ -19,33 +19,43 @@ object Day17 : Puzzle<List<Int>, Int>(day = 17) {
     }
   }
 
-  data class Computer(var a: Int, var b: Int, var c: Int, val program: List<Int>, var pointer: Int = 0) {
+  data class Computer(
+    var a: Int,
+    var b: Int,
+    var c: Int,
+    val program: List<Int>,
+    var pointer: Int = 0,
+  ) {
 
     private fun literalOperand(): Int = program[pointer + 1]
 
-    private fun comboOperand(): Int = when (val value = program[pointer + 1]) {
-      0, 1, 2, 3 -> value
-      4 -> a
-      5 -> b
-      6 -> c
-      else -> error("Invalid operand $value")
-    }
+    private fun comboOperand(): Int =
+      when (val value = program[pointer + 1]) {
+        0,
+        1,
+        2,
+        3 -> value
+        4 -> a
+        5 -> b
+        6 -> c
+        else -> error("Invalid operand $value")
+      }
 
     private fun advStyleCalculation(): Int = a / 2.0.pow(comboOperand()).toInt()
 
     fun run(): List<Int> {
       val output = mutableListOf<Int>()
       while (true) {
-        val opCode = program.getOrNull(pointer)
-          ?: return output
+        val opCode = program.getOrNull(pointer) ?: return output
         when (opCode) {
           0 -> a = advStyleCalculation()
           1 -> b = b xor literalOperand()
           2 -> b = comboOperand().mod(8)
-          3 -> if (a != 0) {
-            pointer = literalOperand()
-            continue
-          }
+          3 ->
+            if (a != 0) {
+              pointer = literalOperand()
+              continue
+            }
           4 -> b = b xor c
           5 -> output += comboOperand().mod(8)
           6 -> b = advStyleCalculation()
@@ -57,13 +67,13 @@ object Day17 : Puzzle<List<Int>, Int>(day = 17) {
     }
 
     companion object {
-      fun parse(input: String): Computer = Computer(
-        a = input.lines()[0].substringAfterLast(" ").toInt(),
-        b = input.lines()[1].substringAfterLast(" ").toInt(),
-        c = input.lines()[2].substringAfterLast(" ").toInt(),
-        program = input.lines()[4].substringAfterLast(" ")
-          .split(",").map(String::toInt),
-      )
+      fun parse(input: String): Computer =
+        Computer(
+          a = input.lines()[0].substringAfterLast(" ").toInt(),
+          b = input.lines()[1].substringAfterLast(" ").toInt(),
+          c = input.lines()[2].substringAfterLast(" ").toInt(),
+          program = input.lines()[4].substringAfterLast(" ").split(",").map(String::toInt),
+        )
     }
   }
 }

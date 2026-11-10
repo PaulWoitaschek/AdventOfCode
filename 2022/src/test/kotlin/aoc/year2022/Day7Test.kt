@@ -2,8 +2,8 @@ package aoc.year2022
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day7Test {
 
@@ -36,7 +36,8 @@ $ ls
 8033020 d.log
 5626152 d.ext
 7214296 k
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -70,7 +71,8 @@ $ ls
 8033020 d.log
 5626152 d.ext
 7214296 k
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }

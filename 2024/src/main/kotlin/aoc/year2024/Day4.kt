@@ -15,10 +15,11 @@ object Day4 : Puzzle<Long, Long>(day = 4) {
         if (char == 'X') {
           val from = Point(x, y)
           count += allDirections.count { direction ->
-            val result = generateSequence(from) { it + direction }
-              .take(4)
-              .mapNotNull { lines.getOrNull(it.y)?.getOrNull(it.x) }
-              .joinToString("")
+            val result =
+              generateSequence(from) { it + direction }
+                .take(4)
+                .mapNotNull { lines.getOrNull(it.y)?.getOrNull(it.x) }
+                .joinToString("")
             result == "XMAS"
           }
         }
@@ -37,11 +38,12 @@ object Day4 : Puzzle<Long, Long>(day = 4) {
         if (char == 'A') {
           val topLeftAndBottomRight = listOf(Point(x - 1, y - 1), Point(x + 1, y + 1))
           val bottomLeftAndTopRight = listOf(Point(x - 1, y + 1), Point(x + 1, y - 1))
-          val diagonalsOnlySM = listOf(topLeftAndBottomRight, bottomLeftAndTopRight)
-            .map { points ->
-              points.map { lines.getOrNull(it.y)?.getOrNull(it.x) }.toSet()
-            }
-            .all { it == setOf('S', 'M') }
+          val diagonalsOnlySM =
+            listOf(topLeftAndBottomRight, bottomLeftAndTopRight)
+              .map { points ->
+                points.map { lines.getOrNull(it.y)?.getOrNull(it.x) }.toSet()
+              }
+              .all { it == setOf('S', 'M') }
 
           if (diagonalsOnlySM) count++
         }

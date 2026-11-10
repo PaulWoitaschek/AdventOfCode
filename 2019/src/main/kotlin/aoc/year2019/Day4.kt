@@ -12,9 +12,7 @@ object Day4 : Puzzle<Int, Int>(4) {
     input: String,
     isValidPassword: (Int) -> Boolean,
   ): Int {
-    val (from, to) = input
-      .split('-')
-      .map(String::toInt)
+    val (from, to) = input.split('-').map(String::toInt)
     return (from..to).count(isValidPassword)
   }
 

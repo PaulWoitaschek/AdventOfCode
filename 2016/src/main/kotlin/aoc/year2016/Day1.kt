@@ -12,8 +12,9 @@ object Day1 : Puzzle<Int, Int>(day = 1) {
   override fun solvePart2(input: String): Int {
     val visited = mutableSetOf<Point>()
     return walk(input) {
-      !visited.add(it)
-    }.manhattanDistanceTo(Point.Zero)
+        !visited.add(it)
+      }
+      .manhattanDistanceTo(Point.Zero)
   }
 
   private inline fun walk(
@@ -25,11 +26,12 @@ object Day1 : Puzzle<Int, Int>(day = 1) {
     input.split(", ").forEach { line ->
       val turning = line.first()
       val steps = line.drop(1).toInt()
-      facing = when (turning) {
-        'R' -> facing.clockwise()
-        'L' -> facing.counterClockwise()
-        else -> error("Invalid $turning")
-      }
+      facing =
+        when (turning) {
+          'R' -> facing.clockwise()
+          'L' -> facing.counterClockwise()
+          else -> error("Invalid $turning")
+        }
       repeat(steps) {
         position = position.move(facing)
         if (shouldStop(position)) {

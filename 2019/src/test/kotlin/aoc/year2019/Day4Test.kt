@@ -1,7 +1,7 @@
 package aoc.year2019
 
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day4Test {
 
@@ -18,22 +18,24 @@ class Day4Test {
   @Test
   fun validPasswordPart1() {
     mapOf(
-      111111 to true,
-      223450 to false,
-      123789 to false,
-    ).forEach { (password, validPassword) ->
-      assertEquals(validPassword, Day4.isValidPasswordPart1(password))
-    }
+        111111 to true,
+        223450 to false,
+        123789 to false,
+      )
+      .forEach { (password, validPassword) ->
+        assertEquals(validPassword, Day4.isValidPasswordPart1(password))
+      }
   }
 
   @Test
   fun validPasswordPart2() {
     mapOf(
-      112233 to true,
-      123444 to false,
-      111122 to true,
-    ).forEach { (password, validPassword) ->
-      assertEquals(validPassword, Day4.isValidPasswordPart2(password))
-    }
+        112233 to true,
+        123444 to false,
+        111122 to true,
+      )
+      .forEach { (password, validPassword) ->
+        assertEquals(validPassword, Day4.isValidPasswordPart2(password))
+      }
   }
 }

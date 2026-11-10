@@ -4,6 +4,7 @@ import aoc.library.Puzzle
 
 object Day5 : Puzzle<String, String>(5) {
   override fun solvePart1(input: String) = input.solve(moveOneByOne = true)
+
   override fun solvePart2(input: String) = input.solve(moveOneByOne = false)
 }
 
@@ -44,11 +45,13 @@ private value class Crates(val stacks: List<MutableList<Char>>) {
       val lines = input.lines().reversed().drop(1)
       return Crates(
         List(9) { index ->
-          lines.mapNotNull {
-            it.getOrNull(1 + index * 4)?.takeIf { char ->
-              char in 'A'..'Z'
+          lines
+            .mapNotNull {
+              it.getOrNull(1 + index * 4)?.takeIf { char ->
+                char in 'A'..'Z'
+              }
             }
-          }.toMutableList()
+            .toMutableList()
         },
       )
     }
@@ -67,7 +70,6 @@ private data class MoveInstruction(val count: Int, val from: Int, val to: Int) {
 private fun String.parseInput(): Pair<Crates, List<MoveInstruction>> {
   val (cratesString, instructions) = split("\n\n")
   val crates = Crates.parse(cratesString)
-  val moveInstructions = instructions.lines().filter { it.isNotEmpty() }
-    .map(MoveInstruction::parse)
+  val moveInstructions = instructions.lines().filter { it.isNotEmpty() }.map(MoveInstruction::parse)
   return crates to moveInstructions
 }

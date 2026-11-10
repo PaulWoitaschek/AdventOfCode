@@ -79,6 +79,7 @@ object Day9 : Puzzle<Long, Long>(day = 9) {
 
   private sealed interface Block {
     data class Space(var size: Int) : Block
+
     data class FileBlock(val id: Int, val size: Int) : Block
   }
 }

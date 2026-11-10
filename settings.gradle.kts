@@ -20,4 +20,5 @@ plugins {
 }
 
 include(":prepare", ":library")
+
 include((2015..2025).map { year -> ":$year" })

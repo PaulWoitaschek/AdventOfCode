@@ -4,13 +4,17 @@ import aoc.library.Puzzle
 
 object Day8 : Puzzle<Long, Long>(8) {
 
-  override fun solvePart1(input: String): Long = parseInput(input).sumOf { line ->
-    line.output.count {
-      it.size == 2 || it.size == 4 || it.size == 3 || it.size == 7
-    }.toLong()
-  }
+  override fun solvePart1(input: String): Long =
+    parseInput(input).sumOf { line ->
+      line.output
+        .count {
+          it.size == 2 || it.size == 4 || it.size == 3 || it.size == 7
+        }
+        .toLong()
+    }
 
-  override fun solvePart2(input: String): Long = parseInput(input).sumOf { it.outputValue().toLong() }
+  override fun solvePart2(input: String): Long =
+    parseInput(input).sumOf { it.outputValue().toLong() }
 
   private fun parseInput(input: String): List<Display> = input.lines().map(Display.Companion::parse)
 }

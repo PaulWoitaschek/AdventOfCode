@@ -1,7 +1,7 @@
 package aoc.library
 
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class PointTest {
 
@@ -9,17 +9,19 @@ class PointTest {
   fun testPrintString() {
     assertEquals(
       """
-          ╔═══╗
-          ║███║
-          ║  █║
-          ╚═══╝
-      """.trimIndent(),
+      ╔═══╗
+      ║███║
+      ║  █║
+      ╚═══╝
+      """
+        .trimIndent(),
       setOf(
-        Point(0, 0),
-        Point(1, 0),
-        Point(2, 0),
-        Point(2, 1),
-      ).printString(),
+          Point(0, 0),
+          Point(1, 0),
+          Point(2, 0),
+          Point(2, 1),
+        )
+        .printString(),
     )
   }
 

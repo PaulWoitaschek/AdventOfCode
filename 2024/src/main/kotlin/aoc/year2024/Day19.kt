@@ -15,20 +15,22 @@ object Day19 : Puzzle<Int, Long>(day = 19) {
 
     val cache = mutableMapOf<String, Long>()
 
-    fun possibleCombinations(towel: String): Long = cache.getOrPut(towel) {
-      if (towel.isEmpty()) {
-        1
-      } else {
-        available.filter { it in towel }
-          .sumOf {
-            if (towel.startsWith(it)) {
-              possibleCombinations(towel.removePrefix(it))
-            } else {
-              0
+    fun possibleCombinations(towel: String): Long =
+      cache.getOrPut(towel) {
+        if (towel.isEmpty()) {
+          1
+        } else {
+          available
+            .filter { it in towel }
+            .sumOf {
+              if (towel.startsWith(it)) {
+                possibleCombinations(towel.removePrefix(it))
+              } else {
+                0
+              }
             }
-          }
+        }
       }
-    }
 
     return required.map { possibleCombinations(it) }
   }

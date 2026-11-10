@@ -1,8 +1,8 @@
 package aoc.year2023
 
 import aoc.library.solvePart1
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day25Test {
 
@@ -25,7 +25,8 @@ class Day25Test {
         lsr: lhk
         rzs: qnr cmg lsr rsh
         frs: qnr lhk lsr
-        """.trimIndent(),
+        """
+          .trimIndent(),
       ),
     )
   }

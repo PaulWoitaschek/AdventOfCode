@@ -7,18 +7,19 @@ object Day21 : Puzzle<Long, Long>(21) {
   override fun solvePart1(input: String): Long {
     val monkeys = parseInput(input)
 
-    fun calculationElement(shout: Shout): CalculationElement = when (shout) {
-      is Shout.Operation -> {
-        CalculationElement.Operation(
-          operator = shout.operator,
-          a = calculationElement(monkeys.getValue(shout.a)),
-          b = calculationElement(monkeys.getValue(shout.b)),
-        )
+    fun calculationElement(shout: Shout): CalculationElement =
+      when (shout) {
+        is Shout.Operation -> {
+          CalculationElement.Operation(
+            operator = shout.operator,
+            a = calculationElement(monkeys.getValue(shout.a)),
+            b = calculationElement(monkeys.getValue(shout.b)),
+          )
+        }
+        is Shout.Value -> {
+          CalculationElement.Value(shout.value)
+        }
       }
-      is Shout.Value -> {
-        CalculationElement.Value(shout.value)
-      }
-    }
 
     val calculationElement = calculationElement(monkeys.getValue("root"))
 
@@ -43,37 +44,40 @@ object Day21 : Puzzle<Long, Long>(21) {
     return reduce(calculationElement)
   }
 
-  private fun parseInput(input: String): Map<String, Shout> = input.lines().filter(String::isNotEmpty)
-    .associate { line ->
+  private fun parseInput(input: String): Map<String, Shout> =
+    input.lines().filter(String::isNotEmpty).associate { line ->
       val name = line.substringBefore(":")
       val value = line.substringAfter(": ")
-      name to when {
-        value.first().isDigit() -> Shout.Value(value.toLong())
-        else -> {
-          val a = value.substringBefore(" ")
-          val b = value.substringAfterLast(" ")
-          val operation = Operator.parse(value.substringAfter(" ").first())
-          Shout.Operation(operation, a, b)
+      name to
+        when {
+          value.first().isDigit() -> Shout.Value(value.toLong())
+          else -> {
+            val a = value.substringBefore(" ")
+            val b = value.substringAfterLast(" ")
+            val operation = Operator.parse(value.substringAfter(" ").first())
+            Shout.Operation(operation, a, b)
+          }
         }
-      }
     }
 
   override fun solvePart2(input: String) = TODO()
 
   sealed interface CalculationElement {
 
-    @JvmInline
-    value class Value(val value: Long) : CalculationElement
+    @JvmInline value class Value(val value: Long) : CalculationElement
 
-    data class Operation(val operator: Operator, val a: CalculationElement, val b: CalculationElement) : CalculationElement
+    data class Operation(
+      val operator: Operator,
+      val a: CalculationElement,
+      val b: CalculationElement,
+    ) : CalculationElement
   }
 
   enum class Operator(val char: Char) {
     Plus('+'),
     Times('*'),
     Div('/'),
-    Minus('-'),
-    ;
+    Minus('-');
 
     companion object {
       fun parse(input: Char) = entries.first { it.char == input }
@@ -81,8 +85,8 @@ object Day21 : Puzzle<Long, Long>(21) {
   }
 
   sealed interface Shout {
-    @JvmInline
-    value class Value(val value: Long) : Shout
+    @JvmInline value class Value(val value: Long) : Shout
+
     data class Operation(val operator: Operator, val a: String, val b: String) : Shout
   }
 }

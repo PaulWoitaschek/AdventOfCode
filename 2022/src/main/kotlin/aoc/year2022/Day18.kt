@@ -22,7 +22,8 @@ object Day18 : Puzzle<Int, Int>(18) {
     while (queue.isNotEmpty()) {
       val cube = queue.removeLast()
       if (!air.add(cube)) continue
-      cube.adjacent()
+      cube
+        .adjacent()
         .filter { it !in air && it.x in xRange && it.y in yRange && it.z in zRange && it !in lava }
         .let(queue::addAll)
     }
@@ -34,14 +35,15 @@ object Day18 : Puzzle<Int, Int>(18) {
   }
 
   data class Cube(val x: Int, val y: Int, val z: Int) {
-    fun adjacent() = listOf(
-      copy(x = x + 1),
-      copy(x = x - 1),
-      copy(y = y + 1),
-      copy(y = y - 1),
-      copy(z = z + 1),
-      copy(z = z - 1),
-    )
+    fun adjacent() =
+      listOf(
+        copy(x = x + 1),
+        copy(x = x - 1),
+        copy(y = y + 1),
+        copy(y = y - 1),
+        copy(z = z + 1),
+        copy(z = z - 1),
+      )
 
     override fun toString(): String = "($x,$y,$z)"
 
@@ -53,5 +55,6 @@ object Day18 : Puzzle<Int, Int>(18) {
     }
   }
 
-  private fun parseInput(input: String): List<Cube> = input.lines().filter(String::isNotEmpty).map(Cube::parse)
+  private fun parseInput(input: String): List<Cube> =
+    input.lines().filter(String::isNotEmpty).map(Cube::parse)
 }

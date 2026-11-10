@@ -2,8 +2,8 @@ package aoc.year2020
 
 import aoc.library.solvePart1
 import aoc.library.solvePart2
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
 
 class Day10Test {
 
@@ -14,38 +14,39 @@ class Day10Test {
       22 * 10,
       Day10.solvePart1(
         """
-28
-33
-18
-42
-31
-14
-46
-20
-48
-47
-24
-23
-49
-45
-19
-38
-39
-11
-1
-32
-25
-35
-8
-17
-7
-9
-4
-2
-34
-10
-3
-        """.trimIndent(),
+        28
+        33
+        18
+        42
+        31
+        14
+        46
+        20
+        48
+        47
+        24
+        23
+        49
+        45
+        19
+        38
+        39
+        11
+        1
+        32
+        25
+        35
+        8
+        17
+        7
+        9
+        4
+        2
+        34
+        10
+        3
+        """
+          .trimIndent(),
       ),
     )
   }
@@ -57,38 +58,39 @@ class Day10Test {
       19208,
       Day10.solvePart2(
         """
-28
-33
-18
-42
-31
-14
-46
-20
-48
-47
-24
-23
-49
-45
-19
-38
-39
-11
-1
-32
-25
-35
-8
-17
-7
-9
-4
-2
-34
-10
-3
-        """.trimIndent(),
+        28
+        33
+        18
+        42
+        31
+        14
+        46
+        20
+        48
+        47
+        24
+        23
+        49
+        45
+        19
+        38
+        39
+        11
+        1
+        32
+        25
+        35
+        8
+        17
+        7
+        9
+        4
+        2
+        34
+        10
+        3
+        """
+          .trimIndent(),
       ),
     )
   }
