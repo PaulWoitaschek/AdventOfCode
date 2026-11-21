@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.4.21"
 ktfmt = "0.65"
-spotless = "8.11.0"
+spotless = "8.12.0"
 
 [libraries]
 ktfmt = { module = "org.jetbrains.kotlinx:ktfmt", version.ref = "ktfmt" }
